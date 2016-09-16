@@ -7,12 +7,32 @@ use idOS\Auth\AuthInterface;
 use idOS\Endpoint\AbstractEndpoint;
 
 class Features extends AbstractProfileEndpoint {
+    private function typeInfer($value) : string {
+        if (is_float($value)) {
+            return 'double';
+        }
+
+        if (is_integer($value)) {
+            return 'integer';
+        }
+
+        if (is_bool($value)) {
+            return 'boolean';
+        }
+
+        return 'string';
+    }
+
     public function createNew(
         int $sourceId,
         string $name,
         $value,
-        string $type
+        $type = null
     ) : array {
+        if ($type === null) {
+            $type = $this->typeInfer($value);
+        }
+
         return $this->sendPost(
             sprintf('/profiles/%s/features', $this->userName),
             [],
@@ -29,8 +49,12 @@ class Features extends AbstractProfileEndpoint {
         int $sourceId,
         string $name,
         $value,
-        string $type
+        $type = null
     ) : array {
+        if ($type === null) {
+            $type = $this->typeInfer($value);
+        }
+
         return $this->sendPut(
             sprintf('/profiles/%s/features', $this->userName),
             [],
