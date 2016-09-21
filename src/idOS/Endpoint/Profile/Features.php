@@ -34,7 +34,7 @@ class Features extends AbstractProfileEndpoint {
      * @param  string $name
      * @param  $value
      * @param  $type
-     * @return Json response
+     * @return Array Response
      */
     public function createNew(
         int $sourceId,
@@ -65,7 +65,7 @@ class Features extends AbstractProfileEndpoint {
      * @param  string $name
      * @param  $value
      * @param  $type
-     * @return Json response
+     * @return Array Response
      */
     public function createOrUpdate(
         int $sourceId,
@@ -93,7 +93,7 @@ class Features extends AbstractProfileEndpoint {
      * Lists all features
      *
      * @param  array  $filters
-     * @return Json response
+     * @return Array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -106,7 +106,7 @@ class Features extends AbstractProfileEndpoint {
      * Retrieves a feature given its slug
      *
      * @param  string $featureSlug
-     * @return Json response
+     * @return Array Response
      */
     public function getOne(string $featureSlug) : array {
         return $this->sendGet(
@@ -120,7 +120,7 @@ class Features extends AbstractProfileEndpoint {
      * @param  string $featureSlug
      * @param  $value
      * @param  string $type
-     * @return Json response
+     * @return Array Response
      */
     public function updateOne(string $featureSlug, $value, string $type) : array {
         return $this->sendPatch(
@@ -137,7 +137,7 @@ class Features extends AbstractProfileEndpoint {
      * Deletes a feature given its slug
      *
      * @param  string $featureSlug
-     * @return Json response
+     * @return Array Response
      */
     public function deleteOne(string $featureSlug) : array {
         return $this->sendDelete(
@@ -149,7 +149,7 @@ class Features extends AbstractProfileEndpoint {
      * Deletes all features
      *
      * @param  array  $filters
-     * @return Json response
+     * @return Array Response
      */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(

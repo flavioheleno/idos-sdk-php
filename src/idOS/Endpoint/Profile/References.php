@@ -6,9 +6,9 @@ use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 
 /**
- * Sources Class Endpoint
+ * References Class Endpoint
  */
-class Sources extends AbstractProfileEndpoint {
+class References extends AbstractProfileEndpoint {
 	/**
 	 * Lists all sources
 	 *
@@ -17,7 +17,7 @@ class Sources extends AbstractProfileEndpoint {
 	 */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
-            sprintf('/profiles/%s/sources', $this->userName),
+            sprintf('/profiles/%s/references', $this->userName),
             $filters
         );
     }

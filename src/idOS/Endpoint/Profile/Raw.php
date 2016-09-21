@@ -16,7 +16,7 @@ class Raw extends AbstractProfileEndpoint {
      * @param  int    $sourceId
      * @param  string $collectionName
      * @param  array  $data
-     * @return Json response
+     * @return Array Response
      */
     public function createNew(
         int $sourceId,
@@ -40,7 +40,7 @@ class Raw extends AbstractProfileEndpoint {
      * @param  int    $sourceId
      * @param  string $collectionName
      * @param  array  $data
-     * @return Json response
+     * @return Array Response
      */
     public function createOrUpdate(
         int $sourceId,
@@ -62,7 +62,7 @@ class Raw extends AbstractProfileEndpoint {
      * Lists all raw data
      *
      * @param  array  $filters
-     * @return Json response
+     * @return Array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -82,7 +82,7 @@ class Raw extends AbstractProfileEndpoint {
      *
      * @param  string $collectionName
      * @param  array  $data
-     * @return Json response
+     * @return Array Response
      */
     public function updateOne(string $collectionName, array $data) : array {
         return $this->sendPatch(
@@ -98,7 +98,7 @@ class Raw extends AbstractProfileEndpoint {
      * Deletes a raw data given its collectionName
      *
      * @param  string $collectionName
-     * @return Json response
+     * @return Array Response
      */
     public function deleteOne(string $collectionName) : array {
         return $this->sendDelete(

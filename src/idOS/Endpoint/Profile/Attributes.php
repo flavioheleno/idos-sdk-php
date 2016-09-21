@@ -15,7 +15,7 @@ class Attributes extends AbstractEndpoint {
 	 *
 	 * @param  string $username
 	 * @param  array  $filter
-	 * @return Json response
+	 * @return Array Response
 	 */
     public function listAll($username = '_self', array $filter = []) {
         return $this->get(
