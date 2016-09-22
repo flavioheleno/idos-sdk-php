@@ -16,7 +16,7 @@ $auth = new \idOS\Auth\CredentialToken(
  * Valid username to be used in all /profiles endpoints.
  * @var string
  */
-$username = 'usr001';
+$username = 'f67b96dcf96b49d713a520ce9f54053c';
 
 /**
  * Calls the create method that instantiates the SDK passing the auth object trought the constructor

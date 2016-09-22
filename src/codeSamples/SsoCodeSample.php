@@ -26,7 +26,7 @@ $response = $sdk
 print_r($response);
 
 /**
- * Retrieves facebook
+ * Retrieves the facebook provider
  */
 $response = $sdk
 	->Sso

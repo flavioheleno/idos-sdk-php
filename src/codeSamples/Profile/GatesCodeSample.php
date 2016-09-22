@@ -47,3 +47,14 @@ $response = $sdk
  */
 print_r($response);
 
+/**
+ * REtrieves the gate created
+ */
+$response = $sdk
+	->Profile($username)
+	->Gates->getOne('18');
+
+/**
+ * Prints the api response
+ */
+print_r($response);

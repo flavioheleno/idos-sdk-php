@@ -20,7 +20,7 @@ class Gates extends AbstractProfileEndpoint {
      */
     public function createNew(
         string $name,
-        boolean $pass
+        bool $pass
     ) : array {
 
         return $this->sendPost(
@@ -42,7 +42,7 @@ class Gates extends AbstractProfileEndpoint {
      */
     public function createOrUpdate(
         string $name,
-        boolean $pass
+        bool $pass
     ) : array {
 
         return $this->sendPut(
