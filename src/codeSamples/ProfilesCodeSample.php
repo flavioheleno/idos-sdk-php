@@ -13,37 +13,18 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * Valid username to be used in all /profiles endpoints.
- * @var string
- */
-$username = 'usr001';
-
-/**
  * Calls the create method that instantiates the SDK passing the auth object trought the constructor
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all gates for the given username
+ * Lists all profiles
  */
 $response = $sdk
-    ->Profile($username)
-    ->Gates->listAll();
+	->Profiles
+	->listAll();
 
 /**
  * Prints the api response
  */
 print_r($response);
-
-/**
- * Creates a new gate
- */
-$response = $sdk
-	->Profile($username)
-	->Gates->createNew('18+', true);
-
-/**
- * Prints the api response
- */
-print_r($response);
-

@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/settings.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../settings.php';
 
 /**
  * Creates an auth object for a CredentialToken required in the SDK constructor for calling all endpoints. Passing through the CredentialToken constructor the credential public key, handler public and handler private key, so the auth token can be generated.
@@ -16,7 +16,7 @@ $auth = new \idOS\Auth\CredentialToken(
  * Valid username to be used in all /profiles endpoints.
  * @var string
  */
-$username = 'usr001';
+$username = 'f67b96dcf96b49d713a520ce9f54053c';
 
 /**
  * Calls the create method that instantiates the SDK passing the auth object trought the constructor
@@ -24,26 +24,21 @@ $username = 'usr001';
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all warnings for the given username
+ * Calling the Profile Endpoint passing the username, and after that, the Scores Endpoint and the method listAll
+ * @var [type]
  */
 $response = $sdk
     ->Profile($username)
-    ->Warnings->listAll();
+    ->Scores->listAll();
 
 /**
- * Prints the api response
+ * Prints the response
  */
 print_r($response);
 
 /**
- * Retrieves a process given its slug
+ * Calls the get one method
  */
 $response = $sdk
 	->Profile($username)
-	->Warnings->getOne('warningslug');
-
-/**
- * Prints the api response
- */
-print_r($response);
-
+	->Scores->getOne('scoreName');

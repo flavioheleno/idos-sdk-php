@@ -5,6 +5,8 @@ namespace idOS;
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 use idOS\Section\Profile;
+use idOS\Section\Profile\Process;
+use idOS\Endpoint;
 
 class SDK {
     private $authentication;
@@ -78,5 +80,52 @@ class SDK {
             $this->client,
             $this->throwsExceptions
         );
+    }
+
+    public function process(int $processId) : Process {
+        return new Process(
+            $processId,
+            $this->authentication,
+            $this->client,
+            $this->throwsExceptions
+        );
+    }
+
+     public function __get(string $name) {
+        $className = $this->getEndpointClassName($name);
+
+        return new $className(
+            $this->authentication,
+            $this->client
+        );
+    }
+
+    public function __call(string $name, array $args) {
+        $className = $this->getSectionClassName($name);
+        $args[] = $this->authentication;
+        $args[] = $this->client;
+
+        return new $className(...$args);
+    }
+
+    protected function getEndpointClassName(string $name) : string {
+        $className = sprintf(
+            '%s\\%s\\%s',
+            'idOS',
+            'Endpoint',
+            ucfirst($name)
+        );
+
+        if (! class_exists($className)) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Invalid endpoint name "%s" (%s)',
+                    $name,
+                    $className
+                )
+            );
+        }
+
+        return $className;
     }
 }
