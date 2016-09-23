@@ -104,4 +104,4 @@ $response = $sdk
 	->Gates->createNew('18+', true);
 
 ```
-To see more examples of how to use the SDK and how to call the methods and endpoints, go to the src/codeSamples directory.
+To see more examples of how to use the SDK and how to call the methods and endpoints, go to the ```src/codeSamples``` directory.
