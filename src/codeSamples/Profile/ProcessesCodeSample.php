@@ -34,7 +34,7 @@ print_r($response);
  */
 $response = $sdk
 	->Profile($credentials['username'])
-	->Processes->getOne(1);
+	->Processes->getOne($response['data'][0]['id']);
 
 /**
  * Prints the api response

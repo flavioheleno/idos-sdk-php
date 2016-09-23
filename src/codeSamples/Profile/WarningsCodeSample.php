@@ -34,7 +34,7 @@ print_r($response);
  */
 $response = $sdk
 	->Profile($credentials['username'])
-	->Warnings->getOne('warningslug');
+	->Warnings->getOne($response['data'][0]['slug']);
 
 /**
  * Prints the api response
