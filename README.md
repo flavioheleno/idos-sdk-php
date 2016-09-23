@@ -62,7 +62,6 @@ To make requests to the API, the majority of the endpoints require Authenticatio
 The first step is to create an auth object passing through its constructor the credentials necessary for the request intended.
 
 ```php
-
 /**
  * Instantiates an auth object of CredentialToken Class.
  * Foreach type of Authorization, there is a Class to be instantiated.
@@ -79,7 +78,6 @@ $auth = new \idOS\Auth\CredentialToken(
 The second step is to instantiate the SDK itself, calling the static method create
 
 ```php
-
 $sdk = \idOS\SDK::create($auth);
 
 ```
@@ -87,4 +85,23 @@ $sdk = \idOS\SDK::create($auth);
 ### Third Step
 
 The third step is to calling the endpoints.
+For now we support all endpoints related to the users.
+To make it easier, every fragment of the request is separated in different classes.
 
+```php
+/**
+ * Making a /GET request to scores endpoint, listing all scores.
+ */
+$response = $sdk
+    ->Profile($credentials['username']) //passing the username in the Profile Class constructor
+    ->Scores->listAll();
+
+/**
+ * Making a /POST request to gates endpoint, creating a new gate
+ */
+$response = $sdk
+	->Profile($credentials['username']) //passing the username in the Profile Class constructor
+	->Gates->createNew('18+', true);
+
+```
+To see more examples of how to use the SDK and how to call the methods and endpoints, go to the src/codeSamples directory.
