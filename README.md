@@ -57,7 +57,7 @@ How To Use The New SDK
 
 To make requests to the API, the majority of the endpoints require Authentication tokens. They can be UserToken, CredentialToken or IdentityToken.
 
-##### First Step
+### First Step
 
 The first step is to create an auth object passing through its constructor the credentials necessary for the request intended.
 
@@ -74,7 +74,7 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 ```
-##### Second Step
+### Second Step
 
 The second step is to instantiate the SDK itself, calling the static method create
 
@@ -84,7 +84,7 @@ $sdk = \idOS\SDK::create($auth);
 
 ```
 
-##### Third Step
+### Third Step
 
 The third step is to calling the endpoints.
 
