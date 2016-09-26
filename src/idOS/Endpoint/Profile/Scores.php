@@ -101,7 +101,6 @@ class Scores extends AbstractProfileEndpoint {
             [],
             [
                 'attribute' => $attribute,
-                'name' => $name,
                 'value' => $value
             ]
         );

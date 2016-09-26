@@ -30,9 +30,50 @@ $response = $sdk
  */
 print_r($response);
 
+// /**
+//  * Creates a new score
+//  */
+// $response = $sdk
+// 	->Profile($credentials['username'])
+// 	->Scores->createNew('firstName', 'Jhon', 0.6);
+
+// /**
+//  * Prints the response
+//  */
+// print_r($response);
+
+/**
+ * Updates a score
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Scores->updateOne('firstName', 'Jhon', 0.7);
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
 /**
  * Calls the get one method
  */
 $response = $sdk
 	->Profile($credentials['username'])
-	->Scores->getOne('scoreName');
+	->Scores->getOne('Jhon');
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Deletes the score created/updated
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Scores->deleteOne('Jhon');
+
+/**
+ * Prints the response
+ */
+print_r($response);

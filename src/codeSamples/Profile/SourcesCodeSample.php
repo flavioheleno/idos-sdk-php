@@ -35,7 +35,23 @@ print_r($response);
 $sourceId = $response['data'][0]['id'];
 
 /**
- * Retrieves a process given its slug
+ * Creates a new source
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Sources->createNew(
+		'email',
+		[
+        	'otp_check' => 'email'
+    	]
+    );
+/**
+ * Prints the api response
+ */
+print_r($response);
+
+/**
+ * Retrieves a process given its id
  */
 $response = $sdk
 	->Profile($credentials['username'])
@@ -46,3 +62,14 @@ $response = $sdk
  */
 print_r($response);
 
+
+/**
+ * Deletes the source created
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Sources->deleteOne($sourceId);
+/**
+ * Prints the api response
+ */
+print_r($response);

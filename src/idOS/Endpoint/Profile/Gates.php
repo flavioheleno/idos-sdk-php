@@ -83,16 +83,14 @@ class Gates extends AbstractProfileEndpoint {
     /**
      * Updates a gate given its slug
      *
-     * @param  string $name
      * @param  boolean $pass
      * @return Array Response
      */
-    public function updateOne(string $gateSlug, $value, string $type) : array {
+    public function updateOne(string $gateSlug, bool $pass) : array {
         return $this->sendPatch(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug),
             [],
             [
-                'name'      => $name,
                 'pass'     => $pass
             ]
         );
@@ -106,7 +104,7 @@ class Gates extends AbstractProfileEndpoint {
      */
     public function deleteOne(string $gateSlug) : array {
         return $this->sendDelete(
-            sprintf('/profiles/%s/gates/%s', $this->userName, $gatesSlug)
+            sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug)
         );
     }
 

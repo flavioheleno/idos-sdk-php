@@ -13,7 +13,7 @@ $auth = new \idOS\Auth\UserToken(
 );
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object trought the constructor
+ * Calls the create method that instantiates the SDK passing the auth object through the constructor
  */
 $sdk = \idOS\SDK::create($auth);
 

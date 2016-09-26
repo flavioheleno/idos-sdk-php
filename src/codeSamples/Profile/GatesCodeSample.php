@@ -52,3 +52,39 @@ $response = $sdk
  * Prints the api response
  */
 print_r($response);
+
+/**
+ * Updates the pass option to false
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Gates->updateOne($response['data']['slug'], false);
+
+/**
+ * Prints the api response
+ */
+print_r($response);
+
+/**
+ * Deletes the gate created and updated
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Gates->deleteOne($response['data']['slug']);
+
+/**
+ * Prints the api response
+ */
+print_r($response);
+
+/**
+ * Deletes all gates
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Gates->deleteAll();
+
+/**
+ * Prints the api response
+ */
+print_r($response);

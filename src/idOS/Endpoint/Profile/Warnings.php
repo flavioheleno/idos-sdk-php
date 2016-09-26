@@ -14,21 +14,21 @@ class Warnings extends AbstractProfileEndpoint {
     /**
      * Creates a new warning for the given user.
      *
-     * @param  string $name
-     * @param  string $reference
+     * @param  string $slug
+     * @param  string $attribute
      * @return Array Response
      */
     public function createNew(
-        string $name,
-        string $reference
+        string $slug,
+        string $attribute
     ) : array {
 
         return $this->sendPost(
             sprintf('/profiles/%s/warnings', $this->userName),
             [],
             [
-                'name'      => $name,
-                'reference' => $reference
+                'slug'      => $slug,
+                'attribute' => $attribute
             ]
         );
     }
@@ -49,24 +49,24 @@ class Warnings extends AbstractProfileEndpoint {
     /**
      * Retrieves a warning given its slug
      *
-     * @param  string $warningSlug
+     * @param  string $slug
      * @return Array Response
      */
-    public function getOne(string $warningSlug) : array {
+    public function getOne(string $slug) : array {
         return $this->sendGet(
-            sprintf('/profiles/%s/warnings/%s', $this->userName, $warningSlug)
+            sprintf('/profiles/%s/warnings/%s', $this->userName, $slug)
         );
     }
 
     /**
      * Deletes a warning given its slug
      *
-     * @param  string $warningSlug
+     * @param  string $slug
      * @return Array Response
      */
-    public function deleteOne(string $warningSlug) : array {
+    public function deleteOne(string $slug) : array {
         return $this->sendDelete(
-            sprintf('/profiles/%s/warnings/%s', $this->userName, $warningsSlug)
+            sprintf('/profiles/%s/warnings/%s', $this->userName, $slug)
         );
     }
 

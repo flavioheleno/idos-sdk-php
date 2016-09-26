@@ -19,11 +19,69 @@ $sdk = \idOS\SDK::create($auth);
 
 /**
  * Calling the Profile Endpoint passing the username, and after that, the References Endpoint and the method listAll
- * @var [type]
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->References->listAll();
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Creates a new reference
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->References->createNew('reference', 'value');
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Updates a reference
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->References->updateOne('reference', 'new-value');
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Retrieves the reference updated
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->References->getOne('reference');
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Deletes the reference created/updated
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->References->deleteOne('reference');
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Deletes all references
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->References->deleteAll();
 
 /**
  * Prints the response

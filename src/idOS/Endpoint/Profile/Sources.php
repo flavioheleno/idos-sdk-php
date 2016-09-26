@@ -20,17 +20,22 @@ class Sources extends AbstractProfileEndpoint {
      */
     public function createNew(
        string $name,
-       string $attr,
-       array $tags
+       array $tags,
+       string $ipaddr = ''
     ) : array {
+        $array = [
+            'name' => $name,
+            'tags' => $tags
+        ];
+
+        if (!empty($ipaddr)) {
+            $array['ipaddr'] = $ipaddr;
+        }
+
         return $this->sendPost(
             sprintf('/profiles/%s/sources', $this->userName),
             [],
-            [
-                'name' => $name,
-                'ipaddr' => $ipaddr,
-                'tags' => $tags
-            ]
+            $array
         );
     }
 
@@ -62,20 +67,25 @@ class Sources extends AbstractProfileEndpoint {
     /**
      * Updates a source in the given profile.
      *
-     * @param  float $otpCode
-     * @param  string $ipaddr
+     * @param string $name
+     * @param string $ipaddr
      * @param string $tags
      * @return Array Response
      */
-    public function updateOne(string $otpCode, string $ipaddr, float $tags) : array {
-        return $this->sendPatch(
-            sprintf('/profiles/%s/sources/%s', $this->userName, $ipaddr),
+    public function updateOne(string $name, array $tags, string $ipaddr = '') : array {
+         $array = [
+            'name' => $name,
+            'tags' => $tags
+        ];
+
+        if (!empty($ipaddr)) {
+            $array['ipaddr'] = $ipaddr;
+        }
+
+        return $this->sendPost(
+            sprintf('/profiles/%s/sources', $this->userName),
             [],
-            [
-                'otpCode' => $otpCode,
-                'ipaddr' => $ipaddr,
-                'tags' => $tags
-            ]
+            $array
         );
     }
 

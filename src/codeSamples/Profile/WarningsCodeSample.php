@@ -30,14 +30,25 @@ $response = $sdk
 print_r($response);
 
 /**
- * Retrieves a process given its slug
+ * Creates a new warning
  */
 $response = $sdk
 	->Profile($credentials['username'])
-	->Warnings->getOne($response['data'][0]['slug']);
+	->Warnings->createNew('middle-name-mismatch', 'middle-name');
 
 /**
  * Prints the api response
  */
 print_r($response);
 
+/**
+ * Retrieves a process given its slug
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Warnings->getOne($response['data']['slug']);
+
+/**
+ * Prints the api response
+ */
+print_r($response);
