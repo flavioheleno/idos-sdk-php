@@ -3,10 +3,10 @@ Veridu idOS PHP SDK
 
 Installation
 ------------
-This library can be found on [Packagist](https://packagist.org/packages/veridu/veridu-php).
-The recommended way to install this is through [composer](http://getcomposer.org).
+This SDK can be found on [Packagist](https://packagist.org/packages/veridu/veridu-php).
+Is recommended to install this SDK by using [composer](http://getcomposer.org).
 
-Edit your `composer.json` and add:
+If you are using composer, please edit your `composer.json` and add the following:
 
 ```json
 {
@@ -16,7 +16,7 @@ Edit your `composer.json` and add:
 }
 ```
 
-And install dependencies:
+To continue with the installation please add this dependencies:
 
 ```bash
 $ curl -sS https://getcomposer.org/installer | php
@@ -25,11 +25,11 @@ $ php composer.phar install
 
 Examples
 --------
-Examples of basic usage are located in the src/codeSamples/ directory.
+You can find examples of basic usage on src/codeSamples/ directory.
 
 Bugs and feature requests
 -------------------------
-Have a bug or a feature request? [Please open a new issue](https://github.com/veridu/idos-sdk-php/issues).
+Found a Bug? Have a feature request? [Please open a new issue](https://github.com/veridu/idos-sdk-php/issues).
 Before opening any issue, please search for existing issues and read the [Issue Guidelines](https://github.com/necolas/issue-guidelines), written by [Nicolas Gallagher](https://github.com/necolas/).
 
 Versioning
@@ -55,7 +55,8 @@ To run the tests, you must install dependencies with `composer install --dev`.
 How To Use The New SDK
 ----------------------
 
-To make requests to the API, the majority of the endpoints require Authentication tokens. They can be UserToken, CredentialToken or IdentityToken.
+The majority of the endpoints require Authentication Tokens when making requests to the API. 
+There are three kinds of tokens: UserToken, CredentialToken or IdentityToken.
 
 ### First Step
 
@@ -84,9 +85,9 @@ $sdk = \idOS\SDK::create($auth);
 
 ### Third Step
 
-The third step is to calling the endpoints.
-For now we support all endpoints related to the users.
-To make it easier, every fragment of the request is separated in different classes.
+The third step to perform is the requests to the endpoints.
+At the time being we only support endpoints related to the users methods.
+To simplify the SDK and its usage,every fragment of the request is separated in different classes.
 
 ```php
 /**
@@ -104,4 +105,4 @@ $response = $sdk
 	->Gates->createNew('18+', true);
 
 ```
-To see more examples of how to use the SDK and how to call the methods and endpoints, go to the ```src/codeSamples``` directory.
+To see more examples of how to use the SDK and how to call the methods and endpoints, go to ```src/codeSamples``` directory.
