@@ -9,8 +9,19 @@ use idOS\Section\AbstractSection;
 use idOS\Section\SectionInterface;
 
 class Process extends AbstractSection {
+    /**
+     * The process id necessary for all /process base endpoint
+     */
     private $processId;
 
+    /**
+     * Constructor Class
+     * @param int           $processId
+     * @param string        $userName
+     * @param AuthInterface $authentication
+     * @param Client        $client
+     * @param bool|boolean  $throwsExceptions
+     */
     public function __construct(
         int $processId,
         string $userName,
@@ -23,6 +34,11 @@ class Process extends AbstractSection {
         parent::__construct($authentication, $client, $throwsExceptions);
     }
 
+    /**
+     * returns the endpoint called passing the process id inside constructor
+     * @param  string $name
+     * @return endpoint instance
+     */
     public function __get(string $name) : EndpointInterface {
         $className = $this->getEndpointClassName($name);
 
@@ -34,6 +50,12 @@ class Process extends AbstractSection {
         );
     }
 
+    /**
+     * returns the endpoint called
+     * @param  string $name
+     * @param  array  $args
+     * @return endpoint instance
+     */
     public function __call(string $name, array $args) : SectionInterface {
         $className = $this->getSectionClassName($name);
         $args[] = $this->processId;

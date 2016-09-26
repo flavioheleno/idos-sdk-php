@@ -5,12 +5,33 @@ namespace idOS\Auth;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Builder;
 
+/**
+ * Credential Token Class that generates the Credential token.
+ */
 class CredentialToken extends AbstractAuth {
+    /**
+     * The credential Public Key
+     */
     private $credentialPublicKey;
+    /**
+     * The handler Public Key
+     */
     private $handlerPublicKey;
+    /**
+     * The handler Private Key
+     */
     private $handlerPrivateKey;
+    /**
+     * The generated token
+     */
     private $token;
 
+    /**
+     * Constructor Class
+     * @param string $credentialPublicKey
+     * @param string $handlerPublicKey
+     * @param string $handlerPrivateKey
+     */
     public function __construct(
         string $credentialPublicKey,
         string $handlerPublicKey,
@@ -21,6 +42,10 @@ class CredentialToken extends AbstractAuth {
         $this->handlerPrivateKey   = $handlerPrivateKey;
     }
 
+    /**
+     * Generates the credential token and returns it.
+     * @return string credentialToken
+     */
     public function getToken() : string {
         if (($this->token === null) || ($this->token->isExpired())) {
             $jwtBuilder = new Builder();

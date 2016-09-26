@@ -6,10 +6,25 @@ use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 
 abstract class AbstractSection implements SectionInterface {
+    /**
+     * Authentication type (User, Credential, Identity)
+     */
     protected $authentication;
+    /**
+     * GuzzeHTTP\Client;
+     */
     protected $client;
+    /**
+     * Boolean option to throw exception or not
+     * @var [type]
+     */
     protected $throwsExceptions;
 
+    /**
+     * Return the Endpoint Class Name
+     * @param  string $name
+     * @return string $className
+     */
     protected function getEndpointClassName(string $name) : string {
         $className = sprintf(
             '%s\\%s',
@@ -30,6 +45,11 @@ abstract class AbstractSection implements SectionInterface {
         return $className;
     }
 
+    /**
+     * Returns the Section Class Name
+     * @param  string $name
+     * @return string $className
+     */
     protected function getSectionClassName(string $name) : string {
         $className = sprintf(
             '%s\\%s',
@@ -50,6 +70,12 @@ abstract class AbstractSection implements SectionInterface {
         return $className;
     }
 
+    /**
+     * Constructor Class
+     * @param AuthInterface $authentication
+     * @param Client        $client
+     * @param bool|boolean  $throwExceptions
+     */
     public function __construct(
         AuthInterface $authentication,
         Client $client,

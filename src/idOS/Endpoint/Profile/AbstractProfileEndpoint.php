@@ -7,6 +7,9 @@ use idOS\Auth\AuthInterface;
 use idOS\Endpoint\AbstractEndpoint;
 
 abstract class AbstractProfileEndpoint extends AbstractEndpoint {
+    /**
+     * The username to be stored and used in all /profiles endpoints
+     */
     protected $userName;
 
     /**

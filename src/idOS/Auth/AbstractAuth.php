@@ -2,6 +2,9 @@
 
 namespace idOS\Auth;
 
+/**
+ * Abstract Auth extensible for all Auth Classes
+ */
 abstract class AbstractAuth implements AuthInterface {
 
     public function __toString() : string {
