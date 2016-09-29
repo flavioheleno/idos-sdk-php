@@ -28,6 +28,8 @@ $response = $sdk
 
 $processId = $response['data'][0]['id'];
 
+var_dump($processId);
+
 /**
  * Calling the Profile Class passing the username, and after that, the Process Class passing the $processId trough the constructor. After that calls the Task Ednpoint and the method listAll
  */
@@ -36,6 +38,34 @@ $response = $sdk
 	->Process($processId)
 	->Tasks
 	->listAll();
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Creates a new task
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Process($processId)
+	->Tasks
+	->createNew('Testing', 'testing', true, true, '');
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Updates a task
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Process($processId)
+	->Tasks
+	->updateOne($response['data']['id'], 'Test', 'test', false, false, 'dummy-message');
 
 /**
  * Prints the response

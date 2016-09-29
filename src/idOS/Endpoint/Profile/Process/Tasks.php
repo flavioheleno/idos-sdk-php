@@ -25,8 +25,8 @@ class Tasks extends AbstractProcessEndpoint {
     public function createNew(
         string $name,
         string $event,
-        boolean $running,
-        boolean $success,
+        bool $running,
+        bool $success,
         string $message
     ) : array {
 
@@ -76,13 +76,22 @@ class Tasks extends AbstractProcessEndpoint {
      * @param  string $type
      * @return Array Response
      */
-    public function updateOne(int $taskId, $value, string $type) : array {
-        return $this->sendPatch(
+    public function updateOne(
+        int $taskId,
+        string $name,
+        string $event,
+        bool $running,
+        bool $success,
+        string $message) : array {
+        return $this->sendPut(
             sprintf('/profiles/%s/processes/%s/tasks/%s', $this->userName, $this->processId, $taskId),
             [],
             [
-                'value' => $value,
-                'type'  => $type
+                'name' => $name,
+                'event' => $event,
+                'running' => $running,
+                'success' => $success,
+                'message' => $message
             ]
         );
     }
