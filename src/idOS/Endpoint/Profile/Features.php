@@ -67,7 +67,7 @@ class Features extends AbstractProfileEndpoint {
      * @param  $type
      * @return Array Response
      */
-    public function createOrUpdate(
+    public function upsertOne(
         int $sourceId,
         string $name,
         $value,
@@ -86,6 +86,20 @@ class Features extends AbstractProfileEndpoint {
                 'value'     => $value,
                 'type'      => $type
             ]
+        );
+    }
+
+    public function upsertBulk(array $features) {
+        foreach ($features as &$feature) {
+            if (empty($feature['type'])) {
+                $feature['type'] = $this->typeInfer($feature['value']);
+            }
+        }
+
+        return $this->sendPut(
+            sprintf('/profiles/%s/features/bulk', $this->userName),
+            [],
+            $features
         );
     }
 
