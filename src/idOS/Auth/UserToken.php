@@ -6,11 +6,29 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Builder;
 
 class UserToken extends AbstractAuth {
+    /**
+     * The userName
+     */
     private $userName;
+    /**
+     * The credential public key
+     */
     private $credentialPublicKey;
+    /**
+     * The credential private key
+     */
     private $credentialPrivateKey;
+    /**
+     * The generated token
+     */
     private $token;
 
+    /**
+     * Constructor Class
+     * @param string $userName
+     * @param string $credentialPublicKey
+     * @param string $credentialPrivateKey
+     */
     public function __construct(
         string $userName,
         string $credentialPublicKey,
@@ -21,6 +39,10 @@ class UserToken extends AbstractAuth {
         $this->credentialPrivateKey = $credentialPrivateKey;
     }
 
+    /**
+     * Generates the User Token and returns it.
+     * @return string userToken
+     */
     public function getToken() : string {
         if (($this->token === null) || ($this->token->isExpired())) {
             $jwtBuilder = new Builder();

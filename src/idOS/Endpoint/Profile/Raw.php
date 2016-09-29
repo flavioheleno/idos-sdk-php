@@ -5,7 +5,19 @@ namespace idOS\Endpoint\Profile;
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 
+/**
+ * Raw Class Endpoint
+ */
 class Raw extends AbstractProfileEndpoint {
+
+    /**
+     * Creates a new raw data for the given source.
+     *
+     * @param  int    $sourceId
+     * @param  string $collectionName
+     * @param  array  $data
+     * @return Array Response
+     */
     public function createNew(
         int $sourceId,
         string $collectionName,
@@ -22,6 +34,14 @@ class Raw extends AbstractProfileEndpoint {
         );
     }
 
+    /**
+     * Tries to update a raw data and if it doesnt exists, creates a new raw data.
+     *
+     * @param  int    $sourceId
+     * @param  string $collectionName
+     * @param  array  $data
+     * @return Array Response
+     */
     public function createOrUpdate(
         int $sourceId,
         string $collectionName,
@@ -38,6 +58,12 @@ class Raw extends AbstractProfileEndpoint {
         );
     }
 
+    /**
+     * Lists all raw data
+     *
+     * @param  array  $filters
+     * @return Array Response
+     */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
             sprintf('/profiles/%s/raw', $this->userName),
@@ -51,6 +77,13 @@ class Raw extends AbstractProfileEndpoint {
         );
     }
 
+    /**
+     * Updates a raw data in the given source.
+     *
+     * @param  string $collectionName
+     * @param  array  $data
+     * @return Array Response
+     */
     public function updateOne(string $collectionName, array $data) : array {
         return $this->sendPatch(
             sprintf('/profiles/%s/raw/%s', $this->userName, $collectionName),
@@ -61,6 +94,12 @@ class Raw extends AbstractProfileEndpoint {
         );
     }
 
+    /**
+     * Deletes a raw data given its collectionName
+     *
+     * @param  string $collectionName
+     * @return Array Response
+     */
     public function deleteOne(string $collectionName) : array {
         return $this->sendDelete(
             sprintf('/profiles/%s/raw/%s', $this->userName, $collectionName)

@@ -1,32 +1,29 @@
 <?php
 
-namespace idOS\Endpoint\Profile;
+namespace idOS\Endpoint\Company;
 
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 use idOS\Endpoint\AbstractEndpoint;
 
-abstract class AbstractProfileEndpoint extends AbstractEndpoint {
-    /**
-     * The username to be stored and used in all /profiles endpoints
-     */
-    protected $userName;
+abstract class AbstractCompanyEndpoint extends AbstractEndpoint {
+    protected $companySlug;
 
     /**
      * Constructor Class
      *
-     * @param string        $userName         The user username
+     * @param string        $companySlug         The company's slug
      * @param AuthInterface $authentication   The type of the authentication: UserToken, HandlerToken and IdentityToken
      * @param Client        $client
      * @param bool|boolean  $throwsExceptions
      */
     public function __construct(
-        string $userName,
+        string $companySlug,
         AuthInterface $authentication,
         Client $client,
         bool $throwsExceptions = false
     ) {
-        $this->userName = $userName;
+        $this->companySlug = $companySlug;
         parent::__construct($authentication, $client, $throwsExceptions);
     }
 }

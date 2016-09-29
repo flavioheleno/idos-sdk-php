@@ -8,6 +8,13 @@ use idOS\Endpoint\Raw as RawEndpoint;
 
 class Raw {
 
+    /**
+     * Returns the raw instance or, creates a new one if it doesn't exists yet and returns it.
+     *
+     * @param  string $userName
+     * @param  Auth   $auth
+     * @return Raw instance
+     */
     private static function getInstance(
         string $userName,
         Auth $auth
@@ -19,6 +26,16 @@ class Raw {
         );
     }
 
+    /**
+     * Creates a new instance of Raw
+     *
+     * @param  string $userName
+     * @param  int    $sourceId
+     * @param  string $collectionName
+     * @param  array  $data
+     * @param  Auth   $auth
+     * @return Array response
+     */
     public static function createNew(
         string $userName,
         int $sourceId,
@@ -30,6 +47,14 @@ class Raw {
             ->createNew($sourceId, $collectionName, $data);
     }
 
+    /**
+     * Lists all raws
+     *
+     * @param  string $userName [description]
+     * @param  Auth   $auth     [description]
+     * @param  array  $filters  [description]
+     * @return array response
+     */
     public static function listAll(
         string $userName,
         Auth $auth,
