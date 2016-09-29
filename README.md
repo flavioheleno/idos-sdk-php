@@ -3,7 +3,9 @@ Veridu idOS PHP SDK
 
 Installation
 ------------
+
 This SDK can be found on [Packagist](https://packagist.org/packages/veridu/veridu-php).
+
 Is recommended to install this SDK by using [composer](http://getcomposer.org).
 
 If you are using composer, please edit your `composer.json` and add the following:
@@ -25,15 +27,19 @@ $ php composer.phar install
 
 Examples
 --------
-You can find examples of basic usage on src/samples/ directory.
+
+You can find examples of basic usage on the [samples/](samples) directory.
 
 Bugs and feature requests
 -------------------------
+
 Found a Bug? Have a feature request? [Please open a new issue](https://github.com/veridu/idos-sdk-php/issues).
+
 Before opening any issue, please search for existing issues and read the [Issue Guidelines](https://github.com/necolas/issue-guidelines), written by [Nicolas Gallagher](https://github.com/necolas/).
 
 Versioning
 ----------
+
 This SDK will be maintained under the Semantic Versioning guidelines as much as possible.
 
 Releases will be numbered with the following format:
@@ -50,12 +56,14 @@ For more information on SemVer, please visit [http://semver.org/](http://semver.
 
 Tests
 -----
+
 To run the tests, you must install dependencies with `composer install --dev`.
 
 How To Use The New SDK
 ----------------------
 
 The majority of the endpoints require Authentication Tokens when making requests to the API.
+
 There are three kinds of tokens: UserToken, CredentialToken or IdentityToken.
 
 ### First Step
@@ -74,19 +82,21 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 ```
+
 ### Second Step
 
 The second step is to instantiate the SDK itself, calling the static method create
 
 ```php
 $sdk = \idOS\SDK::create($auth);
-
 ```
 
 ### Third Step
 
 The third step to perform is the requests to the endpoints.
+
 At the time being we only support endpoints related to the users methods.
+
 To simplify the SDK and its usage,every fragment of the request is separated in different classes.
 
 ```php
@@ -105,4 +115,4 @@ $response = $sdk
 	->Gates->createNew('18+', true);
 
 ```
-To see more examples of how to use the SDK and how to call the methods and endpoints, go to ```src/samples``` directory.
+To see more examples of how to use the SDK and how to call the methods and endpoints, go to the [samples/](samples) directory.

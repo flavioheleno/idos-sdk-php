@@ -3,23 +3,23 @@
 namespace idOS\Endpoint;
 
 /**
- * Sso Class Endpoint.
+ * Single Sign-On Class Endpoint.
  */
 class Sso extends AbstractEndpoint {
     /**
-     * Creates a new Sso.
+     * Creates a new SSO.
      *
      * @param string $key
      * @param string $secret
-     * @param string $ipAddress
      * @param string $accessToken
+     * @param string $tokenSecret
      * @param string $credentialPubKey
      */
     public function createNew(
         string $key,
         string $secret,
-        string $ipAddress,
         string $accessToken,
+        string $tokenSecret,
         string $credentialPubKey
     ) : array {
         return $this->sendPost(
@@ -28,15 +28,15 @@ class Sso extends AbstractEndpoint {
             [
                 'key'              => $key,
                 'secret'           => $secret,
-                'ipAddress'        => $ipAddress,
                 'accessToken'      => $accessToken,
+                'tokenSecret'      => $tokenSecret,
                 'credentialPubKey' => $credentialPubKey
             ]
         );
     }
 
     /**
-     * Lists all sso.
+     * Lists all SSO.
      *
      * @param array $filters
      *
@@ -50,7 +50,7 @@ class Sso extends AbstractEndpoint {
     }
 
     /**
-     * Retrieves the roleAccess given its providerName.
+     * Retrieves a providerName SSO availability status.
      *
      * @param string $providerName
      *

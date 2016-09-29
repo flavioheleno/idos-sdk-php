@@ -9,6 +9,7 @@ humbug.json
 humbuglog.*
 phpdox.xml
 phpunit.xml
+samples/settings.php
 sftp-config.json
 vendor/
 VeriduRuleset.xml
