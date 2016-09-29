@@ -69,7 +69,7 @@ class Tasks extends AbstractProcessEndpoint {
      * Updates a task given its slug.
      *
      * @param int $taskId
-     * @param  $value
+     * @param mixed $value
      * @param string $type
      *
      * @return array Response
