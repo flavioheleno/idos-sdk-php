@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
@@ -45,6 +45,24 @@ $response = $sdk
             'otp_check' => 'email'
         ]
     );
+
+/**
+ * Prints the api response.
+ */
+print_r($response);
+
+/**
+ * Updates a source
+ */
+$response = $sdk
+    ->Profile($credentials['username'])
+    ->Sources->updateOne(
+        $sourceId,
+        [
+            'test' => 'value-test'
+        ]
+    );
+
 /**
  * Prints the api response.
  */
@@ -68,6 +86,7 @@ print_r($response);
 $response = $sdk
     ->Profile($credentials['username'])
     ->Sources->deleteOne($sourceId);
+
 /**
  * Prints the api response.
  */

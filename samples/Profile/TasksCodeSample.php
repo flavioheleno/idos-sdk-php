@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
@@ -65,6 +65,22 @@ $response = $sdk
 	->Process($processId)
 	->Tasks
 	->updateOne($response['data']['id'], 'Test', 'test', false, false, 'dummy-message');
+
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Gets one task
+ */
+$taskId = $response['data']['id'];
+
+$response = $sdk
+    ->Profile($credentials['username'])
+    ->Process($processId)
+    ->Tasks
+    ->getOne($taskId);
 
 /**
  * Prints the response

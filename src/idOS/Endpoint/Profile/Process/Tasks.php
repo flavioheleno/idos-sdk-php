@@ -93,31 +93,4 @@ class Tasks extends AbstractProcessEndpoint {
             ]
         );
     }
-
-    /**
-     * Deletes a task given its slug.
-     *
-     * @param int $taskId
-     *
-     * @return array Response
-     */
-    public function deleteOne(int $taskId) : array {
-        return $this->sendDelete(
-            sprintf('/profiles/%s/processes/%s/tasks/%s', $this->userName, $this->processId, $tasksId)
-        );
-    }
-
-    /**
-     * Deletes all tasks.
-     *
-     * @param array $filters
-     *
-     * @return array Response
-     */
-    public function deleteAll(array $filters = []) : array {
-        return $this->sendDelete(
-            sprintf('/profiles/%s/processes/%s/tasks', $this->userName, $this->processId),
-            $filters
-        );
-    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
@@ -13,9 +13,9 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object trought the constructor.
+ * Calls the create method that instantiates the SDK passing the auth object throught the constructor
  */
-$sdk = \idOS\SDK::create($auth);
+$sdk = \idOS\SDK::create($auth, true);
 
 /**
  * Lists all gates for the given username.
@@ -23,6 +23,18 @@ $sdk = \idOS\SDK::create($auth);
 $response = $sdk
     ->Profile($credentials['username'])
     ->Gates->listAll();
+
+/**
+ * Prints the api response.
+ */
+print_r($response);
+
+/**
+ * Creates a new gate
+ */
+$response = $sdk
+    ->Profile($credentials['username'])
+    ->Gates->createNew('18+', false);
 
 /**
  * Prints the api response.

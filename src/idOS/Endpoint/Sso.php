@@ -9,29 +9,32 @@ class Sso extends AbstractEndpoint {
     /**
      * Creates a new SSO.
      *
-     * @param string $key
-     * @param string $secret
+     * @param string $providerName
+     * @param string $credentialPubKey
      * @param string $accessToken
      * @param string $tokenSecret
-     * @param string $credentialPubKey
      */
     public function createNew(
-        string $key,
-        string $secret,
+        string $providerName,
+        string $credentialPubKey,
         string $accessToken,
-        string $tokenSecret,
-        string $credentialPubKey
+        string $tokenSecret = ''
     ) : array {
+
+        $array = [
+            'provider' => $providerName,
+            'access_token' => $accessToken,
+            'credential' => $credentialPubKey
+        ];
+
+        if (!empty($tokenSecret)) {
+            $array['token_secret'] = $tokenSecret;
+        }
+
         return $this->sendPost(
             '/sso',
             [],
-            [
-                'key'              => $key,
-                'secret'           => $secret,
-                'accessToken'      => $accessToken,
-                'tokenSecret'      => $tokenSecret,
-                'credentialPubKey' => $credentialPubKey
-            ]
+            $array
         );
     }
 

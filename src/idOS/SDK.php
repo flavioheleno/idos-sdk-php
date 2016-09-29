@@ -28,10 +28,11 @@ class SDK {
      *
      * @return SDK instance
      */
-    public static function create(AuthInterface $authentication) {
+    public static function create(AuthInterface $authentication, bool $throwsExceptions = false) {
         return new static(
             $authentication,
-            new Client()
+            new Client(),
+            $throwsExceptions
         );
     }
 

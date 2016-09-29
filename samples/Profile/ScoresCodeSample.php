@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
@@ -31,17 +31,29 @@ $response = $sdk
  */
 print_r($response);
 
-// /**
-//  * Creates a new score
-//  */
-// $response = $sdk
-// 	->Profile($credentials['username'])
-// 	->Scores->createNew('firstName', 'Jhon', 0.6);
+/**
+ * Creates a new score
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Scores->createNew('firstName', 'Jhon', 0.6);
 
-// /**
-//  * Prints the response
-//  */
-// print_r($response);
+/**
+ * Prints the response
+ */
+print_r($response);
+
+/**
+ * Creates or updates a new score
+ */
+$response = $sdk
+    ->Profile($credentials['username'])
+    ->Scores->upsertOne('firstName', 'Jhon', 0.6);
+
+/**
+ * Prints the response
+ */
+print_r($response);
 
 /**
  * Updates a score.
