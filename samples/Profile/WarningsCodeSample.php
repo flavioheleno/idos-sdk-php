@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
@@ -44,11 +44,38 @@ print_r($response);
 /**
  * Retrieves a process given its slug.
  */
+$slug = $response['data']['slug'];
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Warnings->getOne($response['data']['slug']);
+    ->Warnings->getOne($slug);
 
 /**
  * Prints the api response.
  */
 print_r($response);
+
+/**
+ * Deletes one warning given its slug
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Warnings->deleteOne($slug);
+
+/**
+ * Prints the api response.
+ */
+print_r($response);
+
+/**
+ * Deletes all warnings
+ */
+$response = $sdk
+	->Profile($credentials['username'])
+	->Warnings->deleteAll();
+
+/**
+ * Prints the api response.
+ */
+print_r($response);
+
+

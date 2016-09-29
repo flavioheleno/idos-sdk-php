@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/settings.php';
 
 /**
@@ -36,3 +36,31 @@ $response = $sdk
  * Prints the response.
  */
 print_r($response);
+
+
+/**
+ * Creates a facebook sso
+ */
+$response = $sdk
+	->Sso
+	->createNew('facebook', $credentials['credentialPublicKey'], 'accessToken');
+
+/**
+ * Prints the response.
+ */
+print_r($response['data']['user_token']);
+
+/**
+ * Creates a twitter sso
+ */
+$response = $sdk
+	->Sso
+	->createNew('twitter', $credentials['credentialPublicKey'], 'accessToken', 'tokenSecret');
+
+/**
+ * Prints the response.
+ */
+print_r($response['data']['user_token']);
+
+
+

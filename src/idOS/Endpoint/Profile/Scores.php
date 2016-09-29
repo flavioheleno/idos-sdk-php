@@ -45,10 +45,6 @@ class Scores extends AbstractProfileEndpoint {
         string $name,
         float $value
     ) : array {
-        if ($type === null) {
-            $type = $this->typeInfer($value);
-        }
-
         return $this->sendPut(
             sprintf('/profiles/%s/scores', $this->userName),
             [],
