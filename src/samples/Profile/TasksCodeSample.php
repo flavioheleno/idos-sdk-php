@@ -28,8 +28,6 @@ $response = $sdk
 
 $processId = $response['data'][0]['id'];
 
-var_dump($processId);
-
 /**
  * Calling the Profile Class passing the username, and after that, the Process Class passing the $processId trough the constructor. After that calls the Task Ednpoint and the method listAll
  */
