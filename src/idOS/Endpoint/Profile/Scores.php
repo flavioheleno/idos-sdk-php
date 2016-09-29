@@ -2,47 +2,45 @@
 
 namespace idOS\Endpoint\Profile;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-
 /**
- * Scores Class Endpoint
+ * Scores Class Endpoint.
  */
 class Scores extends AbstractProfileEndpoint {
-
     /**
      * Creates a new score for the given source.
      *
      * @param string $attribute
      * @param string $name
-     * @param float $value
-     * @return Array Response
+     * @param float  $value
+     *
+     * @return array Response
      */
     public function createNew(
-       string $attribute,
-       string $name,
-       float $value
+        string $attribute,
+        string $name,
+        float $value
     ) : array {
         return $this->sendPost(
             sprintf('/profiles/%s/scores', $this->userName),
             [],
             [
                 'attribute' => $attribute,
-                'name' => $name,
-                'value' => $value
+                'name'      => $name,
+                'value'     => $value
             ]
         );
     }
 
-     /**
+    /**
      * Tries to update a score and if it doesnt exists, creates a new score.
      *
-     * @param  string $attribute
-     * @param  string $name
-     * @param  float $value
-     * @return Array Response
+     * @param string $attribute
+     * @param string $name
+     * @param float  $value
+     *
+     * @return array Response
      */
-    public function upsert(
+    public function upsertOne(
         string $attribute,
         string $name,
         float $value
@@ -63,10 +61,11 @@ class Scores extends AbstractProfileEndpoint {
     }
 
     /**
-     * Lists all scores
+     * Lists all scores.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -76,9 +75,10 @@ class Scores extends AbstractProfileEndpoint {
     }
 
     /**
-     * Retrieves the score given its name
+     * Retrieves the score given its name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return
      */
     public function getOne(string $name) : array {
@@ -91,9 +91,10 @@ class Scores extends AbstractProfileEndpoint {
      * Updates a score in the given profile.
      *
      * @param string $attribute
-     * @param  string $name
-     * @param  float $value
-     * @return Array Response
+     * @param string $name
+     * @param float  $value
+     *
+     * @return array Response
      */
     public function updateOne(string $attribute, string $name, float $value) : array {
         return $this->sendPatch(
@@ -101,16 +102,17 @@ class Scores extends AbstractProfileEndpoint {
             [],
             [
                 'attribute' => $attribute,
-                'value' => $value
+                'value'     => $value
             ]
         );
     }
 
     /**
-     * Deletes a score given its name
+     * Deletes a score given its name.
      *
-     * @param  string $name
-     * @return Array Response
+     * @param string $name
+     *
+     * @return array Response
      */
     public function deleteOne(string $name) : array {
         return $this->sendDelete(
@@ -119,9 +121,11 @@ class Scores extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes all scores for the given username
-     * @param  array  $filters
-     * @return Array Response
+     * Deletes all scores for the given username.
+     *
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(

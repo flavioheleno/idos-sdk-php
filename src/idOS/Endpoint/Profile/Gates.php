@@ -2,21 +2,17 @@
 
 namespace idOS\Endpoint\Profile;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-use idOS\Endpoint\AbstractEndpoint;
-
 /**
- * Gates Class Endpoint
+ * Gates Class Endpoint.
  */
 class Gates extends AbstractProfileEndpoint {
-
     /**
      * Creates a new gate for the given user.
      *
-     * @param  string $name
-     * @param  boolean $pass
-     * @return Array Response
+     * @param string $name
+     * @param bool   $pass
+     *
+     * @return array Response
      */
     public function createNew(
         string $name,
@@ -28,7 +24,7 @@ class Gates extends AbstractProfileEndpoint {
             [],
             [
                 'name'      => $name,
-                'pass'     => $pass
+                'pass'      => $pass
             ]
         );
     }
@@ -36,11 +32,12 @@ class Gates extends AbstractProfileEndpoint {
     /**
      * Tries to update a gate and if it doesnt exists, creates a new gate.
      *
-     * @param  string $name
-     * @param  boolean $pass
-     * @return Array Response
+     * @param string $name
+     * @param bool   $pass
+     *
+     * @return array Response
      */
-    public function upsert(
+    public function upsertOne(
         string $name,
         bool $pass
     ) : array {
@@ -50,16 +47,17 @@ class Gates extends AbstractProfileEndpoint {
             [],
             [
                 'name'      => $name,
-                'pass'     => $pass
+                'pass'      => $pass
             ]
         );
     }
 
     /**
-     * Lists all gates
+     * Lists all gates.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -69,10 +67,11 @@ class Gates extends AbstractProfileEndpoint {
     }
 
     /**
-     * Retrieves a gate given its slug
+     * Retrieves a gate given its slug.
      *
-     * @param  string $gateSlug
-     * @return Array Response
+     * @param string $gateSlug
+     *
+     * @return array Response
      */
     public function getOne(string $gateSlug) : array {
         return $this->sendGet(
@@ -81,10 +80,11 @@ class Gates extends AbstractProfileEndpoint {
     }
 
     /**
-     * Updates a gate given its slug
+     * Updates a gate given its slug.
      *
-     * @param  boolean $pass
-     * @return Array Response
+     * @param bool $pass
+     *
+     * @return array Response
      */
     public function updateOne(string $gateSlug, bool $pass) : array {
         return $this->sendPatch(
@@ -97,10 +97,11 @@ class Gates extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes a gate given its slug
+     * Deletes a gate given its slug.
      *
-     * @param  string $gateSlug
-     * @return Array Response
+     * @param string $gateSlug
+     *
+     * @return array Response
      */
     public function deleteOne(string $gateSlug) : array {
         return $this->sendDelete(
@@ -109,10 +110,11 @@ class Gates extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes all gates
+     * Deletes all gates.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(

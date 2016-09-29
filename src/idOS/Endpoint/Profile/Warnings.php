@@ -2,21 +2,17 @@
 
 namespace idOS\Endpoint\Profile;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-use idOS\Endpoint\AbstractEndpoint;
-
 /**
- * Warnings Class Endpoint
+ * Warnings Class Endpoint.
  */
 class Warnings extends AbstractProfileEndpoint {
-
     /**
      * Creates a new warning for the given user.
      *
-     * @param  string $slug
-     * @param  string $attribute
-     * @return Array Response
+     * @param string $slug
+     * @param string $attribute
+     *
+     * @return array Response
      */
     public function createNew(
         string $slug,
@@ -34,10 +30,11 @@ class Warnings extends AbstractProfileEndpoint {
     }
 
     /**
-     * Lists all warnings
+     * Lists all warnings.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -47,10 +44,11 @@ class Warnings extends AbstractProfileEndpoint {
     }
 
     /**
-     * Retrieves a warning given its slug
+     * Retrieves a warning given its slug.
      *
-     * @param  string $slug
-     * @return Array Response
+     * @param string $slug
+     *
+     * @return array Response
      */
     public function getOne(string $slug) : array {
         return $this->sendGet(
@@ -59,10 +57,11 @@ class Warnings extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes a warning given its slug
+     * Deletes a warning given its slug.
      *
-     * @param  string $slug
-     * @return Array Response
+     * @param string $slug
+     *
+     * @return array Response
      */
     public function deleteOne(string $slug) : array {
         return $this->sendDelete(
@@ -71,10 +70,11 @@ class Warnings extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes all warnings
+     * Deletes all warnings.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(

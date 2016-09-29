@@ -2,29 +2,30 @@
 
 namespace idOS\Auth;
 
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class UserToken extends AbstractAuth {
     /**
-     * The userName
+     * The userName.
      */
     private $userName;
     /**
-     * The credential public key
+     * The credential public key.
      */
     private $credentialPublicKey;
     /**
-     * The credential private key
+     * The credential private key.
      */
     private $credentialPrivateKey;
     /**
-     * The generated token
+     * The generated token.
      */
     private $token;
 
     /**
-     * Constructor Class
+     * Constructor Class.
+     *
      * @param string $userName
      * @param string $credentialPublicKey
      * @param string $credentialPrivateKey
@@ -41,6 +42,7 @@ class UserToken extends AbstractAuth {
 
     /**
      * Generates the User Token and returns it.
+     *
      * @return string userToken
      */
     public function getToken() : string {

@@ -8,16 +8,17 @@ use idOS\Endpoint\EndpointInterface;
 
 class Profile extends AbstractSection {
     /**
-     * The profile userName
+     * The profile userName.
      */
     private $userName;
 
     /**
-     * Constructor Class
+     * Constructor Class.
+     *
      * @param string        $userName
      * @param AuthInterface $authentication
      * @param Client        $client
-     * @param bool|boolean  $throwsExceptions
+     * @param bool|bool     $throwsExceptions
      */
     public function __construct(
         string $userName,
@@ -25,13 +26,15 @@ class Profile extends AbstractSection {
         Client $client,
         bool $throwsExceptions = false
     ) {
-        $this->userName       = $userName;
+        $this->userName = $userName;
         parent::__construct($authentication, $client, $throwsExceptions);
     }
 
     /**
-     * returns the endpoint called passing the process id inside constructor
-     * @param  string $name
+     * returns the endpoint called passing the process id inside constructor.
+     *
+     * @param string $name
+     *
      * @return endpoint instance
      */
     public function __get(string $name) : EndpointInterface {
@@ -45,16 +48,18 @@ class Profile extends AbstractSection {
     }
 
     /**
-     * returns the endpoint called
-     * @param  string $name
-     * @param  array  $args
+     * returns the endpoint called.
+     *
+     * @param string $name
+     * @param array  $args
+     *
      * @return endpoint instance
      */
     public function __call(string $name, array $args) : SectionInterface {
         $className = $this->getSectionClassName($name);
-        $args[] = $this->userName;
-        $args[] = $this->authentication;
-        $args[] = $this->client;
+        $args[]    = $this->userName;
+        $args[]    = $this->authentication;
+        $args[]    = $this->client;
 
         return new $className(...$args);
     }

@@ -2,20 +2,17 @@
 
 namespace idOS\Endpoint\Profile;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-
 /**
- * References Class Endpoint
+ * References Class Endpoint.
  */
 class References extends AbstractProfileEndpoint {
-
-	 /**
+    /**
      * Creates a new reference for the given user.
      *
-     * @param  string $name
-     * @param  boolean $value
-     * @return Array Response
+     * @param string $name
+     * @param bool   $value
+     *
+     * @return array Response
      */
     public function createNew(
         string $name,
@@ -33,10 +30,11 @@ class References extends AbstractProfileEndpoint {
     }
 
     /**
-     * Lists all references
+     * Lists all references.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -46,10 +44,11 @@ class References extends AbstractProfileEndpoint {
     }
 
     /**
-     * Retrieves a reference given its slug
+     * Retrieves a reference given its slug.
      *
-     * @param  string $referenceName
-     * @return Array Response
+     * @param string $referenceName
+     *
+     * @return array Response
      */
     public function getOne(string $referenceName) : array {
         return $this->sendGet(
@@ -58,10 +57,11 @@ class References extends AbstractProfileEndpoint {
     }
 
     /**
-     * Updates a reference given its slug
+     * Updates a reference given its slug.
      *
-     * @param  boolean $value
-     * @return Array Response
+     * @param bool $value
+     *
+     * @return array Response
      */
     public function updateOne(string $referenceName, string $value) : array {
         return $this->sendPatch(
@@ -74,10 +74,11 @@ class References extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes a reference given its slug
+     * Deletes a reference given its slug.
      *
-     * @param  string $referenceName
-     * @return Array Response
+     * @param string $referenceName
+     *
+     * @return array Response
      */
     public function deleteOne(string $referenceName) : array {
         return $this->sendDelete(
@@ -86,10 +87,11 @@ class References extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes all references
+     * Deletes all references.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(
@@ -97,5 +99,4 @@ class References extends AbstractProfileEndpoint {
             $filters
         );
     }
-
 }

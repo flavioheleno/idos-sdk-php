@@ -6,7 +6,8 @@ class IdentityToken extends AbstractAuth {
     private $token;
 
     /**
-     * Constructor Class
+     * Constructor Class.
+     *
      * @param string $token the identityToken
      */
     public function __construct(string $token) {
@@ -14,7 +15,8 @@ class IdentityToken extends AbstractAuth {
     }
 
     /**
-     * Returns the token saved on instantiating the IdentityToken Class
+     * Returns the token saved on instantiating the IdentityToken Class.
+     *
      * @return string identityToken
      */
     public function getToken() : string {

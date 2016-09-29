@@ -2,20 +2,16 @@
 
 namespace idOS\Endpoint\Profile;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-use idOS\Endpoint\AbstractEndpoint;
-
 /**
- * Processes Class Endpoint
+ * Processes Class Endpoint.
  */
 class Processes extends AbstractProfileEndpoint {
-
     /**
-     * Lists all processes
+     * Lists all processes.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -25,10 +21,11 @@ class Processes extends AbstractProfileEndpoint {
     }
 
     /**
-     * Retrieves a processe given its slug
+     * Retrieves a processe given its slug.
      *
-     * @param  string $processId
-     * @return Array Response
+     * @param string $processId
+     *
+     * @return array Response
      */
     public function getOne(string $processId) : array {
         return $this->sendGet(

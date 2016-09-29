@@ -10,12 +10,12 @@ abstract class AbstractCompanyEndpoint extends AbstractEndpoint {
     protected $companySlug;
 
     /**
-     * Constructor Class
+     * Constructor Class.
      *
-     * @param string        $companySlug         The company's slug
+     * @param string        $companySlug      The company's slug
      * @param AuthInterface $authentication   The type of the authentication: UserToken, HandlerToken and IdentityToken
      * @param Client        $client
-     * @param bool|boolean  $throwsExceptions
+     * @param bool|bool     $throwsExceptions
      */
     public function __construct(
         string $companySlug,

@@ -3,7 +3,7 @@
 namespace idOS\Auth;
 
 /**
- * Auth Interface implemmented by AbstractAuth
+ * Auth Interface implemmented by AbstractAuth.
  */
 interface AuthInterface {
     public function getToken() : string;
