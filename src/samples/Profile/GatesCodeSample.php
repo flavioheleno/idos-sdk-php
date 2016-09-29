@@ -30,11 +30,11 @@ $response = $sdk
 print_r($response);
 
 /**
- * Creates a new gate
+ * Creates a new gate or updates it
  */
 $response = $sdk
 	->Profile($credentials['username'])
-	->Gates->createNew('18+', true);
+	->Gates->upsert('18+', true);
 
 /**
  * Prints the api response
@@ -47,18 +47,6 @@ print_r($response);
 $response = $sdk
 	->Profile($credentials['username'])
 	->Gates->getOne('18');
-
-/**
- * Prints the api response
- */
-print_r($response);
-
-/**
- * Updates the pass option to false
- */
-$response = $sdk
-	->Profile($credentials['username'])
-	->Gates->updateOne($response['data']['slug'], false);
 
 /**
  * Prints the api response

@@ -42,7 +42,7 @@ class Scores extends AbstractProfileEndpoint {
      * @param  float $value
      * @return Array Response
      */
-    public function createOrUpdate(
+    public function upsert(
         string $attribute,
         string $name,
         float $value

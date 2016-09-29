@@ -42,7 +42,7 @@ class Raw extends AbstractProfileEndpoint {
      * @param  array  $data
      * @return Array Response
      */
-    public function createOrUpdate(
+    public function upsert(
         int $sourceId,
         string $collectionName,
         array $data

@@ -40,7 +40,7 @@ class Gates extends AbstractProfileEndpoint {
      * @param  boolean $pass
      * @return Array Response
      */
-    public function createOrUpdate(
+    public function upsert(
         string $name,
         bool $pass
     ) : array {
