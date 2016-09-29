@@ -31,8 +31,8 @@ class Features extends AbstractProfileEndpoint {
      *
      * @param int    $sourceId
      * @param string $name
-     * @param  $value
-     * @param  $type
+     * @param mixed $value
+     * @param mixed|null $type
      *
      * @return array Response
      */
@@ -63,8 +63,8 @@ class Features extends AbstractProfileEndpoint {
      *
      * @param int    $sourceId
      * @param string $name
-     * @param  $value
-     * @param  $type
+     * @param mixed $value
+     * @param mixed|null $type
      *
      * @return array Response
      */
@@ -135,7 +135,7 @@ class Features extends AbstractProfileEndpoint {
      * Updates a feature given its slug.
      *
      * @param string $featureSlug
-     * @param  $value
+     * @param mixed $value
      * @param string $type
      *
      * @return array Response
