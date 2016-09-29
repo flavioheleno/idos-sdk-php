@@ -67,7 +67,7 @@ class Features extends AbstractProfileEndpoint {
      * @param  $type
      * @return Array Response
      */
-    public function createOrUpdate(
+    public function upsert(
         int $sourceId,
         string $name,
         $value,

@@ -25,7 +25,7 @@ $ php composer.phar install
 
 Examples
 --------
-You can find examples of basic usage on src/codeSamples/ directory.
+You can find examples of basic usage on src/samples/ directory.
 
 Bugs and feature requests
 -------------------------
@@ -55,7 +55,7 @@ To run the tests, you must install dependencies with `composer install --dev`.
 How To Use The New SDK
 ----------------------
 
-The majority of the endpoints require Authentication Tokens when making requests to the API. 
+The majority of the endpoints require Authentication Tokens when making requests to the API.
 There are three kinds of tokens: UserToken, CredentialToken or IdentityToken.
 
 ### First Step
@@ -105,4 +105,4 @@ $response = $sdk
 	->Gates->createNew('18+', true);
 
 ```
-To see more examples of how to use the SDK and how to call the methods and endpoints, go to ```src/codeSamples``` directory.
+To see more examples of how to use the SDK and how to call the methods and endpoints, go to ```src/samples``` directory.
