@@ -19,6 +19,10 @@ class Features extends AbstractProfileEndpoint {
             return 'boolean';
         }
 
+        if (is_array($value)) {
+            return 'array';
+        }
+
         return 'string';
     }
 
