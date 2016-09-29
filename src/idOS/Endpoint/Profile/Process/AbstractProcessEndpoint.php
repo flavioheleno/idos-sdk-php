@@ -11,12 +11,12 @@ abstract class AbstractProcessEndpoint extends AbstractEndpoint {
     protected $userName;
 
     /**
-     * Constructor Class
+     * Constructor Class.
      *
-     * @param int        $processId         The process' id
+     * @param int           $processId        The process' id
      * @param AuthInterface $authentication   The type of the authentication: UserToken, HandlerToken and IdentityToken
      * @param Client        $client
-     * @param bool|boolean  $throwsExceptions
+     * @param bool|bool     $throwsExceptions
      */
     public function __construct(
         int $processId,
@@ -26,7 +26,7 @@ abstract class AbstractProcessEndpoint extends AbstractEndpoint {
         bool $throwsExceptions = false
     ) {
         $this->processId = $processId;
-        $this->userName = $userName;
+        $this->userName  = $userName;
         parent::__construct($authentication, $client, $throwsExceptions);
     }
 }

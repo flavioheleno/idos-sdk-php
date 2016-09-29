@@ -2,21 +2,18 @@
 
 namespace idOS\Endpoint\Profile;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-
 /**
- * Sources Class Endpoint
+ * Sources Class Endpoint.
  */
 class Sources extends AbstractProfileEndpoint {
-
-	/**
+    /**
      * Creates a new source for the given username.
      *
      * @param string $name
      * @param string $ipaddr
-     * @param array $tags
-     * @return Array Response
+     * @param array  $tags
+     *
+     * @return array Response
      */
     public function createNew(
        string $name,
@@ -28,7 +25,7 @@ class Sources extends AbstractProfileEndpoint {
             'tags' => $tags
         ];
 
-        if (!empty($ipaddr)) {
+        if (! empty($ipaddr)) {
             $array['ipaddr'] = $ipaddr;
         }
 
@@ -39,12 +36,13 @@ class Sources extends AbstractProfileEndpoint {
         );
     }
 
-	/**
-	 * Lists all sources
-	 *
-	 * @param  array  $filters
-	 * @return Array Response
-	 */
+    /**
+     * Lists all sources.
+     *
+     * @param array $filters
+     *
+     * @return array Response
+     */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
             sprintf('/profiles/%s/sources', $this->userName),
@@ -53,10 +51,11 @@ class Sources extends AbstractProfileEndpoint {
     }
 
     /**
-     * Retrieves the source given its sourceId
+     * Retrieves the source given its sourceId.
      *
-     * @param  int $sourceId
-     * @return Array Response
+     * @param int $sourceId
+     *
+     * @return array Response
      */
     public function getOne(int $sourceId) : array {
         return $this->sendGet(
@@ -70,7 +69,8 @@ class Sources extends AbstractProfileEndpoint {
      * @param string $name
      * @param string $ipaddr
      * @param string $tags
-     * @return Array Response
+     *
+     * @return array Response
      */
     public function updateOne(string $name, array $tags, string $ipaddr = '') : array {
          $array = [
@@ -78,7 +78,7 @@ class Sources extends AbstractProfileEndpoint {
             'tags' => $tags
         ];
 
-        if (!empty($ipaddr)) {
+        if (! empty($ipaddr)) {
             $array['ipaddr'] = $ipaddr;
         }
 
@@ -90,10 +90,11 @@ class Sources extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes a source given its sourceId
+     * Deletes a source given its sourceId.
      *
-     * @param  string $sourceId
-     * @return Array Response
+     * @param string $sourceId
+     *
+     * @return array Response
      */
     public function deleteOne(string $sourceId) : array {
         return $this->sendDelete(
@@ -101,11 +102,13 @@ class Sources extends AbstractProfileEndpoint {
         );
     }
 
- 	/**
- 	 * Deletes all sources for the given username
- 	 * @param  array  $filters
- 	 * @return Array Response
- 	 */
+    /**
+     * Deletes all sources for the given username.
+     *
+     * @param array $filters
+     *
+     * @return array Response
+     */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(
             sprintf('/profiles/%s/sources', $this->userName),

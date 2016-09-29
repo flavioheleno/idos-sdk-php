@@ -2,25 +2,20 @@
 
 namespace idOS\Endpoint\Profile\Process;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-use idOS\Endpoint\Profile\Process\AbstractProcessEndpoint;
-use idOS\Endpoint\AbstractEndpoint;
-
 /**
- * Tasks Class Endpoint
+ * Tasks Class Endpoint.
  */
 class Tasks extends AbstractProcessEndpoint {
-
     /**
      * Creates a new task for the given user.
      *
      * @param string $name
      * @param string $event
-     * @param boolean $running
-     * @param boolean $success
+     * @param bool   $running
+     * @param bool   $success
      * @param string $message
-     * @return Array Response
+     *
+     * @return array Response
      */
     public function createNew(
         string $name,
@@ -34,8 +29,8 @@ class Tasks extends AbstractProcessEndpoint {
             sprintf('/profiles/%s/processes/%s/tasks', $this->userName, $this->processId),
             [],
             [
-                'name' => $name,
-                'event' => $event,
+                'name'    => $name,
+                'event'   => $event,
                 'running' => $running,
                 'success' => $success,
                 'message' => $message
@@ -44,10 +39,11 @@ class Tasks extends AbstractProcessEndpoint {
     }
 
     /**
-     * Lists all tasks
+     * Lists all tasks.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -57,10 +53,11 @@ class Tasks extends AbstractProcessEndpoint {
     }
 
     /**
-     * Retrieves a task given its slug
+     * Retrieves a task given its slug.
      *
-     * @param  int $taskId
-     * @return Array Response
+     * @param int $taskId
+     *
+     * @return array Response
      */
     public function getOne(int $taskId) : array {
         return $this->sendGet(
@@ -69,12 +66,13 @@ class Tasks extends AbstractProcessEndpoint {
     }
 
     /**
-     * Updates a task given its slug
+     * Updates a task given its slug.
      *
-     * @param  int $taskId
+     * @param int $taskId
      * @param  $value
-     * @param  string $type
-     * @return Array Response
+     * @param string $type
+     *
+     * @return array Response
      */
     public function updateOne(int $taskId, $value, string $type) : array {
         return $this->sendPatch(
@@ -88,10 +86,11 @@ class Tasks extends AbstractProcessEndpoint {
     }
 
     /**
-     * Deletes a task given its slug
+     * Deletes a task given its slug.
      *
-     * @param  int $taskId
-     * @return Array Response
+     * @param int $taskId
+     *
+     * @return array Response
      */
     public function deleteOne(int $taskId) : array {
         return $this->sendDelete(
@@ -100,10 +99,11 @@ class Tasks extends AbstractProcessEndpoint {
     }
 
     /**
-     * Deletes all tasks
+     * Deletes all tasks.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(

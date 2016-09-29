@@ -10,17 +10,18 @@ use idOS\Section\SectionInterface;
 
 class Process extends AbstractSection {
     /**
-     * The process id necessary for all /process base endpoint
+     * The process id necessary for all /process base endpoint.
      */
     private $processId;
 
     /**
-     * Constructor Class
+     * Constructor Class.
+     *
      * @param int           $processId
      * @param string        $userName
      * @param AuthInterface $authentication
      * @param Client        $client
-     * @param bool|boolean  $throwsExceptions
+     * @param bool|bool     $throwsExceptions
      */
     public function __construct(
         int $processId,
@@ -30,13 +31,15 @@ class Process extends AbstractSection {
         bool $throwsExceptions = false
     ) {
         $this->processId = $processId;
-        $this->userName = $userName;
+        $this->userName  = $userName;
         parent::__construct($authentication, $client, $throwsExceptions);
     }
 
     /**
-     * returns the endpoint called passing the process id inside constructor
-     * @param  string $name
+     * returns the endpoint called passing the process id inside constructor.
+     *
+     * @param string $name
+     *
      * @return endpoint instance
      */
     public function __get(string $name) : EndpointInterface {
@@ -51,17 +54,19 @@ class Process extends AbstractSection {
     }
 
     /**
-     * returns the endpoint called
-     * @param  string $name
-     * @param  array  $args
+     * returns the endpoint called.
+     *
+     * @param string $name
+     * @param array  $args
+     *
      * @return endpoint instance
      */
     public function __call(string $name, array $args) : SectionInterface {
         $className = $this->getSectionClassName($name);
-        $args[] = $this->processId;
-        $args[] = $this->userName;
-        $args[] = $this->authentication;
-        $args[] = $this->client;
+        $args[]    = $this->processId;
+        $args[]    = $this->userName;
+        $args[]    = $this->authentication;
+        $args[]    = $this->client;
 
         return new $className(...$args);
     }

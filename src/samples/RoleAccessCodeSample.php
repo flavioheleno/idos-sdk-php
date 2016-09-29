@@ -7,24 +7,24 @@ require_once __DIR__ . '/settings.php';
  * Creates an auth object for a UserToken required in the SDK constructor for calling all endpoints. Passing through the UserToken constructor: the userName, the credential public key and the credential private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\UserToken(
-	'f67b96dcf96b49d713a520ce9f54053c',
-	$credentials['credentialPublicKey'],
-	$credentials['credentialPrivKey']
+    'f67b96dcf96b49d713a520ce9f54053c',
+    $credentials['credentialPublicKey'],
+    $credentials['credentialPrivKey']
 );
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object through the constructor
+ * Calls the create method that instantiates the SDK passing the auth object through the constructor.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all processes
+ * Lists all processes.
  */
 $response = $sdk
-	->RoleAccess
-	->listAll();
+    ->RoleAccess
+    ->listAll();
 
 /**
- * Prints the api response
+ * Prints the api response.
  */
 print_r($response);

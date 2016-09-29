@@ -6,26 +6,27 @@ use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 
 abstract class AbstractEndpoint implements EndpointInterface {
-
     /**
-     * The Authentication type (UserToken, CredentialToken, IdentityToken)
+     * The Authentication type (UserToken, CredentialToken, IdentityToken).
      */
     protected $authentication;
     /**
-     * GuzzleHttp\Client
+     * GuzzleHttp\Client.
      */
     protected $client;
     /**
-     * Boolean option to throw exception
+     * Boolean option to throw exception.
      */
     protected $throwExceptions;
 
     /**
-     * Sends the request to the api
-     * @param  string $method
-     * @param  array  $query
-     * @param  array  $body
-     * @return Array response
+     * Sends the request to the api.
+     *
+     * @param string $method
+     * @param array  $query
+     * @param array  $body
+     *
+     * @return array response
      */
     private function sendRequest(string $method, string $uri, array $query = [], array $body = []) : array {
         // $uri = sprintf('https://api.idos.io/1.0/%s', ltrim($uri, '/'));
@@ -74,10 +75,12 @@ abstract class AbstractEndpoint implements EndpointInterface {
     }
 
     /**
-     * Sends GET request
-     * @param  string $uri
-     * @param  array  $query
-     * @return Array response
+     * Sends GET request.
+     *
+     * @param string $uri
+     * @param array  $query
+     *
+     * @return array response
      */
     protected function sendGet(string $uri, array $query = []) : array {
         return $this->sendRequest(
@@ -89,11 +92,13 @@ abstract class AbstractEndpoint implements EndpointInterface {
     }
 
     /**
-     * Sends a POST request
-     * @param  string $uri
-     * @param  array  $query
-     * @param  array  $body
-     * @return Array response
+     * Sends a POST request.
+     *
+     * @param string $uri
+     * @param array  $query
+     * @param array  $body
+     *
+     * @return array response
      */
     protected function sendPost(string $uri, array $query = [], array $body = []) : array {
         return $this->sendRequest(
@@ -105,11 +110,13 @@ abstract class AbstractEndpoint implements EndpointInterface {
     }
 
     /**
-     * Sends a PATCH request
-     * @param  string $uri
-     * @param  array  $query
-     * @param  array  $body
-     * @return Array response
+     * Sends a PATCH request.
+     *
+     * @param string $uri
+     * @param array  $query
+     * @param array  $body
+     *
+     * @return array response
      */
     protected function sendPatch(string $uri, array $query = [], array $body = []) : array {
         return $this->sendRequest(
@@ -121,11 +128,13 @@ abstract class AbstractEndpoint implements EndpointInterface {
     }
 
     /**
-     * Sends a PUT request
-     * @param  string $uri
-     * @param  array  $query
-     * @param  array  $body
-     * @return Array response
+     * Sends a PUT request.
+     *
+     * @param string $uri
+     * @param array  $query
+     * @param array  $body
+     *
+     * @return array response
      */
     protected function sendPut(string $uri, array $query = [], array $body = []) : array {
         return $this->sendRequest(
@@ -137,10 +146,12 @@ abstract class AbstractEndpoint implements EndpointInterface {
     }
 
     /**
-     * Sends a DELETE request
-     * @param  string $uri
-     * @param  array  $query
-     * @return Array response
+     * Sends a DELETE request.
+     *
+     * @param string $uri
+     * @param array  $query
+     *
+     * @return array response
      */
     protected function sendDelete(string $uri, array $query = []) : array {
         return $this->sendRequest(
@@ -152,10 +163,11 @@ abstract class AbstractEndpoint implements EndpointInterface {
     }
 
     /**
-     * Constructor Class
+     * Constructor Class.
+     *
      * @param AuthInterface $authentication
      * @param Client        $client
-     * @param bool|boolean  $throwExceptions
+     * @param bool|bool     $throwExceptions
      */
     public function __construct(
         AuthInterface $authentication,

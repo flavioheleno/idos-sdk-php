@@ -2,21 +2,18 @@
 
 namespace idOS\Endpoint\Profile;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-
 /**
- * Raw Class Endpoint
+ * Raw Class Endpoint.
  */
 class Raw extends AbstractProfileEndpoint {
-
     /**
      * Creates a new raw data for the given source.
      *
-     * @param  int    $sourceId
-     * @param  string $collectionName
-     * @param  array  $data
-     * @return Array Response
+     * @param int    $sourceId
+     * @param string $collectionName
+     * @param array  $data
+     *
+     * @return array Response
      */
     public function createNew(
         int $sourceId,
@@ -37,10 +34,11 @@ class Raw extends AbstractProfileEndpoint {
     /**
      * Tries to update a raw data and if it doesnt exists, creates a new raw data.
      *
-     * @param  int    $sourceId
-     * @param  string $collectionName
-     * @param  array  $data
-     * @return Array Response
+     * @param int    $sourceId
+     * @param string $collectionName
+     * @param array  $data
+     *
+     * @return array Response
      */
     public function upsertOne(
         int $sourceId,
@@ -59,10 +57,11 @@ class Raw extends AbstractProfileEndpoint {
     }
 
     /**
-     * Lists all raw data
+     * Lists all raw data.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -80,9 +79,10 @@ class Raw extends AbstractProfileEndpoint {
     /**
      * Updates a raw data in the given source.
      *
-     * @param  string $collectionName
-     * @param  array  $data
-     * @return Array Response
+     * @param string $collectionName
+     * @param array  $data
+     *
+     * @return array Response
      */
     public function updateOne(string $collectionName, array $data) : array {
         return $this->sendPatch(
@@ -95,10 +95,11 @@ class Raw extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes a raw data given its collectionName
+     * Deletes a raw data given its collectionName.
      *
-     * @param  string $collectionName
-     * @return Array Response
+     * @param string $collectionName
+     *
+     * @return array Response
      */
     public function deleteOne(string $collectionName) : array {
         return $this->sendDelete(

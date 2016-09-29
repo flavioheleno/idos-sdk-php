@@ -2,15 +2,10 @@
 
 namespace idOS\Endpoint\Profile;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-use idOS\Endpoint\AbstractEndpoint;
-
 /**
- * Features Class Endpoint
+ * Features Class Endpoint.
  */
 class Features extends AbstractProfileEndpoint {
-
     private function typeInfer($value) : string {
         if (is_float($value)) {
             return 'double';
@@ -30,11 +25,12 @@ class Features extends AbstractProfileEndpoint {
     /**
      * Creates a new feature for the given user.
      *
-     * @param  int    $sourceId
-     * @param  string $name
+     * @param int    $sourceId
+     * @param string $name
      * @param  $value
      * @param  $type
-     * @return Array Response
+     *
+     * @return array Response
      */
     public function createNew(
         int $sourceId,
@@ -61,11 +57,12 @@ class Features extends AbstractProfileEndpoint {
     /**
      * Tries to update a feature and if it doesnt exists, creates a new feature.
      *
-     * @param  int    $sourceId
-     * @param  string $name
+     * @param int    $sourceId
+     * @param string $name
      * @param  $value
      * @param  $type
-     * @return Array Response
+     *
+     * @return array Response
      */
     public function upsertOne(
         int $sourceId,
@@ -104,10 +101,11 @@ class Features extends AbstractProfileEndpoint {
     }
 
     /**
-     * Lists all features
+     * Lists all features.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
@@ -117,10 +115,11 @@ class Features extends AbstractProfileEndpoint {
     }
 
     /**
-     * Retrieves a feature given its slug
+     * Retrieves a feature given its slug.
      *
-     * @param  string $featureSlug
-     * @return Array Response
+     * @param string $featureSlug
+     *
+     * @return array Response
      */
     public function getOne(string $featureSlug) : array {
         return $this->sendGet(
@@ -129,12 +128,13 @@ class Features extends AbstractProfileEndpoint {
     }
 
     /**
-     * Updates a feature given its slug
+     * Updates a feature given its slug.
      *
-     * @param  string $featureSlug
+     * @param string $featureSlug
      * @param  $value
-     * @param  string $type
-     * @return Array Response
+     * @param string $type
+     *
+     * @return array Response
      */
     public function updateOne(string $featureSlug, $value, string $type) : array {
         return $this->sendPatch(
@@ -148,10 +148,11 @@ class Features extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes a feature given its slug
+     * Deletes a feature given its slug.
      *
-     * @param  string $featureSlug
-     * @return Array Response
+     * @param string $featureSlug
+     *
+     * @return array Response
      */
     public function deleteOne(string $featureSlug) : array {
         return $this->sendDelete(
@@ -160,10 +161,11 @@ class Features extends AbstractProfileEndpoint {
     }
 
     /**
-     * Deletes all features
+     * Deletes all features.
      *
-     * @param  array  $filters
-     * @return Array Response
+     * @param array $filters
+     *
+     * @return array Response
      */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(

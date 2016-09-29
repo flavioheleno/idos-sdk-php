@@ -166,6 +166,7 @@ class Auth {
             case self::IDENTITY:
                 return sprintf('IdentityToken %s', $this->getIdentityToken());
         }
+
         throw new \RuntimeException(
             sprintf(
                 'Invalid auth type "%d"',
@@ -187,6 +188,7 @@ class Auth {
             case self::IDENTITY:
                 return sprintf('identityToken=%s', $this->getIdentityToken());
         }
+
         throw new \RuntimeException(
             sprintf(
                 'Invalid auth type "%d"',

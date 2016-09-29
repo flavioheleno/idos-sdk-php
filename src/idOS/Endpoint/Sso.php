@@ -2,16 +2,12 @@
 
 namespace idOS\Endpoint;
 
-use GuzzleHttp\Client;
-use idOS\Auth\AuthInterface;
-
 /**
- * Sso Class Endpoint
+ * Sso Class Endpoint.
  */
 class Sso extends AbstractEndpoint {
-
-	/**
-     * Creates a new Sso
+    /**
+     * Creates a new Sso.
      *
      * @param string $key
      * @param string $secret
@@ -30,21 +26,22 @@ class Sso extends AbstractEndpoint {
             '/sso',
             [],
             [
-                'key' => $key,
-                'secret' => $secret,
-                'ipAddress' => $ipAddress,
-                'accessToken' => $accessToken,
+                'key'              => $key,
+                'secret'           => $secret,
+                'ipAddress'        => $ipAddress,
+                'accessToken'      => $accessToken,
                 'credentialPubKey' => $credentialPubKey
             ]
         );
     }
 
-	/**
-	 * Lists all sso
-	 *
-	 * @param  array  $filters
-	 * @return Array Response
-	 */
+    /**
+     * Lists all sso.
+     *
+     * @param array $filters
+     *
+     * @return array Response
+     */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
             '/sso',
@@ -53,10 +50,11 @@ class Sso extends AbstractEndpoint {
     }
 
     /**
-     * Retrieves the roleAccess given its providerName
+     * Retrieves the roleAccess given its providerName.
      *
-     * @param  string $providerName
-     * @return Array Response
+     * @param string $providerName
+     *
+     * @return array Response
      */
     public function getOne(string $providerName) : array {
         return $this->sendGet(

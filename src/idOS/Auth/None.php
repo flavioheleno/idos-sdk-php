@@ -3,18 +3,17 @@
 namespace idOS\Auth;
 
 /**
- * None Authorization Class
+ * None Authorization Class.
  */
 class None extends AbstractAuth {
-
-	/**
-	 *  Constructor Class
-	 */
+    /**
+     *  Constructor Class.
+     */
     public function __construct() {
     }
 
     /**
-     * Returns an empty string
+     * Returns an empty string.
      */
     public function getToken() : string {
         return '';

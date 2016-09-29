@@ -6,25 +6,26 @@ use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 use idOS\Section\Profile;
 use idOS\Section\Profile\Process;
-use idOS\Endpoint;
 
 class SDK {
     /**
-     * Authentication instance
+     * Authentication instance.
      */
     private $authentication;
     /**
-     * GuzzleHttp\Client
+     * GuzzleHttp\Client.
      */
     private $client;
     /**
-     * boolean option to throw exception
+     * boolean option to throw exception.
      */
     private $throwsExceptions;
 
     /**
-     * Creates the SDK instance
-     * @param  AuthInterface $authentication
+     * Creates the SDK instance.
+     *
+     * @param AuthInterface $authentication
+     *
      * @return SDK instance
      */
     public static function create(AuthInterface $authentication) {
@@ -35,10 +36,11 @@ class SDK {
     }
 
     /**
-     * Constructor Class
+     * Constructor Class.
+     *
      * @param AuthInterface $authentication
      * @param Client        $client
-     * @param bool|boolean  $throwsExceptions
+     * @param bool|bool     $throwsExceptions
      */
     public function __construct(AuthInterface $authentication, Client $client, bool $throwsExceptions = false) {
         $this->authentication   = $authentication;
@@ -47,7 +49,8 @@ class SDK {
     }
 
     /**
-     * setter Stores auth object
+     * setter Stores auth object.
+     *
      * @param AuthInterface $authentication
      */
     public function setAuth(AuthInterface $authentication) : self {
@@ -57,7 +60,8 @@ class SDK {
     }
 
     /**
-     * Returns auth object
+     * Returns auth object.
+     *
      * @return AuthInterface auth
      */
     public function getAuth() : AuthInterface {
@@ -65,7 +69,8 @@ class SDK {
     }
 
     /**
-     * Setter sets GuzzleHttp\Client instance
+     * Setter sets GuzzleHttp\Client instance.
+     *
      * @param Client $client
      */
     public function setClient(Client $client) : self {
@@ -75,7 +80,8 @@ class SDK {
     }
 
     /**
-     * Returns the GuzzleHttp\Client instance
+     * Returns the GuzzleHttp\Client instance.
+     *
      * @return GuzzeHttp\Client client
      */
     public function getClient() : Client {
@@ -83,7 +89,8 @@ class SDK {
     }
 
     /**
-     * Sets the throws exception option
+     * Sets the throws exception option.
+     *
      * @param bool $throws
      */
     public function setThrowsExceptions(bool $throws) : self {
@@ -93,16 +100,19 @@ class SDK {
     }
 
     /**
-     * Returns boolean value of $throwsExceptions
-     * @return boolean throwsExceptions
+     * Returns boolean value of $throwsExceptions.
+     *
+     * @return bool throwsExceptions
      */
     public function getThrowsExceptions() : bool {
         return $this->throwsExceptions;
     }
 
     /**
-     * Return new instance of Section\Profile
-     * @param  string $userName
+     * Return new instance of Section\Profile.
+     *
+     * @param string $userName
+     *
      * @return Section\Profile instance
      */
     public function profile(string $userName) : Profile {
@@ -115,9 +125,11 @@ class SDK {
     }
 
     /**
-     * Return new instance of Company Endpoint
-     * @param  string $companySlug
-     * @return  Endpoint\Company instance
+     * Return new instance of Company Endpoint.
+     *
+     * @param string $companySlug
+     *
+     * @return Endpoint\Company instance
      */
     public function company(string $companySlug) : Company {
         return new Endpoint\Company(
@@ -129,7 +141,8 @@ class SDK {
     }
 
     /**
-     * Return new instance of SSO Endpoint
+     * Return new instance of SSO Endpoint.
+     *
      * @return Endpoint\SSO instance
      */
     public function sso() : SSO {
@@ -141,8 +154,10 @@ class SDK {
     }
 
     /**
-     * Return new instance of Section\Profile\Process
-     * @param  int    $processId
+     * Return new instance of Section\Profile\Process.
+     *
+     * @param int $processId
+     *
      * @return Section\Profile\Process instance
      */
     public function process(int $processId) : Process {
@@ -155,8 +170,10 @@ class SDK {
     }
 
     /**
-     * Gets the ClassName and instantiates it
-     * @param  string $name
+     * Gets the ClassName and instantiates it.
+     *
+     * @param string $name
+     *
      * @return new instance of the given class
      */
     public function __get(string $name) {
@@ -169,22 +186,26 @@ class SDK {
     }
 
     /**
-     * Returns the instance of endpoint given with params
-     * @param  string $name
-     * @param  array  $args
+     * Returns the instance of endpoint given with params.
+     *
+     * @param string $name
+     * @param array  $args
+     *
      * @return new instance of the given class
      */
     public function __call(string $name, array $args) {
         $className = $this->getSectionClassName($name);
-        $args[] = $this->authentication;
-        $args[] = $this->client;
+        $args[]    = $this->authentication;
+        $args[]    = $this->client;
 
         return new $className(...$args);
     }
 
     /**
-     * Returns the name of the endpoint class
-     * @param  string $name
+     * Returns the name of the endpoint class.
+     *
+     * @param string $name
+     *
      * @return string className
      */
     protected function getEndpointClassName(string $name) : string {
