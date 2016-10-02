@@ -29,9 +29,9 @@ class Features extends AbstractProfileEndpoint {
     /**
      * Creates a new feature for the given user.
      *
-     * @param int    $sourceId
-     * @param string $name
-     * @param mixed $value
+     * @param int        $sourceId
+     * @param string     $name
+     * @param mixed      $value
      * @param mixed|null $type
      *
      * @return array Response
@@ -61,9 +61,9 @@ class Features extends AbstractProfileEndpoint {
     /**
      * Tries to update a feature and if it doesnt exists, creates a new feature.
      *
-     * @param int    $sourceId
-     * @param string $name
-     * @param mixed $value
+     * @param int        $sourceId
+     * @param string     $name
+     * @param mixed      $value
      * @param mixed|null $type
      *
      * @return array Response
@@ -135,7 +135,7 @@ class Features extends AbstractProfileEndpoint {
      * Updates a feature given its slug.
      *
      * @param string $featureSlug
-     * @param mixed $value
+     * @param mixed  $value
      * @param string $type
      *
      * @return array Response

@@ -32,7 +32,6 @@ abstract class AbstractEndpoint implements EndpointInterface {
         // $uri = sprintf('https://api.idos.io/1.0/%s', ltrim($uri, '/'));
         $uri = sprintf('http://api.idos.io/1.0/%s', ltrim($uri, '/'));
 
-
         $options = [
             'headers' => [
                 'Authorization' => (string) $this->authentication

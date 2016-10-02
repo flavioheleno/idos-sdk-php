@@ -22,12 +22,12 @@ class Sso extends AbstractEndpoint {
     ) : array {
 
         $array = [
-            'provider' => $providerName,
+            'provider'     => $providerName,
             'access_token' => $accessToken,
-            'credential' => $credentialPubKey
+            'credential'   => $credentialPubKey
         ];
 
-        if (!empty($tokenSecret)) {
+        if (! empty($tokenSecret)) {
             $array['token_secret'] = $tokenSecret;
         }
 

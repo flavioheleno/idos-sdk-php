@@ -68,8 +68,8 @@ class Tasks extends AbstractProcessEndpoint {
     /**
      * Updates a task given its slug.
      *
-     * @param int $taskId
-     * @param mixed $value
+     * @param int    $taskId
+     * @param mixed  $value
      * @param string $type
      *
      * @return array Response
@@ -80,13 +80,14 @@ class Tasks extends AbstractProcessEndpoint {
         string $event,
         bool $running,
         bool $success,
-        string $message) : array {
+        string $message
+    ) : array {
         return $this->sendPut(
             sprintf('/profiles/%s/processes/%s/tasks/%s', $this->userName, $this->processId, $taskId),
             [],
             [
-                'name' => $name,
-                'event' => $event,
+                'name'    => $name,
+                'event'   => $event,
                 'running' => $running,
                 'success' => $success,
                 'message' => $message

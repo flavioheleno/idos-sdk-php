@@ -16,8 +16,8 @@ class Sources extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-       string $name,
-       array $tags
+        string $name,
+        array $tags
     ) : array {
         $array = [
             'name' => $name,
@@ -61,7 +61,7 @@ class Sources extends AbstractProfileEndpoint {
     /**
      * Updates a source in the given profile.
      *
-     * @param int $sourceId
+     * @param int    $sourceId
      * @param string $ipaddr
      * @param string $tags
      *
