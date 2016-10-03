@@ -13,3 +13,5 @@ samples/settings.php
 sftp-config.json
 vendor/
 VeriduRuleset.xml
+settings.php
+phpunit.xml
