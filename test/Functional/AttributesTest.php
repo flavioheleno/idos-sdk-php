@@ -7,6 +7,35 @@ class AttributesTest extends AbstractFunctional {
 		parent::setUp();
 	}
 
+	public function testListAll() {
+		$this->sdk
+		    ->Profile($this->credentials['username'])
+		    ->Attributes->deleteAll();
+
+		$this->sdk
+		    ->Profile($this->credentials['username'])
+		    ->Attributes->createNew('name-test-1', 'value-test-1', 0.5);
+		$this->sdk
+		    ->Profile($this->credentials['username'])
+		    ->Attributes->createNew('name-test-2', 'value-test-2', 0.6);
+
+		$response = $this->sdk
+		    ->Profile($this->credentials['username'])
+		    ->Attributes->listAll();
+
+		foreach ($response['data'] as $attribute) {
+			if ($attribute['name'] === 'name-test-1') {
+				$this->assertSame('value-test-1', $attribute['value']);
+				$this->assertSame(0.5, $attribute['support']);
+			}
+
+			if ($attribute['name'] === 'name-test-2') {
+				$this->assertSame('value-test-2', $attribute['value']);
+				$this->assertSame(0.6, $attribute['support']);
+			}
+		}
+	}
+
 	public function testCreateNew() {
 		$response = $this->sdk
 		    ->Profile($this->credentials['username'])
