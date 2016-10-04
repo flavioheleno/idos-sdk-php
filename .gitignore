@@ -3,6 +3,7 @@
 *.log
 *.sublime-project
 *.sublime-workspace
+.idea
 .php_cs
 composer.lock
 humbug.json

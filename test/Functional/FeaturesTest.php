@@ -25,7 +25,7 @@ class FeaturesTest extends AbstractFunctional {
 
 		foreach ($response['data'] as $feature) {
 			if ($feature['name'] === 'name-test-1') {
-				$this->assertSame('value-test-1-changed', $feature['value']);
+				$this->assertSame('value-test-1', $feature['value']);
 				$this->assertSame('string', $feature['type']);
 			}
 
