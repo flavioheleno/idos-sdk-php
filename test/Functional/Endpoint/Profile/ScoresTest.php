@@ -1,6 +1,8 @@
 <?php
 
-namespace Test\Functional;
+namespace Test\Functional\Endpoint\Profile;
+
+use Test\Functional\AbstractFunctional;
 
 class ScoresTest extends AbstractFunctional {
 	protected function setUp() {
