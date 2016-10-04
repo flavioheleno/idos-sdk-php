@@ -29,11 +29,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
      * @return array response
      */
     private function sendRequest(string $method, string $uri, array $query = [], array $body = []) : array {
-        if (defined('IDOS_URI_DEV')) {
-            $uri = sprintf(IDOS_URI_DEV, ltrim($uri, '/'));
-        } else {
-            $uri = sprintf('https://api.idos.io/1.0/%s', ltrim($uri, '/'));
-        }
+        $uri = sprintf('https://api.idos.io/1.0/%s', ltrim($uri, '/'));
 
         $options = [
             'headers' => [
