@@ -44,35 +44,35 @@ $response = $sdk
 print_r($response);
 
 /**
- * Creates a new task
+ * Creates a new task.
  */
 $response = $sdk
-	->Profile($credentials['username'])
-	->Process($processId)
-	->Tasks
-	->createNew('Testing', 'testing', true, true, '');
+    ->Profile($credentials['username'])
+    ->Process($processId)
+    ->Tasks
+    ->createNew('Testing', 'testing', true, true, '');
 
 /**
- * Prints the response
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Updates a task
+ * Updates a task.
  */
 $response = $sdk
-	->Profile($credentials['username'])
-	->Process($processId)
-	->Tasks
-	->updateOne($response['data']['id'], 'Test', 'test', false, false, 'dummy-message');
+    ->Profile($credentials['username'])
+    ->Process($processId)
+    ->Tasks
+    ->updateOne($response['data']['id'], 'Test', 'test', false, false, 'dummy-message');
 
 /**
- * Prints the response
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Gets one task
+ * Gets one task.
  */
 $taskId = $response['data']['id'];
 
@@ -83,6 +83,6 @@ $response = $sdk
     ->getOne($taskId);
 
 /**
- * Prints the response
+ * Prints the response.
  */
 print_r($response);
