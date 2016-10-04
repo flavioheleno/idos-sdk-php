@@ -29,7 +29,8 @@ abstract class AbstractEndpoint implements EndpointInterface {
      * @return array response
      */
     private function sendRequest(string $method, string $uri, array $query = [], array $body = []) : array {
-        $uri = sprintf('https://api.idos.io/1.0/%s', ltrim($uri, '/'));
+        //$uri = sprintf('https://api.idos.io/1.0/%s', ltrim($uri, '/'));
+        $uri = sprintf('http://idos-api.veridu.local.rafaa.me/1.0/%s', ltrim($uri, '/'));
 
         $options = [
             'headers' => [

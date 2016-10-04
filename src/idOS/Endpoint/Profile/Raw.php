@@ -70,43 +70,6 @@ class Raw extends AbstractProfileEndpoint {
         );
     }
 
-    public function getOne(string $collectionName) : array {
-        return $this->sendGet(
-            sprintf('/profiles/%s/raw/%s', $this->userName, $collectionName)
-        );
-    }
-
-    /**
-     * Updates a raw data in the given source.
-     *
-     * @param string $collectionName
-     * @param array  $data
-     *
-     * @return array Response
-     */
-    public function updateOne(string $collectionName, array $data) : array {
-        return $this->sendPatch(
-            sprintf('/profiles/%s/raw/%s', $this->userName, $collectionName),
-            [],
-            [
-                'data' => $data
-            ]
-        );
-    }
-
-    /**
-     * Deletes a raw data given its collectionName.
-     *
-     * @param string $collectionName
-     *
-     * @return array Response
-     */
-    public function deleteOne(string $collectionName) : array {
-        return $this->sendDelete(
-            sprintf('/profiles/%s/raw/%s', $this->userName, $collectionName)
-        );
-    }
-
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(
             sprintf('/profiles/%s/raw', $this->userName),
