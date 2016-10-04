@@ -121,28 +121,28 @@ class Features extends AbstractProfileEndpoint {
     /**
      * Retrieves a feature given its slug.
      *
-     * @param string $featureSlug
+     * @param int $featureId
      *
      * @return array Response
      */
-    public function getOne(string $featureSlug) : array {
+    public function getOne(int $featureId) : array {
         return $this->sendGet(
-            sprintf('/profiles/%s/features/%s', $this->userName, $featureSlug)
+            sprintf('/profiles/%s/features/%s', $this->userName, $featureId)
         );
     }
 
     /**
      * Updates a feature given its slug.
      *
-     * @param string $featureSlug
+     * @param string $featureId
      * @param mixed  $value
      * @param string $type
      *
      * @return array Response
      */
-    public function updateOne(string $featureSlug, $value, string $type) : array {
+    public function updateOne(int $featureId, $value, string $type) : array {
         return $this->sendPatch(
-            sprintf('/profiles/%s/features/%s', $this->userName, $featureSlug),
+            sprintf('/profiles/%s/features/%s', $this->userName, $featureId),
             [],
             [
                 'value' => $value,
@@ -154,13 +154,13 @@ class Features extends AbstractProfileEndpoint {
     /**
      * Deletes a feature given its slug.
      *
-     * @param string $featureSlug
+     * @param int $featureId
      *
      * @return array Response
      */
-    public function deleteOne(string $featureSlug) : array {
+    public function deleteOne(int $featureId) : array {
         return $this->sendDelete(
-            sprintf('/profiles/%s/features/%s', $this->userName, $featuresSlug)
+            sprintf('/profiles/%s/features/%s', $this->userName, $featureId)
         );
     }
 
