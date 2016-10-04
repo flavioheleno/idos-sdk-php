@@ -44,7 +44,7 @@ print_r($response);
 /**
  * Retrieves a process given its slug.
  */
-$slug = $response['data']['slug'];
+$slug     = $response['data']['slug'];
 $response = $sdk
     ->Profile($credentials['username'])
     ->Warnings->getOne($slug);
@@ -55,11 +55,11 @@ $response = $sdk
 print_r($response);
 
 /**
- * Deletes one warning given its slug
+ * Deletes one warning given its slug.
  */
 $response = $sdk
-	->Profile($credentials['username'])
-	->Warnings->deleteOne($slug);
+    ->Profile($credentials['username'])
+    ->Warnings->deleteOne($slug);
 
 /**
  * Prints the api response.
@@ -67,15 +67,13 @@ $response = $sdk
 print_r($response);
 
 /**
- * Deletes all warnings
+ * Deletes all warnings.
  */
 $response = $sdk
-	->Profile($credentials['username'])
-	->Warnings->deleteAll();
+    ->Profile($credentials['username'])
+    ->Warnings->deleteAll();
 
 /**
  * Prints the api response.
  */
 print_r($response);
-
-

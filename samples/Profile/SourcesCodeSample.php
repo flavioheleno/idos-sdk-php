@@ -52,7 +52,7 @@ $response = $sdk
 print_r($response);
 
 /**
- * Updates a source
+ * Updates a source.
  */
 $response = $sdk
     ->Profile($credentials['username'])
