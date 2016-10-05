@@ -1,8 +1,10 @@
 <?php
 
-namespace Test\Functional;
+namespace Test\Functional\Endpoint\Profile;
 
-class ScoresTest extends AbstractFunctional {
+use Test\Functional\AbstractFunctional;
+
+class GatesTest extends AbstractFunctional {
     protected function setUp() {
         parent::setUp();
     }
@@ -10,30 +12,28 @@ class ScoresTest extends AbstractFunctional {
     public function testListAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteAll();
+            ->Gates->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-name-1', 'score-1', 0.9);
+            ->Gates->createNew('Name Test 1', true);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-name-2', 'score-2', 0.7);
+            ->Gates->createNew('Name Test 2', false);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->listAll();
+            ->Gates->listAll();
 
-        foreach ($response['data'] as $score) {
-            if ($score['name'] === 'score-1') {
-                $this->assertNotEmpty($score['creator']);
-                $this->assertSame('attribute-name-1', $score['attribute']);
-                $this->assertSame(0.9, $score['value']);
+        foreach ($response['data'] as $gate) {
+            if ($gate['name'] === 'Name Test 1') {
+                $this->assertSame('name-test-1', $gate['slug']);
+                $this->assertTrue($gate['pass']);
             }
 
-            if ($score['name'] === 'score-2') {
-                $this->assertNotEmpty($score['creator']);
-                $this->assertSame('attribute-name-2', $score['attribute']);
-                $this->assertSame(0.7, $score['value']);
+            if ($gate['name'] === 'Name Test 2') {
+                $this->assertSame('name-test-2', $gate['slug']);
+                $this->assertFalse($gate['pass']);
             }
         }
     }
@@ -41,24 +41,24 @@ class ScoresTest extends AbstractFunctional {
     public function testCreateNew() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteAll();
+            ->Gates->deleteAll();
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-test', 'score-test', 0.6);
+            ->Gates->createNew('Name Test', true);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('attribute-test', $response['data']['attribute']);
-        $this->assertSame('score-test', $response['data']['name']);
-        $this->assertSame(0.6, $response['data']['value']);
+        $this->assertSame('Name Test', $response['data']['name']);
+        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertTrue($response['data']['pass']);
     }
 
     public function testCreateNewUtf8() {
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('áttribúte-test', 'scóre-tést', 0.3);
+            ->Gates->createNew('Náme Tést', true);
 
         $this->assertFalse($response['status']);
         $this->assertNotEmpty($response['error']);
@@ -67,85 +67,85 @@ class ScoresTest extends AbstractFunctional {
     public function testGetOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteAll();
+            ->Gates->deleteAll();
 
-        $this->sdk
+        $feature = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-test', 'score-test', 0.3);
+            ->Gates->createNew('Name Test', true);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->getOne('score-test');
+            ->Gates->getOne('name-test');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('attribute-test', $response['data']['attribute']);
-        $this->assertSame('score-test', $response['data']['name']);
-        $this->assertSame(0.3, $response['data']['value']);
+        $this->assertSame('Name Test', $response['data']['name']);
+        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertTrue($response['data']['pass']);
     }
 
     public function testUpdateOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteAll();
+            ->Gates->deleteAll();
 
-        $this->sdk
+        $feature = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-test', 'score-test', 0.3);
+            ->Gates->createNew('Name Test', true);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->updateOne('attribute-test', 'score-test', 0.4);
+            ->Gates->updateOne('name-test', false);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('attribute-test', $response['data']['attribute']);
-        $this->assertSame('score-test', $response['data']['name']);
-        $this->assertSame(0.4, $response['data']['value']);
+        $this->assertSame('Name Test', $response['data']['name']);
+        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertFalse($response['data']['pass']);
     }
 
     public function testUpsertOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteAll();
+            ->Gates->deleteAll();
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-test', 'score-test', 0.3);
+            ->Gates->upsertOne('Name Test', true);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('attribute-test', $response['data']['attribute']);
-        $this->assertSame('score-test', $response['data']['name']);
-        $this->assertSame(0.3, $response['data']['value']);
+        $this->assertSame('Name Test', $response['data']['name']);
+        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertTrue($response['data']['pass']);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->upsertOne('attribute-test', 'score-test', 0.5);
+            ->Gates->upsertOne('Name Test', false);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('attribute-test', $response['data']['attribute']);
-        $this->assertSame('score-test', $response['data']['name']);
-        $this->assertSame(0.5, $response['data']['value']);
+        $this->assertSame('Name Test', $response['data']['name']);
+        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertFalse($response['data']['pass']);
     }
 
     public function testDeleteOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteAll();
+            ->Gates->deleteAll();
 
-        $this->sdk
+        $feature = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-test', 'score-test', 0.3);
+            ->Gates->createNew('Name Test', true);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteOne('score-test');
+            ->Gates->deleteOne('name-test');
 
         $this->assertTrue($response['status']);
     }
@@ -153,21 +153,21 @@ class ScoresTest extends AbstractFunctional {
     public function testDeleteAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteAll();
+            ->Gates->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-test-1', 'score-test-1', 0.3);
+            ->Gates->createNew('Name Test 1', true);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-test-2', 'score-test-2', 0.4);
+            ->Gates->createNew('Name Test 2', false);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->createNew('attribute-test-3', 'score-test-3', 0.5);
+            ->Gates->createNew('Name Test 3', true);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Scores->deleteAll();
+            ->Gates->deleteAll();
 
         $this->assertTrue($response['status']);
         $this->assertSame(3, $response['deleted']);

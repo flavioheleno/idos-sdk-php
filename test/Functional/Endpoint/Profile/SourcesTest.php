@@ -1,8 +1,10 @@
 <?php
 
-namespace Test\Functional;
+namespace Test\Functional\Endpoint\Profile;
 
-class ReferencesTest extends AbstractFunctional {
+use Test\Functional\AbstractFunctional;
+
+class SourcesTest extends AbstractFunctional {
     protected function setUp() {
         parent::setUp();
     }
@@ -10,26 +12,26 @@ class ReferencesTest extends AbstractFunctional {
     public function testListAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->deleteAll();
+            ->Sources->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test-1', 'value-test-1');
-        $this->sdk
+            ->Sources->createNew('name-test-1', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
+        $test = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test-2', 'value-test-2');
+            ->Sources->createNew('name-test-2', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->listAll();
+            ->Sources->listAll();
 
-        foreach ($response['data'] as $reference) {
-            if ($reference['name'] === 'name-test-1') {
-                $this->assertSame('value-test-1', $reference['value']);
+        foreach ($response['data'] as $source) {
+            if ($source['name'] === 'name-test-1') {
+                $this->assertSame(['tag-1' => 'value-1', 'tag-2' => 'value-2'], $source['tags']);
             }
 
-            if ($reference['name'] === 'name-test-2') {
-                $this->assertSame('value-test-2', $reference['value']);
+            if ($source['name'] === 'name-test-2') {
+                $this->assertSame(['tag-1' => 'value-1', 'tag-2' => 'value-2'], $source['tags']);
             }
         }
     }
@@ -37,88 +39,77 @@ class ReferencesTest extends AbstractFunctional {
     public function testCreateNew() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->deleteAll();
+            ->Sources->deleteAll();
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test', 'value-test');
+            ->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertSame('name-test', $response['data']['name']);
-        $this->assertSame('value-test', $response['data']['value']);
+        $this->assertSame(['tag-1' => 'value-1', 'tag-2' => 'value-2'], $response['data']['tags']);
     }
 
-    public function testCreateNewNameUtf8() {
+    public function testCreateNewUtf8() {
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('námé-test', 'válué-test');
+            ->Sources->createNew('námé-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
 
         $this->assertFalse($response['status']);
         $this->assertNotEmpty($response['error']);
     }
 
-    public function testCreateNewValueUtf8() {
-        $response = $this->sdk
-            ->Profile($this->credentials['username'])
-            ->References->createNew('name-test', 'válué-test');
-
-        $this->assertTrue($response['status']);
-        $this->assertNotEmpty($response['data']);
-        $this->assertSame('name-test', $response['data']['name']);
-        $this->assertSame('válué-test', $response['data']['value']);
-    }
-
     public function testGetOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->deleteAll();
+            ->Sources->deleteAll();
 
-        $this->sdk
+        $source = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test', 'value-test');
+            ->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->getOne('name-test');
+            ->Sources->getOne($source['data']['id']);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertSame('name-test', $response['data']['name']);
-        $this->assertSame('value-test', $response['data']['value']);
+        $this->assertSame(['tag-1' => 'value-1', 'tag-2' => 'value-2'], $response['data']['tags']);
     }
 
     public function testUpdateOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->deleteAll();
+            ->Sources->deleteAll();
 
-        $this->sdk
+        $source = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test', 'value-test');
+            ->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->updateOne('name-test', 'value-test-changed');
+            ->Sources->updateOne($source['data']['id'], ['tag-1' => 'value-1', 'tag-2' => 'value-2', 'tag-3' => 'value-3']);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertSame('name-test', $response['data']['name']);
-        $this->assertSame('value-test-changed', $response['data']['value']);
+        $this->assertSame(['tag-1' => 'value-1', 'tag-2' => 'value-2', 'tag-3' => 'value-3'], $response['data']['tags']);
     }
 
     public function testDeleteOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->deleteAll();
+            ->Sources->deleteAll();
 
-        $feature = $this->sdk
+        $source = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test', 'value-test');
+            ->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->deleteOne('name-test');
+            ->Sources->deleteOne($source['data']['id']);
 
         $this->assertTrue($response['status']);
     }
@@ -126,23 +117,20 @@ class ReferencesTest extends AbstractFunctional {
     public function testDeleteAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->deleteAll();
+            ->Sources->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test-1', 'value-test-1');
+            ->Sources->createNew('name-test-1', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test-2', 'value-test-2');
-        $this->sdk
-            ->Profile($this->credentials['username'])
-            ->References->createNew('name-test-3', 'value-test-3');
+            ->Sources->createNew('name-test-2', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->deleteAll();
+            ->Sources->deleteAll();
 
         $this->assertTrue($response['status']);
-        $this->assertSame(3, $response['deleted']);
+        $this->assertSame(2, $response['deleted']);
     }
 }

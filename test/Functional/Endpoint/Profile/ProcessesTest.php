@@ -1,6 +1,8 @@
 <?php
 
-namespace Test\Functional;
+namespace Test\Functional\Endpoint\Profile;
+
+use Test\Functional\AbstractFunctional;
 
 class ProcessesTest extends AbstractFunctional {
     protected function setUp() {
