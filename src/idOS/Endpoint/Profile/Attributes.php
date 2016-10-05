@@ -5,12 +5,11 @@ namespace idOS\Endpoint\Profile;
 /**
  * Attribute Class Endpoint.
  */
-class Attributes extends  AbstractProfileEndpoint {
-
+class Attributes extends AbstractProfileEndpoint {
     /**
      * Lists all attributes.
      *
-     * @param array  $filter
+     * @param array $filter
      *
      * @return array Response
      */
@@ -22,11 +21,12 @@ class Attributes extends  AbstractProfileEndpoint {
     }
 
     /**
-     * Creates a new attribute for the given user
+     * Creates a new attribute for the given user.
      *
-     * @param  string $name
-     * @param  string $value
-     * @param  float  $support
+     * @param string $name
+     * @param string $value
+     * @param float  $support
+     *
      * @return array Response
      */
     public function createNew(
