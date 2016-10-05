@@ -4,9 +4,7 @@ namespace idOS\Section\Profile;
 
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
-use idOS\Endpoint\EndpointInterface;
 use idOS\Section\AbstractSection;
-use idOS\Section\SectionInterface;
 
 class Process extends AbstractSection {
     /**

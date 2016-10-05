@@ -42,7 +42,7 @@ $response = $sdk
 print_r($response);
 
 /**
- * Retrieves the attribute created
+ * Retrieves the attribute created.
  */
 $response = $sdk
     ->Profile($credentials['username'])
@@ -61,7 +61,7 @@ $response = $sdk
     ->Attributes->deleteOne('attribute');
 
 /**
- * Prints the response
+ * Prints the response.
  */
 print_r($response);
 
