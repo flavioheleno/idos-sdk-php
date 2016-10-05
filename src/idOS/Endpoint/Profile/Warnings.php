@@ -15,9 +15,9 @@ class Warnings extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-        string $slug,
-        string $attribute
-    ) : array {
+        $slug,
+        $attribute
+    ) {
 
         return $this->sendPost(
             sprintf('/profiles/%s/warnings', $this->userName),
@@ -36,7 +36,7 @@ class Warnings extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             sprintf('/profiles/%s/warnings', $this->userName),
             $filters
@@ -50,7 +50,7 @@ class Warnings extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function getOne(string $slug) : array {
+    public function getOne($slug) {
         return $this->sendGet(
             sprintf('/profiles/%s/warnings/%s', $this->userName, $slug)
         );
@@ -63,7 +63,7 @@ class Warnings extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteOne(string $slug) : array {
+    public function deleteOne($slug) {
         return $this->sendDelete(
             sprintf('/profiles/%s/warnings/%s', $this->userName, $slug)
         );
@@ -76,7 +76,7 @@ class Warnings extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteAll(array $filters = []) : array {
+    public function deleteAll(array $filters = []) {
         return $this->sendDelete(
             sprintf('/profiles/%s/warnings', $this->userName),
             $filters

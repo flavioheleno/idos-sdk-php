@@ -28,7 +28,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
      *
      * @return array response
      */
-    private function sendRequest(string $method, string $uri, array $query = [], array $body = []) : array {
+    private function sendRequest($method, $uri, array $query = [], array $body = []) {
         $uri = sprintf('https://api.idos.io/1.0/%s', ltrim($uri, '/'));
 
         $options = [
@@ -80,7 +80,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
      *
      * @return array response
      */
-    protected function sendGet(string $uri, array $query = []) : array {
+    protected function sendGet($uri, array $query = []) {
         return $this->sendRequest(
             'GET',
             $uri,
@@ -98,7 +98,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
      *
      * @return array response
      */
-    protected function sendPost(string $uri, array $query = [], array $body = []) : array {
+    protected function sendPost($uri, array $query = [], array $body = []) {
         return $this->sendRequest(
             'POST',
             $uri,
@@ -116,7 +116,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
      *
      * @return array response
      */
-    protected function sendPatch(string $uri, array $query = [], array $body = []) : array {
+    protected function sendPatch($uri, array $query = [], array $body = []) {
         return $this->sendRequest(
             'PATCH',
             $uri,
@@ -134,7 +134,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
      *
      * @return array response
      */
-    protected function sendPut(string $uri, array $query = [], array $body = []) : array {
+    protected function sendPut($uri, array $query = [], array $body = []) {
         return $this->sendRequest(
             'PUT',
             $uri,
@@ -151,7 +151,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
      *
      * @return array response
      */
-    protected function sendDelete(string $uri, array $query = []) : array {
+    protected function sendDelete($uri, array $query = []) {
         return $this->sendRequest(
             'DELETE',
             $uri,
@@ -170,7 +170,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
     public function __construct(
         AuthInterface $authentication,
         Client $client,
-        bool $throwExceptions = false
+        $throwExceptions = false
     ) {
         $this->authentication  = $authentication;
         $this->client          = $client;

@@ -16,10 +16,10 @@ class Raw extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-        int $sourceId,
-        string $collectionName,
+        $sourceId,
+        $collectionName,
         array $data
-    ) : array {
+    ) {
         return $this->sendPost(
             sprintf('/profiles/%s/raw', $this->userName),
             [],
@@ -41,10 +41,10 @@ class Raw extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function upsertOne(
-        int $sourceId,
-        string $collectionName,
+        $sourceId,
+        $collectionName,
         array $data
-    ) : array {
+    ) {
         return $this->sendPut(
             sprintf('/profiles/%s/raw', $this->userName),
             [],
@@ -63,51 +63,14 @@ class Raw extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             sprintf('/profiles/%s/raw', $this->userName),
             $filters
         );
     }
 
-    public function getOne(string $collectionName) : array {
-        return $this->sendGet(
-            sprintf('/profiles/%s/raw/%s', $this->userName, $collectionName)
-        );
-    }
-
-    /**
-     * Updates a raw data in the given source.
-     *
-     * @param string $collectionName
-     * @param array  $data
-     *
-     * @return array Response
-     */
-    public function updateOne(string $collectionName, array $data) : array {
-        return $this->sendPatch(
-            sprintf('/profiles/%s/raw/%s', $this->userName, $collectionName),
-            [],
-            [
-                'data' => $data
-            ]
-        );
-    }
-
-    /**
-     * Deletes a raw data given its collectionName.
-     *
-     * @param string $collectionName
-     *
-     * @return array Response
-     */
-    public function deleteOne(string $collectionName) : array {
-        return $this->sendDelete(
-            sprintf('/profiles/%s/raw/%s', $this->userName, $collectionName)
-        );
-    }
-
-    public function deleteAll(array $filters = []) : array {
+    public function deleteAll(array $filters = []) {
         return $this->sendDelete(
             sprintf('/profiles/%s/raw', $this->userName),
             $filters

@@ -37,30 +37,30 @@ $response = $sdk
  */
 print_r($response);
 
-
 /**
- * Creates a facebook sso
+ * Creates a facebook sso.
+ *
+ * Note: You should replace "accessToken" with a valid Facebook access token.
  */
 $response = $sdk
-	->Sso
-	->createNew('facebook', $credentials['credentialPublicKey'], 'accessToken');
+    ->Sso
+    ->createNew('facebook', $credentials['credentialPublicKey'], 'accessToken');
 
 /**
  * Prints the response.
  */
-print_r($response['data']['user_token']);
+print_r($response);
 
 /**
- * Creates a twitter sso
+ * Creates a twitter sso.
+ *
+ * Note: You should replace "accessToken" and "tokenSecret" with a valid Twitter access token / token secret.
  */
 $response = $sdk
-	->Sso
-	->createNew('twitter', $credentials['credentialPublicKey'], 'accessToken', 'tokenSecret');
+    ->Sso
+    ->createNew('twitter', $credentials['credentialPublicKey'], 'accessToken', 'tokenSecret');
 
 /**
  * Prints the response.
  */
-print_r($response['data']['user_token']);
-
-
-
+print_r($response);

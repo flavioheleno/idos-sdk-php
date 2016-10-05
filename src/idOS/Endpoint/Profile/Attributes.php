@@ -2,24 +2,86 @@
 
 namespace idOS\Endpoint\Profile;
 
-use idOS\Endpoint\AbstractEndpoint;
-
 /**
  * Attribute Class Endpoint.
  */
-class Attributes extends AbstractEndpoint {
+class Attributes extends  AbstractProfileEndpoint {
+
     /**
      * Lists all attributes.
      *
-     * @param string $username
      * @param array  $filter
      *
      * @return array Response
      */
-    public function listAll($username = '_self', array $filter = []) {
-        return $this->get(
-            sprintf('/profiles/%s/attributes', $username),
+    public function listAll(array $filter = []) {
+        return $this->sendGet(
+            sprintf('/profiles/%s/attributes', $this->userName),
             $filter
+        );
+    }
+
+    /**
+     * Creates a new attribute for the given user
+     *
+     * @param  string $name
+     * @param  string $value
+     * @param  float  $support
+     * @return array Response
+     */
+    public function createNew(
+        $name,
+        $value,
+        $support
+    ) {
+        return $this->sendPost(
+            sprintf('/profiles/%s/attributes', $this->userName),
+            [],
+            [
+                'name'      => $name,
+                'value'     => $value,
+                'support'   => $support
+            ]
+        );
+    }
+
+    /**
+     * Retrieves an attribute given its slug.
+     *
+     * @param string $attributeName
+     *
+     * @return array Response
+     */
+    public function getOne($attributeName) {
+        return $this->sendGet(
+            sprintf('/profiles/%s/attributes/%s', $this->userName, $attributeName)
+        );
+    }
+
+    /**
+     * Deletes an attribute given its slug.
+     *
+     * @param string $attributeName
+     *
+     * @return array Response
+     */
+    public function deleteOne($attributeName) {
+        return $this->sendDelete(
+            sprintf('/profiles/%s/attributes/%s', $this->userName, $attributeName)
+        );
+    }
+
+    /**
+     * Deletes all attributes.
+     *
+     * @param array $filters
+     *
+     * @return array Response
+     */
+    public function deleteAll(array $filters = []) {
+        return $this->sendDelete(
+            sprintf('/profiles/%s/attributes', $this->userName),
+            $filters
         );
     }
 }

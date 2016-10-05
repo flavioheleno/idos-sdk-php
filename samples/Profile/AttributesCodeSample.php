@@ -18,76 +18,61 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all sources for the given username.
+ * Calling the Profile Endpoint passing the username, and after that, the Attributes Endpoint and the method listAll.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Sources->listAll();
+    ->Attributes->listAll();
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Gets the first sourceId.
- */
-$sourceId = $response['data'][0]['id'];
-
-/**
- * Creates a new source.
+ * Creates a new reference.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Sources->createNew(
-        'email',
-        [
-            'otp_check' => 'email'
-        ]
-    );
+    ->Attributes->createNew('attribute', 'value-test', 1.2);
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Updates a source.
+ * Retrieves the attribute created
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Sources->updateOne(
-        $sourceId,
-        [
-            'test' => 'value-test'
-        ]
-    );
+    ->Attributes->getOne('attribute');
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Retrieves a process given its id.
+ * Deletes the attribute created.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Sources->getOne($sourceId);
+    ->Attributes->deleteOne('attribute');
 
 /**
- * Prints the api response.
+ * Prints the response
  */
 print_r($response);
 
 /**
- * Deletes the source created.
+ * Deletes all attributes.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Sources->deleteOne($sourceId);
+    ->Attributes->deleteAll();
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);

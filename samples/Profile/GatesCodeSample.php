@@ -13,7 +13,7 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object throught the constructor
+ * Calls the create method that instantiates the SDK passing the auth object throught the constructor.
  */
 $sdk = \idOS\SDK::create($auth, true);
 
@@ -30,7 +30,7 @@ $response = $sdk
 print_r($response);
 
 /**
- * Creates a new gate
+ * Creates a new gate.
  */
 $response = $sdk
     ->Profile($credentials['username'])

@@ -16,10 +16,10 @@ class Scores extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-        string $attribute,
-        string $name,
-        float $value
-    ) : array {
+        $attribute,
+        $name,
+        $value
+    ) {
         return $this->sendPost(
             sprintf('/profiles/%s/scores', $this->userName),
             [],
@@ -41,10 +41,10 @@ class Scores extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function upsertOne(
-        string $attribute,
-        string $name,
-        float $value
-    ) : array {
+        $attribute,
+        $name,
+        $value
+    ) {
         return $this->sendPut(
             sprintf('/profiles/%s/scores', $this->userName),
             [],
@@ -63,7 +63,7 @@ class Scores extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             sprintf('/profiles/%s/scores', $this->userName),
             $filters
@@ -77,7 +77,7 @@ class Scores extends AbstractProfileEndpoint {
      *
      * @return
      */
-    public function getOne(string $name) : array {
+    public function getOne($name) {
         return $this->sendGet(
             sprintf('/profiles/%s/scores/%s', $this->userName, $name)
         );
@@ -92,7 +92,7 @@ class Scores extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function updateOne(string $attribute, string $name, float $value) : array {
+    public function updateOne($attribute, $name, $value) {
         return $this->sendPatch(
             sprintf('/profiles/%s/scores/%s', $this->userName, $name),
             [],
@@ -110,7 +110,7 @@ class Scores extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteOne(string $name) : array {
+    public function deleteOne($name) {
         return $this->sendDelete(
             sprintf('/profiles/%s/scores/%s', $this->userName, $name)
         );
@@ -123,7 +123,7 @@ class Scores extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteAll(array $filters = []) : array {
+    public function deleteAll(array $filters = []) {
         return $this->sendDelete(
             sprintf('/profiles/%s/scores', $this->userName),
             $filters

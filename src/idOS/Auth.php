@@ -53,9 +53,9 @@ class Auth {
      * @param int    $authType
      */
     public function __construct(
-        string $publicKey,
-        string $privateKey,
-        int $authType
+        $publicKey,
+        $privateKey,
+        $authType
     ) {
         $this->publicKey  = $publicKey;
         $this->privateKey = $privateKey;
@@ -66,7 +66,7 @@ class Auth {
      * Setter to store the public key
      * @param string $publicKey
      */
-    public function setPublicKey(string $publicKey) : self {
+    public function setPublicKey($publicKey) {
         $this->publicKey = $publicKey;
 
         return $this;
@@ -76,7 +76,7 @@ class Auth {
      * Getter to return the public key
      * @return string publicKey
      */
-    public function getPublicKey() : string {
+    public function getPublicKey() {
         return $this->publicKey;
     }
 
@@ -84,7 +84,7 @@ class Auth {
      * Setter to store the private key
      * @param string $privateKey
      */
-    public function setPrivateKey(string $privateKey) : self {
+    public function setPrivateKey($privateKey) {
         $this->privateKey = $privateKey;
 
         return $this;
@@ -94,7 +94,7 @@ class Auth {
      * Getter to return the private key
      * @return string privateKey
      */
-    public function getPrivateKey() : string {
+    public function getPrivateKey() {
         return $this->privateKey;
     }
 
@@ -102,7 +102,7 @@ class Auth {
      * Sets the authorization type
      * @param int $authType
      */
-    public function setAuthType(int $authType) : self {
+    public function setAuthType($authType) {
         $this->authType = $authType;
 
         return $this;
@@ -112,7 +112,7 @@ class Auth {
      * Returnts the authorization type
      * @return int authType
      */
-    public function getAuthType() : int {
+    public function getAuthType() {
         return $this->authType;
     }
 
@@ -121,7 +121,7 @@ class Auth {
      * @param  string $userName
      * @return string userToken
      */
-    public function getUserToken(string $userName) : string {
+    public function getUserToken($userName) {
         if (isset($this->userToken[$userName])) {
             return $this->userToken[$userName];
         }
@@ -131,7 +131,7 @@ class Auth {
      * Returns the credential token
      * @return string credentialToken
      */
-    public function getCredentialToken() : string {
+    public function getCredentialToken() {
         return $this->credentialToken;
     }
 
@@ -139,7 +139,7 @@ class Auth {
      * Sets the identity token
      * @param string $token
      */
-    public function setIdentityToken(string $token) : self {
+    public function setIdentityToken($token) {
         $this->identityToken = $token;
 
         return $this;
@@ -149,7 +149,7 @@ class Auth {
      * Returns the identity token
      * @return string identityToken
      */
-    public function getIdentityToken() : string {
+    public function getIdentityToken() {
         return $this->identityToken;o
     }
 
@@ -157,7 +157,7 @@ class Auth {
      * Gets the Authorization header related to the authType
      * @return string header
      */
-    public function getHeader() : string {
+    public function getHeader() {
         switch ($this->authType) {
             case self::CREDENTIAL:
                 return sprintf('CredentialToken %s', $this->getCredentialToken());
@@ -179,7 +179,7 @@ class Auth {
      * Gets the Authorization related to the authType and transforms it to a query parameter
      * @return string query
      */
-    public function getQuery() : string {
+    public function getQuery() {
         switch ($this->authType) {
             case self::CREDENTIAL:
                 return sprintf('credentialToken=%s', $this->getCredentialToken());

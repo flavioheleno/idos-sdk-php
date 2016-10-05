@@ -6,7 +6,7 @@ namespace idOS\Endpoint\Profile;
  * Features Class Endpoint.
  */
 class Features extends AbstractProfileEndpoint {
-    private function typeInfer($value) : string {
+    private function typeInfer($value) {
         if (is_float($value)) {
             return 'double';
         }
@@ -37,11 +37,11 @@ class Features extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-        int $sourceId,
-        string $name,
+        $sourceId,
+        $name,
         $value,
         $type = null
-    ) : array {
+    ) {
         if ($type === null) {
             $type = $this->typeInfer($value);
         }
@@ -69,11 +69,11 @@ class Features extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function upsertOne(
-        int $sourceId,
-        string $name,
+        $sourceId,
+        $name,
         $value,
         $type = null
-    ) : array {
+    ) {
         if ($type === null) {
             $type = $this->typeInfer($value);
         }
@@ -111,7 +111,7 @@ class Features extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             sprintf('/profiles/%s/features', $this->userName),
             $filters
@@ -121,28 +121,28 @@ class Features extends AbstractProfileEndpoint {
     /**
      * Retrieves a feature given its slug.
      *
-     * @param string $featureSlug
+     * @param int $featureId
      *
      * @return array Response
      */
-    public function getOne(string $featureSlug) : array {
+    public function getOne($featureId) {
         return $this->sendGet(
-            sprintf('/profiles/%s/features/%s', $this->userName, $featureSlug)
+            sprintf('/profiles/%s/features/%s', $this->userName, $featureId)
         );
     }
 
     /**
      * Updates a feature given its slug.
      *
-     * @param string $featureSlug
+     * @param string $featureId
      * @param mixed  $value
      * @param string $type
      *
      * @return array Response
      */
-    public function updateOne(string $featureSlug, $value, string $type) : array {
+    public function updateOne($featureId, $value, $type) {
         return $this->sendPatch(
-            sprintf('/profiles/%s/features/%s', $this->userName, $featureSlug),
+            sprintf('/profiles/%s/features/%s', $this->userName, $featureId),
             [],
             [
                 'value' => $value,
@@ -154,13 +154,13 @@ class Features extends AbstractProfileEndpoint {
     /**
      * Deletes a feature given its slug.
      *
-     * @param string $featureSlug
+     * @param int $featureId
      *
      * @return array Response
      */
-    public function deleteOne(string $featureSlug) : array {
+    public function deleteOne($featureId) {
         return $this->sendDelete(
-            sprintf('/profiles/%s/features/%s', $this->userName, $featuresSlug)
+            sprintf('/profiles/%s/features/%s', $this->userName, $featureId)
         );
     }
 
@@ -171,7 +171,7 @@ class Features extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteAll(array $filters = []) : array {
+    public function deleteAll(array $filters = []) {
         return $this->sendDelete(
             sprintf('/profiles/%s/features', $this->userName),
             $filters

@@ -3,6 +3,7 @@
 *.log
 *.sublime-project
 *.sublime-workspace
+.idea
 .php_cs
 composer.lock
 humbug.json
@@ -13,3 +14,5 @@ samples/settings.php
 sftp-config.json
 vendor/
 VeriduRuleset.xml
+settings.php
+phpunit.xml
