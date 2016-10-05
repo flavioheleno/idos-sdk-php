@@ -15,11 +15,11 @@ class Sso extends AbstractEndpoint {
      * @param string $tokenSecret
      */
     public function createNew(
-        string $providerName,
-        string $credentialPubKey,
-        string $accessToken,
-        string $tokenSecret = ''
-    ) : array {
+        $providerName,
+        $credentialPubKey,
+        $accessToken,
+        $tokenSecret = ''
+    ) {
 
         $array = [
             'provider'     => $providerName,
@@ -45,7 +45,7 @@ class Sso extends AbstractEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             '/sso',
             $filters
@@ -59,7 +59,7 @@ class Sso extends AbstractEndpoint {
      *
      * @return array Response
      */
-    public function getOne(string $providerName) : array {
+    public function getOne($providerName) {
         return $this->sendGet(
             sprintf('/sso/%s', $providerName)
         );

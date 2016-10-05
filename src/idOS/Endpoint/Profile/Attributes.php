@@ -30,10 +30,10 @@ class Attributes extends  AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-        string $name,
-        string $value,
-        float $support
-    ) : array {
+        $name,
+        $value,
+        $support
+    ) {
         return $this->sendPost(
             sprintf('/profiles/%s/attributes', $this->userName),
             [],
@@ -52,7 +52,7 @@ class Attributes extends  AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function getOne(string $attributeName) : array {
+    public function getOne($attributeName) {
         return $this->sendGet(
             sprintf('/profiles/%s/attributes/%s', $this->userName, $attributeName)
         );
@@ -65,7 +65,7 @@ class Attributes extends  AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteOne(string $attributeName) : array {
+    public function deleteOne($attributeName) {
         return $this->sendDelete(
             sprintf('/profiles/%s/attributes/%s', $this->userName, $attributeName)
         );
@@ -78,7 +78,7 @@ class Attributes extends  AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteAll(array $filters = []) : array {
+    public function deleteAll(array $filters = []) {
         return $this->sendDelete(
             sprintf('/profiles/%s/attributes', $this->userName),
             $filters

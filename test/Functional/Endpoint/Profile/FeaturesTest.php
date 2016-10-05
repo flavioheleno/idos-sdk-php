@@ -151,7 +151,7 @@ class FeaturesTest extends AbstractFunctional {
 		    ->Profile($this->credentials['username'])
 		    ->Features->createNew(1321189817, 'name-test-2', 3, 'integer');
 
-		$response = $this->sdk
+        $this->sdk
 		    ->Profile($this->credentials['username'])
 		    ->Features->upsertBulk([
 		    ['source_id' => 1321189817,

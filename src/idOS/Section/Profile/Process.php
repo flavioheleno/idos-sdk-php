@@ -24,14 +24,15 @@ class Process extends AbstractSection {
      * @param bool|bool     $throwsExceptions
      */
     public function __construct(
-        int $processId,
-        string $userName,
+        $processId,
+        $userName,
         AuthInterface $authentication,
         Client $client,
-        bool $throwsExceptions = false
+        $throwsExceptions = false
     ) {
         $this->processId = $processId;
         $this->userName  = $userName;
+
         parent::__construct($authentication, $client, $throwsExceptions);
     }
 
@@ -42,7 +43,7 @@ class Process extends AbstractSection {
      *
      * @return endpoint instance
      */
-    public function __get(string $name) : EndpointInterface {
+    public function __get($name) {
         $className = $this->getEndpointClassName($name);
 
         return new $className(
@@ -61,7 +62,7 @@ class Process extends AbstractSection {
      *
      * @return endpoint instance
      */
-    public function __call(string $name, array $args) : SectionInterface {
+    public function __call($name, array $args) {
         $className = $this->getSectionClassName($name);
         $args[]    = $this->processId;
         $args[]    = $this->userName;

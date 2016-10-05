@@ -15,9 +15,9 @@ class Gates extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-        string $name,
-        bool $pass
-    ) : array {
+        $name,
+        $pass
+    ) {
 
         return $this->sendPost(
             sprintf('/profiles/%s/gates', $this->userName),
@@ -38,9 +38,9 @@ class Gates extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function upsertOne(
-        string $name,
-        bool $pass
-    ) : array {
+        $name,
+        $pass
+    ) {
 
         return $this->sendPut(
             sprintf('/profiles/%s/gates', $this->userName),
@@ -59,7 +59,7 @@ class Gates extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             sprintf('/profiles/%s/gates', $this->userName),
             $filters
@@ -73,7 +73,7 @@ class Gates extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function getOne(string $gateSlug) : array {
+    public function getOne($gateSlug) {
         return $this->sendGet(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug)
         );
@@ -86,7 +86,7 @@ class Gates extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function updateOne(string $gateSlug, bool $pass) : array {
+    public function updateOne($gateSlug, $pass) {
         return $this->sendPatch(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug),
             [],
@@ -103,7 +103,7 @@ class Gates extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteOne(string $gateSlug) : array {
+    public function deleteOne($gateSlug) {
         return $this->sendDelete(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug)
         );
@@ -116,7 +116,7 @@ class Gates extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteAll(array $filters = []) : array {
+    public function deleteAll(array $filters = []) {
         return $this->sendDelete(
             sprintf('/profiles/%s/gates', $this->userName),
             $filters

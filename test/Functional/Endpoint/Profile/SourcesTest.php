@@ -17,7 +17,7 @@ class SourcesTest extends AbstractFunctional {
 		$this->sdk
 		    ->Profile($this->credentials['username'])
 		    ->Sources->createNew('name-test-1', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
-		$test = $this->sdk
+        $this->sdk
 		    ->Profile($this->credentials['username'])
 		    ->Sources->createNew('name-test-2', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
 

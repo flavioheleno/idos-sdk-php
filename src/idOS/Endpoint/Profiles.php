@@ -13,7 +13,7 @@ class Profiles extends AbstractEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             '/profiles',
             $filters

@@ -74,7 +74,6 @@ class AttributesTest extends AbstractFunctional {
 		$this->assertTrue($response['status']);
 		$this->assertNotEmpty($response['data']);
 
-		$attributes = $response['data'];
 		$attribute = array_pop($response['data']);
 		$this->assertNotEmpty($attribute['creator']);
 		$this->assertSame('name-test', $attribute['name']);

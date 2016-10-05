@@ -114,7 +114,7 @@ class ReferencesTest extends AbstractFunctional {
 		    ->Profile($this->credentials['username'])
 		    ->References->deleteAll();
 
-		$feature = $this->sdk
+        $this->sdk
 		    ->Profile($this->credentials['username'])
 		    ->References->createNew('name-test', 'value-test');
 

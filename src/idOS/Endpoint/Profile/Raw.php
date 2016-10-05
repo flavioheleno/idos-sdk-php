@@ -16,10 +16,10 @@ class Raw extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-        int $sourceId,
-        string $collectionName,
+        $sourceId,
+        $collectionName,
         array $data
-    ) : array {
+    ) {
         return $this->sendPost(
             sprintf('/profiles/%s/raw', $this->userName),
             [],
@@ -41,10 +41,10 @@ class Raw extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function upsertOne(
-        int $sourceId,
-        string $collectionName,
+        $sourceId,
+        $collectionName,
         array $data
-    ) : array {
+    ) {
         return $this->sendPut(
             sprintf('/profiles/%s/raw', $this->userName),
             [],
@@ -63,14 +63,14 @@ class Raw extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             sprintf('/profiles/%s/raw', $this->userName),
             $filters
         );
     }
 
-    public function deleteAll(array $filters = []) : array {
+    public function deleteAll(array $filters = []) {
         return $this->sendDelete(
             sprintf('/profiles/%s/raw', $this->userName),
             $filters

@@ -15,9 +15,9 @@ class References extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function createNew(
-        string $name,
-        string $value
-    ) : array {
+        $name,
+        $value
+    ) {
 
         return $this->sendPost(
             sprintf('/profiles/%s/references', $this->userName),
@@ -36,7 +36,7 @@ class References extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) : array {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             sprintf('/profiles/%s/references', $this->userName),
             $filters
@@ -50,7 +50,7 @@ class References extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function getOne(string $referenceName) : array {
+    public function getOne($referenceName) {
         return $this->sendGet(
             sprintf('/profiles/%s/references/%s', $this->userName, $referenceName)
         );
@@ -63,7 +63,7 @@ class References extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function updateOne(string $referenceName, string $value) : array {
+    public function updateOne($referenceName, $value) {
         return $this->sendPatch(
             sprintf('/profiles/%s/references/%s', $this->userName, $referenceName),
             [],
@@ -80,7 +80,7 @@ class References extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteOne(string $referenceName) : array {
+    public function deleteOne($referenceName) {
         return $this->sendDelete(
             sprintf('/profiles/%s/references/%s', $this->userName, $referenceName)
         );
@@ -93,7 +93,7 @@ class References extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function deleteAll(array $filters = []) : array {
+    public function deleteAll(array $filters = []) {
         return $this->sendDelete(
             sprintf('/profiles/%s/references', $this->userName),
             $filters

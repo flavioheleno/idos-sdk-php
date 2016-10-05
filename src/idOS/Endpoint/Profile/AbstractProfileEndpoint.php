@@ -21,10 +21,10 @@ abstract class AbstractProfileEndpoint extends AbstractEndpoint {
      * @param bool|bool     $throwsExceptions
      */
     public function __construct(
-        string $userName,
+        $userName,
         AuthInterface $authentication,
         Client $client,
-        bool $throwsExceptions = false
+        $throwsExceptions = false
     ) {
         $this->userName = $userName;
         parent::__construct($authentication, $client, $throwsExceptions);

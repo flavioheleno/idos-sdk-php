@@ -19,11 +19,11 @@ abstract class AbstractProcessEndpoint extends AbstractEndpoint {
      * @param bool|bool     $throwsExceptions
      */
     public function __construct(
-        int $processId,
-        string $userName,
+        $processId,
+        $userName,
         AuthInterface $authentication,
         Client $client,
-        bool $throwsExceptions = false
+        $throwsExceptions = false
     ) {
         $this->processId = $processId;
         $this->userName  = $userName;
