@@ -1,4 +1,4 @@
-Veridu idOS PHP SDK
+Veridu idOS PHP SDK for PHP5 (for PHP7 [Click Here](https://github.com/veridu/idos-sdk-php/tree/php7))
 ===================
 
 Installation
