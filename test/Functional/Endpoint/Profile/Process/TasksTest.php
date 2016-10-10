@@ -93,7 +93,7 @@ class TasksTest extends AbstractFunctional {
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
-        $this->assertSame('event-test-changed', $response['data']['event']);
+        $this->assertSame('event-test', $response['data']['event']);
         $this->assertFalse($response['data']['running']);
         $this->assertTrue($response['data']['success']);
     }
