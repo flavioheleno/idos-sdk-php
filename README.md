@@ -13,7 +13,7 @@ If you are using composer, please edit your `composer.json` and add the followin
 ```json
 {
     "require": {
-        "veridu/idos-sdk-php": "^1.0"
+        "veridu/idos-sdk-php": "^0.1"
     }
 }
 ```
