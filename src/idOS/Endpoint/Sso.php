@@ -34,7 +34,7 @@ class Sso extends AbstractEndpoint {
         }
 
         if (! empty($signupHash)) {
-            $array['signupHash'] = $signupHash;
+            $array['signup_hash'] = $signupHash;
         }
 
         return $this->sendPost(
