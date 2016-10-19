@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace idOS\Auth;
 
 class StringToken extends AbstractAuth {
@@ -21,7 +23,7 @@ class StringToken extends AbstractAuth {
      *
      * @param string $name
      * @param string $token
-     * 
+     *
      * @return void
      */
     public function __construct(string $name, string $token) {
@@ -40,7 +42,7 @@ class StringToken extends AbstractAuth {
 
     /**
      * Returns the token string representation.
-     * 
+     *
      * @return string
      */
     public function __toString() : string {
