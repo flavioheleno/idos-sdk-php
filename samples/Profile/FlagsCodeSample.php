@@ -18,25 +18,62 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Calling the Profile Endpoint passing the username, and after that, the Attributes Endpoint and the method listAll.
+ * Lists all flags for the given username.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Attributes->listAll();
+    ->Flags->listAll();
 
 /**
- * Prints the response.
+ * Prints the api response.
  */
 print_r($response);
 
 /**
- * Retrieves one attribute.
+ * Creates a new warning.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Attributes->getOne('attribute');
+    ->Flags->createNew('middle-name-mismatch', 'middle-name');
 
 /**
- * Prints the response.
+ * Prints the api response.
+ */
+print_r($response);
+
+/**
+ * Retrieves a process given its slug.
+ */
+$slug     = $response['data']['slug'];
+$response = $sdk
+    ->Profile($credentials['username'])
+    ->Flags->getOne($slug);
+
+/**
+ * Prints the api response.
+ */
+print_r($response);
+
+/**
+ * Deletes one warning given its slug.
+ */
+$response = $sdk
+    ->Profile($credentials['username'])
+    ->Flags->deleteOne($slug);
+
+/**
+ * Prints the api response.
+ */
+print_r($response);
+
+/**
+ * Deletes all flags.
+ */
+$response = $sdk
+    ->Profile($credentials['username'])
+    ->Flags->deleteAll();
+
+/**
+ * Prints the api response.
  */
 print_r($response);

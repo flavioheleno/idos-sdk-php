@@ -18,62 +18,61 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all warnings for the given username.
+ * Calling the Profile Endpoint passing the username, and after that, the Candidates Endpoint and the method listAll.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Warnings->listAll();
+    ->Candidates->listAll();
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Creates a new warning.
+ * Creates a new attribute candidate.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Warnings->createNew('middle-name-mismatch', 'middle-name');
+    ->Candidates->createNew('attribute', 'value-test', 0.8);
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Retrieves a process given its slug.
+ * Retrieves the attribute candidate created.
  */
-$slug     = $response['data']['slug'];
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Warnings->getOne($slug);
+    ->Candidates->getOne('attribute');
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Deletes one warning given its slug.
+ * Deletes the attribute candidate created.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Warnings->deleteOne($slug);
+    ->Candidates->deleteOne('attribute');
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);
 
 /**
- * Deletes all warnings.
+ * Deletes all attribute candidates.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Warnings->deleteAll();
+    ->Candidates->deleteAll();
 
 /**
- * Prints the api response.
+ * Prints the response.
  */
 print_r($response);

@@ -4,7 +4,7 @@ namespace Test\Functional\Endpoint\Profile;
 
 use Test\Functional\AbstractFunctional;
 
-class AttributesTest extends AbstractFunctional {
+class CandidatesTest extends AbstractFunctional {
     protected function setUp() {
         parent::setUp();
     }
@@ -12,18 +12,18 @@ class AttributesTest extends AbstractFunctional {
     public function testListAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->deleteAll();
+            ->Candidates->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->createNew('name-test-1', 'value-test-1', 0.5);
+            ->Candidates->createNew('name-test-1', 'value-test-1', 0.5);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->createNew('name-test-2', 'value-test-2', 0.6);
+            ->Candidates->createNew('name-test-2', 'value-test-2', 0.6);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->listAll();
+            ->Candidates->listAll();
 
         foreach ($response['data'] as $attribute) {
             if ($attribute['name'] === 'name-test-1') {
@@ -41,20 +41,20 @@ class AttributesTest extends AbstractFunctional {
     public function testCreateNew() {
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->createNew('name-test', 'value-test', 1.2);
+            ->Candidates->createNew('name-test', 'value-test', 0.9);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('name-test', $response['data']['name']);
         $this->assertSame('value-test', $response['data']['value']);
-        $this->assertSame(1.2, $response['data']['support']);
+        $this->assertSame(0.9, $response['data']['support']);
     }
 
     public function testCreateNewUtf8() {
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->createNew('námé-test', 'válué-test', 1.2);
+            ->Candidates->createNew('námé-test', 'válué-test', 0.9);
 
         $this->assertFalse($response['status']);
         $this->assertNotEmpty($response['error']);
@@ -63,13 +63,13 @@ class AttributesTest extends AbstractFunctional {
     public function testGetOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->deleteAll();
+            ->Candidates->deleteAll();
 
         $this->testCreateNew();
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->getOne('name-test');
+            ->Candidates->getOne('name-test');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -79,19 +79,19 @@ class AttributesTest extends AbstractFunctional {
         $this->assertNotEmpty($attribute['creator']);
         $this->assertSame('name-test', $attribute['name']);
         $this->assertSame('value-test', $attribute['value']);
-        $this->assertSame(1.2, $attribute['support']);
+        $this->assertSame(0.9, $attribute['support']);
     }
 
     public function testDeleteOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->deleteAll();
+            ->Candidates->deleteAll();
 
         $this->testCreateNew();
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->deleteOne('name-test');
+            ->Candidates->deleteOne('name-test');
 
         $this->assertTrue($response['status']);
         $this->assertSame(1, $response['deleted']);
@@ -100,21 +100,21 @@ class AttributesTest extends AbstractFunctional {
     public function testDeleteAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->deleteAll();
+            ->Candidates->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->createNew('name-test-1', 'value-test-1', 1.2);
+            ->Candidates->createNew('name-test-1', 'value-test-1', 0.9);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->createNew('name-test-2', 'value-test-2', 1.3);
+            ->Candidates->createNew('name-test-2', 'value-test-2', 0.6);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->createNew('name-test-3', 'value-test-3', 1.4);
+            ->Candidates->createNew('name-test-3', 'value-test-3', 0.4);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Attributes->deleteAll();
+            ->Candidates->deleteAll();
 
         $this->assertTrue($response['status']);
         $this->assertSame(3, $response['deleted']);

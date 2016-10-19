@@ -1,0 +1,87 @@
+<?php
+
+namespace idOS\Endpoint\Profile;
+
+/**
+ * Candidate Class Endpoint.
+ */
+class Candidates extends AbstractProfileEndpoint {
+    /**
+     * Lists all attribute candidates.
+     *
+     * @param array $filter
+     *
+     * @return array Response
+     */
+    public function listAll(array $filter = []) {
+        return $this->sendGet(
+            sprintf('/profiles/%s/candidates', $this->userName),
+            $filter
+        );
+    }
+
+    /**
+     * Creates a new attribute candidate for the given user.
+     *
+     * @param string $attribute
+     * @param string $value
+     * @param float  $support
+     *
+     * @return array Response
+     */
+    public function createNew(
+        string $attribute,
+        string $value,
+        float $support
+    ) : array {
+        return $this->sendPost(
+            sprintf('/profiles/%s/candidates', $this->userName),
+            [],
+            [
+                'attribute' => $attribute,
+                'value'     => $value,
+                'support'   => $support
+            ]
+        );
+    }
+
+    /**
+     * Retrieves an attribute candidate given its slug.
+     *
+     * @param string $attributeName
+     *
+     * @return array Response
+     */
+    public function getOne(string $attributeName) : array {
+        return $this->sendGet(
+            sprintf('/profiles/%s/candidates/%s', $this->userName, $attributeName)
+        );
+    }
+
+    /**
+     * Deletes an attribute candidate given its slug.
+     *
+     * @param string $attributeName
+     *
+     * @return array Response
+     */
+    public function deleteOne(string $attributeName) : array {
+        return $this->sendDelete(
+            sprintf('/profiles/%s/candidates/%s', $this->userName, $attributeName)
+        );
+    }
+
+    /**
+     * Deletes all attribute candidates.
+     *
+     * @param array $filters
+     *
+     * @return array Response
+     */
+    public function deleteAll(array $filters = []) : array {
+        return $this->sendDelete(
+            sprintf('/profiles/%s/candidates', $this->userName),
+            $filters
+        );
+    }
+}

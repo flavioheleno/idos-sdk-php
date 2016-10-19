@@ -3,11 +3,11 @@
 namespace idOS\Endpoint\Profile;
 
 /**
- * Warnings Class Endpoint.
+ * Flags Class Endpoint.
  */
-class Warnings extends AbstractProfileEndpoint {
+class Flags extends AbstractProfileEndpoint {
     /**
-     * Creates a new warning for the given user.
+     * Creates a new flag for the given user.
      *
      * @param string $slug
      * @param string $attribute
@@ -20,7 +20,7 @@ class Warnings extends AbstractProfileEndpoint {
     ) : array {
 
         return $this->sendPost(
-            sprintf('/profiles/%s/warnings', $this->userName),
+            sprintf('/profiles/%s/flags', $this->userName),
             [],
             [
                 'slug'      => $slug,
@@ -30,7 +30,7 @@ class Warnings extends AbstractProfileEndpoint {
     }
 
     /**
-     * Lists all warnings.
+     * Lists all flags.
      *
      * @param array $filters
      *
@@ -38,13 +38,13 @@ class Warnings extends AbstractProfileEndpoint {
      */
     public function listAll(array $filters = []) : array {
         return $this->sendGet(
-            sprintf('/profiles/%s/warnings', $this->userName),
+            sprintf('/profiles/%s/flags', $this->userName),
             $filters
         );
     }
 
     /**
-     * Retrieves a warning given its slug.
+     * Retrieves a flag given its slug.
      *
      * @param string $slug
      *
@@ -52,12 +52,12 @@ class Warnings extends AbstractProfileEndpoint {
      */
     public function getOne(string $slug) : array {
         return $this->sendGet(
-            sprintf('/profiles/%s/warnings/%s', $this->userName, $slug)
+            sprintf('/profiles/%s/flags/%s', $this->userName, $slug)
         );
     }
 
     /**
-     * Deletes a warning given its slug.
+     * Deletes a flag given its slug.
      *
      * @param string $slug
      *
@@ -65,12 +65,12 @@ class Warnings extends AbstractProfileEndpoint {
      */
     public function deleteOne(string $slug) : array {
         return $this->sendDelete(
-            sprintf('/profiles/%s/warnings/%s', $this->userName, $slug)
+            sprintf('/profiles/%s/flags/%s', $this->userName, $slug)
         );
     }
 
     /**
-     * Deletes all warnings.
+     * Deletes all flags.
      *
      * @param array $filters
      *
@@ -78,7 +78,7 @@ class Warnings extends AbstractProfileEndpoint {
      */
     public function deleteAll(array $filters = []) : array {
         return $this->sendDelete(
-            sprintf('/profiles/%s/warnings', $this->userName),
+            sprintf('/profiles/%s/flags', $this->userName),
             $filters
         );
     }
