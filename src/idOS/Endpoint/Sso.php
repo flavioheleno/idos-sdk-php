@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace idOS\Endpoint;
 
 /**
@@ -13,12 +15,14 @@ class Sso extends AbstractEndpoint {
      * @param string $credentialPubKey
      * @param string $accessToken
      * @param string $tokenSecret
+     * @param string $signupHash
      */
     public function createNew(
         string $providerName,
         string $credentialPubKey,
         string $accessToken,
-        string $tokenSecret = ''
+        string $tokenSecret = '',
+        string $signupHash = ''
     ) : array {
 
         $array = [
@@ -29,6 +33,10 @@ class Sso extends AbstractEndpoint {
 
         if (! empty($tokenSecret)) {
             $array['token_secret'] = $tokenSecret;
+        }
+
+        if (! empty($signupHash)) {
+            $array['signup_hash'] = $signupHash;
         }
 
         return $this->sendPost(

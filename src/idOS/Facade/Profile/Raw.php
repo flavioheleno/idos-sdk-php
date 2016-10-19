@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace idOS\Facade\Profile;
 
 use GuzzleHttp\Client;
