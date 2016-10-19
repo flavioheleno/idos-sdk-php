@@ -9,6 +9,11 @@ use idOS\Auth\AuthInterface;
 use idOS\Endpoint\AbstractEndpoint;
 
 abstract class AbstractCompanyEndpoint extends AbstractEndpoint {
+    /**
+     * The company slug to be stored and used in all /companies endpoints.
+     *
+     * @var string
+     */
     protected $companySlug;
 
     /**

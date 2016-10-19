@@ -4,7 +4,7 @@ namespace Test\Functional\Endpoint\Profile;
 
 use Test\Functional\AbstractFunctional;
 
-class WarningsTest extends AbstractFunctional {
+class CandidatesTest extends AbstractFunctional {
     protected function setUp() {
         parent::setUp();
     }
@@ -12,49 +12,49 @@ class WarningsTest extends AbstractFunctional {
     public function testListAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Candidates->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-1', 'attribute-test-1');
+            ->Candidates->createNew('name-test-1', 'value-test-1', 0.5);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-2', 'attribute-test-2');
+            ->Candidates->createNew('name-test-2', 'value-test-2', 0.6);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->listAll();
+            ->Candidates->listAll();
 
-        foreach ($response['data'] as $reference) {
-            if ($reference['slug'] === 'warning-test-1') {
-                $this->assertSame('attribute-test-1', $reference['attribute']);
+        foreach ($response['data'] as $attribute) {
+            if ($attribute['name'] === 'name-test-1') {
+                $this->assertSame('value-test-1', $attribute['value']);
+                $this->assertSame(0.5, $attribute['support']);
             }
 
-            if ($reference['slug'] === 'warning-test-2') {
-                $this->assertSame('attribute-test-2', $reference['attribute']);
+            if ($attribute['name'] === 'name-test-2') {
+                $this->assertSame('value-test-2', $attribute['value']);
+                $this->assertSame(0.6, $attribute['support']);
             }
         }
     }
 
     public function testCreateNew() {
-        $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
-
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test', 'attribute-test');
+            ->Candidates->createNew('name-test', 'value-test', 0.9);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
-        $this->assertSame('warning-test', $response['data']['slug']);
-        $this->assertSame('attribute-test', $response['data']['attribute']);
+        $this->assertNotEmpty($response['data']['creator']);
+        $this->assertSame('name-test', $response['data']['name']);
+        $this->assertSame('value-test', $response['data']['value']);
+        $this->assertSame(0.9, $response['data']['support']);
     }
 
     public function testCreateNewUtf8() {
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('wárníng-test', 'áttríbúte-test');
+            ->Candidates->createNew('námé-test', 'válué-test', 0.9);
 
         $this->assertFalse($response['status']);
         $this->assertNotEmpty($response['error']);
@@ -63,56 +63,57 @@ class WarningsTest extends AbstractFunctional {
     public function testGetOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Candidates->deleteAll();
 
-        $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test', 'attribute-test');
+        $this->testCreateNew();
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->getOne('warning-test');
+            ->Candidates->getOne('name-test');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
-        $this->assertSame('warning-test', $response['data']['slug']);
-        $this->assertSame('attribute-test', $response['data']['attribute']);
+
+        $attribute = array_pop($response['data']);
+        $this->assertNotEmpty($attribute['creator']);
+        $this->assertSame('name-test', $attribute['name']);
+        $this->assertSame('value-test', $attribute['value']);
+        $this->assertSame(0.9, $attribute['support']);
     }
 
     public function testDeleteOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Candidates->deleteAll();
 
-        $feature = $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test', 'attribute-test');
+        $this->testCreateNew();
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteOne('warning-test');
+            ->Candidates->deleteOne('name-test');
 
         $this->assertTrue($response['status']);
+        $this->assertSame(1, $response['deleted']);
     }
 
     public function testDeleteAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Candidates->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-1', 'attribute-test-1');
+            ->Candidates->createNew('name-test-1', 'value-test-1', 0.9);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-2', 'attribute-test-2');
+            ->Candidates->createNew('name-test-2', 'value-test-2', 0.6);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-3', 'attribute-test-3');
+            ->Candidates->createNew('name-test-3', 'value-test-3', 0.4);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Candidates->deleteAll();
 
         $this->assertTrue($response['status']);
         $this->assertSame(3, $response['deleted']);
