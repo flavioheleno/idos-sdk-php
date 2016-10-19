@@ -6,6 +6,7 @@ namespace idOS;
 
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
+use idOS\Section\Company;
 use idOS\Section\Profile;
 use idOS\Section\Profile\Process;
 
@@ -135,7 +136,7 @@ class SDK {
      * @return Endpoint\Company instance
      */
     public function company(string $companySlug) : Company {
-        return new Endpoint\Company(
+        return new Company(
             $companySlug,
             $this->authentication,
             $this->client,
