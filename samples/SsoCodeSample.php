@@ -23,7 +23,13 @@ $response = $sdk
 /**
  * Prints the api response.
  */
-print_r($response);
+print_r("\nList of providers: ");
+
+foreach ($response['data'] as $provider) {
+	print_r($provider . "; ");
+}
+
+print_r("\n");
 
 /**
  * Retrieves the facebook provider.
@@ -33,10 +39,10 @@ $response = $sdk
     ->getOne('facebook');
 
 /**
- * Prints the response.
+ * Prints boolean value if enabled or not.
  */
-print_r($response);
-
+print_r("\nEnabled: " . $response['data']['enabled']);
+print_r("\n");
 /**
  * Creates a facebook sso.
  *
@@ -44,13 +50,15 @@ print_r($response);
  */
 $response = $sdk
     ->Sso
-    ->createNew('facebook', $credentials['credentialPublicKey'], 'accessToken');
+    ->createNew('facebook', $credentials['credentialPublicKey'], 'userToken');
 
 /**
- * Prints the response.
+ * Prints the username and the user token.
  */
-print_r($response);
-
+print_r("\nFACEBOOK:");
+print_r("\nUsername: " . $response['data']['username']);
+print_r("\nUser token: " . $response['data']['user_token']);
+print_r("\n");
 /**
  * Creates a twitter sso.
  *
@@ -58,9 +66,12 @@ print_r($response);
  */
 $response = $sdk
     ->Sso
-    ->createNew('twitter', $credentials['credentialPublicKey'], 'accessToken', 'tokenSecret');
+    ->createNew('twitter', $credentials['credentialPublicKey'], 'userToken', 'tokenSecret');
 
 /**
- * Prints the response.
+ * Prints the username and the user token.
  */
-print_r($response);
+print_r("\nTWITTER:");
+print_r("\nUsername: " . $response['data']['username']);
+print_r("\nUser token: " . $response['data']['user_token']);
+print_r("\n");

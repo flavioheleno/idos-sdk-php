@@ -25,6 +25,8 @@ $response = $sdk
     ->listAll();
 
 /**
- * Prints the api response.
+ * Prints the number of profiles.
  */
-print_r($response);
+print_r("\nNumber of profiles: ");
+print_r(count($response['data']));
+print_r("\n");
