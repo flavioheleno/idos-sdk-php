@@ -26,15 +26,19 @@ class ProcessesTest extends AbstractFunctional {
     }
 
     public function testGetOne() {
+        $processes = $this->sdk
+            ->Profile($this->credentials['username'])
+            ->Processes->listAll();
+
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Processes->getOne(1321189817);
+            ->Processes->getOne($processes['data'][0]['id']);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
-        $this->assertSame(1321189817, $response['data']['id']);
+        $this->assertSame($processes['data'][0]['id'], $response['data']['id']);
         $this->assertSame('idos:verification', $response['data']['name']);
-        $this->assertSame('idos:source.facebook.created', $response['data']['event']);
+        $this->assertSame('idos:source.name-test.created', $response['data']['event']);
         $this->assertInternalType('integer', $response['data']['created_at']);
     }
 }
