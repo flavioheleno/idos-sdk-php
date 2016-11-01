@@ -18,28 +18,63 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth, true);
 
 /**
- * Lists all gates for the given username.
+ * Creates a new gate or updates it.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Gates->listAll();
+    ->Gates->upsertOne('18+', true);
 
-/**
- * Prints the api response.
- */
-print_r($response);
+if ($response['status'] === true) {
+    /**
+     * Saves the gate slug
+     */
+    $gateSlug = $response['data']['slug'];
 
-/**
- * Creates a new gate.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Gates->createNew('18+', false);
+    /**
+     * Lists all gates for the given username.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Gates->listAll();
 
-/**
- * Prints the api response.
- */
-print_r($response);
+    foreach ($response['data'] as $gate) {
+        print_r("\nID: " . $gate['id']);
+        print_r("\nName: " . $gate['name']);
+        print_r("\nSlug: " . $gate['slug']);
+        print_r("\nPass: " . $gate['pass']);
+        print_r("\nReview: " . $gate['review']);
+        print_r("\n");
+    }
+
+
+    /**
+     * Retrieves the gate created.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Gates->getOne($gateSlug);
+
+    /**
+     * Prints the info about the gate related to the gateSlug
+     */
+    print_r("\nID: " . $gate['id']);
+    print_r("\nName: " . $gate['name']);
+    print_r("\nSlug: " . $gate['slug']);
+    print_r("\nPass: " . $gate['pass']);
+    print_r("\nReview: " . $gate['review']);
+
+    /**
+     * Deletes the gate created and updated.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Gates->deleteOne($gateSlug);
+
+    /**
+     * Prints the api response.
+     */
+    print_r("\nStatus : " . $response['status']);
+}
 
 /**
  * Creates a new gate or updates it.
@@ -48,43 +83,18 @@ $response = $sdk
     ->Profile($credentials['username'])
     ->Gates->upsertOne('18+', true);
 
-/**
- * Prints the api response.
- */
-print_r($response);
+if ($response['status'] === true) {
 
-/**
- * Retrieves the gate created.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Gates->getOne('18');
+    /**
+     * Deletes all gates.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Gates->deleteAll();
 
-/**
- * Prints the api response.
- */
-print_r($response);
-
-/**
- * Deletes the gate created and updated.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Gates->deleteOne($response['data']['slug']);
-
-/**
- * Prints the api response.
- */
-print_r($response);
-
-/**
- * Deletes all gates.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Gates->deleteAll();
-
-/**
- * Prints the api response.
- */
-print_r($response);
+    /**
+     * Prints the api response.
+     */
+    print_r("\nDeleted gates: " . $response['deleted']);
+    print_r("\n");
+}

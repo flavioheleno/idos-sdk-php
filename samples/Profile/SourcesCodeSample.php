@@ -18,23 +18,6 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all sources for the given username.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Sources->listAll();
-
-/**
- * Prints the api response.
- */
-print_r($response);
-
-/**
- * Gets the first sourceId.
- */
-$sourceId = $response['data'][0]['id'];
-
-/**
  * Creates a new source.
  */
 $response = $sdk
@@ -46,48 +29,84 @@ $response = $sdk
         ]
     );
 
-/**
- * Prints the api response.
- */
-print_r($response);
+if ($response['status'] === true) {
+    /**
+     * Stores the source id of the source created
+     */
+    $sourceId = $response['data']['id'];
 
-/**
- * Updates a source.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Sources->updateOne(
-        $sourceId,
-        [
-            'test' => 'value-test'
-        ]
-    );
+    /**
+     * Lists all sources for the given username.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Sources->listAll();
 
-/**
- * Prints the api response.
- */
-print_r($response);
+    /**
+     * Prints the api response.
+     */
+    foreach ($response['data'] as $source) {
+        print_r("\nID: " . $source['id']);
+        print_r("\nName: " . $source['name']);
+        print_r("\nTags: ");
+        foreach ($source['tags'] as $tags) {
+            print_r($tags . ";");
+        }
+        print_r("\n");
+    }
 
-/**
- * Retrieves a process given its id.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Sources->getOne($sourceId);
+    /**
+     * Updates a source.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Sources->updateOne(
+            $sourceId,
+            [
+                'test' => 'value-test',
+                'other' => 'other-tag'
+            ]
+        );
 
-/**
- * Prints the api response.
- */
-print_r($response);
+    /**
+     * Prints the api response.
+     */
+    print_r("\nID: " . $response['data']['id']);
+    print_r("\nName: " . $response['data']['name']);
+    print_r("\nTags: ");
+    foreach ($response['data']['tags'] as $tags) {
+        print_r($tags . "; ");
+    }
+    print_r("\n");
 
-/**
- * Deletes the source created.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Sources->deleteOne($sourceId);
+    /**
+     * Retrieves a source given its id.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Sources->getOne($sourceId);
 
-/**
- * Prints the api response.
- */
-print_r($response);
+    /**
+     * Prints the api response.
+     */
+    print_r("\nID: " . $response['data']['id']);
+    print_r("\nName: " . $response['data']['name']);
+    print_r("\nTags: ");
+    foreach ($response['data']['tags'] as $tags) {
+        print_r($tags . "; ");
+    }
+    print_r("\n");
+
+    /**
+     * Deletes the source created.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Sources->deleteOne($sourceId);
+
+    /**
+     * Prints the api response status.
+     */
+    print_r("\nStatus: " . $response['status']);
+    print_r("\n");
+}

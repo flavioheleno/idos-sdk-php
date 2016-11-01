@@ -18,52 +18,36 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Calling the Profile Endpoint passing the username, and after that, the Candidates Endpoint and the method listAll.
+ * Creates a new candidate.
  */
-$response = $sdk
+$emailCandidate = $sdk
     ->Profile($credentials['username'])
-    ->Candidates->listAll();
-
+    ->Candidates->createNew('email', 'jhon@jhon.com', 0.9);
 /**
- * Prints the response.
+ * Creates a new candidate
  */
-print_r($response);
-
-/**
- * Creates a new attribute candidate.
- */
-$response = $sdk
+$genderCandidate = $sdk
     ->Profile($credentials['username'])
-    ->Candidates->createNew('attribute', 'value-test', 0.8);
+    ->Candidates->createNew('gender', 'male', 0.9);
 
-/**
- * Prints the response.
- */
-print_r($response);
+if (($emailCandidate['status'] === true) || ($genderCandidate['status'] === true)) {
+    /**
+     * Calling the Profile Endpoint passing the username, and after that, the Candidates Endpoint and the method listAll.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Candidates->listAll();
 
-/**
- * Retrieves the attribute candidate created.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Candidates->getOne('attribute');
-
-/**
- * Prints the response.
- */
-print_r($response);
-
-/**
- * Deletes the attribute candidate created.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Candidates->deleteOne('attribute');
-
-/**
- * Prints the response.
- */
-print_r($response);
+    /**
+     * Prints the response.
+     */
+    foreach ($response['data'] as $candidate) {
+        print_r("\nAttribute: " . $candidate['attribute']);
+        print_r("\nValue: " . $candidate['value']);
+        print_r("\nSupport: " . $candidate['support']);
+        print_r("\n");
+    }
+}
 
 /**
  * Deletes all attribute candidates.
@@ -73,6 +57,6 @@ $response = $sdk
     ->Candidates->deleteAll();
 
 /**
- * Prints the response.
+ * Prints the number of deleted candidates.
  */
-print_r($response);
+print_r("\nDeleted candidates: " . $response['deleted'] . "\n");

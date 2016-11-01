@@ -27,7 +27,12 @@ $response = $sdk
 /**
  * Prints the api response.
  */
-print_r($response);
+foreach ($response['data'] as $process) {
+	print_r("\nID: " . $process['id']);
+	print_r("\nName: " . $process['name']);
+	print_r("\nEvent: " . $process['event']);
+	print_r("\n");
+}
 
 /**
  * Retrieves a process.
@@ -39,4 +44,7 @@ $response = $sdk
 /**
  * Prints the api response.
  */
-print_r($response);
+print_r("\nID: " . $process['id']);
+print_r("\nName: " . $process['name']);
+print_r("\nEvent: " . $process['event']);
+print_r("\n");

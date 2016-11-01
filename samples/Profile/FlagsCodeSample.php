@@ -18,62 +18,82 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all flags for the given username.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Flags->listAll();
-
-/**
- * Prints the api response.
- */
-print_r($response);
-
-/**
- * Creates a new warning.
+ * Creates a new flag.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Flags->createNew('middle-name-mismatch', 'middle-name');
 
-/**
- * Prints the api response.
- */
-print_r($response);
+if ($response['status'] === true) {
+    /**
+     * Saves the id of the flag created
+     */
+    $flagSlug = $response['data']['slug'];
+
+    /**
+     * Lists all flags for the given username.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Flags->listAll();
+
+    /**
+     * Prints the api response.
+     */
+    foreach ($response['data'] as $flags) {
+        print_r("\nID: " . $flags['id']);
+        print_r("\nSlug: " . $flags['slug']);
+        print_r("\nAttribute : " . $flags['attribute']);
+        print_r("\n");
+    }
+
+    /**
+     * Retrieves a process given its slug.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Flags->getOne($flagSlug);
+
+    /**
+     * Prints the api response.
+     */
+    print_r("\nID: " . $flags['id']);
+    print_r("\nSlug: " . $flags['slug']);
+    print_r("\nAttribute : " . $flags['attribute']);
+    print_r("\n");
+
+    /**
+     * Deletes one warning given its slug.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Flags->deleteOne($flagSlug);
+
+    /**
+     * Prints the api response status.
+     */
+    print_r("\nStatus: " . $response['status']);
+
+}
 
 /**
- * Retrieves a process given its slug.
+ * Creates a new flag.
  */
-$slug     = $response['data']['slug'];
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Flags->getOne($slug);
+    ->Flags->createNew('middle-name-mismatch', 'middle-name');
 
-/**
- * Prints the api response.
- */
-print_r($response);
+if ($response['status'] === true) {
+    /**
+     * Deletes all flags.
+     */
+    $response = $sdk
+        ->Profile($credentials['username'])
+        ->Flags->deleteAll();
 
-/**
- * Deletes one warning given its slug.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Flags->deleteOne($slug);
-
-/**
- * Prints the api response.
- */
-print_r($response);
-
-/**
- * Deletes all flags.
- */
-$response = $sdk
-    ->Profile($credentials['username'])
-    ->Flags->deleteAll();
-
-/**
- * Prints the api response.
- */
-print_r($response);
+    /**
+     * Prints the api response.
+     */
+    print_r("\nDeleteded flags: " . $response['deleted']);
+    print_r("\n");
+}

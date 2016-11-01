@@ -41,7 +41,14 @@ $response = $sdk
 /**
  * Prints the response.
  */
-print_r($response);
+print_r("\nList All:");
+foreach ($response['data'] as $task) {
+    print_r("\nID: " . $task['id']);
+    print_r("\nName: " . $task['name']);
+    print_r("\nEvent: " . $task['event']);
+    print_r("\nSuccess: " . $task['success']);
+    print_r("\n");
+}
 
 /**
  * Creates a new task.
@@ -55,7 +62,12 @@ $response = $sdk
 /**
  * Prints the response.
  */
-print_r($response);
+print_r("\nCreate New: ");
+print_r("\nID: " . $response['data']['id']);
+print_r("\nName: " . $response['data']['name']);
+print_r("\nEvent: " . $response['data']['event']);
+print_r("\nSuccess: " . $response['data']['success']);
+print_r("\n");
 
 /**
  * Updates a task.
@@ -69,20 +81,29 @@ $response = $sdk
 /**
  * Prints the response.
  */
-print_r($response);
+print_r("\nUpdate One: ");
+print_r("\nID: " . $response['data']['id']);
+print_r("\nName: " . $response['data']['name']);
+print_r("\nEvent: " . $response['data']['event']);
+print_r("\nSuccess: " . $response['data']['success']);
+print_r("\n");
+
 
 /**
  * Gets one task.
  */
-$taskId = $response['data']['id'];
-
 $response = $sdk
     ->Profile($credentials['username'])
     ->Process($processId)
     ->Tasks
-    ->getOne($taskId);
+    ->getOne($response['data']['id']);
 
 /**
  * Prints the response.
  */
-print_r($response);
+print_r("\nGet One: ");
+print_r("\nID: " . $response['data']['id']);
+print_r("\nName: " . $response['data']['name']);
+print_r("\nEvent: " . $response['data']['event']);
+print_r("\nSuccess: " . $response['data']['success']);
+print_r("\n");
