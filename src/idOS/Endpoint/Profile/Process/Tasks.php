@@ -82,7 +82,7 @@ class Tasks extends AbstractProcessEndpoint {
         $success,
         $message
     ) {
-        return $this->sendPut(
+        return $this->sendPatch(
             sprintf('/profiles/%s/processes/%s/tasks/%s', $this->userName, $this->processId, $taskId),
             [],
             [

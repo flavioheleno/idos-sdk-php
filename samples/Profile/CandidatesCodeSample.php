@@ -21,50 +21,47 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Creates candidates to be listed in the attributes endpoint.
+ * Creates new candidates.
  * To create a new candidate, its necessary to call the function createNew() passing as parameter the attribute name, the value of the attribute and the support value.
  */
-$email = $sdk
+$emailCandidate = $sdk
     ->Profile($credentials['username'])
     ->Candidates->createNew('email', 'jhon@jhon.com', 0.9);
-$gender = $sdk
+
+$genderCandidate = $sdk
     ->Profile($credentials['username'])
-    ->Candidates->createNew('gender', 'male', 0.8);
+    ->Candidates->createNew('gender', 'male', 0.9);
 
 /**
- * Checks if at least one attribute was created before calling other methods related to the attributes endpoint that requires an existing attribute.
+ * Checks if the candidates were created before calling other methods related to the candidates that requires an existing candidate.
  */
-if (($email['status'] === true) || ($gender['status'] === false)) {
-
+if (($emailCandidate['status'] === true) || ($genderCandidate['status'] === true)) {
     /**
-     * Attributes requires UserToken instead of CredentialToken (that was used to create new Candidates in this sample). So, its necessary to instantiate a new $auth object.
-     * Creates an auth object for a UserToken required in the SDK constructor for calling all endpoints. Passing through the UserToken constructor: the username, credential public key and crecendial private key, so the auth token can be generated.
-     */
-    $auth = new \idOS\Auth\UserToken(
-        $credentials['username'],
-        $credentials['credentialPublicKey'],
-        $credentials['credentialPrivKey']
-    );
-
-    /**
-     * Instantiating the SDK again, now passing the auth object related to the UserToken through the constructor.
-     */
-    $sdk = \idOS\SDK::create($auth);
-
-    /**
-     * Lists all attributes related to the username provided
+     * Lists all candidates related to the username provided.
      */
     $response = $sdk
         ->Profile($credentials['username'])
-        ->Attributes->listAll();
+        ->Candidates->listAll();
 
     /**
-     * Prints api call response to Attributes endpoint
+     * Prints api call response to Candidates endpoint
      */
-    echo 'Attributes:', PHP_EOL;
-
-    foreach ($response['data'] as $attribute) {
-    	print_r($attribute);
+    echo 'Listing all candidates:', PHP_EOL;
+    foreach ($response['data'] as $candidate) {
+        print_r($candidate);
         echo PHP_EOL;
     }
 }
+
+/**
+ * Deletes all candidates related to the username provided.
+ */
+$response = $sdk
+    ->Profile($credentials['username'])
+    ->Candidates->deleteAll();
+
+/**
+ * Prints the number of deleted candidates, information received from the api call response to Candidates endpoint
+ */
+printf('Deleted candidates: %s', $response['deleted']);
+echo PHP_EOL;
