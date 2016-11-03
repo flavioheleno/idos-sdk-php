@@ -38,7 +38,7 @@ class ProcessesTest extends AbstractFunctional {
         $this->assertNotEmpty($response['data']);
         $this->assertSame($processes['data'][0]['id'], $response['data']['id']);
         $this->assertSame('idos:verification', $response['data']['name']);
-        $this->assertSame('idos:source.name-test.created', $response['data']['event']);
+        $this->assertSame('idos:feature.profile.created', $response['data']['event']);
         $this->assertInternalType('integer', $response['data']['created_at']);
     }
 }
