@@ -4,7 +4,9 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * Creates an auth object for a CredentialToken required in the SDK constructor for calling all endpoints. Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
+ * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
     $credentials['credentialPublicKey'],
@@ -13,85 +15,95 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object trought the constructor.
+ * The proper way to call the endpoints is to statically calling the create method of the SDK class.
+ * The static method create($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
  * Creates a new reference.
+ * To create a new reference is necessary to calls the createNew() method passing as parameter the reference name and the reference value.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->References->createNew('reference', 'value');
 
+/**
+ * Checks if the reference was created before calling other methods related to the references that requires an existing reference.
+ */
 if ($response['status'] === true) {
 
     /**
-     * Calling the Profile Endpoint passing the username, and after that, the References Endpoint and the method listAll.
+     * Lists all references related to the provided username.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->References->listAll();
 
     /**
-     * Prints the response.
+     * Prints api call response to References endpoint
      */
+    echo 'List All:', PHP_EOL;
     foreach ($response['data'] as $reference) {
-        print_r("\nName: " . $reference['name']);
-        print_r("\nValue: " . $reference['value']);
-        print_r("\n");
+        print_r($reference);
+        echo PHP_EOL;
     }
 
     /**
-     * Updates a reference.
+     * Updates the created reference passing as parameter the reference's name and the new reference value.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->References->updateOne('reference', 'new-value');
 
     /**
-     * Prints the response.
+     * Prints api call response to References endpoint.
      */
-    print_r("\nName: " . $response['data']['name']);
-    print_r("\nValue: " . $response['data']['value']);
-    print_r("\n");
+    echo 'Update One:' , PHP_EOL;
+    print_r($response['data']);
+    echo PHP_EOL;
 
     /**
-     * Retrieves the reference updated.
+     * Retrieves information of the reference updated given the reference name.
      */
     $response = $sdk
         ->Profile($credentials['username'])
-        ->References->getOne($response['data']['name']);
+        ->References->getOne('reference');
 
     /**
-     * Prints the response.
+     * Prints api call response to References endpoint.
      */
-    print_r("\nName: " . $response['data']['name']);
-    print_r("\nValue: " . $response['data']['value']);
-    print_r("\n");
+    echo 'Get One :', PHP_EOL;
+    print_r($response['data']);
+    echo PHP_EOL;
+
     /**
-     * Deletes the reference created/updated.
+     * Deletes the reference given the reference name.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->References->deleteOne($response['data']['name']);
+
     /**
-     * Prints the response status.
+     * Prints the status of the call response to References endpoint
      */
-    print_r("\nStatus: " . $response['status']);
-    print_r("\n");
+    printf('Status: %s', $response['status']);
+    echo PHP_EOL;
 }
 
 /**
- * Creates a new reference.
+ * To avoid the number of deleted references to be equal to 0, the first thing is to create a new reference, calling the createNew() method passing as parameter the the reference's name and the reference's value;
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->References->createNew('reference', 'value');
 
+/**
+ * Checks if the reference was created before calling other methods related to the references that requires an existing reference.
+ */
 if ($response['status'] === true) {
     /**
-     * Deletes all references.
+     * Deletes all references related to the provided username.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -100,6 +112,6 @@ if ($response['status'] === true) {
     /**
      * Prints the number of deleted references.
      */
-    print_r("\nDeleted references: " . $response['deleted']);
-    print_r("\n");
+    printf('Deleted references: %d', $response['deleted']);
+    echo PHP_EOL;
 }

@@ -4,7 +4,9 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * Creates an auth object for a CredentialToken required in the SDK constructor for calling all endpoints. Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
+ * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
     $credentials['credentialPublicKey'],
@@ -13,88 +15,95 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object trought the constructor.
+ * The proper way to call the endpoints is to statically calling the create method of the SDK class.
+ * The static method create($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Creates or updates a new score.
+ * Creates or updates a score.
+ * The upsertOne method checks if the score already exists on the database, if so, it updates it. Otherwise, it creates a new score.
+ * To create or update a score is necessary to call the method upsertOne() passing as parameter the attribute name, the score name and the score value.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Scores->upsertOne('firstName', 'Jhon', 0.6);
 
-
+/**
+ * Checks if the score was created before calling other methods related to the scores endpoint that requires an existing score.
+ */
 if ($response['status'] === true) {
     /**
-     * Calling the Profile Endpoint passing the username, and after that, the Scores Endpoint and the method listAll.
+     * Lists all scores related to the provided username.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->Scores->listAll();
 
     /**
-     * Prints the response.
+     * Prints api call response to Scores endpoint
      */
+    echo 'List All: ', PHP_EOL;
     foreach ($response['data'] as $score) {
-        print_r("\nAttribute: " . $score['attribute']);
-        print_r("\nName: " . $score['name']);
-        print_r("\nValue: " . $score['value']);
-        print_r("\n");
+        print_r($score);
+        echo PHP_EOL;
     }
 
     /**
-     * Updates a score.
+     * Updates the score created passing as parameter the attribute name of the score created, the new score name, and the new score value.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->Scores->updateOne('firstName', 'Jhon', 0.3);
 
     /**
-     * Prints the new value.
+     * Prints api call response to Scores endpoint
      */
-    print_r("\nUpdated value: " . $response['data']['value']);
-    print_r("\n");
+    echo 'Update one:', PHP_EOL;
+    print_r($response['data']);
+    echo PHP_EOL;
+
     /**
-     * Calls the get one method.
+     * Retrieves information of the score created/updated giving the score's name as parameter to the getOne method.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->Scores->getOne('Jhon');
 
     /**
-     * Prints the response.
+     * Prints api call response to Scores endpoint
      */
-    print_r("\nAttribute: " . $response['data']['attribute']);
-    print_r("\nName: " . $response['data']['name']);
-    print_r("\nValue: " . $response['data']['value']);
-    print_r("\n");
+    echo 'Get One:', PHP_EOL;
+    print_r($response['data']);
+    echo PHP_EOL;
 
     /**
-     * Deletes the score created/updated.
+     * Deletes the score created giving the created score's name as parameter to the deleteOne method.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->Scores->deleteOne('Jhon');
 
     /**
-     * Prints the response status.
+     * Prints the status of the call response to Scores endpoint
      */
-    print_r("\nStatus: " . $response['status']);
-    print_r("\n");
+    printf('Status: %s', $response['status']);
+    echo PHP_EOL;
 }
 
 /**
- * Creates a new score.
+ * To avoid the number of deleted scores to be equal to 0, the first thing is to create a new score, calling the createNew() method passing as parameter the attribute's name, the score's name and the score's value.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Scores->createNew('firstName', 'Jhon', 0.6);
 
-
+/**
+ * Checks if the score was created before calling other methods related to the scores endpoint that requires an existing score.
+ */
 if ($response['status'] === true) {
     /**
-     * Deletes all scores.
+     * Deletes all scores related to the provided username.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -103,6 +112,6 @@ if ($response['status'] === true) {
     /**
      * Prints the number of deleted scores.
      */
-    print_r("\nDeleted scores: " . $response['deleted']);
-    print_r("\n");
+    printf('Deleted scores: %s', $response['deleted']);
+    echo PHP_EOL;
 }

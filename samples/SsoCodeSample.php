@@ -4,47 +4,48 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/settings.php';
 
 /**
- * For SSO no header Authorization is necessary.
+ * For SSO no header Authorization is necessary, in that way, the None Class need to be instantiated to be used on creating the $sdk object.
  */
 $auth = new \idOS\Auth\None();
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object trought the constructor.
+ * The proper way to call the endpoints is to statically calling the create method of the SDK class.
+ * The static method create($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all processes.
+ * Lists all available providers for the sso
  */
 $response = $sdk
     ->Sso
     ->listAll();
 
 /**
- * Prints the api response.
+ * Prints api call response to SSO endpoint
  */
-print_r("\nList of providers: ");
+echo 'List of providers: ';
 
 foreach ($response['data'] as $provider) {
-	print_r($provider . "; ");
+	printf("%s; ", $provider);
 }
-
-print_r("\n");
+echo PHP_EOL;
 
 /**
- * Retrieves the facebook provider.
+ * Retrieves data from one provider, passing the name of the provider. In this example, facebook.
  */
 $response = $sdk
     ->Sso
     ->getOne('facebook');
 
 /**
- * Prints boolean value if enabled or not.
+ * Prints api call response to SSO endpoint
  */
-print_r("\nEnabled: " . $response['data']['enabled']);
-print_r("\n");
+printf("Enabled: %s", $response['data']['enabled']);
+echo PHP_EOL;
+
 /**
- * Creates a facebook sso.
+ * Creates an OAuth2 type sso.
  *
  * Note: You should replace "accessToken" with a valid Facebook access token.
  */
@@ -53,14 +54,14 @@ $response = $sdk
     ->createNew('facebook', $credentials['credentialPublicKey'], 'userToken');
 
 /**
- * Prints the username and the user token.
+ * Prints api call response to SSO endpoint
  */
-print_r("\nFACEBOOK:");
-print_r("\nUsername: " . $response['data']['username']);
-print_r("\nUser token: " . $response['data']['user_token']);
-print_r("\n");
+echo 'FACEBOOK:', PHP_EOL;
+print_r($response['data']);
+echo PHP_EOL;
+
 /**
- * Creates a twitter sso.
+ * Creates an OAuth1 type SSO, passing the name of the provider, the credential public key, the user access token and the token secret.
  *
  * Note: You should replace "accessToken" and "tokenSecret" with a valid Twitter access token / token secret.
  */
@@ -69,9 +70,8 @@ $response = $sdk
     ->createNew('twitter', $credentials['credentialPublicKey'], 'userToken', 'tokenSecret');
 
 /**
- * Prints the username and the user token.
+ * Prints api call response to SSO endpoint.
  */
-print_r("\nTWITTER:");
-print_r("\nUsername: " . $response['data']['username']);
-print_r("\nUser token: " . $response['data']['user_token']);
-print_r("\n");
+echo 'TWITTER:', PHP_EOL;
+print_r($response['data']);
+echo PHP_EOL;

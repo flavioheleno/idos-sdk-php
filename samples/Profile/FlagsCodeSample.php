@@ -4,7 +4,9 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * Creates an auth object for a CredentialToken required in the SDK constructor for calling all endpoints. Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
+ * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
     $credentials['credentialPublicKey'],
@@ -13,20 +15,25 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object trought the constructor.
+ * The proper way to call the endpoints is to statically calling the create method of the SDK class.
+ * The static method create($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
  * Creates a new flag.
+ * To create a new flag is necessary to call the createNew() method passing as parameter the name of the flag and the attribute name.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Flags->createNew('middle-name-mismatch', 'middle-name');
 
+/**
+ * Checks if at least one flag was created before calling other methods related to the flags endpoint that requires an existing flag.
+ */
 if ($response['status'] === true) {
     /**
-     * Saves the id of the flag created
+     * Stores the flag slug of the 'middle-name-mismatch' flag created.
      */
     $flagSlug = $response['data']['slug'];
 
@@ -38,62 +45,64 @@ if ($response['status'] === true) {
         ->Flags->listAll();
 
     /**
-     * Prints the api response.
+     * Prints api call response to Flags endpoint
      */
+    echo 'List All: ', PHP_EOL;
     foreach ($response['data'] as $flags) {
-        print_r("\nID: " . $flags['id']);
-        print_r("\nSlug: " . $flags['slug']);
-        print_r("\nAttribute : " . $flags['attribute']);
-        print_r("\n");
+        print_r($flags);
+        echo PHP_EOL;
     }
 
     /**
-     * Retrieves a process given its slug.
+     * Retrieves information about the flag created passing as parameter the stored $flagSlug.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->Flags->getOne($flagSlug);
 
     /**
-     * Prints the api response.
+     * Prints api call response to Flags endpoint
      */
-    print_r("\nID: " . $flags['id']);
-    print_r("\nSlug: " . $flags['slug']);
-    print_r("\nAttribute : " . $flags['attribute']);
-    print_r("\n");
+    echo 'Get One: ', PHP_EOL;
+    print_r($response['data']);
+    echo PHP_EOL;
 
     /**
-     * Deletes one warning given its slug.
+     * Deletes the flag retrieved passing as parameter the stored $flagSlug.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->Flags->deleteOne($flagSlug);
 
     /**
-     * Prints the api response status.
+     * Prints the status of the call response to Flags endpoint
      */
-    print_r("\nStatus: " . $response['status']);
+    printf('Status: %s', $response['status']);
+    echo PHP_EOL;
 
 }
 
 /**
- * Creates a new flag.
+ * To avoid the number of deleted flags to be equal to 0, the first thing is to create a new flag, calling the createNew() method passing as parameter the name of the flag and the attribute name.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Flags->createNew('middle-name-mismatch', 'middle-name');
 
+/**
+ * Checks if the flag was created before calling other methods related to the flags endpoint that requires an existing flag.
+ */
 if ($response['status'] === true) {
     /**
-     * Deletes all flags.
+     * Deletes all flags related to the username provided.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->Flags->deleteAll();
 
     /**
-     * Prints the api response.
+     * Prints the number of deleted flags retrieved from the call response to Flags endpoint
      */
-    print_r("\nDeleteded flags: " . $response['deleted']);
-    print_r("\n");
+    printf('Deleteded flags: %s', $response['deleted']);
+    echo PHP_EOL;
 }

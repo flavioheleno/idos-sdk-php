@@ -4,7 +4,9 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * Creates an auth object for a CredentialToken required in the SDK constructor for calling all endpoints. Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
+ * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
     $credentials['credentialPublicKey'],
@@ -13,38 +15,42 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * Calls the create method that instantiates the SDK passing the auth object trought the constructor.
+ * The proper way to call the endpoints is to statically calling the create method of the SDK class.
+ * The static method create($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all processes for the given username.
+ * Lists all processes related to the provided username.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Processes->listAll();
 
 /**
- * Prints the api response.
+ * Prints api call response to Processes endpoint
  */
+echo 'List All:', PHP_EOL;
 foreach ($response['data'] as $process) {
-	print_r("\nID: " . $process['id']);
-	print_r("\nName: " . $process['name']);
-	print_r("\nEvent: " . $process['event']);
-	print_r("\n");
+	print_r($process);
+    echo PHP_EOL;
 }
 
 /**
- * Retrieves a process.
+ * Stores the process id of the first index of the api call response.
+ */
+$processId = $response['data'][0]['id'];
+
+/**
+ * Retrieves information about the process related to the stored $processId.
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Processes->getOne($response['data'][0]['id']);
+    ->Processes->getOne($processId);
 
 /**
- * Prints the api response.
+ * Prints api call response to Processes endpoint
  */
-print_r("\nID: " . $process['id']);
-print_r("\nName: " . $process['name']);
-print_r("\nEvent: " . $process['event']);
-print_r("\n");
+echo 'Get One:', PHP_EOL;
+print_r($response['data']);
+echo PHP_EOL;
