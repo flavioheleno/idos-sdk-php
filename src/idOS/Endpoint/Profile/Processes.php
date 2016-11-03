@@ -13,7 +13,7 @@ class Processes extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function listAll($filters = []) {
+    public function listAll(array $filters = []) {
         return $this->sendGet(
             sprintf('/profiles/%s/processes', $this->userName),
             $filters
