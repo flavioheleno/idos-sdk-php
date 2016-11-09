@@ -51,7 +51,7 @@ echo PHP_EOL;
  */
 $response = $sdk
     ->Sso
-    ->createNew('facebook', $credentials['credentialPublicKey'], 'userToken');
+    ->createNew('facebook', $credentials['credentialPublicKey'], 'accessToken');
 
 /**
  * Prints api call response to SSO endpoint
@@ -60,14 +60,14 @@ echo 'FACEBOOK:', PHP_EOL;
 print_r($response['data']);
 echo PHP_EOL;
 
-/**
- * Creates an OAuth1 type SSO, passing the name of the provider, the credential public key, the user access token and the token secret.
- *
- * Note: You should replace "accessToken" and "tokenSecret" with a valid Twitter access token / token secret.
- */
+	/**
+	 * Creates an OAuth1 type SSO, passing the name of the provider, the credential public key, the user access token and the token secret.
+	 *
+	 * Note: You should replace "accessToken" and "tokenSecret" with a valid Twitter access token / token secret.
+	 */
 $response = $sdk
     ->Sso
-    ->createNew('twitter', $credentials['credentialPublicKey'], 'userToken', 'tokenSecret');
+    ->createNew('twitter', $credentials['credentialPublicKey'], 'accessToken', 'tokenSecret');
 
 /**
  * Prints api call response to SSO endpoint.

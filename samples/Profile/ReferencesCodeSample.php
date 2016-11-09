@@ -22,7 +22,7 @@ $sdk = \idOS\SDK::create($auth);
 
 /**
  * Creates a new reference.
- * To create a new reference is necessary to calls the createNew() method passing as parameter the reference name and the reference value.
+ * To create a new reference is necessary to call the createNew() method passing as parameter the reference name and the reference value.
  */
 $response = $sdk
     ->Profile($credentials['username'])

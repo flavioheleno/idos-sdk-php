@@ -98,7 +98,7 @@ if ($response['status'] === true) {
         ->Gates->deleteAll();
 
     /**
-     * Prints the number of deleted candidates, information received from the api call response to Candidates endpoint
+     * Prints the number of deleted gates, information received from the api call response to Gates endpoint
      */
     printf('Deleted gates: %s', $response['deleted']);
     echo PHP_EOL;
