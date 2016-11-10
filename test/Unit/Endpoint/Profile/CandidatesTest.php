@@ -82,10 +82,18 @@ class CandidatesTest extends AbstractUnitTest {
         /**
          * Calls the listAll() method.
          */
+
         $response = $this->candidates->listAll();
 
+        /**
+         * Assertions
+         */
+        $this->assertNotEmpty($response);
+        $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
+        $this->assertArrayHasKey('data', $response);
         $this->assertNotEmpty($response['data']);
+
         foreach ($response['data'] as $candidate) {
         	$this->assertArrayHasKey('attribute', $candidate);
         	$this->assertArrayHasKey('value', $candidate);
@@ -126,26 +134,21 @@ class CandidatesTest extends AbstractUnitTest {
          */
         $response = $this->candidates->createNew('firstName', 'Jhon', 0.6);
 
+        /**
+         * Assertions
+         */
+        $this->assertNotEmpty($response);
+        $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
-        $this->assertNotEmpty($response['data']);
-        $this->assertArrayHasKey('attribute', $response['data']);
+        $this->assertArrayHasKey('data', $response);
+        $this->assertNotEmpty($response['data']);        $this->assertArrayHasKey('attribute', $response['data']);
         $this->assertSame($response['data']['attribute'], $array['data']['attribute']);
         $this->assertArrayHasKey('value', $response['data']);
         $this->assertSame($response['data']['value'], $array['data']['value']);
         $this->assertArrayHasKey('support', $response['data']);
         $this->assertSame($response['data']['support'], $array['data']['support']);
-        $this->assertTrue(is_int($response['data']['created_at']));
-        $this->assertTrue(is_int($response['data']['updated_at']));
-    }
-
-    /**
-     * @expectedException TypeError
-     */
-    public function testCreateNewInvalidParameters() {
-        /**
-         * Calls the createNew() method.
-         */
-        $response = $this->candidates->createNew('firstName', 'Jhon', 'invalidSupportValue');
+        $this->assertInternalType('int', $response['data']['created_at']);
+        $this->assertInternalType('int', $response['data']['updated_at']);
     }
 
     public function testDeleteAll() {
@@ -170,8 +173,16 @@ class CandidatesTest extends AbstractUnitTest {
             ->method('request')
             ->will($this->returnValue($this->httpResponse));
 
+        /**
+         * Calls the deleteAll() method
+         */
         $response = $this->candidates->deleteAll();
 
+        /**
+         * Assertions
+         */
+        $this->assertNotEmpty($response);
+        $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
         $this->assertArrayHasKey('deleted', $response);
         $this->assertEquals(2, $response['deleted']);

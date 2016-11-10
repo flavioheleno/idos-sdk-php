@@ -20,9 +20,9 @@ class FeaturesTest extends AbstractUnitTest {
             ->getMock();
 
         /**
-         * UserToken instance to instantiate the idOS\SDK Class.
+         * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\UserToken(
+        $this->auth = new \idOS\Auth\CredentialToken(
             $this->credentials['userName'],
             $this->credentials['credentialPublicKey'],
             $this->credentials['credentialPrivKey']
@@ -69,20 +69,28 @@ class FeaturesTest extends AbstractUnitTest {
          * Calls the listAll() method.
          */
         $response = $this->features->listAll();
+
+        /**
+         * Assertions
+         */
+        $this->assertNotEmpty($response);
+        $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
-        $this->assertArrayHasKey('name', $array['data'][0]);
-        $this->assertSame('test1', $array['data'][0]['name']);
-        $this->assertArrayHasKey('creator', $array['data'][0]);
-        $this->assertNotEmpty($array['data'][0]['creator']);
-        $this->assertContainsOnly('string', $array['data'][0]['creator']);
-        $this->assertSame('creator.test', $array['data'][0]['creator'][0]);
-        $this->assertArrayHasKey('type', $array['data'][0]);
-        $this->assertSame('type', $array['data'][0]['type']);
-        $this->assertArrayHasKey('value', $array['data'][0]);
-        $this->assertSame('value', $array['data'][0]['value']);
-        $this->assertArrayHasKey('source', $array['data'][0]);
-        $this->assertSame('test', $array['data'][0]['source']);
-        $this->assertTrue(is_int($response['data'][0]['created_at']));
-        $this->assertTrue(is_int($response['data'][0]['updated_at']));
+        $this->assertArrayHasKey('data', $response);
+        $this->assertNotEmpty($response['data']);
+        $this->assertArrayHasKey('name', $response['data'][0]);
+        $this->assertSame('test1', $response['data'][0]['name']);
+        $this->assertArrayHasKey('creator', $response['data'][0]);
+        $this->assertNotEmpty($response['data'][0]['creator']);
+        $this->assertContainsOnly('string', $response['data'][0]['creator']);
+        $this->assertSame('creator.test', $response['data'][0]['creator'][0]);
+        $this->assertArrayHasKey('type', $response['data'][0]);
+        $this->assertSame('type', $response['data'][0]['type']);
+        $this->assertArrayHasKey('value', $response['data'][0]);
+        $this->assertSame('value', $response['data'][0]['value']);
+        $this->assertArrayHasKey('source', $response['data'][0]);
+        $this->assertSame('test', $response['data'][0]['source']);
+        $this->assertInternalType('int', $response['data'][0]['created_at']);
+        $this->assertInternalType('int', $response['data'][0]['updated_at']);
     }
 }

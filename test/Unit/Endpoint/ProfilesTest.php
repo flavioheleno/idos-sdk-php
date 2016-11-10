@@ -74,7 +74,7 @@ class ProfilesTest extends AbstractUnitTest {
         $this->assertNotEmpty($response['data']);
         $this->assertArrayHasKey('userName', $response['data']);
         $this->assertSame($response['data']['userName'], 'user');
-        $this->assertTrue(is_int($response['data']['created_at']));
-        $this->assertTrue(is_int($response['data']['updated_at']));
+        $this->assertInternalType('int', $response['data']['created_at']);
+        $this->assertInternalType('int', $response['data']['updated_at']);
     }
 }

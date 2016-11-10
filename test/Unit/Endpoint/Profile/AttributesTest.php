@@ -76,10 +76,19 @@ class AttributesTest extends AbstractUnitTest {
          */
         $response = $this->attributes->listAll();
 
-        $this->assertTrue(is_int($response['data'][0]['created_at']));
-        $this->assertTrue(is_int($response['data'][0]['updated_at']));
-        $this->assertTrue(is_int($response['data'][1]['created_at']));
-        $this->assertTrue(is_int($response['data'][1]['updated_at']));
+        $this->assertNotEmpty($response);
+        $this->assertArrayHasKey('status', $response);
+        $this->assertTrue($response['status']);
+        $this->assertArrayHasKey('data', $response);
+        $this->assertNotEmpty($response['data']);
+        $this->assertArrayHasKey('userName', $response['data'][0]);
+        $this->assertSame('user1', $response['data'][0]['userName']);
+        $this->assertInternalType('int', $response['data'][0]['created_at']);
+        $this->assertInternalType('int', $response['data'][0]['updated_at']);
+        $this->assertArrayHasKey('userName', $response['data'][1]);
+        $this->assertSame('user2', $response['data'][1]['userName']);
+        $this->assertInternalType('int', $response['data'][1]['created_at']);
+        $this->assertInternalType('int', $response['data'][1]['updated_at']);
     }
 }
 
