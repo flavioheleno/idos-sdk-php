@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Unit\idOS\Endpoint\Profile;
+namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\idOS\AbstractUnitTest;
+use Test\Unit\AbstractUnitTest;
 use idOS\Endpoint\Profile\Features;
 
 class FeaturesTest extends AbstractUnitTest {

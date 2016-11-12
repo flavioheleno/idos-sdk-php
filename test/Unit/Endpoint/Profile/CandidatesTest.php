@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Unit\idOS\Endpoint\Profile;
+namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\idOS\AbstractUnitTest;
+use Test\Unit\AbstractUnitTest;
 use idOS\Endpoint\Profile\Candidates;
 /**
  * CandidatesTest Class tests all methods from the Candidates Class.

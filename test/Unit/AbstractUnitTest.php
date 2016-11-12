@@ -1,8 +1,10 @@
 <?php
 
-namespace Test\Unit\idOS;
+namespace Test\Unit;
 
-
+/**
+ * Abstract Class (Base for all unit tests).
+ */
 abstract class AbstractUnitTest extends \PHPUnit_Framework_TestCase {
 	protected $sdk;
 	protected $auth;

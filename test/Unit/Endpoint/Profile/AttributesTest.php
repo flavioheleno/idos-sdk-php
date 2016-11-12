@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Unit\idOS\Endpoint\Profile;
+namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\idOS\AbstractUnitTest;
+use Test\Unit\AbstractUnitTest;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Attributes;
 use idOS\Section\Profile;

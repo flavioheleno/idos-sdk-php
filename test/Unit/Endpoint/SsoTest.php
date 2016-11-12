@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Unit\idOS\Endpoint;
+namespace Test\Unit\Endpoint;
 
-use Test\Unit\idOS\AbstractUnitTest;
+use Test\Unit\AbstractUnitTest;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Sso;
 
