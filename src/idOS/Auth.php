@@ -47,6 +47,10 @@ class Auth {
      * The identity token
      */
     private $identityToken;
+    /**
+     * The handler token
+     */
+    private $handlerToken;
 
     /**
      * Constructor Class
@@ -148,11 +152,19 @@ class Auth {
     }
 
     /**
+     * Returns the handler token
+     * @return string handlerToken
+     */
+    public function getHandlerToken() : string {
+        return $this->handlerToken;
+    }
+
+    /**
      * Returns the identity token
      * @return string identityToken
      */
     public function getIdentityToken() : string {
-        return $this->identityToken;o
+        return $this->identityToken;
     }
 
     /**
@@ -163,18 +175,11 @@ class Auth {
         switch ($this->authType) {
             case self::CREDENTIAL:
                 return sprintf('CredentialToken %s', $this->getCredentialToken());
-            case self::USER:
-                return sprintf('UserToken %s', $this->getUserToken());
+            case self::HANDLER:
+                return sprintf('HandlerToken %s', $this->getHandlerToken());
             case self::IDENTITY:
                 return sprintf('IdentityToken %s', $this->getIdentityToken());
         }
-
-        throw new \RuntimeException(
-            sprintf(
-                'Invalid auth type "%d"',
-                $this->authType
-            )
-        );
     }
 
     /**
@@ -185,17 +190,10 @@ class Auth {
         switch ($this->authType) {
             case self::CREDENTIAL:
                 return sprintf('credentialToken=%s', $this->getCredentialToken());
-            case self::USER:
-                return sprintf('userToken=%s', $this->getUserToken());
+            case self::HANDLER:
+                return sprintf('handlerToken=%s', $this->getHandlerToken());
             case self::IDENTITY:
                 return sprintf('identityToken=%s', $this->getIdentityToken());
         }
-
-        throw new \RuntimeException(
-            sprintf(
-                'Invalid auth type "%d"',
-                $this->authType
-            )
-        );
     }
 }
