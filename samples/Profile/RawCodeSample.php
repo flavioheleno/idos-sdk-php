@@ -4,8 +4,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
- * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * To instantiate the $sdk object, which is responsible for calling the endpoints, it is necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They relate to the type of authorization required by the endpoint.
  * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
@@ -15,13 +15,13 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * The proper way to call the endpoints is to statically calling the create method of the SDK class.
- * The static method create($auth) creates a new instance of the SDK class.
+ * The correct way to call the endpoints is by statically calling the create method of the SDK class.
+ * The static create method($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * To create a new raw, a source id is necessary. Therefore, before creating a new source to be used to create a new raw, all sources relateded to the username provided, is deleted to avoid creating a repeated feature.
+ * To create a new raw, a source id is necessary. Before creating a new source to be used to create a new raw, all sources related to the username provided, are deleted to avoid creating a repeated feature.
  */
 $sdk
     ->Profile($credentials['username'])
@@ -41,7 +41,7 @@ $sourceId = $source['data']['id'];
 
 /**
  * Creates a new raw.
- * To create a new raw, its necessary to call the createNew() method passing as parameter the stored $sourceId, the collection's name, and the data array.
+ * To create a new raw, it is necessary to call the createNew() method passing the stored $sourceId, the collection's name, and the data array as a parameter.
  */
 $rawSample1 = $sdk
     ->Profile($credentials['username'])
@@ -51,7 +51,7 @@ $rawSample2 = $sdk
     ->Raw->createNew($sourceId, 'name-test-2', ['data-1' => [4, 5, 6], 'data-2' => [1, 2, 3]]);
 
 /**
- * Checks if at least one raw was created before calling other methods related to the raw endpoint that requires an existing raw.
+ * Checks if at least one raw was created before calling other methods related to the raw endpoint (requires an existing raw).
  */
 if (($rawSample1['status'] === true) || ($rawSample2['status'] === true)) {
     /**

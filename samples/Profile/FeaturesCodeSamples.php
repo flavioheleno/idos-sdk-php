@@ -4,8 +4,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
- * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * To instantiate the $sdk object, which is responsible for calling the endpoints, it is necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They relate to the type of authorization required by the endpoint.
  * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
@@ -15,14 +15,14 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * The proper way to call the endpoints is to statically calling the create method of the SDK class.
- * The static method create($auth) creates a new instance of the SDK class.
+ * The correct way to call the endpoints is by statically calling the create method of the SDK class.
+ * The static create method($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * To create a new feature, its necessary to provide the sourceId where the feature to be created is related to this id.
- * In this example, all sources is deleted to avoid creating a repeated source.
+ * To create a new feature, it is necessary to provide the sourceId where the feature to be created is related to this id.
+ * In this example, all sources are deleted to avoid creating a repeated source.
  */
 $sdk
     ->Profile($credentials['username'])
@@ -49,7 +49,7 @@ $sdk
 
 /**
  * Creates new features.
- * To create a new feature, its necessary to call the createNew() method passing as parameter the source id, the feature name, the feature value and finally, the type of the feature value.
+ * To create a new feature, it is necessary to call the createNew() method passing the source id, the feature name, the feature value and the type of the feature value as a parameter.
  */
 $featureSample1 = $sdk
     ->Profile($credentials['username'])
@@ -65,7 +65,7 @@ $featureSample2 = $sdk
 $featureId = $featureSample1['data']['id'];
 
 /**
- * Checks if at least one feature was created before calling other methods related to the features endpoint that requires an existing feature.
+ * Checks if at least one feature was created before calling other methods related to the features endpoint (requires an existing feature).
  */
 if (($featureSample1['status'] === true) || ($featureSample2['status'] === true)) {
     /**
@@ -85,7 +85,7 @@ if (($featureSample1['status'] === true) || ($featureSample2['status'] === true)
     }
 
     /**
-     * Updates the featureSample1 passing as parameter the feature id, the new feature value and the type of the new value.
+     * Updates the featureSample1, passing the feature id, the new feature value and the type of the new value as a parameter.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -102,14 +102,14 @@ if (($featureSample1['status'] === true) || ($featureSample2['status'] === true)
 /**
  * Creates or updates a feature.
  * The upsertOne method checks if the feature already exists on the database, if so, it updates it. Otherwise, it creates a new feature.
- * To create or update a feature is necessary to call the method upsertOne() passing as parameter the source id, the name of the feature, the value of the feature and finally the type of the new value.
+ * To create or update a feature it is necessary to call the method upsertOne() passing the source id, the name of the feature, the value of the feature and the type of the new value as a parameter.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Features->upsertOne($sourceId, 'name-test-1', 'value-test-1', 'string');
 
 /**
- * Checks if the feature was created before calling other methods related to the features endpoint that requires an existing feature.
+ * Checks if the feature was created before calling other methods related to the features endpoint (requires an existing feature).
  */
 if ($response['status'] === true) {
 
@@ -131,7 +131,7 @@ if ($response['status'] === true) {
 /**
  * Creates or updates more than one feature once
  * The upsertBulk works pretty the same as the upsertOne, except it allows to create/update more than one feature once.
- * To create or update more than one feature once, is necessary to call the method upsertBulk() passing as parameter an array as parameter, and for each index, it must contain the source id, the name of the feature, the value of the feature and the type of the new value.
+ * To create or update more than one feature once, it is necessary to call the method upsertBulk() passing an array as parameter, and for each index, it must contain the source id, the name of the feature, the value of the feature and the type of the new value.
  */
 $sdk
     ->Profile($credentials['username'])

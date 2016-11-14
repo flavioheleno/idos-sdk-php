@@ -4,7 +4,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/settings.php';
 
 /**
- * For SSO no header Authorization is necessary, in that way, the None Class need to be instantiated to be used on creating the $sdk object.
+ * To instantiate the $sdk object, which is responsible for calling the endpoints, it is necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They relate to the type of authorization required by the endpoint.
+ * For SSO, no header Authorization is necessary, in that way, the None Class need to be instantiated to instantiate the $sdk object.
  */
 $auth = new \idOS\Auth\None();
 
@@ -15,24 +17,7 @@ $auth = new \idOS\Auth\None();
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all available providers for the sso.
- */
-$response = $sdk
-    ->Sso
-    ->listAll();
-
-/**
- * Prints api call response to SSO endpoint.
- */
-echo 'List of providers: ';
-
-foreach ($response['data'] as $provider) {
-    printf('%s; ', $provider);
-}
-echo PHP_EOL;
-
-/**
- * Retrieves data from one provider, passing the name of the provider. In this example, facebook.
+ * Checks if a provider is enabled, passing the name of the provider as parameter.
  */
 $response = $sdk
     ->Sso
@@ -45,7 +30,7 @@ printf('Enabled: %s', $response['data']['enabled']);
 echo PHP_EOL;
 
 /**
- * Creates an OAuth2 type sso.
+ * Creates an OAuth2 type SSO, passing as parameter: the name of the provider, the credential public key, and the user access token.
  *
  * Note: You should replace "accessToken" with a valid Facebook access token.
  */
@@ -61,7 +46,7 @@ print_r($response['data']);
 echo PHP_EOL;
 
 /**
- * Creates an OAuth1 type SSO, passing the name of the provider, the credential public key, the user access token and the token secret.
+ * Creates an OAuth1 type SSO, passing as parameter: the name of the provider, the credential public key, the user access token and the token secret.
  *
  * Note: You should replace "accessToken" and "tokenSecret" with a valid Twitter access token / token secret.
  */

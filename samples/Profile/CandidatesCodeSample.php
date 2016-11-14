@@ -4,8 +4,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
- * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * To instantiate the $sdk object, which is responsible for calling the endpoints, it is necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They relate to the type of authorization required by the endpoint.
  * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
@@ -15,14 +15,14 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * The proper way to call the endpoints is to statically calling the create method of the SDK class.
- * The static method create($auth) creates a new instance of the SDK class.
+ * The correct way to call the endpoints is by statically calling the create method of the SDK class.
+ * The static create method($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
  * Creates new candidates.
- * To create a new candidate, its necessary to call the function createNew() passing as parameter the attribute name, the value of the attribute and the support value.
+ * To create a new candidate, it is necessary to call the createNew() function, passing the attribute name, the value of the attribute and the support value as a parameter.
  */
 $emailCandidate = $sdk
     ->Profile($credentials['username'])
@@ -33,7 +33,7 @@ $genderCandidate = $sdk
     ->Candidates->createNew('gender', 'male', 0.9);
 
 /**
- * Checks if the candidates were created before calling other methods related to the candidates that requires an existing candidate.
+ * Checks if the candidates were created before calling other methods related to the candidates ( requires an existing candidate).
  */
 if (($emailCandidate['status'] === true) || ($genderCandidate['status'] === true)) {
     /**

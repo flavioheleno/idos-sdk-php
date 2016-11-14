@@ -4,8 +4,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
- * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * To instantiate the $sdk object, which is responsible for calling the endpoints, it is necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They relate to the type of authorization required by the endpoint.
  * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
@@ -15,21 +15,21 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * The proper way to call the endpoints is to statically calling the create method of the SDK class.
- * The static method create($auth) creates a new instance of the SDK class.
+ * The correct way to call the endpoints is by statically calling the create method of the SDK class.
+ * The static create method($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
  * Creates a new reference.
- * To create a new reference is necessary to call the createNew() method passing as parameter the reference name and the reference value.
+ * To create a new reference it is necessary to call the createNew() method passing the reference name and the reference value as a parameter.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->References->createNew('reference', 'value');
 
 /**
- * Checks if the reference was created before calling other methods related to the references that requires an existing reference.
+ * Checks if the reference was created before calling other methods related to the references (requires an existing reference).
  */
 if ($response['status'] === true) {
 
@@ -50,7 +50,7 @@ if ($response['status'] === true) {
     }
 
     /**
-     * Updates the created reference passing as parameter the reference's name and the new reference value.
+     * Updates the created reference passing the reference's name and the new reference value as a parameter.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -64,7 +64,7 @@ if ($response['status'] === true) {
     echo PHP_EOL;
 
     /**
-     * Retrieves information of the reference updated given the reference name.
+     * Retrieves information on the updated reference by the given reference name.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -78,7 +78,7 @@ if ($response['status'] === true) {
     echo PHP_EOL;
 
     /**
-     * Deletes the reference given the reference name.
+     * Deletes the reference by the given reference name.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -92,14 +92,14 @@ if ($response['status'] === true) {
 }
 
 /**
- * To avoid the number of deleted references to be equal to 0, the first thing is to create a new reference, calling the createNew() method passing as parameter the the reference's name and the reference's value;.
+ * To avoid the number of deleted references equalling 0, the first thing is to create a new reference, calling the createNew() method passing the the reference's name and the reference's value  as a parameter;.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->References->createNew('reference', 'value');
 
 /**
- * Checks if the reference was created before calling other methods related to the references that requires an existing reference.
+ * Checks if the reference was created before calling other methods related to the references (requires an existing reference).
  */
 if ($response['status'] === true) {
     /**

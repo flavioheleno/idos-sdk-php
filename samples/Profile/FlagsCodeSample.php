@@ -4,8 +4,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../settings.php';
 
 /**
- * For instantiating the $sdk object, responsible to call the endpoints, its necessary to create the $auth object.
- * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They are related to the type of authorization required by the endpoint.
+ * To instantiate the $sdk object, which is responsible for calling the endpoints, it is necessary to create the $auth object.
+ * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They relate to the type of authorization required by the endpoint.
  * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
  */
 $auth = new \idOS\Auth\CredentialToken(
@@ -15,21 +15,21 @@ $auth = new \idOS\Auth\CredentialToken(
 );
 
 /**
- * The proper way to call the endpoints is to statically calling the create method of the SDK class.
- * The static method create($auth) creates a new instance of the SDK class.
+ * The correct way to call the endpoints is by statically calling the create method of the SDK class.
+ * The static create method($auth) creates a new instance of the SDK class.
  */
 $sdk = \idOS\SDK::create($auth);
 
 /**
  * Creates a new flag.
- * To create a new flag is necessary to call the createNew() method passing as parameter the name of the flag and the attribute name.
+ * To create a new flag it is necessary to call the createNew() method passing the name of the flag and the attribute name as a parameter.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Flags->createNew('middle-name-mismatch', 'middle-name');
 
 /**
- * Checks if at least one flag was created before calling other methods related to the flags endpoint that requires an existing flag.
+ * Checks if at least one flag was created before calling other methods related to the flags endpoint (requires an existing flag).
  */
 if ($response['status'] === true) {
     /**
@@ -54,7 +54,7 @@ if ($response['status'] === true) {
     }
 
     /**
-     * Retrieves information about the flag created passing as parameter the stored $flagSlug.
+     * Deletes the flag retrieved passing the stored $flagSlug as a parameter.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -68,7 +68,7 @@ if ($response['status'] === true) {
     echo PHP_EOL;
 
     /**
-     * Deletes the flag retrieved passing as parameter the stored $flagSlug.
+     * Retrieves information about the flag created passing the stored $flagSlug as  aparameter.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -83,14 +83,14 @@ if ($response['status'] === true) {
 }
 
 /**
- * To avoid the number of deleted flags to be equal to 0, the first thing is to create a new flag, calling the createNew() method passing as parameter the name of the flag and the attribute name.
+ * To avoid the number of deleted flags to be equal to 0, the first thing is to create a new flag, calling the createNew() method passing the name of the flag and the attribute name as a parameter.
  */
 $response = $sdk
     ->Profile($credentials['username'])
     ->Flags->createNew('middle-name-mismatch', 'middle-name');
 
 /**
- * Checks if the flag was created before calling other methods related to the flags endpoint that requires an existing flag.
+ * Checks if the flag was created before calling other methods related to the flags endpoint (requires an existing flag).
  */
 if ($response['status'] === true) {
     /**
