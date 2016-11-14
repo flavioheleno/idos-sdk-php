@@ -2,10 +2,8 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Raw;
-use idOS\Section\Profile;
+use Test\Unit\AbstractUnit;
 
 /**
  * RawTest Class tests all methods from the Raw Class.
@@ -40,7 +38,7 @@ class RawTest extends AbstractUnit {
 
     public function testListAll() {
         $sourceArray = [
-            'id' => 1068368561,
+            'id'   => 1068368561,
             'name' => 'name-test',
             'tags' => [
                 'tag-1' => 'value-1',
@@ -55,11 +53,11 @@ class RawTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'source' => $sourceArray,
+                    'source'     => $sourceArray,
                     'collection' => 'collection-name',
-                    'data' => [
+                    'data'       => [
                         'value' => 'test'
                     ],
                     'created_at' => time(),
@@ -69,7 +67,7 @@ class RawTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -87,7 +85,7 @@ class RawTest extends AbstractUnit {
         $response = $this->raw->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -106,7 +104,7 @@ class RawTest extends AbstractUnit {
 
     public function testCreateNew() {
         $sourceArray = [
-            'id' => 1068368561,
+            'id'   => 1068368561,
             'name' => 'name-test',
             'tags' => [
                 'tag-1' => 'value-1',
@@ -121,10 +119,10 @@ class RawTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'source' => $sourceArray,
+            'data'   => [
+                'source'     => $sourceArray,
                 'collection' => 'collection-name',
-                'data' => [
+                'data'       => [
                     'value' => 'test'
                 ],
                 'created_at' => time(),
@@ -133,7 +131,7 @@ class RawTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -151,7 +149,7 @@ class RawTest extends AbstractUnit {
         $response = $this->raw->createNew(1068368561, 'collection-name', ['value' => 'test']);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -170,7 +168,7 @@ class RawTest extends AbstractUnit {
 
     public function testUpsertOne() {
         $sourceArray = [
-            'id' => 1068368561,
+            'id'   => 1068368561,
             'name' => 'name-test',
             'tags' => [
                 'tag-1' => 'value-1',
@@ -185,10 +183,10 @@ class RawTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'source' => $sourceArray,
+            'data'   => [
+                'source'     => $sourceArray,
                 'collection' => 'collection-name',
-                'data' => [
+                'data'       => [
                     'value' => 'test'
                 ],
                 'created_at' => time(),
@@ -197,7 +195,7 @@ class RawTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -215,7 +213,7 @@ class RawTest extends AbstractUnit {
         $response = $this->raw->upsertOne(1068368561, 'collection-name', ['value' => 'test']);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

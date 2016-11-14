@@ -2,62 +2,48 @@
 
 namespace Test\Unit\Endpoint;
 
-use Test\Unit\AbstractUnit;
-use idOS\Endpoint\AbstractEndpoint;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use idOs\Exception\SDKException;
+use idOS\Endpoint\AbstractEndpoint;
+use Test\Unit\AbstractUnit;
+
 /**
  * AbstractEndpointTest Class tests the AbstractEndpoint Class.
  */
 class AbstractEndpointTest extends AbstractUnit {
-	private $abstractMock;
+    private $abstractMock;
     private $httpClient;
     protected $auth;
 
-	protected function setUp() {
+    protected function setUp() {
         parent::setUp();
 
         $this->auth = new \idOS\Auth\CredentialToken(
-  			$this->credentials['credentialPublicKey'],
-    		$this->credentials['handlerPublicKey'],
-    		$this->credentials['handlerPrivKey']
-		);
+            $this->credentials['credentialPublicKey'],
+            $this->credentials['handlerPublicKey'],
+            $this->credentials['handlerPrivKey']
+        );
 
         $this->httpClient = $this
             ->getMockBuilder(Client::class)
             ->getMock();
 
         $this->abstractMock = $this
-        	->getMockBuilder(AbstractEndpoint::class)
-        	->setConstructorArgs([$this->auth, $this->httpClient, false])
-        	->getMockForAbstractClass();
-    }
-
-    /**
-     * Invokes private and protected methods.
-     * @param  [type] &$object    the instance of the object
-     * @param  [type] $method     the name of the method to be invoked
-     * @param  array  $parameters the method parameters
-     */
-    private function invokeMethod(&$object, $method, array $parameters = []) {
-        $reflection = new \ReflectionClass(get_class($object));
-        $method = $reflection->getMethod($method);
-        $method->setAccessible(true);
-
-        return $method->invokeArgs($object, $parameters);
+            ->getMockBuilder(AbstractEndpoint::class)
+            ->setConstructorArgs([$this->auth, $this->httpClient, false])
+            ->getMockForAbstractClass();
     }
 
     public function testSendRequestBasicFlow() {
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 'key' => 'value'
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $httpResponse = $this
             ->getMockBuilder(Response::class)
@@ -70,11 +56,11 @@ class AbstractEndpointTest extends AbstractUnit {
             ->will($this->returnValue($httpResponse));
 
         /**
-         * Calls the invokeMethod() that will invoke the private sendRequest() method
+         * Calls the invokeMethod() that will invoke the private sendRequest() method.
          */
-    	$response = $this->invokeMethod($this->abstractMock, 'sendRequest', ['get', 'uri']);
+        $response = $this->invokeMethod($this->abstractMock, 'sendRequest', ['get', 'uri']);
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -85,9 +71,6 @@ class AbstractEndpointTest extends AbstractUnit {
         $this->assertSame('value', $response['data']['key']);
     }
 
-    /**
-     * @expectedException idOS\Exception\SDKError
-     */
     public function testSendRequestThrowsSDKError() {
         $this->abstractMock = $this
             ->getMockBuilder(AbstractEndpoint::class)
@@ -95,7 +78,7 @@ class AbstractEndpointTest extends AbstractUnit {
             ->getMockForAbstractClass();
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $httpResponse = $this
             ->getMockBuilder(Response::class)
@@ -107,32 +90,30 @@ class AbstractEndpointTest extends AbstractUnit {
             ->method('request')
             ->will($this->returnValue($httpResponse));
 
+        $this->setExpectedException(\idOS\Exception\SDKError::class);
         /**
-         * Calls the invokeMethod() that will invoke the private sendRequest() method
+         * Calls the invokeMethod() that will invoke the private sendRequest() method.
          */
         $response = $this->invokeMethod($this->abstractMock, 'sendRequest', ['get', 'uri']);
     }
 
-    /**
-     * @expectedException idOS\Exception\SDKException
-     */
-    public function testSendRequestThrowsSDKException() {
+    public function testSendRequestWithErrorButThrowsExceptionFalse() {
         $this->abstractMock = $this
             ->getMockBuilder(AbstractEndpoint::class)
-            ->setConstructorArgs([$this->auth, $this->httpClient, true])
+            ->setConstructorArgs([$this->auth, $this->httpClient, false])
             ->getMockForAbstractClass();
 
         $array = [
             'status' => false,
-            'error' => [
+            'error'  => [
                 'message' => 'Invalid Credentials',
-                'type' => 'Error',
-                'link' => 'link'
+                'type'    => 'Error',
+                'link'    => 'link'
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $httpResponse = $this
             ->getMockBuilder(Response::class)
@@ -145,7 +126,59 @@ class AbstractEndpointTest extends AbstractUnit {
             ->will($this->returnValue($httpResponse));
 
         /**
-         * Calls the invokeMethod() that will invoke the private sendRequest() method
+         * Calls the invokeMethod() that will invoke the private sendRequest() method.
+         */
+        $response = $this->invokeMethod($this->abstractMock, 'sendRequest', ['get', 'uri']);
+
+        /**
+         * Assertions.
+         */
+        $this->assertNotEmpty($response);
+        $this->assertArrayHasKey('status', $response);
+        $this->assertFalse($response['status']);
+        $this->assertArrayHasKey('error', $response);
+        $this->assertNotEmpty($response['error']);
+        $this->assertArrayHasKey('message', $response['error']);
+        $this->assertSame('Invalid Credentials', $response['error']['message']);
+        $this->assertArrayHasKey('type', $response['error']);
+        $this->assertSame('Error', $response['error']['type']);
+        $this->assertArrayHasKey('link', $response['error']);
+        $this->assertSame('link', $response['error']['link']);
+
+    }
+
+    public function testSendRequestThrowsSDKException() {
+        $this->abstractMock = $this
+            ->getMockBuilder(AbstractEndpoint::class)
+            ->setConstructorArgs([$this->auth, $this->httpClient, true])
+            ->getMockForAbstractClass();
+
+        $array = [
+            'status' => false,
+            'error'  => [
+                'message' => 'Invalid Credentials',
+                'type'    => 'Error',
+                'link'    => 'link'
+            ]
+        ];
+
+        /**
+         * Mocks the HTTP Response.
+         */
+        $httpResponse = $this
+            ->getMockBuilder(Response::class)
+            ->getMock();
+        $httpResponse
+            ->method('getBody')
+            ->will($this->returnValue(json_encode($array)));
+        $this->httpClient
+            ->method('request')
+            ->will($this->returnValue($httpResponse));
+
+        $this->setExpectedException(\idOS\Exception\SDKException::class);
+
+        /**
+         * Calls the invokeMethod() that will invoke the private sendRequest() method.
          */
         $response = $this->invokeMethod($this->abstractMock, 'sendRequest', ['get', 'uri']);
     }

@@ -8,7 +8,6 @@ use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 use idOS\Section\Company;
 use idOS\Section\Profile;
-use idOS\Section\Profile\Process;
 
 class SDK {
     /**

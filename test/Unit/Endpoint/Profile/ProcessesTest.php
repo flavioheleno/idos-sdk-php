@@ -2,10 +2,9 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Processes;
 use idOS\Section\Profile;
+use Test\Unit\AbstractUnit;
 
 /**
  * ProcessesTest Class tests all methods from the Processes Class.
@@ -44,10 +43,10 @@ class ProcessesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'id' => 7854963,
-                    'name' => 'process1',
+                    'id'    => 7854963,
+                    'name'  => 'process1',
                     'event' => [
                         'idos:source.sms.verified'
                     ],
@@ -55,8 +54,8 @@ class ProcessesTest extends AbstractUnit {
                     'updated_at' => time()
                 ],
                 1 => [
-                    'id' => 4347294,
-                    'name' => 'process2',
+                    'id'    => 4347294,
+                    'name'  => 'process2',
                     'event' => [
                         'idos:feature.profile.created'
                     ],
@@ -67,7 +66,7 @@ class ProcessesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -85,7 +84,7 @@ class ProcessesTest extends AbstractUnit {
         $response = $this->processes->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -118,9 +117,9 @@ class ProcessesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'id' => 7854963,
-                'name' => 'process1',
+            'data'   => [
+                'id'    => 7854963,
+                'name'  => 'process1',
                 'event' => [
                     'idos:source.sms.verified'
                 ],
@@ -130,7 +129,7 @@ class ProcessesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -148,7 +147,7 @@ class ProcessesTest extends AbstractUnit {
         $response = $this->processes->getOne(7854963);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

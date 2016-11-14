@@ -45,7 +45,7 @@ if ($response['status'] === true) {
         ->Flags->listAll();
 
     /**
-     * Prints api call response to Flags endpoint
+     * Prints api call response to Flags endpoint.
      */
     echo 'List All: ', PHP_EOL;
     foreach ($response['data'] as $flags) {
@@ -61,7 +61,7 @@ if ($response['status'] === true) {
         ->Flags->getOne($flagSlug);
 
     /**
-     * Prints api call response to Flags endpoint
+     * Prints api call response to Flags endpoint.
      */
     echo 'Get One: ', PHP_EOL;
     print_r($response['data']);
@@ -75,7 +75,7 @@ if ($response['status'] === true) {
         ->Flags->deleteOne($flagSlug);
 
     /**
-     * Prints the status of the call response to Flags endpoint
+     * Prints the status of the call response to Flags endpoint.
      */
     printf('Status: %s', $response['status']);
     echo PHP_EOL;
@@ -101,7 +101,7 @@ if ($response['status'] === true) {
         ->Flags->deleteAll();
 
     /**
-     * Prints the number of deleted flags retrieved from the call response to Flags endpoint
+     * Prints the number of deleted flags retrieved from the call response to Flags endpoint.
      */
     printf('Deleteded flags: %s', $response['deleted']);
     echo PHP_EOL;

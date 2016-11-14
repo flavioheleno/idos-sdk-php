@@ -28,11 +28,11 @@ $response = $sdk
     ->Processes->listAll();
 
 /**
- * Prints api call response to Processes endpoint
+ * Prints api call response to Processes endpoint.
  */
 echo 'List All:', PHP_EOL;
 foreach ($response['data'] as $process) {
-	print_r($process);
+    print_r($process);
     echo PHP_EOL;
 }
 
@@ -49,7 +49,7 @@ $response = $sdk
     ->Processes->getOne($processId);
 
 /**
- * Prints api call response to Processes endpoint
+ * Prints api call response to Processes endpoint.
  */
 echo 'Get One:', PHP_EOL;
 print_r($response['data']);

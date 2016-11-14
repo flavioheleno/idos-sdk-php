@@ -2,10 +2,8 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\References;
-use idOS\Section\Profile;
+use Test\Unit\AbstractUnit;
 
 /**
  * ReferencesTest Class tests all methods from the References Class.
@@ -44,16 +42,16 @@ class ReferencesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'name' => 'reference1',
-                    'value' => 'value1',
+                    'name'       => 'reference1',
+                    'value'      => 'value1',
                     'created_at' => time(),
                     'updated_at' => time()
                 ],
                 1 => [
-                    'name' => 'reference2',
-                    'value' => 'value2',
+                    'name'       => 'reference2',
+                    'value'      => 'value2',
                     'created_at' => time(),
                     'updated_at' => time()
                 ]
@@ -61,7 +59,7 @@ class ReferencesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -79,7 +77,7 @@ class ReferencesTest extends AbstractUnit {
         $response = $this->references->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -106,16 +104,16 @@ class ReferencesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'name' => 'reference1',
-                'value' => 'value1',
+            'data'   => [
+                'name'       => 'reference1',
+                'value'      => 'value1',
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -133,7 +131,7 @@ class ReferencesTest extends AbstractUnit {
         $response = $this->references->getOne('reference1');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -154,16 +152,16 @@ class ReferencesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'name' => 'reference1',
-                'value' => 'value1',
+            'data'   => [
+                'name'       => 'reference1',
+                'value'      => 'value1',
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -181,7 +179,7 @@ class ReferencesTest extends AbstractUnit {
         $response = $this->references->createNew('reference1', 'value1');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -202,16 +200,16 @@ class ReferencesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'name' => 'reference1',
-                'value' => 'value1',
+            'data'   => [
+                'name'       => 'reference1',
+                'value'      => 'value1',
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -229,7 +227,7 @@ class ReferencesTest extends AbstractUnit {
         $response = $this->references->updateOne('reference1', 'value1');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -245,7 +243,7 @@ class ReferencesTest extends AbstractUnit {
     }
 
     public function testDeleteOne() {
-                /**
+        /**
          * Array response from the fake api call to References endpoint.
          */
         $array = [
@@ -253,7 +251,7 @@ class ReferencesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -271,7 +269,7 @@ class ReferencesTest extends AbstractUnit {
         $response = $this->references->deleteOne('reference1');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -279,16 +277,16 @@ class ReferencesTest extends AbstractUnit {
     }
 
     public function testDeleteAll() {
-                /**
+        /**
          * Array response from the fake api call to References endpoint.
          */
         $array = [
-            'status' => true,
+            'status'  => true,
             'deleted' => 5
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -306,7 +304,7 @@ class ReferencesTest extends AbstractUnit {
         $response = $this->references->deleteAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

@@ -2,10 +2,8 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Scores;
-use idOS\Section\Profile;
+use Test\Unit\AbstractUnit;
 
 /**
  * ScoresTest Class tests all methods from the Scores Class.
@@ -44,14 +42,14 @@ class ScoresTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
                     'creator' => [
                     'name' => 'idOS Scraper'
                     ],
-                    'attribute' => 'firstName',
-                    'name' => 'Jhon',
-                    'value' => 0.3,
+                    'attribute'  => 'firstName',
+                    'name'       => 'Jhon',
+                    'value'      => 0.3,
                     'created_at' => time(),
                     'updated_at' => time()
                 ]
@@ -59,7 +57,7 @@ class ScoresTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -77,7 +75,7 @@ class ScoresTest extends AbstractUnit {
         $response = $this->scores->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -100,20 +98,20 @@ class ScoresTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 'creator' => [
                     'name' => 'idOS Scraper'
                 ],
-                'attribute' => 'firstName',
-                'name' => 'Jhon',
-                'value' => 0.3,
+                'attribute'  => 'firstName',
+                'name'       => 'Jhon',
+                'value'      => 0.3,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -131,7 +129,7 @@ class ScoresTest extends AbstractUnit {
         $response = $this->scores->createNew('firstName', 'Jhon', 0.3);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -154,20 +152,20 @@ class ScoresTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 'creator' => [
                     'name' => 'idOS Scraper'
                 ],
-                'attribute' => 'firstName',
-                'name' => 'Jhon',
-                'value' => 0.3,
+                'attribute'  => 'firstName',
+                'name'       => 'Jhon',
+                'value'      => 0.3,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -185,7 +183,7 @@ class ScoresTest extends AbstractUnit {
         $response = $this->scores->getOne('Jhon');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -208,20 +206,20 @@ class ScoresTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 'creator' => [
                     'name' => 'idOS Scraper'
                 ],
-                'attribute' => 'firstName',
-                'name' => 'Jhon',
-                'value' => 0.5,
+                'attribute'  => 'firstName',
+                'name'       => 'Jhon',
+                'value'      => 0.5,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -239,7 +237,7 @@ class ScoresTest extends AbstractUnit {
         $response = $this->scores->upsertOne('firstName', 'Jhon', 0.5);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -262,20 +260,20 @@ class ScoresTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 'creator' => [
                     'name' => 'idOS Scraper'
                 ],
-                'attribute' => 'firstName',
-                'name' => 'Jhon',
-                'value' => 0.5,
+                'attribute'  => 'firstName',
+                'name'       => 'Jhon',
+                'value'      => 0.5,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -293,7 +291,7 @@ class ScoresTest extends AbstractUnit {
         $response = $this->scores->updateOne('firstName', 'Jhon', 0.5);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -318,7 +316,7 @@ class ScoresTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -336,7 +334,7 @@ class ScoresTest extends AbstractUnit {
         $response = $this->scores->deleteOne('Jhon');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -348,12 +346,12 @@ class ScoresTest extends AbstractUnit {
          * Array response from the fake api call to Scores endpoint.
          */
         $array = [
-            'status' => true,
+            'status'  => true,
             'deleted' => 11
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -371,7 +369,7 @@ class ScoresTest extends AbstractUnit {
         $response = $this->scores->deleteAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

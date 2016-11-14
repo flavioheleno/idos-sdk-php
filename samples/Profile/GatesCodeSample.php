@@ -30,7 +30,7 @@ $response = $sdk
     ->Gates->upsertOne('18+', true);
 
 /**
- * Stores the gate slug of the slug created
+ * Stores the gate slug of the slug created.
  */
 $gateSlug = $response['data']['slug'];
 
@@ -58,7 +58,7 @@ if ($response['status'] === true) {
         ->Gates->getOne($gateSlug);
 
     /**
-     * Prints api call response to Gates endpoint
+     * Prints api call response to Gates endpoint.
      */
     print_r($response['data']);
     echo PHP_EOL;
@@ -71,7 +71,7 @@ if ($response['status'] === true) {
         ->Gates->deleteOne($gateSlug);
 
     /**
-     * Prints the status of the api call response to Features endpoint
+     * Prints the status of the api call response to Features endpoint.
      */
     print_r('Status: %s', $response['status']);
 }
@@ -98,7 +98,7 @@ if ($response['status'] === true) {
         ->Gates->deleteAll();
 
     /**
-     * Prints the number of deleted gates, information received from the api call response to Gates endpoint
+     * Prints the number of deleted gates, information received from the api call response to Gates endpoint.
      */
     printf('Deleted gates: %s', $response['deleted']);
     echo PHP_EOL;

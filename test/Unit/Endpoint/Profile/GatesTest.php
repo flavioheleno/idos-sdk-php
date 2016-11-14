@@ -2,10 +2,8 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Gates;
-use idOS\Section\Profile;
+use Test\Unit\AbstractUnit;
 
 /**
  * GatesTest Class tests all methods from the Gates Class.
@@ -44,18 +42,18 @@ class GatesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'name' => '18+',
-                    'slug' => '18',
-                    'pass' => true,
+                    'name'       => '18+',
+                    'slug'       => '18',
+                    'pass'       => true,
                     'created_at' => time(),
                     'updated_at' => time()
                 ],
                 1 => [
-                    'name' => 'gate slug',
-                    'slug' => 'gate-slug',
-                    'pass' => false,
+                    'name'       => 'gate slug',
+                    'slug'       => 'gate-slug',
+                    'pass'       => false,
                     'created_at' => time(),
                     'updated_at' => time()
                 ]
@@ -63,7 +61,7 @@ class GatesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -81,7 +79,7 @@ class GatesTest extends AbstractUnit {
         $response = $this->gates->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -112,17 +110,17 @@ class GatesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'name' => '18+',
-                'slug' => '18',
-                'pass' => true,
+            'data'   => [
+                'name'       => '18+',
+                'slug'       => '18',
+                'pass'       => true,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -140,7 +138,7 @@ class GatesTest extends AbstractUnit {
         $response = $this->gates->getOne('18');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -164,17 +162,17 @@ class GatesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'name' => '18+',
-                'slug' => '18',
-                'pass' => true,
+            'data'   => [
+                'name'       => '18+',
+                'slug'       => '18',
+                'pass'       => true,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -192,7 +190,7 @@ class GatesTest extends AbstractUnit {
         $response = $this->gates->createNew('18+', true);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -216,17 +214,17 @@ class GatesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'name' => '18+',
-                'slug' => '18',
-                'pass' => false,
+            'data'   => [
+                'name'       => '18+',
+                'slug'       => '18',
+                'pass'       => false,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -244,7 +242,7 @@ class GatesTest extends AbstractUnit {
         $response = $this->gates->updateOne('18', false);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -262,22 +260,22 @@ class GatesTest extends AbstractUnit {
     }
 
     public function testUpsertOne() {
-         /**
+        /**
          * Array response from the fake api call to Gates endpoint.
          */
         $array = [
             'status' => true,
-            'data' => [
-                'name' => '18+',
-                'slug' => '18',
-                'pass' => false,
+            'data'   => [
+                'name'       => '18+',
+                'slug'       => '18',
+                'pass'       => false,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -295,7 +293,7 @@ class GatesTest extends AbstractUnit {
         $response = $this->gates->upsertOne('18+', false);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -313,7 +311,7 @@ class GatesTest extends AbstractUnit {
     }
 
     public function testDeleteOne() {
-         /**
+        /**
          * Array response from the fake api call to Gates endpoint.
          */
         $array = [
@@ -321,7 +319,7 @@ class GatesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -339,7 +337,7 @@ class GatesTest extends AbstractUnit {
         $response = $this->gates->deleteOne('18');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -347,16 +345,16 @@ class GatesTest extends AbstractUnit {
     }
 
     public function testDeleteAll() {
-         /**
+        /**
          * Array response from the fake api call to Gates endpoint.
          */
         $array = [
-            'status' => true,
+            'status'  => true,
             'deleted' => 1
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -374,7 +372,7 @@ class GatesTest extends AbstractUnit {
         $response = $this->gates->deleteAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

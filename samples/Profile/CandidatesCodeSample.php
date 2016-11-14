@@ -44,7 +44,7 @@ if (($emailCandidate['status'] === true) || ($genderCandidate['status'] === true
         ->Candidates->listAll();
 
     /**
-     * Prints api call response to Candidates endpoint
+     * Prints api call response to Candidates endpoint.
      */
     echo 'Listing all candidates:', PHP_EOL;
     foreach ($response['data'] as $candidate) {
@@ -61,7 +61,7 @@ $response = $sdk
     ->Candidates->deleteAll();
 
 /**
- * Prints the number of deleted candidates, information received from the api call response to Candidates endpoint
+ * Prints the number of deleted candidates, information received from the api call response to Candidates endpoint.
  */
 printf('Deleted candidates: %s', $response['deleted']);
 echo PHP_EOL;

@@ -2,9 +2,8 @@
 
 namespace Test\Unit\Endpoint;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Sso;
+use Test\Unit\AbstractUnit;
 
 /**
  * SsoTest Class tests all methods from the Sso Class.
@@ -40,11 +39,11 @@ class SsoTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => ['facebook', 'twitter', 'paypal']
+            'data'   => ['facebook', 'twitter', 'paypal']
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -62,7 +61,7 @@ class SsoTest extends AbstractUnit {
         $response = $this->sso->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response['data']);
         $this->assertContainsOnly('string', $response['data']);
@@ -74,13 +73,13 @@ class SsoTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 'enabled' => true
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -98,7 +97,7 @@ class SsoTest extends AbstractUnit {
         $response = $this->sso->getOne('twitter');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response['data']);
         $this->assertArrayHasKey('enabled', $response['data']);
@@ -111,14 +110,14 @@ class SsoTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'userName' => 'user',
+            'data'   => [
+                'userName'   => 'user',
                 'user_token' => 'dummyToken'
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -136,7 +135,7 @@ class SsoTest extends AbstractUnit {
         $response = $this->sso->createNew('twitter', 'DummyCredentialPublicKey', 'DummyUserToken', 'DummySecretToken');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response['data']);
         $this->assertArrayHasKey('userName', $response['data']);

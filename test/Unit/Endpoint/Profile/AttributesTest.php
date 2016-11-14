@@ -2,10 +2,8 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Attributes;
-use idOS\Section\Profile;
+use Test\Unit\AbstractUnit;
 
 /**
  * AttributesTest Class tests all methods from the Attributes Class.
@@ -44,14 +42,14 @@ class AttributesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'userName' => 'user1',
+                    'userName'   => 'user1',
                     'created_at' => time(),
                     'updated_at' => time()
                 ],
                 1 => [
-                    'userName' => 'user2',
+                    'userName'   => 'user2',
                     'created_at' => time(),
                     'updated_at' => time()
                 ]
@@ -59,7 +57,7 @@ class AttributesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -91,4 +89,3 @@ class AttributesTest extends AbstractUnit {
         $this->assertInternalType('int', $response['data'][1]['updated_at']);
     }
 }
-

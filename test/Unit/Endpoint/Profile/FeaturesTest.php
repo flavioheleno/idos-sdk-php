@@ -2,12 +2,11 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
 use idOS\Endpoint\Profile\Features;
+use Test\Unit\AbstractUnit;
 
 class FeaturesTest extends AbstractUnit {
-
-	private $features;
+    private $features;
 
     protected function setUp() {
         parent::setUp();
@@ -37,15 +36,15 @@ class FeaturesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'name' => 'test1',
+                    'name'    => 'test1',
                     'creator' => [
-                    	'creator.test'
+                        'creator.test'
                     ],
-                    'type' => 'type',
-                    'value' => 'value',
-                    'source' => 'test',
+                    'type'       => 'type',
+                    'value'      => 'value',
+                    'source'     => 'test',
                     'created_at' => time(),
                     'updated_at' => time()
                 ]
@@ -53,7 +52,7 @@ class FeaturesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -71,7 +70,7 @@ class FeaturesTest extends AbstractUnit {
         $response = $this->features->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

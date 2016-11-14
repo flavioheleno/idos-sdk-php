@@ -2,9 +2,8 @@
 
 namespace Test\Unit\Endpoint;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profiles;
+use Test\Unit\AbstractUnit;
 
 /**
  * ProfilesTest Class tests all methods from the Profiles Class.
@@ -43,15 +42,15 @@ class ProfilesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'userName' => 'user',
+            'data'   => [
+                'userName'   => 'user',
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -69,7 +68,7 @@ class ProfilesTest extends AbstractUnit {
         $response = $this->profiles->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response['data']);
         $this->assertArrayHasKey('userName', $response['data']);

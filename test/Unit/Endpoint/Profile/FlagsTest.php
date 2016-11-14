@@ -2,12 +2,11 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
 use idOS\Endpoint\Profile\Flags;
+use Test\Unit\AbstractUnit;
 
 class FlagsTest extends AbstractUnit {
-
-	private $Flags;
+    private $Flags;
 
     protected function setUp() {
         parent::setUp();
@@ -37,10 +36,10 @@ class FlagsTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'slug' => 'flag-slug',
-                    'attribute' => 'attr',
+                    'slug'       => 'flag-slug',
+                    'attribute'  => 'attr',
                     'created_at' => time(),
                     'updated_at' => time()
                 ]
@@ -48,7 +47,7 @@ class FlagsTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -66,7 +65,7 @@ class FlagsTest extends AbstractUnit {
         $response = $this->flags->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -80,23 +79,22 @@ class FlagsTest extends AbstractUnit {
         $this->assertInternalType('int', $response['data'][0]['updated_at']);
     }
 
-
     public function testGetOne() {
-         /**
+        /**
          * Array response from the fake api call to Flags endpoint.
          */
         $array = [
             'status' => true,
-            'data' => [
-                'slug' => 'flag-slug',
-                'attribute' => 'attr',
+            'data'   => [
+                'slug'       => 'flag-slug',
+                'attribute'  => 'attr',
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -114,7 +112,7 @@ class FlagsTest extends AbstractUnit {
         $response = $this->flags->getOne('flag-slug');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -135,16 +133,16 @@ class FlagsTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'slug' => 'flag-slug',
-                'attribute' => 'attr',
+            'data'   => [
+                'slug'       => 'flag-slug',
+                'attribute'  => 'attr',
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -162,7 +160,7 @@ class FlagsTest extends AbstractUnit {
         $response = $this->flags->createNew('flag-slug', 'attr');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -186,7 +184,7 @@ class FlagsTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -204,7 +202,7 @@ class FlagsTest extends AbstractUnit {
         $response = $this->flags->deleteOne('flag-slug');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -212,16 +210,16 @@ class FlagsTest extends AbstractUnit {
     }
 
     public function deleteAll() {
-         /**
+        /**
          * Array response from the fake api call to Flags endpoint.
          */
         $array = [
-            'status' => true,
+            'status'  => true,
             'deleted' => 2
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -239,7 +237,7 @@ class FlagsTest extends AbstractUnit {
         $response = $this->flags->deleteAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

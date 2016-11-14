@@ -2,9 +2,8 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Process\Tasks;
+use Test\Unit\AbstractUnit;
 
 /**
  * TasksTest Class tests all methods from the Tasks Class.
@@ -43,13 +42,13 @@ class TasksTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'id' => 1822872842,
-                    'name' => 'test',
-                    'event' => 'user:created',
-                    'running' => true,
-                    'success' => true,
+                    'id'         => 1822872842,
+                    'name'       => 'test',
+                    'event'      => 'user:created',
+                    'running'    => true,
+                    'success'    => true,
                     'created_at' => time(),
                     'updated_at' => time()
                 ]
@@ -57,7 +56,7 @@ class TasksTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -75,7 +74,7 @@ class TasksTest extends AbstractUnit {
         $response = $this->tasks->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -102,19 +101,19 @@ class TasksTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'id' => 1822872842,
-                'name' => 'test',
-                'event' => 'user:created',
-                'running' => true,
-                'success' => true,
+            'data'   => [
+                'id'         => 1822872842,
+                'name'       => 'test',
+                'event'      => 'user:created',
+                'running'    => true,
+                'success'    => true,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -132,7 +131,7 @@ class TasksTest extends AbstractUnit {
         $response = $this->tasks->createNew('test', 'user:created', true, true, 'dummy message');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -159,19 +158,19 @@ class TasksTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'id' => 1822872842,
-                'name' => 'test',
-                'event' => 'user:created',
-                'running' => true,
-                'success' => true,
+            'data'   => [
+                'id'         => 1822872842,
+                'name'       => 'test',
+                'event'      => 'user:created',
+                'running'    => true,
+                'success'    => true,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -189,7 +188,7 @@ class TasksTest extends AbstractUnit {
         $response = $this->tasks->getOne(1822872842);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -211,24 +210,24 @@ class TasksTest extends AbstractUnit {
     }
 
     public function testUpdateOne() {
-         /**
+        /**
          * Array response from the fake api call to Tasks endpoint.
          */
         $array = [
             'status' => true,
-            'data' => [
-                'id' => 1822872842,
-                'name' => 'test',
-                'event' => 'user:created',
-                'running' => true,
-                'success' => true,
+            'data'   => [
+                'id'         => 1822872842,
+                'name'       => 'test',
+                'event'      => 'user:created',
+                'running'    => true,
+                'success'    => true,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -246,7 +245,7 @@ class TasksTest extends AbstractUnit {
         $response = $this->tasks->updateOne(1822872842, 'test', 'user:created', true, true, 'dummy message');
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

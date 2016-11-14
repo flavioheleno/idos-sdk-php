@@ -28,10 +28,10 @@ $response = $sdk
     ->listAll();
 
 /**
- * Prints all usernames provided by the api call response to Profiles endpoint
+ * Prints all usernames provided by the api call response to Profiles endpoint.
  */
 echo 'Usernames:', PHP_EOL;
 foreach ($response['data'] as $profiles) {
-	printf($profiles['username']);
-	echo PHP_EOL;
+    printf($profiles['username']);
+    echo PHP_EOL;
 }

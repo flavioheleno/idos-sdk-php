@@ -2,10 +2,8 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
-use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Sources;
-use idOS\Section\Profile;
+use Test\Unit\AbstractUnit;
 
 /**
  * SourcesTest Class tests all methods from the Sources Class.
@@ -44,12 +42,12 @@ class SourcesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'id' => 1822872842,
+                    'id'   => 1822872842,
                     'name' => 'email',
                     'tags' => [
-                        'test' => 'value-test',
+                        'test'  => 'value-test',
                         'other' => 'other-tag'
                     ],
                     'created_at' => time(),
@@ -59,7 +57,7 @@ class SourcesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -77,7 +75,7 @@ class SourcesTest extends AbstractUnit {
         $response = $this->sources->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -91,7 +89,7 @@ class SourcesTest extends AbstractUnit {
         $this->assertArrayHasKey('tags', $response['data'][0]);
         $this->assertSame(
             [
-                'test' => 'value-test',
+                'test'  => 'value-test',
                 'other' => 'other-tag'
             ],
             $response['data'][0]['tags']
@@ -106,11 +104,11 @@ class SourcesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'id' => 1822872842,
+            'data'   => [
+                'id'   => 1822872842,
                 'name' => 'email',
                 'tags' => [
-                    'test' => 'value-test',
+                    'test'  => 'value-test',
                     'other' => 'other-tag'
                 ],
                 'created_at' => time(),
@@ -119,7 +117,7 @@ class SourcesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -137,13 +135,13 @@ class SourcesTest extends AbstractUnit {
         $response = $this->sources->createNew(
             'email',
             [
-                'test' => 'value-test',
+                'test'  => 'value-test',
                 'other' => 'other-tag'
             ]
         );
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -157,7 +155,7 @@ class SourcesTest extends AbstractUnit {
         $this->assertArrayHasKey('tags', $response['data']);
         $this->assertSame(
             [
-                'test' => 'value-test',
+                'test'  => 'value-test',
                 'other' => 'other-tag'
             ],
             $response['data']['tags']
@@ -172,11 +170,11 @@ class SourcesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'id' => 1822872842,
+            'data'   => [
+                'id'   => 1822872842,
                 'name' => 'email',
                 'tags' => [
-                    'test' => 'value-test',
+                    'test'  => 'value-test',
                     'other' => 'other-tag'
                 ],
                 'created_at' => time(),
@@ -185,7 +183,7 @@ class SourcesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -203,7 +201,7 @@ class SourcesTest extends AbstractUnit {
         $response = $this->sources->getOne(1822872842);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -217,7 +215,7 @@ class SourcesTest extends AbstractUnit {
         $this->assertArrayHasKey('tags', $response['data']);
         $this->assertSame(
             [
-                'test' => 'value-test',
+                'test'  => 'value-test',
                 'other' => 'other-tag'
             ],
             $response['data']['tags']
@@ -232,11 +230,11 @@ class SourcesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
-                'id' => 1822872842,
+            'data'   => [
+                'id'   => 1822872842,
                 'name' => 'email',
                 'tags' => [
-                    'test' => 'updated-test',
+                    'test'  => 'updated-test',
                     'other' => 'updated-tag'
                 ],
                 'created_at' => time(),
@@ -245,7 +243,7 @@ class SourcesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -263,13 +261,13 @@ class SourcesTest extends AbstractUnit {
         $response = $this->sources->updateOne(
             1822872842,
             [
-                'test' => 'updated-test',
+                'test'  => 'updated-test',
                 'other' => 'updated-tag'
             ]
         );
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -283,7 +281,7 @@ class SourcesTest extends AbstractUnit {
         $this->assertArrayHasKey('tags', $response['data']);
         $this->assertSame(
             [
-                'test' => 'updated-test',
+                'test'  => 'updated-test',
                 'other' => 'updated-tag'
             ],
             $response['data']['tags']
@@ -301,7 +299,7 @@ class SourcesTest extends AbstractUnit {
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -319,7 +317,7 @@ class SourcesTest extends AbstractUnit {
         $response = $this->sources->deleteOne(1822872842);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -331,12 +329,12 @@ class SourcesTest extends AbstractUnit {
          * Array response from the fake api call to Sources endpoint.
          */
         $array = [
-            'status' => true,
+            'status'  => true,
             'deleted' => 7
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -354,7 +352,7 @@ class SourcesTest extends AbstractUnit {
         $response = $this->sources->deleteAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

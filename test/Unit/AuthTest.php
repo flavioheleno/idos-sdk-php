@@ -3,12 +3,9 @@
 namespace idOS;
 
 use Test\Unit\AbstractUnit;
-use idOS\Auth;
-
 
 class AuthTest extends AbstractUnit {
-
-	/**
+    /**
      * $auth object instantiates the SDK Class.
      */
     protected $auth;
@@ -23,46 +20,18 @@ class AuthTest extends AbstractUnit {
         );
     }
 
-    /**
-     * Invokes private and protected methods.
-     * @param  [type] &$object    the instance of the object
-     * @param  [type] $method     the name of the method to be invoked
-     * @param  array  $parameters the method parameters
-     */
-    private function invokeMethod(&$object, $method, array $parameters = []) {
-        $reflection = new \ReflectionClass(get_class($object));
-        $method = $reflection->getMethod($method);
-        $method->setAccessible(true);
-
-        return $method->invokeArgs($object, $parameters);
-    }
-
-
-    /**
-     * Sets a value for a private property
-     * @param [type] $object   the instance of the object
-     * @param string $property the name of the property
-     * @param [type] $value    the vaue of the property
-     */
-    private function setPropertyValue($object, string $property, $value) {
-        $reflection = new \ReflectionClass($object);
-        $property = $reflection->getProperty($property);
-        $property->setAccessible(true);
-        $property->setValue($object, $value);
-    }
-
     public function testSetAndGetPublicKey() {
-    	$this->auth->setPublicKey('pubKey');
-    	$this->assertSame('pubKey', $this->auth->getPublicKey());
+        $this->auth->setPublicKey('pubKey');
+        $this->assertSame('pubKey', $this->auth->getPublicKey());
     }
 
     public function testSetAndGetPrivateKey() {
-    	$this->auth->setPrivateKey('privKey');
+        $this->auth->setPrivateKey('privKey');
         $this->assertSame('privKey', $this->auth->getPrivateKey());
     }
 
     public function testSetAndGetAuthType() {
-    	$this->auth->setAuthType(\idOS\Auth::IDENTITY);
+        $this->auth->setAuthType(\idOS\Auth::IDENTITY);
         $this->assertEquals(3, $this->auth->getAuthType());
         $this->auth->setAuthType(\idOS\Auth::HANDLER);
         $this->assertEquals(2, $this->auth->getAuthType());

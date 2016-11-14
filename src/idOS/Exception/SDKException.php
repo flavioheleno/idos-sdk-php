@@ -5,11 +5,11 @@ declare(strict_types = 1);
 namespace idOS\Exception;
 
 class SDKException extends \Exception {
-   	protected $type;
+    protected $type;
 
-   	protected $link;
+    protected $link;
 
-   	protected $message;
+    protected $message;
 
     public function __construct(
         String $message,
@@ -17,7 +17,7 @@ class SDKException extends \Exception {
         String $link
     ) {
         $this->message = $message;
-        $this->type = $type;
-        $this->link = $link;
+        $this->type    = $type;
+        $this->link    = $link;
     }
 }

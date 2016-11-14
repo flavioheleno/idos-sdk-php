@@ -2,13 +2,14 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnit;
 use idOS\Endpoint\Profile\Candidates;
+use Test\Unit\AbstractUnit;
+
 /**
  * CandidatesTest Class tests all methods from the Candidates Class.
  */
 class CandidatesTest extends AbstractUnit {
-	/**
+    /**
      * $candidates object instantiates the Candidates Class.
      */
     protected $candidates;
@@ -28,9 +29,9 @@ class CandidatesTest extends AbstractUnit {
          */
         $this->auth = new \idOS\Auth\CredentialToken(
             $this->credentials['credentialPublicKey'],
-		    $this->credentials['handlerPublicKey'],
-		    $this->credentials['handlerPrivKey']
-		);
+            $this->credentials['handlerPublicKey'],
+            $this->credentials['handlerPrivKey']
+        );
 
         $this->candidates = new Candidates('dummyUserName', $this->auth, $this->httpClient, false);
     }
@@ -41,33 +42,33 @@ class CandidatesTest extends AbstractUnit {
          */
         $array = [
             'status' => true,
-            'data' => [
+            'data'   => [
                 0 => [
-                    'attribute' => 'firstName',
-                    'value' => 'Jhon',
-                    'support' => 0.6,
+                    'attribute'  => 'firstName',
+                    'value'      => 'Jhon',
+                    'support'    => 0.6,
                     'created_at' => time(),
                     'updated_at' => time()
                 ],
                 1 => [
-                  	'attribute' => 'lastName',
-                    'value' => 'Doe',
-                    'support' => 0.7,
-                    'created_at' => time(),
-                    'updated_at' => time()
+                      'attribute' => 'lastName',
+                    'value'       => 'Doe',
+                    'support'     => 0.7,
+                    'created_at'  => time(),
+                    'updated_at'  => time()
                 ],
                 2 => [
-                	'attribute' => 'gender',
-                	'value' => 'male',
-                	'support' => 0.8,
-                	'created_at' => time(),
+                    'attribute'  => 'gender',
+                    'value'      => 'male',
+                    'support'    => 0.8,
+                    'created_at' => time(),
                     'updated_at' => time()
                 ]
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -82,11 +83,10 @@ class CandidatesTest extends AbstractUnit {
         /**
          * Calls the listAll() method.
          */
-
         $response = $this->candidates->listAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -95,29 +95,29 @@ class CandidatesTest extends AbstractUnit {
         $this->assertNotEmpty($response['data']);
 
         foreach ($response['data'] as $candidate) {
-        	$this->assertArrayHasKey('attribute', $candidate);
-        	$this->assertArrayHasKey('value', $candidate);
-        	$this->assertArrayHasKey('support', $candidate);
-    	}
+            $this->assertArrayHasKey('attribute', $candidate);
+            $this->assertArrayHasKey('value', $candidate);
+            $this->assertArrayHasKey('support', $candidate);
+        }
     }
 
     public function testCreateNew() {
-    	/**
+        /**
          * Array response from the fake api call to Candidates endpoint.
          */
         $array = [
             'status' => true,
-            'data' => [
-                'attribute' => 'firstName',
-                'value' => 'Jhon',
-                'support' => 0.6,
+            'data'   => [
+                'attribute'  => 'firstName',
+                'value'      => 'Jhon',
+                'support'    => 0.6,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -135,7 +135,7 @@ class CandidatesTest extends AbstractUnit {
         $response = $this->candidates->createNew('firstName', 'Jhon', 0.6);
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);
@@ -152,16 +152,16 @@ class CandidatesTest extends AbstractUnit {
     }
 
     public function testDeleteAll() {
-    	/**
+        /**
          * Array response from the fake api call to Candidates endpoint.
          */
         $array = [
-            'status' => true,
+            'status'  => true,
             'deleted' => 2
         ];
 
         /**
-         * Mocks the HTTP Response
+         * Mocks the HTTP Response.
          */
         $this->httpResponse = $this
             ->getMockBuilder('GuzzleHttp\Psr7\Response')
@@ -174,12 +174,12 @@ class CandidatesTest extends AbstractUnit {
             ->will($this->returnValue($this->httpResponse));
 
         /**
-         * Calls the deleteAll() method
+         * Calls the deleteAll() method.
          */
         $response = $this->candidates->deleteAll();
 
         /**
-         * Assertions
+         * Assertions.
          */
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('status', $response);

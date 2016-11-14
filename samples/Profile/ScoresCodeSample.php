@@ -41,7 +41,7 @@ if ($response['status'] === true) {
         ->Scores->listAll();
 
     /**
-     * Prints api call response to Scores endpoint
+     * Prints api call response to Scores endpoint.
      */
     echo 'List All: ', PHP_EOL;
     foreach ($response['data'] as $score) {
@@ -57,7 +57,7 @@ if ($response['status'] === true) {
         ->Scores->updateOne('firstName', 'Jhon', 0.3);
 
     /**
-     * Prints api call response to Scores endpoint
+     * Prints api call response to Scores endpoint.
      */
     echo 'Update one:', PHP_EOL;
     print_r($response['data']);
@@ -71,7 +71,7 @@ if ($response['status'] === true) {
         ->Scores->getOne('Jhon');
 
     /**
-     * Prints api call response to Scores endpoint
+     * Prints api call response to Scores endpoint.
      */
     echo 'Get One:', PHP_EOL;
     print_r($response['data']);
@@ -85,7 +85,7 @@ if ($response['status'] === true) {
         ->Scores->deleteOne('Jhon');
 
     /**
-     * Prints the status of the call response to Scores endpoint
+     * Prints the status of the call response to Scores endpoint.
      */
     printf('Status: %s', $response['status']);
     echo PHP_EOL;

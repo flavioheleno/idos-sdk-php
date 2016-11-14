@@ -62,7 +62,7 @@ if (($rawSample1['status'] === true) || ($rawSample2['status'] === true)) {
         ->Raw->listAll();
 
     /**
-     * Prints api call response to Raw endpoint
+     * Prints api call response to Raw endpoint.
      */
     foreach ($response['data'] as $raw) {
         print_r($raw);

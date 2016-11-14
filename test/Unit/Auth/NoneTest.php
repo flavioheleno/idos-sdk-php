@@ -3,11 +3,9 @@
 namespace idOS\Auth;
 
 use Test\Unit\AbstractUnit;
-use idOS\Auth\None;
-
 
 class NoneTest extends AbstractUnit {
-	/**
+    /**
      * $auth object instantiates the None Class.
      */
     protected $auth;
@@ -19,7 +17,7 @@ class NoneTest extends AbstractUnit {
     }
 
     public function testGetToken() {
-       	$this->assertInternalType('string', $this->auth->getToken());
-       	$this->assertEmpty($this->auth->getToken());
+           $this->assertInternalType('string', $this->auth->getToken());
+           $this->assertEmpty($this->auth->getToken());
     }
 }

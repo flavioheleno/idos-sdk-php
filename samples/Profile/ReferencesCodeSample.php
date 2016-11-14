@@ -41,7 +41,7 @@ if ($response['status'] === true) {
         ->References->listAll();
 
     /**
-     * Prints api call response to References endpoint
+     * Prints api call response to References endpoint.
      */
     echo 'List All:', PHP_EOL;
     foreach ($response['data'] as $reference) {
@@ -85,14 +85,14 @@ if ($response['status'] === true) {
         ->References->deleteOne($response['data']['name']);
 
     /**
-     * Prints the status of the call response to References endpoint
+     * Prints the status of the call response to References endpoint.
      */
     printf('Status: %s', $response['status']);
     echo PHP_EOL;
 }
 
 /**
- * To avoid the number of deleted references to be equal to 0, the first thing is to create a new reference, calling the createNew() method passing as parameter the the reference's name and the reference's value;
+ * To avoid the number of deleted references to be equal to 0, the first thing is to create a new reference, calling the createNew() method passing as parameter the the reference's name and the reference's value;.
  */
 $response = $sdk
     ->Profile($credentials['username'])

@@ -50,7 +50,7 @@ if ($response['status'] === true) {
         ->Sources->listAll();
 
     /**
-     * Prints api call response to Sources endpoint
+     * Prints api call response to Sources endpoint.
      */
     echo 'List All:', PHP_EOL;
     foreach ($response['data'] as $source) {
@@ -66,7 +66,7 @@ if ($response['status'] === true) {
         ->Sources->updateOne(
             $sourceId,
             [
-                'test' => 'value-test',
+                'test'  => 'value-test',
                 'other' => 'other-tag'
             ]
         );
@@ -86,7 +86,7 @@ if ($response['status'] === true) {
         ->Sources->getOne($sourceId);
 
     /**
-     * Prints api call response to Sources endpoint
+     * Prints api call response to Sources endpoint.
      */
     echo 'Get One:', PHP_EOL;
     print_r($response['data']);
@@ -100,7 +100,7 @@ if ($response['status'] === true) {
         ->Sources->deleteOne($sourceId);
 
     /**
-     * Prints the status of the call response to Flags endpoint
+     * Prints the status of the call response to Flags endpoint.
      */
     printf('Status: %s', $response['status']);
     echo PHP_EOL;

@@ -52,19 +52,19 @@ if (($email['status'] === true) || ($gender['status'] === false)) {
     $sdk = \idOS\SDK::create($auth);
 
     /**
-     * Lists all attributes related to the username provided
+     * Lists all attributes related to the username provided.
      */
     $response = $sdk
         ->Profile($credentials['username'])
         ->Attributes->listAll();
 
     /**
-     * Prints api call response to Attributes endpoint
+     * Prints api call response to Attributes endpoint.
      */
     echo 'Attributes:', PHP_EOL;
 
     foreach ($response['data'] as $attribute) {
-    	print_r($attribute);
+        print_r($attribute);
         echo PHP_EOL;
     }
 }
