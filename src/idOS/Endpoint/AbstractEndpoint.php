@@ -6,6 +6,8 @@ namespace idOS\Endpoint;
 
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
+use idOS\Exception\SDKException;
+use idOS\Exception\SDKError;
 
 abstract class AbstractEndpoint implements EndpointInterface {
     /**

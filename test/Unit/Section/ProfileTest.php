@@ -1,15 +1,15 @@
 <?php
 
-namespace Test\Unit\Section\Profile;
+namespace Test\Unit\Section;
 
 use Test\Unit\AbstractUnit;
 
-class ProcessTest extends AbstractUnit {
+class ProfileTest extends AbstractUnit {
 	/**
      * $auth object instantiates the CredentialToken Class.
      */
     protected $auth;
-    protected $processSection;
+    protected $profileSection;
 
     protected function setUp() {
         parent::setUp();
@@ -20,8 +20,7 @@ class ProcessTest extends AbstractUnit {
             $this->credentials['handlerPrivKey']
         );
 
-       	$this->processSection = new \idOS\Section\Profile\Process(
-       		123456,
+       	$this->profileSection = new \idOS\Section\Profile(
        		'userName',
        		$this->auth,
        		new \GuzzleHttp\Client(),
@@ -70,7 +69,12 @@ class ProcessTest extends AbstractUnit {
     }
 
     public function testGetMethod() {
-    	$attributeEndpoint = $this->invokeMethod($this->processSection, '__get', ['Tasks']);
-		$this->assertInstanceOf(\idOS\Endpoint\Profile\Process\Tasks::class, $attributeEndpoint);
+    	$attributeEndpoint = $this->invokeMethod($this->profileSection, '__get', ['Attributes']);
+		$this->assertInstanceOf(\idOS\Endpoint\Profile\Attributes::class, $attributeEndpoint);
     }
+
+    public function testCallMethod() {
+    	$processSection = $this->invokeMethod($this->profileSection, '__call', ['Process', [123456]]);
+		$this->assertInstanceOf(\idOS\Section\Profile\Process::class, $processSection);
+	}
 }

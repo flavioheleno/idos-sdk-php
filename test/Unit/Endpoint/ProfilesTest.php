@@ -2,14 +2,14 @@
 
 namespace Test\Unit\Endpoint;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profiles;
 
 /**
  * ProfilesTest Class tests all methods from the Profiles Class.
  */
-class ProfilesTest extends AbstractUnitTest {
+class ProfilesTest extends AbstractUnit {
     /**
      * $profiles object instantiates the Profiles Class.
      */

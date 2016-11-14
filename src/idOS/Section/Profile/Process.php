@@ -54,22 +54,4 @@ class Process extends AbstractSection {
             $this->client
         );
     }
-
-    /**
-     * returns the endpoint called.
-     *
-     * @param string $name
-     * @param array  $args
-     *
-     * @return endpoint instance
-     */
-    public function __call(string $name, array $args) : SectionInterface {
-        $className = $this->getSectionClassName($name);
-        $args[]    = $this->processId;
-        $args[]    = $this->userName;
-        $args[]    = $this->authentication;
-        $args[]    = $this->client;
-
-        return new $className(...$args);
-    }
 }

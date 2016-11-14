@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Processes;
 use idOS\Section\Profile;
@@ -10,7 +10,7 @@ use idOS\Section\Profile;
 /**
  * ProcessesTest Class tests all methods from the Processes Class.
  */
-class ProcessesTest extends AbstractUnitTest {
+class ProcessesTest extends AbstractUnit {
     /**
      * $processes object instantiates the Processes Class.
      */

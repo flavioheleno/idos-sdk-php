@@ -2,14 +2,14 @@
 
 namespace Test\Unit\Endpoint;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Sso;
 
 /**
  * SsoTest Class tests all methods from the Sso Class.
  */
-class SsoTest extends AbstractUnitTest {
+class SsoTest extends AbstractUnit {
     /**
      * $sso object instantiates the Sso Class.
      */

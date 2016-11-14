@@ -2,12 +2,12 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use idOS\Endpoint\Profile\Candidates;
 /**
  * CandidatesTest Class tests all methods from the Candidates Class.
  */
-class CandidatesTest extends AbstractUnitTest {
+class CandidatesTest extends AbstractUnit {
 	/**
      * $candidates object instantiates the Candidates Class.
      */

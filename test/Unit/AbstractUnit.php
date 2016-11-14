@@ -5,7 +5,7 @@ namespace Test\Unit;
 /**
  * Abstract Class (Base for all unit tests).
  */
-abstract class AbstractUnitTest extends \PHPUnit_Framework_TestCase {
+abstract class AbstractUnit extends \PHPUnit_Framework_TestCase {
 	protected $sdk;
 	protected $auth;
 	protected $credentials;

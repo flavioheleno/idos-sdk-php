@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Gates;
 use idOS\Section\Profile;
@@ -10,7 +10,7 @@ use idOS\Section\Profile;
 /**
  * GatesTest Class tests all methods from the Gates Class.
  */
-class GatesTest extends AbstractUnitTest {
+class GatesTest extends AbstractUnit {
     /**
      * $gates object instantiates the Gates Class.
      */

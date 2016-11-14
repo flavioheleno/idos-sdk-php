@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\References;
 use idOS\Section\Profile;
@@ -10,7 +10,7 @@ use idOS\Section\Profile;
 /**
  * ReferencesTest Class tests all methods from the References Class.
  */
-class ReferencesTest extends AbstractUnitTest {
+class ReferencesTest extends AbstractUnit {
     /**
      * $References object instantiates the References Class.
      */

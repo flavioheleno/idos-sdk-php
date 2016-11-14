@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Sources;
 use idOS\Section\Profile;
@@ -10,7 +10,7 @@ use idOS\Section\Profile;
 /**
  * SourcesTest Class tests all methods from the Sources Class.
  */
-class SourcesTest extends AbstractUnitTest {
+class SourcesTest extends AbstractUnit {
     /**
      * $sources object instantiates the Sources Class.
      */

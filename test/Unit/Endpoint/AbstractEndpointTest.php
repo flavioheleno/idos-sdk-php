@@ -2,22 +2,23 @@
 
 namespace Test\Unit\Endpoint;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use idOS\Endpoint\AbstractEndpoint;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-
+use idOs\Exception\SDKException;
 /**
  * AbstractEndpointTest Class tests the AbstractEndpoint Class.
  */
-class AbstractEndpointTest extends AbstractUnitTest {
+class AbstractEndpointTest extends AbstractUnit {
 	private $abstractMock;
     private $httpClient;
+    protected $auth;
 
 	protected function setUp() {
         parent::setUp();
 
-        $auth = new \idOS\Auth\CredentialToken(
+        $this->auth = new \idOS\Auth\CredentialToken(
   			$this->credentials['credentialPublicKey'],
     		$this->credentials['handlerPublicKey'],
     		$this->credentials['handlerPrivKey']
@@ -29,16 +30,19 @@ class AbstractEndpointTest extends AbstractUnitTest {
 
         $this->abstractMock = $this
         	->getMockBuilder(AbstractEndpoint::class)
-        	->setConstructorArgs([$auth, $this->httpClient, false])
+        	->setConstructorArgs([$this->auth, $this->httpClient, false])
         	->getMockForAbstractClass();
     }
 
     /**
      * Invokes private and protected methods.
+     * @param  [type] &$object    the instance of the object
+     * @param  [type] $method     the name of the method to be invoked
+     * @param  array  $parameters the method parameters
      */
-    private function invokeMethod(&$object, $methodName, array $parameters = []) {
+    private function invokeMethod(&$object, $method, array $parameters = []) {
         $reflection = new \ReflectionClass(get_class($object));
-        $method = $reflection->getMethod($methodName);
+        $method = $reflection->getMethod($method);
         $method->setAccessible(true);
 
         return $method->invokeArgs($object, $parameters);
@@ -82,10 +86,14 @@ class AbstractEndpointTest extends AbstractUnitTest {
     }
 
     /**
-     * @expectedException=SDKError
-     * @return [type] [description]
+     * @expectedException idOS\Exception\SDKError
      */
     public function testSendRequestThrowsSDKError() {
+        $this->abstractMock = $this
+            ->getMockBuilder(AbstractEndpoint::class)
+            ->setConstructorArgs([$this->auth, $this->httpClient, true])
+            ->getMockForAbstractClass();
+
         /**
          * Mocks the HTTP Response
          */
@@ -105,7 +113,40 @@ class AbstractEndpointTest extends AbstractUnitTest {
         $response = $this->invokeMethod($this->abstractMock, 'sendRequest', ['get', 'uri']);
     }
 
-    public function testSendRequestReturnsArrayResponseError() {
+    /**
+     * @expectedException idOS\Exception\SDKException
+     */
+    public function testSendRequestThrowsSDKException() {
+        $this->abstractMock = $this
+            ->getMockBuilder(AbstractEndpoint::class)
+            ->setConstructorArgs([$this->auth, $this->httpClient, true])
+            ->getMockForAbstractClass();
 
+        $array = [
+            'status' => false,
+            'error' => [
+                'message' => 'Invalid Credentials',
+                'type' => 'Error',
+                'link' => 'link'
+            ]
+        ];
+
+        /**
+         * Mocks the HTTP Response
+         */
+        $httpResponse = $this
+            ->getMockBuilder(Response::class)
+            ->getMock();
+        $httpResponse
+            ->method('getBody')
+            ->will($this->returnValue(json_encode($array)));
+        $this->httpClient
+            ->method('request')
+            ->will($this->returnValue($httpResponse));
+
+        /**
+         * Calls the invokeMethod() that will invoke the private sendRequest() method
+         */
+        $response = $this->invokeMethod($this->abstractMock, 'sendRequest', ['get', 'uri']);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Attributes;
 use idOS\Section\Profile;
@@ -10,7 +10,7 @@ use idOS\Section\Profile;
 /**
  * AttributesTest Class tests all methods from the Attributes Class.
  */
-class AttributesTest extends AbstractUnitTest {
+class AttributesTest extends AbstractUnit {
     /**
      * $attributes object instantiates the Attributes Class.
      */

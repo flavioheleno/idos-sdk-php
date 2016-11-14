@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Scores;
 use idOS\Section\Profile;
@@ -10,7 +10,7 @@ use idOS\Section\Profile;
 /**
  * ScoresTest Class tests all methods from the Scores Class.
  */
-class ScoresTest extends AbstractUnitTest {
+class ScoresTest extends AbstractUnit {
     /**
      * $scores object instantiates the Scores Class.
      */

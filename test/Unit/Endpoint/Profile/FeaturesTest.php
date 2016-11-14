@@ -2,10 +2,10 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use idOS\Endpoint\Profile\Features;
 
-class FeaturesTest extends AbstractUnitTest {
+class FeaturesTest extends AbstractUnit {
 
 	private $features;
 

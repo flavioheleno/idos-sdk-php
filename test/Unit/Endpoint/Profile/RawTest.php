@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use GuzzleHttp\Client;
 use idOS\Endpoint\Profile\Raw;
 use idOS\Section\Profile;
@@ -10,7 +10,7 @@ use idOS\Section\Profile;
 /**
  * RawTest Class tests all methods from the Raw Class.
  */
-class RawTest extends AbstractUnitTest {
+class RawTest extends AbstractUnit {
     /**
      * $raw object instantiates the Raw Class.
      */

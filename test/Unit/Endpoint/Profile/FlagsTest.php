@@ -2,10 +2,10 @@
 
 namespace Test\Unit\Endpoint\Profile;
 
-use Test\Unit\AbstractUnitTest;
+use Test\Unit\AbstractUnit;
 use idOS\Endpoint\Profile\Flags;
 
-class FlagsTest extends AbstractUnitTest {
+class FlagsTest extends AbstractUnit {
 
 	private $Flags;
 
