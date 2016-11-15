@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="true"
+		 backupStaticAttributes="false"
+		 bootstrap="test/bootstrap.php"
+		 colors="true"
+		 convertErrorsToExceptions="true"
+		 convertNoticesToExceptions="true"
+		 convertWarningsToExceptions="true"
+		 forceCoversAnnotation="false"
+		 mapTestClassNameToCoveredClassName="false"
+		 processIsolation="true"
+		 stopOnError="false"
+		 stopOnFailure="false"
+		 stopOnIncomplete="false"
+		 stopOnSkipped="false"
+		 verbose="true">
+	<testsuites>
+		<testsuite name="Unit">
+			<directory>test/Unit</directory>
+		</testsuite>
+		<testsuite name="Functional">
+			<directory>test/Functional</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">app</directory>
+			<exclude>
+				<directory>app/Exception</directory>
+				<directory suffix="Interface.php">app</directory>
+			</exclude>
+		</whitelist>
+		<blacklist>
+			<directory>vendor</directory>
+		</blacklist>
+	</filter>
+</phpunit>

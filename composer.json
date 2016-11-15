@@ -1,0 +1,55 @@
+{
+    "name": "veridu/idos-sdk-php",
+    "description": "Veridu idOS PHP SDK.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [],
+    "homepage": "https://veridu.com/",
+    "authors": [
+        {
+            "name": "Flavio Heleno",
+            "email": "flavio@veridu.com"
+        },
+        {
+            "name": "Rafael Campanari",
+            "email": "rafael@veridu.com"
+        },
+        {
+            "name": "Caue Lorenzato",
+            "email": "caue@veridu.com"
+        },
+        {
+            "name": "Rafael Andreatta",
+            "email": "andreatta@veridu.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "idOS\\": "src/idOS",
+            "Test\\": "test"
+        }
+    },
+    "require": {
+        "php": ">=5.6",
+        "guzzlehttp/guzzle": "^6.0",
+        "lcobucci/jwt": "^3.1",
+        "roave/security-advisories": "dev-master"
+    },
+    "require-dev": {
+        "ext-xsl": "*",
+        "friendsofphp/php-cs-fixer": "@stable",
+        "pdepend/pdepend": "@stable",
+        "phploc/phploc": "@stable",
+        "phpmd/phpmd" : "@stable",
+        "phpunit/dbunit": "@stable",
+        "phpunit/phpunit": "@stable",
+        "psy/psysh": "@stable",
+        "sebastian/phpcpd": "@stable",
+        "sensiolabs/security-checker": "@stable",
+        "squizlabs/php_codesniffer": "@stable",
+        "theseer/phpdox": "@stable"
+    },
+    "config": {
+        "optimize-autoloader": false
+    }
+}

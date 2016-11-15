@@ -1,0 +1,9 @@
+<?php
+
+$credentials = [
+	'credentialPublicKey' => 'credentialPublicKey',
+	'credentialPrivKey' => 'credentialPrivateKey',
+	'handlerPublicKey' => 'handlerPublicKey',
+	'handlerPrivKey' => 'handlerPrivateKey',
+	'username' => 'username'
+];
