@@ -95,7 +95,7 @@ class Sources extends AbstractProfileEndpoint {
             $array['otpCode'] = $otpCode;
         }
 
-        return $this->sendPut(
+        return $this->sendPatch(
             sprintf('/profiles/%s/sources/%s', $this->userName, $sourceId),
             [],
             $array
