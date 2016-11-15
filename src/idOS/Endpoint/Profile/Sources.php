@@ -20,9 +20,7 @@ class Sources extends AbstractProfileEndpoint {
     ) {
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
 
         $array = [
@@ -61,9 +59,7 @@ class Sources extends AbstractProfileEndpoint {
     public function getOne($sourceId) {
         assert(
             is_int($sourceId),
-            new \RuntimeException(
-                sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
-            )
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
         );
 
         return $this->sendGet(
@@ -83,9 +79,7 @@ class Sources extends AbstractProfileEndpoint {
     public function updateOne($sourceId, array $tags, $otpCode = null) {
         assert(
             is_int($sourceId),
-            new \RuntimeException(
-                sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
-            )
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
         );
 
         $array = [
@@ -95,9 +89,7 @@ class Sources extends AbstractProfileEndpoint {
         if ($otpCode !== null) {
             assert(
                 is_int($otpCode),
-                new \RuntimeException(
-                    sprintf('Parameter "$otpCode" should be a int. (%s)', $otpCode)
-                )
+                sprintf('Parameter "$otpCode" should be a int. (%s)', $otpCode)
             );
 
             $array['otpCode'] = $otpCode;
@@ -120,10 +112,9 @@ class Sources extends AbstractProfileEndpoint {
     public function deleteOne($sourceId) {
         assert(
             is_int($sourceId),
-            new \RuntimeException(
-                sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
-            )
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
         );
+
         return $this->sendDelete(
             sprintf('/profiles/%s/sources/%s', $this->userName, $sourceId)
         );

@@ -22,21 +22,15 @@ class Scores extends AbstractProfileEndpoint {
     ) {
         assert(
             is_string($attribute),
-            new \RuntimeException(
-                sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
-            )
+            sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
         );
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
             is_float($value),
-            new \RuntimeException(
-                sprintf('Parameter "$value" should be a float. (%s)', $value)
-            )
+            sprintf('Parameter "$value" should be a float. (%s)', $value)
         );
 
         return $this->sendPost(
@@ -66,21 +60,15 @@ class Scores extends AbstractProfileEndpoint {
     ) {
         assert(
             is_string($attribute),
-            new \RuntimeException(
-                sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
-            )
+            sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
         );
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
             is_float($value),
-            new \RuntimeException(
-                sprintf('Parameter "$value" should be a float. (%s)', $value)
-            )
+            sprintf('Parameter "$value" should be a float. (%s)', $value)
         );
 
         return $this->sendPut(
@@ -118,9 +106,7 @@ class Scores extends AbstractProfileEndpoint {
     public function getOne($name) {
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
 
         return $this->sendGet(
@@ -140,21 +126,15 @@ class Scores extends AbstractProfileEndpoint {
     public function updateOne($attribute, $name, $value) {
         assert(
             is_string($attribute),
-            new \RuntimeException(
-                sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
-            )
+            sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
         );
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
             is_float($value),
-            new \RuntimeException(
-                sprintf('Parameter "$value" should be a float. (%s)', $value)
-            )
+            sprintf('Parameter "$value" should be a float. (%s)', $value)
         );
 
         return $this->sendPatch(
@@ -177,9 +157,7 @@ class Scores extends AbstractProfileEndpoint {
     public function deleteOne($name) {
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
 
         return $this->sendDelete(

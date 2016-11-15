@@ -20,15 +20,11 @@ class References extends AbstractProfileEndpoint {
     ) {
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
             is_string($value),
-            new \RuntimeException(
-                sprintf('Parameter "$value" should be a string. (%s)', $value)
-            )
+            sprintf('Parameter "$value" should be a string. (%s)', $value)
         );
 
         return $this->sendPost(
@@ -65,9 +61,7 @@ class References extends AbstractProfileEndpoint {
     public function getOne($referenceName) {
         assert(
             is_string($referenceName),
-            new \RuntimeException(
-                sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
-            )
+            sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
         );
 
         return $this->sendGet(
@@ -86,15 +80,11 @@ class References extends AbstractProfileEndpoint {
     public function updateOne($referenceName, $value) {
         assert(
             is_string($referenceName),
-            new \RuntimeException(
-                sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
-            )
+            sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
         );
         assert(
             is_string($value),
-            new \RuntimeException(
-                sprintf('Parameter "$value" should be a string. (%s)', $value)
-            )
+            sprintf('Parameter "$value" should be a string. (%s)', $value)
         );
 
         return $this->sendPatch(
@@ -116,9 +106,7 @@ class References extends AbstractProfileEndpoint {
     public function deleteOne($referenceName) {
         assert(
             is_string($referenceName),
-            new \RuntimeException(
-                sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
-            )
+            sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
         );
 
         return $this->sendDelete(

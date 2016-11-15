@@ -26,15 +26,11 @@ class Tasks extends AbstractProcessEndpoint {
     ) {
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
             is_string($event),
-            new \RuntimeException(
-                sprintf('Parameter "$event" should be a string. (%s)', $event)
-            )
+            sprintf('Parameter "$event" should be a string. (%s)', $event)
         );
 
         $array = [
@@ -50,9 +46,7 @@ class Tasks extends AbstractProcessEndpoint {
         if ($success !== null) {
             assert(
                 is_bool($success),
-                new \RuntimeException(
-                    sprintf('Parameter "$success" should be a bool. (%s)', $success)
-                )
+                sprintf('Parameter "$success" should be a bool. (%s)', $success)
             );
 
             $array['success'] = $success;
@@ -89,9 +83,7 @@ class Tasks extends AbstractProcessEndpoint {
     public function getOne($taskId) {
         assert(
             is_int($taskId),
-            new \RuntimeException(
-                sprintf('Parameter "$taskId" should be a string. (%s)', $taskId)
-            )
+            sprintf('Parameter "$taskId" should be a string. (%s)', $taskId)
         );
 
         return $this->sendGet(
@@ -118,27 +110,19 @@ class Tasks extends AbstractProcessEndpoint {
     ) {
         assert(
             is_int($taskId),
-            new \RuntimeException(
-                sprintf('Parameter "$taskId" should be a string. (%s)', $taskId)
-            )
+            sprintf('Parameter "$taskId" should be a string. (%s)', $taskId)
         );
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
             is_string($event),
-            new \RuntimeException(
-                sprintf('Parameter "$event" should be a string. (%s)', $event)
-            )
+            sprintf('Parameter "$event" should be a string. (%s)', $event)
         );
         assert(
             is_bool($running),
-            new \RuntimeException(
-                sprintf('Parameter "$running" should be a bool. (%s)', $running)
-            )
+            sprintf('Parameter "$running" should be a bool. (%s)', $running)
         );
 
         $array = [
@@ -154,9 +138,7 @@ class Tasks extends AbstractProcessEndpoint {
         if ($success !== null) {
             assert(
                 is_bool($success),
-                new \RuntimeException(
-                    sprintf('Parameter "$success" should be a bool. (%s)', $success)
-                )
+                sprintf('Parameter "$success" should be a bool. (%s)', $success)
             );
 
             $array['success'] = $success;

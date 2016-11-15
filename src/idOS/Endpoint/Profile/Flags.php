@@ -20,15 +20,11 @@ class Flags extends AbstractProfileEndpoint {
     ) {
         assert(
             is_string($slug),
-            new \RuntimeException(
-                sprintf('Parameter "$slug" should be a string. (%s)', $slug)
-            )
+            sprintf('Parameter "$slug" should be a string. (%s)', $slug)
         );
         assert(
             is_string($attribute),
-            new \RuntimeException(
-                sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
-            )
+            sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
         );
 
         return $this->sendPost(
@@ -65,9 +61,7 @@ class Flags extends AbstractProfileEndpoint {
     public function getOne($slug) {
         assert(
             is_string($slug),
-            new \RuntimeException(
-                sprintf('Parameter "$slug" should be a string. (%s)', $slug)
-            )
+            sprintf('Parameter "$slug" should be a string. (%s)', $slug)
         );
 
         return $this->sendGet(
@@ -85,9 +79,7 @@ class Flags extends AbstractProfileEndpoint {
     public function deleteOne($slug) {
         assert(
             is_string($slug),
-            new \RuntimeException(
-                sprintf('Parameter "$slug" should be a string. (%s)', $slug)
-            )
+            sprintf('Parameter "$slug" should be a string. (%s)', $slug)
         );
 
         return $this->sendDelete(

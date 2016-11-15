@@ -36,21 +36,15 @@ class Candidates extends AbstractProfileEndpoint {
     ) {
         assert(
             is_string($attribute),
-            new \RuntimeException(
-                sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
-            )
+            sprintf('Parameter "$attribute" should be a string. (%s)', $attribute)
         );
         assert(
             is_string($value),
-            new \RuntimeException(
-                sprintf('Parameter "$value" should be a string. (%s)', $value)
-            )
+            sprintf('Parameter "$value" should be a string. (%s)', $value)
         );
         assert(
             is_float($support),
-            new \RuntimeException(
-                sprintf('Parameter "$support" should be a float. (%s)', $support)
-            )
+            sprintf('Parameter "$support" should be a float. (%s)', $support)
         );
 
         return $this->sendPost(

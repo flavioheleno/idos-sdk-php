@@ -30,9 +30,7 @@ class Processes extends AbstractProfileEndpoint {
     public function getOne($processId) {
         assert(
             is_int($processId),
-            new \RuntimeException(
-                sprintf('Parameter "$processId" should be a int. (%s)', $processId)
-            )
+            sprintf('Parameter "$processId" should be a int. (%s)', $processId)
         );
 
         return $this->sendGet(

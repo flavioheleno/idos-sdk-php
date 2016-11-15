@@ -30,9 +30,7 @@ class Attributes extends AbstractProfileEndpoint {
     public function getOne($attributeName) {
         assert(
             is_string($attributeName),
-            new \RuntimeException(
-                sprintf('Parameter "$attributeName" should be a string. (%s)', $attributeName)
-            )
+            sprintf('Parameter "$attributeName" should be a string. (%s)', $attributeName)
         );
 
         return $this->sendGet(

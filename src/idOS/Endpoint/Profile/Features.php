@@ -48,15 +48,11 @@ class Features extends AbstractProfileEndpoint {
 
         assert(
             is_int($sourceId),
-            new \RuntimeException(
-                sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
-            )
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
         );
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
 
         return $this->sendPost(
@@ -93,15 +89,11 @@ class Features extends AbstractProfileEndpoint {
 
         assert(
             is_int($sourceId),
-            new \RuntimeException(
-                sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
-            )
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
         );
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
 
         return $this->sendPut(
@@ -161,9 +153,7 @@ class Features extends AbstractProfileEndpoint {
     public function getOne($featureId) {
         assert(
             is_int($featureId),
-            new \RuntimeException(
-                sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
-            )
+            sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
         );
         return $this->sendGet(
             sprintf('/profiles/%s/features/%s', $this->userName, $featureId)
@@ -182,9 +172,7 @@ class Features extends AbstractProfileEndpoint {
     public function updateOne($featureId, $value, $type) {
         assert(
             is_int($featureId),
-            new \RuntimeException(
-                sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
-            )
+            sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
         );
 
         return $this->sendPatch(
@@ -207,9 +195,7 @@ class Features extends AbstractProfileEndpoint {
     public function deleteOne($featureId) {
         assert(
             is_int($featureId),
-            new \RuntimeException(
-                sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
-            )
+            sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
         );
         return $this->sendDelete(
             sprintf('/profiles/%s/features/%s', $this->userName, $featureId)

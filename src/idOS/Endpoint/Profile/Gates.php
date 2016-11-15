@@ -20,15 +20,11 @@ class Gates extends AbstractProfileEndpoint {
     ) {
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
             is_bool($pass),
-            new \RuntimeException(
-                sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
-            )
+            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
         );
 
         return $this->sendPost(
@@ -55,15 +51,11 @@ class Gates extends AbstractProfileEndpoint {
     ) {
         assert(
             is_string($name),
-            new \RuntimeException(
-                sprintf('Parameter "$name" should be a string. (%s)', $name)
-            )
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
             is_bool($pass),
-            new \RuntimeException(
-                sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
-            )
+            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
         );
 
         return $this->sendPut(
@@ -100,9 +92,7 @@ class Gates extends AbstractProfileEndpoint {
     public function getOne($gateSlug) {
         assert(
             is_string($gateSlug),
-            new \RuntimeException(
-                sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
-            )
+            sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
         );
 
         return $this->sendGet(
@@ -121,15 +111,11 @@ class Gates extends AbstractProfileEndpoint {
     public function updateOne($gateSlug, $pass) {
         assert(
             is_string($gateSlug),
-            new \RuntimeException(
-                sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
-            )
+            sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
         );
         assert(
             is_bool($pass),
-            new \RuntimeException(
-                sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
-            )
+            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
         );
 
         return $this->sendPatch(
@@ -151,9 +137,7 @@ class Gates extends AbstractProfileEndpoint {
     public function deleteOne($gateSlug) {
         assert(
             is_string($gateSlug),
-            new \RuntimeException(
-                sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
-            )
+            sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
         );
 
         return $this->sendDelete(

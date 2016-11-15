@@ -22,21 +22,15 @@ class Sso extends AbstractEndpoint {
     ) {
         assert(
             is_string($providerName),
-            new \RuntimeException(
-                sprintf('Parameter "$providerName" should be a string. (%s)', $providerName)
-            )
+            sprintf('Parameter "$providerName" should be a string. (%s)', $providerName)
         );
         assert(
             is_string($credentialPubKey),
-            new \RuntimeException(
-                sprintf('Parameter "$credentialPubKey" should be a string. (%s)', $credentialPubKey)
-            )
+            sprintf('Parameter "$credentialPubKey" should be a string. (%s)', $credentialPubKey)
         );
         assert(
             is_string($accessToken),
-            new \RuntimeException(
-                sprintf('Parameter "$accessToken" should be a string. (%s)', $accessToken)
-            )
+            sprintf('Parameter "$accessToken" should be a string. (%s)', $accessToken)
         );
 
         $array = [
@@ -48,9 +42,7 @@ class Sso extends AbstractEndpoint {
         if (! empty($tokenSecret)) {
             assert(
                 is_string($tokenSecret),
-                new \RuntimeException(
-                    sprintf('Parameter "$tokenSecret" should be a string. (%s)', $tokenSecret)
-                )
+                sprintf('Parameter "$tokenSecret" should be a string. (%s)', $tokenSecret)
             );
             $array['token_secret'] = $tokenSecret;
         }
@@ -58,9 +50,7 @@ class Sso extends AbstractEndpoint {
         if (! empty($signupHash)) {
             assert(
                 is_string($signupHash),
-                new \RuntimeException(
-                    sprintf('Parameter "$signupHash" should be a string. (%s)', $signupHash)
-                )
+                sprintf('Parameter "$signupHash" should be a string. (%s)', $signupHash)
             );
             $array['signup_hash'] = $signupHash;
         }
@@ -96,9 +86,7 @@ class Sso extends AbstractEndpoint {
     public function getOne($providerName) {
         assert(
             is_string($providerName),
-            new \RuntimeException(
-                sprintf('Parameter "$providerName" should be a string. (%s)', $providerName)
-            )
+            sprintf('Parameter "$providerName" should be a string. (%s)', $providerName)
         );
 
         return $this->sendGet(

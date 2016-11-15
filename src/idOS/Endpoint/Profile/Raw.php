@@ -22,16 +22,12 @@ class Raw extends AbstractProfileEndpoint {
     ) {
         assert(
             is_int($sourceId),
-            new \RuntimeException(
-                sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
-            )
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
         );
 
         assert(
             is_string($collectionName),
-            new \RuntimeException(
-                sprintf('Parameter "$collectionName" should be a string. (%s)', $collectionName)
-            )
+            sprintf('Parameter "$collectionName" should be a string. (%s)', $collectionName)
         );
 
         return $this->sendPost(
@@ -61,16 +57,12 @@ class Raw extends AbstractProfileEndpoint {
     ) {
         assert(
             is_int($sourceId),
-            new \RuntimeException(
-                sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
-            )
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
         );
 
         assert(
             is_string($collectionName),
-            new \RuntimeException(
-                sprintf('Parameter "$collectionName" should be a string. (%s)', $collectionName)
-            )
+            sprintf('Parameter "$collectionName" should be a string. (%s)', $collectionName)
         );
 
         return $this->sendPut(
