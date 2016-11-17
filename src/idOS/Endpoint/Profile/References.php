@@ -10,7 +10,7 @@ class References extends AbstractProfileEndpoint {
      * Creates a new reference for the given user.
      *
      * @param string $name
-     * @param bool   $value
+     * @param string $value
      *
      * @return array Response
      */
@@ -18,6 +18,14 @@ class References extends AbstractProfileEndpoint {
         $name,
         $value
     ) {
+        assert(
+            is_string($name),
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
+        );
+        assert(
+            is_string($value),
+            sprintf('Parameter "$value" should be a string. (%s)', $value)
+        );
 
         return $this->sendPost(
             sprintf('/profiles/%s/references', $this->userName),
@@ -51,6 +59,11 @@ class References extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function getOne($referenceName) {
+        assert(
+            is_string($referenceName),
+            sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
+        );
+
         return $this->sendGet(
             sprintf('/profiles/%s/references/%s', $this->userName, $referenceName)
         );
@@ -59,11 +72,21 @@ class References extends AbstractProfileEndpoint {
     /**
      * Updates a reference given its slug.
      *
-     * @param bool $value
+     * @param string $referenceName
+     * @param string $value
      *
      * @return array Response
      */
     public function updateOne($referenceName, $value) {
+        assert(
+            is_string($referenceName),
+            sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
+        );
+        assert(
+            is_string($value),
+            sprintf('Parameter "$value" should be a string. (%s)', $value)
+        );
+
         return $this->sendPatch(
             sprintf('/profiles/%s/references/%s', $this->userName, $referenceName),
             [],
@@ -81,6 +104,11 @@ class References extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function deleteOne($referenceName) {
+        assert(
+            is_string($referenceName),
+            sprintf('Parameter "$referenceName" should be a string. (%s)', $referenceName)
+        );
+
         return $this->sendDelete(
             sprintf('/profiles/%s/references/%s', $this->userName, $referenceName)
         );

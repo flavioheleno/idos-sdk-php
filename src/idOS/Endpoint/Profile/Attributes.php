@@ -21,31 +21,6 @@ class Attributes extends AbstractProfileEndpoint {
     }
 
     /**
-     * Creates a new attribute for the given user.
-     *
-     * @param string $name
-     * @param string $value
-     * @param float  $support
-     *
-     * @return array Response
-     */
-    public function createNew(
-        $name,
-        $value,
-        $support
-    ) {
-        return $this->sendPost(
-            sprintf('/profiles/%s/attributes', $this->userName),
-            [],
-            [
-                'name'      => $name,
-                'value'     => $value,
-                'support'   => $support
-            ]
-        );
-    }
-
-    /**
      * Retrieves an attribute given its slug.
      *
      * @param string $attributeName
@@ -53,35 +28,13 @@ class Attributes extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function getOne($attributeName) {
+        assert(
+            is_string($attributeName),
+            sprintf('Parameter "$attributeName" should be a string. (%s)', $attributeName)
+        );
+
         return $this->sendGet(
             sprintf('/profiles/%s/attributes/%s', $this->userName, $attributeName)
-        );
-    }
-
-    /**
-     * Deletes an attribute given its slug.
-     *
-     * @param string $attributeName
-     *
-     * @return array Response
-     */
-    public function deleteOne($attributeName) {
-        return $this->sendDelete(
-            sprintf('/profiles/%s/attributes/%s', $this->userName, $attributeName)
-        );
-    }
-
-    /**
-     * Deletes all attributes.
-     *
-     * @param array $filters
-     *
-     * @return array Response
-     */
-    public function deleteAll(array $filters = []) {
-        return $this->sendDelete(
-            sprintf('/profiles/%s/attributes', $this->userName),
-            $filters
         );
     }
 }

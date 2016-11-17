@@ -69,7 +69,7 @@ class GatesTest extends AbstractFunctional {
             ->Profile($this->credentials['username'])
             ->Gates->deleteAll();
 
-        $feature = $this->sdk
+        $this->sdk
             ->Profile($this->credentials['username'])
             ->Gates->createNew('Name Test', true);
 
@@ -139,7 +139,7 @@ class GatesTest extends AbstractFunctional {
             ->Profile($this->credentials['username'])
             ->Gates->deleteAll();
 
-        $feature = $this->sdk
+        $this->sdk
             ->Profile($this->credentials['username'])
             ->Gates->createNew('Name Test', true);
 

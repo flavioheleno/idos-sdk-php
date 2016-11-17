@@ -46,6 +46,15 @@ class Features extends AbstractProfileEndpoint {
             $type = $this->typeInfer($value);
         }
 
+        assert(
+            is_int($sourceId),
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
+        );
+        assert(
+            is_string($name),
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
+        );
+
         return $this->sendPost(
             sprintf('/profiles/%s/features', $this->userName),
             [],
@@ -78,6 +87,15 @@ class Features extends AbstractProfileEndpoint {
             $type = $this->typeInfer($value);
         }
 
+        assert(
+            is_int($sourceId),
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
+        );
+        assert(
+            is_string($name),
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
+        );
+
         return $this->sendPut(
             sprintf('/profiles/%s/features', $this->userName),
             [],
@@ -90,6 +108,13 @@ class Features extends AbstractProfileEndpoint {
         );
     }
 
+    /**
+     * Creates or Updates more than one feature
+     *
+     * @param  array  $features
+     *
+     * @return array Response
+     */
     public function upsertBulk(array $features) {
         foreach ($features as &$feature) {
             if (empty($feature['type'])) {
@@ -126,6 +151,10 @@ class Features extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function getOne($featureId) {
+        assert(
+            is_int($featureId),
+            sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
+        );
         return $this->sendGet(
             sprintf('/profiles/%s/features/%s', $this->userName, $featureId)
         );
@@ -141,6 +170,11 @@ class Features extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function updateOne($featureId, $value, $type) {
+        assert(
+            is_int($featureId),
+            sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
+        );
+
         return $this->sendPatch(
             sprintf('/profiles/%s/features/%s', $this->userName, $featureId),
             [],
@@ -159,6 +193,10 @@ class Features extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function deleteOne($featureId) {
+        assert(
+            is_int($featureId),
+            sprintf('Parameter "$featureId" should be a int. (%s)', $featureId)
+        );
         return $this->sendDelete(
             sprintf('/profiles/%s/features/%s', $this->userName, $featureId)
         );

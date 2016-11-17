@@ -1,7 +1,6 @@
 <?php
 
 namespace idOS\Endpoint;
-
 /**
  * Single Sign-On Class Endpoint.
  */
@@ -21,6 +20,18 @@ class Sso extends AbstractEndpoint {
         $tokenSecret = '',
         $signupHash = ''
     ) {
+        assert(
+            is_string($providerName),
+            sprintf('Parameter "$providerName" should be a string. (%s)', $providerName)
+        );
+        assert(
+            is_string($credentialPubKey),
+            sprintf('Parameter "$credentialPubKey" should be a string. (%s)', $credentialPubKey)
+        );
+        assert(
+            is_string($accessToken),
+            sprintf('Parameter "$accessToken" should be a string. (%s)', $accessToken)
+        );
 
         $array = [
             'provider'     => $providerName,
@@ -29,10 +40,18 @@ class Sso extends AbstractEndpoint {
         ];
 
         if (! empty($tokenSecret)) {
+            assert(
+                is_string($tokenSecret),
+                sprintf('Parameter "$tokenSecret" should be a string. (%s)', $tokenSecret)
+            );
             $array['token_secret'] = $tokenSecret;
         }
 
         if (! empty($signupHash)) {
+            assert(
+                is_string($signupHash),
+                sprintf('Parameter "$signupHash" should be a string. (%s)', $signupHash)
+            );
             $array['signup_hash'] = $signupHash;
         }
 
@@ -65,6 +84,11 @@ class Sso extends AbstractEndpoint {
      * @return array Response
      */
     public function getOne($providerName) {
+        assert(
+            is_string($providerName),
+            sprintf('Parameter "$providerName" should be a string. (%s)', $providerName)
+        );
+
         return $this->sendGet(
             sprintf('/sso/%s', $providerName)
         );

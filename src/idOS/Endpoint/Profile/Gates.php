@@ -18,6 +18,14 @@ class Gates extends AbstractProfileEndpoint {
         $name,
         $pass
     ) {
+        assert(
+            is_string($name),
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
+        );
+        assert(
+            is_bool($pass),
+            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
+        );
 
         return $this->sendPost(
             sprintf('/profiles/%s/gates', $this->userName),
@@ -41,6 +49,14 @@ class Gates extends AbstractProfileEndpoint {
         $name,
         $pass
     ) {
+        assert(
+            is_string($name),
+            sprintf('Parameter "$name" should be a string. (%s)', $name)
+        );
+        assert(
+            is_bool($pass),
+            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
+        );
 
         return $this->sendPut(
             sprintf('/profiles/%s/gates', $this->userName),
@@ -74,6 +90,11 @@ class Gates extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function getOne($gateSlug) {
+        assert(
+            is_string($gateSlug),
+            sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
+        );
+
         return $this->sendGet(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug)
         );
@@ -82,11 +103,21 @@ class Gates extends AbstractProfileEndpoint {
     /**
      * Updates a gate given its slug.
      *
+     * @param string $gateSlug
      * @param bool $pass
      *
      * @return array Response
      */
     public function updateOne($gateSlug, $pass) {
+        assert(
+            is_string($gateSlug),
+            sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
+        );
+        assert(
+            is_bool($pass),
+            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
+        );
+
         return $this->sendPatch(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug),
             [],
@@ -104,6 +135,11 @@ class Gates extends AbstractProfileEndpoint {
      * @return array Response
      */
     public function deleteOne($gateSlug) {
+        assert(
+            is_string($gateSlug),
+            sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
+        );
+
         return $this->sendDelete(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug)
         );

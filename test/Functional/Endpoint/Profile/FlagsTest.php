@@ -4,7 +4,7 @@ namespace Test\Functional\Endpoint\Profile;
 
 use Test\Functional\AbstractFunctional;
 
-class WarningsTest extends AbstractFunctional {
+class FlagsTest extends AbstractFunctional {
     protected function setUp() {
         parent::setUp();
     }
@@ -12,25 +12,25 @@ class WarningsTest extends AbstractFunctional {
     public function testListAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Flags->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-1', 'attribute-test-1');
+            ->Flags->createNew('flag-test-1', 'attribute-test-1');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-2', 'attribute-test-2');
+            ->Flags->createNew('flag-test-2', 'attribute-test-2');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->listAll();
+            ->Flags->listAll();
 
         foreach ($response['data'] as $reference) {
-            if ($reference['slug'] === 'warning-test-1') {
+            if ($reference['slug'] === 'flag-test-1') {
                 $this->assertSame('attribute-test-1', $reference['attribute']);
             }
 
-            if ($reference['slug'] === 'warning-test-2') {
+            if ($reference['slug'] === 'flag-test-2') {
                 $this->assertSame('attribute-test-2', $reference['attribute']);
             }
         }
@@ -39,22 +39,22 @@ class WarningsTest extends AbstractFunctional {
     public function testCreateNew() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Flags->deleteAll();
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test', 'attribute-test');
+            ->Flags->createNew('flag-test', 'attribute-test');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
-        $this->assertSame('warning-test', $response['data']['slug']);
+        $this->assertSame('flag-test', $response['data']['slug']);
         $this->assertSame('attribute-test', $response['data']['attribute']);
     }
 
     public function testCreateNewUtf8() {
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('wárníng-test', 'áttríbúte-test');
+            ->Flags->createNew('wárníng-test', 'áttríbúte-test');
 
         $this->assertFalse($response['status']);
         $this->assertNotEmpty($response['error']);
@@ -63,34 +63,34 @@ class WarningsTest extends AbstractFunctional {
     public function testGetOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Flags->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test', 'attribute-test');
+            ->Flags->createNew('flag-test', 'attribute-test');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->getOne('warning-test');
+            ->Flags->getOne('flag-test');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
-        $this->assertSame('warning-test', $response['data']['slug']);
+        $this->assertSame('flag-test', $response['data']['slug']);
         $this->assertSame('attribute-test', $response['data']['attribute']);
     }
 
     public function testDeleteOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Flags->deleteAll();
 
         $feature = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test', 'attribute-test');
+            ->Flags->createNew('flag-test', 'attribute-test');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteOne('warning-test');
+            ->Flags->deleteOne('flag-test');
 
         $this->assertTrue($response['status']);
     }
@@ -98,21 +98,21 @@ class WarningsTest extends AbstractFunctional {
     public function testDeleteAll() {
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Flags->deleteAll();
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-1', 'attribute-test-1');
+            ->Flags->createNew('flag-test-1', 'attribute-test-1');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-2', 'attribute-test-2');
+            ->Flags->createNew('flag-test-2', 'attribute-test-2');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->createNew('warning-test-3', 'attribute-test-3');
+            ->Flags->createNew('flag-test-3', 'attribute-test-3');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Warnings->deleteAll();
+            ->Flags->deleteAll();
 
         $this->assertTrue($response['status']);
         $this->assertSame(3, $response['deleted']);

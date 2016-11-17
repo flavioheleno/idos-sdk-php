@@ -8,7 +8,8 @@ abstract class AbstractFunctional extends \PHPUnit_Framework_TestCase {
 
     protected function setUp() {
         if (! $this->credentials) {
-            $this->credentials = require __DIR__ . '/../../settings.php';
+            require __DIR__ . '/../../settings.php';
+            $this->credentials = $credentials;
         }
 
         if (! $this->sdk) {

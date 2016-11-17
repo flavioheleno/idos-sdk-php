@@ -20,6 +20,16 @@ class Raw extends AbstractProfileEndpoint {
         $collectionName,
         array $data
     ) {
+        assert(
+            is_int($sourceId),
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
+        );
+
+        assert(
+            is_string($collectionName),
+            sprintf('Parameter "$collectionName" should be a string. (%s)', $collectionName)
+        );
+
         return $this->sendPost(
             sprintf('/profiles/%s/raw', $this->userName),
             [],
@@ -45,6 +55,16 @@ class Raw extends AbstractProfileEndpoint {
         $collectionName,
         array $data
     ) {
+        assert(
+            is_int($sourceId),
+            sprintf('Parameter "$sourceId" should be a int. (%s)', $sourceId)
+        );
+
+        assert(
+            is_string($collectionName),
+            sprintf('Parameter "$collectionName" should be a string. (%s)', $collectionName)
+        );
+
         return $this->sendPut(
             sprintf('/profiles/%s/raw', $this->userName),
             [],

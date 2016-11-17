@@ -5,8 +5,20 @@ namespace Test\Functional\Endpoint\Profile;
 use Test\Functional\AbstractFunctional;
 
 class FeaturesTest extends AbstractFunctional {
+    private $sourceId;
+
     protected function setUp() {
         parent::setUp();
+
+        $this->sdk
+            ->Profile($this->credentials['username'])
+            ->Sources->deleteAll();
+
+        $source = $this->sdk
+            ->Profile($this->credentials['username'])
+            ->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
+
+        $this->sourceId = $source['data']['id'];
     }
 
     public function testListAll() {
@@ -16,10 +28,10 @@ class FeaturesTest extends AbstractFunctional {
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test-1', 'value-test-1', 'string');
+            ->Features->createNew($this->sourceId, 'name-test-1', 'value-test-1', 'string');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test-2', 3, 'integer');
+            ->Features->createNew($this->sourceId, 'name-test-2', 3, 'integer');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
@@ -43,14 +55,14 @@ class FeaturesTest extends AbstractFunctional {
             ->Profile($this->credentials['username'])
             ->Features->deleteAll();
 
+
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test', 'value-test', 'string');
-
+            ->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('facebook', $response['data']['source']);
+        $this->assertSame('name-test', $response['data']['source']);
         $this->assertSame('name-test', $response['data']['name']);
         $this->assertSame('value-test', $response['data']['value']);
         $this->assertSame('string', $response['data']['type']);
@@ -59,7 +71,7 @@ class FeaturesTest extends AbstractFunctional {
     public function testCreateNewUtf8() {
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'námé-test', 'válué-test', 1.2);
+            ->Features->createNew($this->sourceId, 'námé-test', 'válué-test', 1.2);
 
         $this->assertFalse($response['status']);
         $this->assertNotEmpty($response['error']);
@@ -72,7 +84,7 @@ class FeaturesTest extends AbstractFunctional {
 
         $feature = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test', 'value-test', 'string');
+            ->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
@@ -81,7 +93,7 @@ class FeaturesTest extends AbstractFunctional {
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('facebook', $response['data']['source']);
+        $this->assertSame('name-test', $response['data']['source']);
         $this->assertSame('name-test', $response['data']['name']);
         $this->assertSame('value-test', $response['data']['value']);
         $this->assertSame('string', $response['data']['type']);
@@ -94,7 +106,7 @@ class FeaturesTest extends AbstractFunctional {
 
         $feature = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test', 'value-test', 'string');
+            ->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
@@ -103,7 +115,7 @@ class FeaturesTest extends AbstractFunctional {
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('facebook', $response['data']['source']);
+        $this->assertSame('name-test', $response['data']['source']);
         $this->assertSame('name-test', $response['data']['name']);
         $this->assertSame(2, $response['data']['value']);
         $this->assertSame('integer', $response['data']['type']);
@@ -116,24 +128,24 @@ class FeaturesTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->upsertOne(1321189817, 'name-test', 'value-test', 'string');
+            ->Features->upsertOne($this->sourceId, 'name-test', 'value-test', 'string');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('facebook', $response['data']['source']);
+        $this->assertSame('name-test', $response['data']['source']);
         $this->assertSame('name-test', $response['data']['name']);
         $this->assertSame('value-test', $response['data']['value']);
         $this->assertSame('string', $response['data']['type']);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->upsertOne(1321189817, 'name-test', 2, 'integer');
+            ->Features->upsertOne($this->sourceId, 'name-test', 2, 'integer');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('facebook', $response['data']['source']);
+        $this->assertSame('name-test', $response['data']['source']);
         $this->assertSame('name-test', $response['data']['name']);
         $this->assertSame(2, $response['data']['value']);
         $this->assertSame('integer', $response['data']['type']);
@@ -201,7 +213,7 @@ class FeaturesTest extends AbstractFunctional {
 
         $feature = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test', 'value-test', 'string');
+            ->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
@@ -217,13 +229,13 @@ class FeaturesTest extends AbstractFunctional {
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test-1', 'value-test-1', 'string');
+            ->Features->createNew($this->sourceId, 'name-test-1', 'value-test-1', 'string');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test-2', 3, 'integer');
+            ->Features->createNew($this->sourceId, 'name-test-2', 3, 'integer');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Features->createNew(1321189817, 'name-test-3', 2.2, 'float');
+            ->Features->createNew($this->sourceId, 'name-test-3', 2.2, 'float');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
