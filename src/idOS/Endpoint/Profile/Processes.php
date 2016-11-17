@@ -25,11 +25,11 @@ class Processes extends AbstractProfileEndpoint {
     /**
      * Retrieves a processe given its slug.
      *
-     * @param string $processId
+     * @param int $processId
      *
      * @return array Response
      */
-    public function getOne(string $processId) : array {
+    public function getOne(int $processId) : array {
         return $this->sendGet(
             sprintf('/profiles/%s/processes/%s', $this->userName, $processId)
         );

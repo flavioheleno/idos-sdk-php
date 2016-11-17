@@ -37,7 +37,7 @@ class Credentials extends AbstractCompanyEndpoint {
             sprintf('/companies/%s/credentials', $this->companySlug),
             [],
             [
-                'name' => $name,
+                'name'       => $name,
                 'production' => $production
             ]
         );

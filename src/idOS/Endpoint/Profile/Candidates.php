@@ -48,32 +48,6 @@ class Candidates extends AbstractProfileEndpoint {
     }
 
     /**
-     * Retrieves an attribute candidate given its slug.
-     *
-     * @param string $attributeName
-     *
-     * @return array Response
-     */
-    public function getOne(string $attributeName) : array {
-        return $this->sendGet(
-            sprintf('/profiles/%s/candidates/%s', $this->userName, $attributeName)
-        );
-    }
-
-    /**
-     * Deletes an attribute candidate given its slug.
-     *
-     * @param string $attributeName
-     *
-     * @return array Response
-     */
-    public function deleteOne(string $attributeName) : array {
-        return $this->sendDelete(
-            sprintf('/profiles/%s/candidates/%s', $this->userName, $attributeName)
-        );
-    }
-
-    /**
      * Deletes all attribute candidates.
      *
      * @param array $filters

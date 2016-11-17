@@ -8,7 +8,6 @@ use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 use idOS\Section\Company;
 use idOS\Section\Profile;
-use idOS\Section\Profile\Process;
 
 class SDK {
     /**
@@ -145,35 +144,6 @@ class SDK {
     }
 
     /**
-     * Return new instance of SSO Endpoint.
-     *
-     * @return Endpoint\SSO instance
-     */
-    public function sso() : SSO {
-        return new Endpoint\SSO(
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions
-        );
-    }
-
-    /**
-     * Return new instance of Section\Profile\Process.
-     *
-     * @param int $processId
-     *
-     * @return Section\Profile\Process instance
-     */
-    public function process(int $processId) : Process {
-        return new Process(
-            $processId,
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions
-        );
-    }
-
-    /**
      * Gets the ClassName and instantiates it.
      *
      * @param string $name
@@ -185,7 +155,8 @@ class SDK {
 
         return new $className(
             $this->authentication,
-            $this->client
+            $this->client,
+            $this->throwsExceptions
         );
     }
 
