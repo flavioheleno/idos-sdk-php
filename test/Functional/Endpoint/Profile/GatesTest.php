@@ -45,13 +45,13 @@ class GatesTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test', true);
+            ->Gates->createNew('Name Test', true, 'confidence-factor');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test', $response['data']['name']);
-        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertSame('name-test-confidence-factor', $response['data']['slug']);
         $this->assertTrue($response['data']['pass']);
     }
 
@@ -113,13 +113,13 @@ class GatesTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->upsertOne('Name Test', true);
+            ->Gates->upsertOne('Name Test', true, 'confidence-factor');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test', $response['data']['name']);
-        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertSame('name-test-confidence-factor', $response['data']['slug']);
         $this->assertTrue($response['data']['pass']);
 
         $response = $this->sdk

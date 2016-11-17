@@ -11,12 +11,14 @@ class Gates extends AbstractProfileEndpoint {
      *
      * @param string $name
      * @param bool   $pass
+     * @param string $confidenceLevel
      *
      * @return array Response
      */
     public function createNew(
         $name,
-        $pass
+        $pass,
+        $confidenceLevel = ''
     ) {
         assert(
             is_string($name),
@@ -27,13 +29,23 @@ class Gates extends AbstractProfileEndpoint {
             sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
         );
 
+        $array = [
+            'name'      => $name,
+            'pass'      => $pass
+        ];
+
+        if (! empty($confidenceLevel)) {
+            assert(
+                is_string($confidenceLevel),
+                sprintf('Parameter "$confidenceLevel" should be a string. (%s)', $confidenceLevel)
+            );
+            $array['confidence_level'] = $confidenceLevel;
+        }
+
         return $this->sendPost(
             sprintf('/profiles/%s/gates', $this->userName),
             [],
-            [
-                'name'      => $name,
-                'pass'      => $pass
-            ]
+            $array
         );
     }
 
@@ -42,12 +54,14 @@ class Gates extends AbstractProfileEndpoint {
      *
      * @param string $name
      * @param bool   $pass
+     * @param string $confidenceLevel
      *
      * @return array Response
      */
     public function upsertOne(
         $name,
-        $pass
+        $pass,
+        $confidenceLevel = ''
     ) {
         assert(
             is_string($name),
@@ -58,13 +72,23 @@ class Gates extends AbstractProfileEndpoint {
             sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
         );
 
+        $array = [
+            'name'      => $name,
+            'pass'      => $pass
+        ];
+
+        if (! empty($confidenceLevel)) {
+            assert(
+                is_string($confidenceLevel),
+                sprintf('Parameter "$confidenceLevel" should be a string. (%s)', $confidenceLevel)
+            );
+            $array['confidence_level'] = $confidenceLevel;
+        }
+
         return $this->sendPut(
             sprintf('/profiles/%s/gates', $this->userName),
             [],
-            [
-                'name'      => $name,
-                'pass'      => $pass
-            ]
+            $array
         );
     }
 
