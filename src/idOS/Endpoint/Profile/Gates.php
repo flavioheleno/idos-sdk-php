@@ -13,21 +13,29 @@ class Gates extends AbstractProfileEndpoint {
      *
      * @param string $name
      * @param bool   $pass
+     * @param string $confidenceLevel
      *
      * @return array Response
      */
     public function createNew(
         string $name,
-        bool $pass
+        bool $pass,
+        string $confidenceLevel = ''
     ) : array {
+
+        $array = [
+            'name'      => $name,
+            'pass'      => $pass
+        ];
+
+        if (! empty($confidenceLevel)) {
+            $array['confidence_level'] = $confidenceLevel;
+        }
 
         return $this->sendPost(
             sprintf('/profiles/%s/gates', $this->userName),
             [],
-            [
-                'name'      => $name,
-                'pass'      => $pass
-            ]
+            $array
         );
     }
 
@@ -44,13 +52,19 @@ class Gates extends AbstractProfileEndpoint {
         bool $pass
     ) : array {
 
+        $array = [
+            'name'      => $name,
+            'pass'      => $pass
+        ];
+
+        if (! empty($confidenceLevel)) {
+            $array['confidence_level'] = $confidenceLevel;
+        }
+
         return $this->sendPut(
             sprintf('/profiles/%s/gates', $this->userName),
             [],
-            [
-                'name'      => $name,
-                'pass'      => $pass
-            ]
+            $array
         );
     }
 
