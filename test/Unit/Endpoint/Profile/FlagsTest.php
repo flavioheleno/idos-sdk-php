@@ -6,7 +6,10 @@ use idOS\Endpoint\Profile\Flags;
 use Test\Unit\AbstractUnit;
 
 class FlagsTest extends AbstractUnit {
-    private $Flags;
+    /**
+     * Profile flags endpoint instance.
+     */
+    private $flags;
 
     protected function setUp() {
         parent::setUp();

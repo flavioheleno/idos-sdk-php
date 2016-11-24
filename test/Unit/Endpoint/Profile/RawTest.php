@@ -10,7 +10,7 @@ use Test\Unit\AbstractUnit;
  */
 class RawTest extends AbstractUnit {
     /**
-     * $raw object instantiates the Raw Class.
+     * Raw data endpoint instance.
      */
     protected $raw;
 

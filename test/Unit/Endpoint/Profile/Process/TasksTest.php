@@ -10,7 +10,7 @@ use Test\Unit\AbstractUnit;
  */
 class TasksTest extends AbstractUnit {
     /**
-     * $tasks object instantiates the Tasks Class.
+     * Process tasks endpoint instance.
      */
     protected $tasks;
 

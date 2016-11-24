@@ -10,7 +10,7 @@ use Test\Unit\AbstractUnit;
  */
 class ScoresTest extends AbstractUnit {
     /**
-     * $scores object instantiates the Scores Class.
+     * Profile scores endpoint instance.
      */
     protected $scores;
 

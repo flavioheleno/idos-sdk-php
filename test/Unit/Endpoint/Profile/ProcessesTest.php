@@ -11,7 +11,7 @@ use Test\Unit\AbstractUnit;
  */
 class ProcessesTest extends AbstractUnit {
     /**
-     * $processes object instantiates the Processes Class.
+     * Profile processes endpoint instance.
      */
     protected $processes;
 

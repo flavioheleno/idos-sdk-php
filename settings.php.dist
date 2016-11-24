@@ -5,5 +5,6 @@ $credentials = [
 	'credentialPrivKey' => 'credentialPrivateKey',
 	'handlerPublicKey' => 'handlerPublicKey',
 	'handlerPrivKey' => 'handlerPrivateKey',
-	'username' => 'username'
+	'username' => 'username',
+	'identityToken' => 'identityToken'
 ];
