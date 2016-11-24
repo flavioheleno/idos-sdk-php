@@ -10,9 +10,9 @@ use Test\Unit\AbstractUnit;
  */
 class ReferencesTest extends AbstractUnit {
     /**
-     * $References object instantiates the References Class.
+     * Profile references endpoint instance.
      */
-    protected $References;
+    protected $references;
 
     protected function setUp() {
         parent::setUp();

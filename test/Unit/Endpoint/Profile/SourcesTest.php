@@ -10,7 +10,7 @@ use Test\Unit\AbstractUnit;
  */
 class SourcesTest extends AbstractUnit {
     /**
-     * $sources object instantiates the Sources Class.
+     * Profile sources endpoint instance.
      */
     protected $sources;
 

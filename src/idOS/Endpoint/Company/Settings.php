@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace idOS\Endpoint\Company;
 
 /**
@@ -41,8 +43,10 @@ class Settings extends AbstractCompanyEndpoint {
             sprintf('/companies/%s/settings', $this->companySlug),
             [],
             [
-                'name' => $name,
-                'production' => $production
+                'section' => $section,
+                'property' => $property,
+                'value' => $value,
+                'protected' => $protected
             ]
         );
     }

@@ -10,7 +10,7 @@ use Test\Unit\AbstractUnit;
  */
 class CandidatesTest extends AbstractUnit {
     /**
-     * $candidates object instantiates the Candidates Class.
+     * Profile candidates endpoint instance.
      */
     protected $candidates;
 

@@ -10,7 +10,7 @@ use Test\Unit\AbstractUnit;
  */
 class AttributesTest extends AbstractUnit {
     /**
-     * $attributes object instantiates the Attributes Class.
+     * Profile attributes endpoint instance.
      */
     protected $attributes;
 

@@ -21,7 +21,8 @@ abstract class AbstractUnit extends \PHPUnit_Framework_TestCase {
             'credentialPrivKey'   => 'credentialPrivKey',
             'handlerPublicKey'    => 'handlerPublicKey',
             'handlerPrivKey'      => 'handlerPrivKey',
-            'userName'            => 'userName'
+            'userName'            => 'userName',
+            'identityToken'      => 'identityToken'
         ];
     }
 
