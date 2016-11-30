@@ -69,7 +69,7 @@ class Sources extends AbstractProfileEndpoint {
      *
      * @return array Response
      */
-    public function updateOne(int $sourceId, array $tags, int $otpCode = null, string $ipaddr = '') : array {
+    public function updateOne(int $sourceId, array $tags, string $otpCode = null, string $ipaddr = '') : array {
         $array = [
             'tags' => $tags
         ];
