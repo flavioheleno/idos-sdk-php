@@ -22,6 +22,10 @@ abstract class AbstractSection implements SectionInterface {
      * @var [type]
      */
     protected $throwsExceptions;
+    /**
+     * idOS API base URL.
+     */
+    protected $baseUrl;
 
     /**
      * Return the Endpoint Class Name.
@@ -82,15 +86,18 @@ abstract class AbstractSection implements SectionInterface {
      *
      * @param AuthInterface $authentication
      * @param Client        $client
-     * @param bool|bool     $throwExceptions
+     * @param bool          $throwExceptions
+     * @param string        $baseUrl
      */
     public function __construct(
         AuthInterface $authentication,
         Client $client,
-        bool $throwExceptions = false
+        bool $throwExceptions = false,
+        string $baseUrl = 'https://api.idos.io/1.0/'
     ) {
         $this->authentication  = $authentication;
         $this->client          = $client;
         $this->throwExceptions = $throwExceptions;
+        $this->baseUrl         = $baseUrl;
     }
 }
