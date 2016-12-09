@@ -22,6 +22,10 @@ abstract class AbstractEndpoint implements EndpointInterface {
      * Boolean option to throw exception.
      */
     protected $throwExceptions;
+    /**
+     * idOS API base URL.
+     */
+    protected $baseUrl;
 
     /**
      * Sends the request to the api.
@@ -33,7 +37,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
      * @return array response
      */
     private function sendRequest(string $method, string $uri, array $query = [], array $body = []) : array {
-        $uri = sprintf('https://api.idos.io/1.0/%s', ltrim($uri, '/'));
+        $uri = sprintf('%s%s', $this->baseUrl, ltrim($uri, '/'));
 
         $options = [
             'headers' => [
@@ -174,10 +178,12 @@ abstract class AbstractEndpoint implements EndpointInterface {
     public function __construct(
         AuthInterface $authentication,
         Client $client,
-        bool $throwExceptions = false
+        bool $throwExceptions = false, 
+        string $baseUrl = 'https://api.idos.io/1.0/'
     ) {
         $this->authentication  = $authentication;
         $this->client          = $client;
         $this->throwExceptions = $throwExceptions;
+        $this->baseUrl         = $baseUrl;
     }
 }

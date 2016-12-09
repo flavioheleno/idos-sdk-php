@@ -1,6 +1,6 @@
 <?php
 
-$credentials = [
+return [
 	'credentialPublicKey' => 'credentialPublicKey',
 	'credentialPrivKey' => 'credentialPrivateKey',
 	'handlerPublicKey' => 'handlerPublicKey',

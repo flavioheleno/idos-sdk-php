@@ -22,6 +22,10 @@ class SDK {
      * boolean option to throw exception.
      */
     private $throwsExceptions;
+    /**
+     * idOS API base URL.
+     */
+    protected $baseUrl;
 
     /**
      * Creates the SDK instance.
@@ -30,11 +34,12 @@ class SDK {
      *
      * @return SDK instance
      */
-    public static function create(AuthInterface $authentication, bool $throwsExceptions = false) {
+    public static function create(AuthInterface $authentication, bool $throwsExceptions = false, string $baseUrl = 'https://api.idos.io/1.0/') {
         return new static(
             $authentication,
             new Client(),
-            $throwsExceptions
+            $throwsExceptions,
+            $baseUrl
         );
     }
 
@@ -43,12 +48,13 @@ class SDK {
      *
      * @param AuthInterface $authentication
      * @param Client        $client
-     * @param bool|bool     $throwsExceptions
+     * @param bool          $throwsExceptions
      */
-    public function __construct(AuthInterface $authentication, Client $client, bool $throwsExceptions = false) {
+    public function __construct(AuthInterface $authentication, Client $client, bool $throwsExceptions = false, string $baseUrl = 'https://api.idos.io/1.0/') {
         $this->authentication   = $authentication;
         $this->client           = $client;
         $this->throwsExceptions = $throwsExceptions;
+        $this->setBaseUrl($baseUrl);
     }
 
     /**
@@ -112,35 +118,23 @@ class SDK {
     }
 
     /**
-     * Return new instance of Section\Profile.
+     * Sets idOS API base URL.
      *
-     * @param string $userName
-     *
-     * @return Section\Profile instance
+     * @param string $baseUrl
      */
-    public function profile(string $userName) : Profile {
-        return new Profile(
-            $userName,
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions
-        );
+    public function setBaseUrl(string $baseUrl) : self {
+        $this->baseUrl = rtrim($baseUrl, '/') . '/';
+
+        return $this;
     }
 
     /**
-     * Return new instance of Company Endpoint.
+     * Returns idOS API base URL.
      *
-     * @param string $companySlug
-     *
-     * @return Endpoint\Company instance
+     * @return string $baseUrl
      */
-    public function company(string $companySlug) : Company {
-        return new Company(
-            $companySlug,
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions
-        );
+    public function getBaseUrl() : string {
+        return $this->baseUrl;
     }
 
     /**
@@ -156,7 +150,8 @@ class SDK {
         return new $className(
             $this->authentication,
             $this->client,
-            $this->throwsExceptions
+            $this->throwsExceptions,
+            $this->baseUrl
         );
     }
 
@@ -172,6 +167,8 @@ class SDK {
         $className = $this->getSectionClassName($name);
         $args[]    = $this->authentication;
         $args[]    = $this->client;
+        $args[]    = $this->throwsExceptions;
+        $args[]    = $this->baseUrl;
 
         return new $className(...$args);
     }
@@ -195,6 +192,34 @@ class SDK {
             throw new \RuntimeException(
                 sprintf(
                     'Invalid endpoint name "%s" (%s)',
+                    $name,
+                    $className
+                )
+            );
+        }
+
+        return $className;
+    }
+
+    /**
+     * Returns the name of the section class.
+     *
+     * @param string $name
+     *
+     * @return string className
+     */
+    protected function getSectionClassName(string $name) : string {
+        $className = sprintf(
+            '%s\\%s\\%s',
+            'idOS',
+            'Section',
+            ucfirst($name)
+        );
+
+        if (! class_exists($className)) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Invalid section name "%s" (%s)',
                     $name,
                     $className
                 )
