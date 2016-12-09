@@ -41,8 +41,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
             'headers' => [
                 'Authorization' => (string) $this->authentication
             ],
-            'http_errors' => false,
-            'verify' => false
+            'http_errors' => false
         ];
 
         if (! empty($query)) {
