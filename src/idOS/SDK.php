@@ -48,13 +48,13 @@ class SDK {
      *
      * @param AuthInterface $authentication
      * @param Client        $client
-     * @param bool|bool     $throwsExceptions
+     * @param bool          $throwsExceptions
      */
     public function __construct(AuthInterface $authentication, Client $client, bool $throwsExceptions = false, string $baseUrl = 'https://api.idos.io/1.0/') {
         $this->authentication   = $authentication;
         $this->client           = $client;
         $this->throwsExceptions = $throwsExceptions;
-        $this->baseUrl          = $baseUrl;
+        $this->setBaseUrl($baseUrl);
     }
 
     /**
