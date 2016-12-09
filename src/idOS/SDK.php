@@ -139,71 +139,6 @@ class SDK {
     }
 
     /**
-     * Return new instance of Section\Profile.
-     *
-     * @param string $userName
-     *
-     * @return Section\Profile instance
-     */
-    public function profile(string $userName) : Profile {
-        return new Profile(
-            $userName,
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions,
-            $this->baseUrl
-        );
-    }
-
-    /**
-     * Return new instance of Company Endpoint.
-     *
-     * @param string $companySlug
-     *
-     * @return Endpoint\Company instance
-     */
-    public function company(string $companySlug) : Company {
-        return new Company(
-            $companySlug,
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions,
-            $this->baseUrl
-        );
-    }
-
-    /**
-     * Return new instance of SSO Endpoint.
-     *
-     * @return Endpoint\SSO instance
-     */
-    public function sso() : SSO {
-        return new Endpoint\SSO(
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions,
-            $this->baseUrl
-        );
-    }
-
-    /**
-     * Return new instance of Section\Profile\Process.
-     *
-     * @param int $processId
-     *
-     * @return Section\Profile\Process instance
-     */
-    public function process(int $processId) : Process {
-        return new Process(
-            $processId,
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions,
-            $this->baseUrl
-        );
-    }
-
-    /**
      * Gets the ClassName and instantiates it.
      *
      * @param string $name
@@ -268,16 +203,17 @@ class SDK {
     }
 
     /**
-     * Returns the Section Class Name.
+     * Returns the name of the section class.
      *
      * @param string $name
      *
-     * @return string $className
+     * @return string className
      */
     protected function getSectionClassName(string $name) : string {
         $className = sprintf(
-            '%s\\%s',
-            get_class($this),
+            '%s\\%s\\%s',
+            'idOS',
+            'Section',
             ucfirst($name)
         );
 
