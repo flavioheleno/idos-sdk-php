@@ -12,7 +12,7 @@ class References extends AbstractProfileEndpoint {
      * Creates a new reference for the given user.
      *
      * @param string $name
-     * @param bool   $value
+     * @param string $value
      *
      * @return array Response
      */

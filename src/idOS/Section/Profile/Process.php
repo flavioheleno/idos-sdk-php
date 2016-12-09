@@ -8,7 +8,6 @@ use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
 use idOS\Endpoint\EndpointInterface;
 use idOS\Section\AbstractSection;
-use idOS\Section\SectionInterface;
 
 class Process extends AbstractSection {
     /**
@@ -53,23 +52,5 @@ class Process extends AbstractSection {
             $this->authentication,
             $this->client
         );
-    }
-
-    /**
-     * returns the endpoint called.
-     *
-     * @param string $name
-     * @param array  $args
-     *
-     * @return endpoint instance
-     */
-    public function __call(string $name, array $args) : SectionInterface {
-        $className = $this->getSectionClassName($name);
-        $args[]    = $this->processId;
-        $args[]    = $this->userName;
-        $args[]    = $this->authentication;
-        $args[]    = $this->client;
-
-        return new $className(...$args);
     }
 }

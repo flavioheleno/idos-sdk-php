@@ -45,13 +45,13 @@ class GatesTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test', true);
+            ->Gates->createNew('Name Test', true, 'confidence-level');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test', $response['data']['name']);
-        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertSame('name-test-confidence-level', $response['data']['slug']);
         $this->assertTrue($response['data']['pass']);
     }
 
@@ -92,17 +92,17 @@ class GatesTest extends AbstractFunctional {
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test', true);
+            ->Gates->createNew('Name Test', true, 'confidence-level');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->updateOne('name-test', false);
+            ->Gates->updateOne('name-test-confidence-level', false);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test', $response['data']['name']);
-        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertSame('name-test-confidence-level', $response['data']['slug']);
         $this->assertFalse($response['data']['pass']);
     }
 
@@ -124,14 +124,14 @@ class GatesTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->upsertOne('Name Test', false);
+            ->Gates->upsertOne('Name Test1', true);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('Name Test', $response['data']['name']);
-        $this->assertSame('name-test', $response['data']['slug']);
-        $this->assertFalse($response['data']['pass']);
+        $this->assertSame('Name Test1', $response['data']['name']);
+        $this->assertSame('name-test1', $response['data']['slug']);
+        $this->assertTrue($response['data']['pass']);
     }
 
     public function testDeleteOne() {

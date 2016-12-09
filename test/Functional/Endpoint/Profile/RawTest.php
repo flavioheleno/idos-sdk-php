@@ -5,8 +5,20 @@ namespace Test\Functional\Endpoint\Profile;
 use Test\Functional\AbstractFunctional;
 
 class RawTest extends AbstractFunctional {
+    private $sourceId;
+
     protected function setUp() {
         parent::setUp();
+
+        $this->sdk
+            ->Profile($this->credentials['username'])
+            ->Sources->deleteAll();
+
+        $source = $this->sdk
+            ->Profile($this->credentials['username'])
+            ->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
+
+        $this->sourceId = $source['data']['id'];
     }
 
     public function testListAll() {
@@ -16,10 +28,10 @@ class RawTest extends AbstractFunctional {
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Raw->createNew(1321189817, 'name-test-1', ['data-1' => [1, 2, 3], 'data-2' => [4, 5, 6]]);
+            ->Raw->createNew($this->sourceId, 'name-test-1', ['data-1' => [1, 2, 3], 'data-2' => [4, 5, 6]]);
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Raw->createNew(1321189817, 'name-test-2', ['data-1' => [4, 5, 6], 'data-2' => [1, 2, 3]]);
+            ->Raw->createNew($this->sourceId, 'name-test-2', ['data-1' => [4, 5, 6], 'data-2' => [1, 2, 3]]);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
@@ -45,7 +57,7 @@ class RawTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Raw->createNew(1321189817, 'name-test', ['data-1' => [1, 2, 3], 'data-2' => [4, 5, 6]]);
+            ->Raw->createNew($this->sourceId, 'name-test', ['data-1' => [1, 2, 3], 'data-2' => [4, 5, 6]]);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -60,7 +72,7 @@ class RawTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Raw->createNew(1321189817, 'name-test', ['dátá-1' => [1, 2, 3], 'dátá-2' => [4, 5, 6]]);
+            ->Raw->createNew($this->sourceId, 'name-test', ['dátá-1' => [1, 2, 3], 'dátá-2' => [4, 5, 6]]);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -75,7 +87,7 @@ class RawTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Raw->createNew(1321189817, 'name-test', ['data-1' => [1, 2, 3], 'data-2' => [4, 5, 6]]);
+            ->Raw->createNew($this->sourceId, 'name-test', ['data-1' => [1, 2, 3], 'data-2' => [4, 5, 6]]);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -84,31 +96,11 @@ class RawTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Raw->upsertOne(1321189817, 'name-test', ['data-1' => [4, 5, 6], 'data-2' => [1, 2, 3]]);
+            ->Raw->upsertOne($this->sourceId, 'name-test', ['data-1' => [4, 5, 6], 'data-2' => [1, 2, 3]]);
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['source']);
         $this->assertSame(['data-1' => [4, 5, 6], 'data-2' => [1, 2, 3]], $response['data']['data']);
-    }
-
-    public function testDeleteAll() {
-        $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Raw->deleteAll();
-
-        $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Raw->createNew(1321189817, 'name-test-1', ['data-1' => [1, 2, 3], 'data-2' => [4, 5, 6]]);
-        $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Raw->createNew(1321189817, 'name-test-2', ['data-1' => [4, 5, 6], 'data-2' => [1, 2, 3]]);
-
-        $response = $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Raw->deleteAll();
-
-        $this->assertTrue($response['status']);
-        $this->assertSame(2, $response['deleted']);
     }
 }

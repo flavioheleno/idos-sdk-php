@@ -26,12 +26,12 @@ class CandidatesTest extends AbstractFunctional {
             ->Candidates->listAll();
 
         foreach ($response['data'] as $attribute) {
-            if ($attribute['name'] === 'name-test-1') {
+            if ($attribute['attribute'] === 'name-test-1') {
                 $this->assertSame('value-test-1', $attribute['value']);
                 $this->assertSame(0.5, $attribute['support']);
             }
 
-            if ($attribute['name'] === 'name-test-2') {
+            if ($attribute['attribute'] === 'name-test-2') {
                 $this->assertSame('value-test-2', $attribute['value']);
                 $this->assertSame(0.6, $attribute['support']);
             }
@@ -45,8 +45,7 @@ class CandidatesTest extends AbstractFunctional {
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
-        $this->assertNotEmpty($response['data']['creator']);
-        $this->assertSame('name-test', $response['data']['name']);
+        $this->assertSame('name-test', $response['data']['attribute']);
         $this->assertSame('value-test', $response['data']['value']);
         $this->assertSame(0.9, $response['data']['support']);
     }
@@ -58,42 +57,6 @@ class CandidatesTest extends AbstractFunctional {
 
         $this->assertFalse($response['status']);
         $this->assertNotEmpty($response['error']);
-    }
-
-    public function testGetOne() {
-        $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Candidates->deleteAll();
-
-        $this->testCreateNew();
-
-        $response = $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Candidates->getOne('name-test');
-
-        $this->assertTrue($response['status']);
-        $this->assertNotEmpty($response['data']);
-
-        $attribute = array_pop($response['data']);
-        $this->assertNotEmpty($attribute['creator']);
-        $this->assertSame('name-test', $attribute['name']);
-        $this->assertSame('value-test', $attribute['value']);
-        $this->assertSame(0.9, $attribute['support']);
-    }
-
-    public function testDeleteOne() {
-        $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Candidates->deleteAll();
-
-        $this->testCreateNew();
-
-        $response = $this->sdk
-            ->Profile($this->credentials['username'])
-            ->Candidates->deleteOne('name-test');
-
-        $this->assertTrue($response['status']);
-        $this->assertSame(1, $response['deleted']);
     }
 
     public function testDeleteAll() {

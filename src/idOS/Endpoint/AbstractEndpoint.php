@@ -6,6 +6,8 @@ namespace idOS\Endpoint;
 
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
+use idOS\Exception\SDKError;
+use idOS\Exception\SDKException;
 
 abstract class AbstractEndpoint implements EndpointInterface {
     /**
@@ -67,7 +69,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
             return [(string) $response->getBody()];
         }
 
-        if ((! $json['status']) && ($this->throwExceptions)) {
+        if (($json['status'] === false) && ($this->throwExceptions)) {
             throw new SDKException(
                 $json['error']['message'],
                 $json['error']['type'],
