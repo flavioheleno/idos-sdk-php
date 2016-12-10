@@ -38,7 +38,9 @@ class SDK {
     /**
      * Creates the SDK instance.
      *
-     * @param AuthInterface $authentication
+     * @param \idOS\Auth\AuthInterface $authentication
+     * @param bool                     $throwsExceptions
+     * @param string                   $baseUrl
      *
      * @return self instance
      */
@@ -58,9 +60,10 @@ class SDK {
     /**
      * Constructor Class.
      *
-     * @param AuthInterface $authentication
-     * @param Client        $client
-     * @param bool          $throwsExceptions
+     * @param \idOS\Auth\AuthInterface $authentication
+     * @param \GuzzleHttp\Client       $client
+     * @param bool                     $throwsExceptions
+     * @param string                   $baseUrl
      *
      * @return void
      */
@@ -171,7 +174,7 @@ class SDK {
      *
      * @return \idOS\Endpoint\EndpointInterface
      */
-    public function __get(string $name) {
+    public function __get(string $name) : EndpointInterface {
         $className = $this->getEndpointClassName($name);
 
         return new $className(
@@ -190,7 +193,7 @@ class SDK {
      *
      * @return \idOS\Section\SectionInterface
      */
-    public function __call(string $name, array $args) {
+    public function __call(string $name, array $args) : SectionInterface {
         $className = $this->getSectionClassName($name);
         $args[]    = $this->authentication;
         $args[]    = $this->client;
