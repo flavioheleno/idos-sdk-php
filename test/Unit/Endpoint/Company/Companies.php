@@ -64,21 +64,20 @@ class CompaniesTest extends AbstractUnit {
          */
         $response = $this->companies->createNew('Dummy Company 2');
 
-
         /**
          * Assertions.
          */
         $this->assertNotEmpty($response);
-        
+
         $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
-        
+
         $this->assertArrayHasKey('data', $response);
         $this->assertNotEmpty($response['data']);
 
         $this->assertArrayHasKey('name', $response['data']);
         $this->assertSame('Dummy Company 2', $response['data']['name']);
-        
+
         $this->assertArrayHasKey('slug', $response['data']);
         $this->assertSame('dummy-company-2', $response['data']['slug']);
 

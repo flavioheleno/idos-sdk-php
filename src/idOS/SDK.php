@@ -6,35 +6,47 @@ namespace idOS;
 
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
-use idOS\Section\Company;
-use idOS\Section\Profile;
+use idOS\Endpoint\EndpointInterface;
+use idOS\Section\SectionInterface;
 
 class SDK {
     /**
      * Authentication instance.
+     *
+     * @var \idOS\Auth\AuthInterface
      */
     private $authentication;
     /**
-     * GuzzleHttp\Client.
+     * Guzzle Client instance.
+     *
+     * @var \GuzzleHttp\Client.
      */
     private $client;
     /**
-     * boolean option to throw exception.
+     * Flag to convert errors to exceptions.
+     *
+     * @var bool
      */
     private $throwsExceptions;
     /**
      * idOS API base URL.
+     *
+     * @var string
      */
-    protected $baseUrl;
+    private $baseUrl;
 
     /**
      * Creates the SDK instance.
      *
      * @param AuthInterface $authentication
      *
-     * @return SDK instance
+     * @return self instance
      */
-    public static function create(AuthInterface $authentication, bool $throwsExceptions = false, string $baseUrl = 'https://api.idos.io/1.0/') {
+    public static function create(
+        AuthInterface $authentication,
+        bool $throwsExceptions = false,
+        string $baseUrl = 'https://api.idos.io/1.0/'
+    ) : self {
         return new static(
             $authentication,
             new Client(),
@@ -49,8 +61,15 @@ class SDK {
      * @param AuthInterface $authentication
      * @param Client        $client
      * @param bool          $throwsExceptions
+     *
+     * @return void
      */
-    public function __construct(AuthInterface $authentication, Client $client, bool $throwsExceptions = false, string $baseUrl = 'https://api.idos.io/1.0/') {
+    public function __construct(
+        AuthInterface $authentication,
+        Client $client,
+        bool $throwsExceptions = false,
+        string $baseUrl = 'https://api.idos.io/1.0/'
+    ) {
         $this->authentication   = $authentication;
         $this->client           = $client;
         $this->throwsExceptions = $throwsExceptions;
@@ -58,9 +77,11 @@ class SDK {
     }
 
     /**
-     * setter Stores auth object.
+     * Stores auth object.
      *
-     * @param AuthInterface $authentication
+     * @param \idOS\Auth\AuthInterface $authentication
+     *
+     * @return self
      */
     public function setAuth(AuthInterface $authentication) : self {
         $this->authentication = $authentication;
@@ -71,7 +92,7 @@ class SDK {
     /**
      * Returns auth object.
      *
-     * @return AuthInterface auth
+     * @return \idOS\Auth\AuthInterface auth
      */
     public function getAuth() : AuthInterface {
         return $this->authentication;
@@ -80,7 +101,9 @@ class SDK {
     /**
      * Setter sets GuzzleHttp\Client instance.
      *
-     * @param Client $client
+     * @param \GuzzleHttp\Client $client
+     *
+     * @return self
      */
     public function setClient(Client $client) : self {
         $this->client = $client;
@@ -91,7 +114,7 @@ class SDK {
     /**
      * Returns the GuzzleHttp\Client instance.
      *
-     * @return GuzzeHttp\Client client
+     * @return \GuzzeHttp\Client client
      */
     public function getClient() : Client {
         return $this->client;
@@ -101,6 +124,8 @@ class SDK {
      * Sets the throws exception option.
      *
      * @param bool $throws
+     *
+     * @return self
      */
     public function setThrowsExceptions(bool $throws) : self {
         $this->throwsExceptions = $throws;
@@ -121,6 +146,8 @@ class SDK {
      * Sets idOS API base URL.
      *
      * @param string $baseUrl
+     *
+     * @return self
      */
     public function setBaseUrl(string $baseUrl) : self {
         $this->baseUrl = rtrim($baseUrl, '/') . '/';
@@ -142,7 +169,7 @@ class SDK {
      *
      * @param string $name
      *
-     * @return new instance of the given class
+     * @return \idOS\Endpoint\EndpointInterface
      */
     public function __get(string $name) {
         $className = $this->getEndpointClassName($name);
@@ -161,7 +188,7 @@ class SDK {
      * @param string $name
      * @param array  $args
      *
-     * @return new instance of the given class
+     * @return \idOS\Section\SectionInterface
      */
     public function __call(string $name, array $args) {
         $className = $this->getSectionClassName($name);

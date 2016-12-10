@@ -12,18 +12,26 @@ use idOS\Exception\SDKException;
 abstract class AbstractEndpoint implements EndpointInterface {
     /**
      * The Authentication type (UserToken, CredentialToken, IdentityToken).
+     *
+     * @var \idOS\Auth\AuthInterface
      */
     protected $authentication;
     /**
      * GuzzleHttp\Client.
+     *
+     * @var \GuzzleHttp\Client
      */
     protected $client;
     /**
      * Boolean option to throw exception.
+     *
+     * @var bool
      */
     protected $throwExceptions;
     /**
      * idOS API base URL.
+     *
+     * @var string
      */
     protected $baseUrl;
 
@@ -178,7 +186,7 @@ abstract class AbstractEndpoint implements EndpointInterface {
     public function __construct(
         AuthInterface $authentication,
         Client $client,
-        bool $throwExceptions = false, 
+        bool $throwExceptions = false,
         string $baseUrl = 'https://api.idos.io/1.0/'
     ) {
         $this->authentication  = $authentication;

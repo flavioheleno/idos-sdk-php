@@ -77,13 +77,13 @@ class CredentialsTest extends AbstractUnit {
 
         $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
-        
+
         $this->assertArrayHasKey('data', $response);
         $this->assertNotEmpty($response['data']);
-        
+
         $this->assertArrayHasKey('company_id', $response['data'][0]);
         $this->assertSame(4564658766, $response['data'][0]['company_id']);
-        
+
         $this->assertArrayHasKey('name', $response['data'][0]);
         $this->assertSame('My Test Key', $response['data'][0]['name']);
 
@@ -101,7 +101,7 @@ class CredentialsTest extends AbstractUnit {
 
         $this->assertInternalType('int', $response['data'][0]['special']);
         $this->assertSame(1, $response['data'][0]['special']);
-        
+
         $this->assertInternalType('int', $response['data'][0]['created_at']);
         $this->assertInternalType('int', $response['data'][0]['updated_at']);
     }
@@ -150,13 +150,13 @@ class CredentialsTest extends AbstractUnit {
 
         $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
-        
+
         $this->assertArrayHasKey('data', $response);
         $this->assertNotEmpty($response['data']);
-        
+
         $this->assertArrayHasKey('company_id', $response['data']);
         $this->assertSame(4564658766, $response['data']['company_id']);
-        
+
         $this->assertArrayHasKey('name', $response['data']);
         $this->assertSame('My Test Key', $response['data']['name']);
 
@@ -174,7 +174,7 @@ class CredentialsTest extends AbstractUnit {
 
         $this->assertInternalType('int', $response['data']['special']);
         $this->assertSame(1, $response['data']['special']);
-        
+
         $this->assertInternalType('int', $response['data']['created_at']);
         $this->assertInternalType('int', $response['data']['updated_at']);
     }

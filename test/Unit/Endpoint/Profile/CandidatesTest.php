@@ -141,7 +141,8 @@ class CandidatesTest extends AbstractUnit {
         $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
         $this->assertArrayHasKey('data', $response);
-        $this->assertNotEmpty($response['data']);        $this->assertArrayHasKey('attribute', $response['data']);
+        $this->assertNotEmpty($response['data']);
+        $this->assertArrayHasKey('attribute', $response['data']);
         $this->assertSame($response['data']['attribute'], $array['data']['attribute']);
         $this->assertArrayHasKey('value', $response['data']);
         $this->assertSame($response['data']['value'], $array['data']['value']);

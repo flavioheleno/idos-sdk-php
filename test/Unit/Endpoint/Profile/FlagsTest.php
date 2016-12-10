@@ -74,7 +74,8 @@ class FlagsTest extends AbstractUnit {
         $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
         $this->assertArrayHasKey('data', $response);
-        $this->assertNotEmpty($response['data']);        $this->assertArrayHasKey('slug', $response['data'][0]);
+        $this->assertNotEmpty($response['data']);
+        $this->assertArrayHasKey('slug', $response['data'][0]);
         $this->assertSame('flag-slug', $response['data'][0]['slug']);
         $this->assertArrayHasKey('attribute', $response['data'][0]);
         $this->assertSame('attr', $response['data'][0]['attribute']);
