@@ -22,11 +22,10 @@ class AbstractSectionTest extends AbstractUnit {
         );
 
         $this->section = new Profile(
-           'userName',
-
-           $this->auth,
-           new \GuzzleHttp\Client(),
-           false
+            'userName',
+            $this->auth,
+            new \GuzzleHttp\Client(),
+            false
         );
     }
 

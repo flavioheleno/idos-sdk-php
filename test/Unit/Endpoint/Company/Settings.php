@@ -74,13 +74,13 @@ class SettingsTest extends AbstractUnit {
 
         $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
-        
+
         $this->assertArrayHasKey('data', $response);
         $this->assertNotEmpty($response['data']);
-        
+
         $this->assertArrayHasKey('company_id', $response['data'][0]);
         $this->assertSame(4564658766, $response['data'][0]['company_id']);
-        
+
         $this->assertArrayHasKey('section', $response['data'][0]);
         $this->assertSame('DummySection', $response['data'][0]['section']);
 
@@ -135,13 +135,13 @@ class SettingsTest extends AbstractUnit {
 
         $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
-        
+
         $this->assertArrayHasKey('data', $response);
         $this->assertNotEmpty($response['data']);
-        
+
         $this->assertArrayHasKey('company_id', $response['data']);
         $this->assertSame(4564658766, $response['data']['company_id']);
-        
+
         $this->assertArrayHasKey('section', $response['data']);
         $this->assertSame('DummySection', $response['data']['section']);
 

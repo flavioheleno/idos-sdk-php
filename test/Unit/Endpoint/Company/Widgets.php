@@ -75,13 +75,13 @@ class WidgetsTest extends AbstractUnit {
 
         $this->assertArrayHasKey('status', $response);
         $this->assertTrue($response['status']);
-        
+
         $this->assertArrayHasKey('data', $response);
         $this->assertNotEmpty($response['data']);
-        
+
         $this->assertArrayHasKey('hash', $response['data'][0]);
         $this->assertSame('b863d45ef489ab31ed9571a951375717', $response['data'][0]['hash']);
-        
+
         $this->assertArrayHasKey('label', $response['data'][0]);
         $this->assertSame('Dummy Widget', $response['data'][0]['label']);
 
@@ -90,7 +90,7 @@ class WidgetsTest extends AbstractUnit {
 
         $this->assertArrayHasKey('config', $response['data'][0]);
         $this->assertSame(json_encode(['gates' => 'gate_1']), $response['data'][0]['config']);
-        
+
         $this->assertInternalType('int', $response['data'][0]['creator_id']);
         $this->assertSame(263517634, $response['data'][0]['creator_id']);
 
@@ -149,7 +149,7 @@ class WidgetsTest extends AbstractUnit {
 
         $this->assertArrayHasKey('hash', $response['data']);
         $this->assertSame('b863d45ef489ab31ed9571a951375717', $response['data']['hash']);
-        
+
         $this->assertArrayHasKey('label', $response['data']);
         $this->assertSame('Dummy Widget', $response['data']['label']);
 
@@ -158,7 +158,7 @@ class WidgetsTest extends AbstractUnit {
 
         $this->assertArrayHasKey('config', $response['data']);
         $this->assertSame(json_encode(['gates' => 'gate_1']), $response['data']['config']);
-        
+
         $this->assertInternalType('int', $response['data']['creator_id']);
         $this->assertSame(263517634, $response['data']['creator_id']);
 

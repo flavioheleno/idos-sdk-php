@@ -10,20 +10,26 @@ use idOS\Auth\AuthInterface;
 abstract class AbstractSection implements SectionInterface {
     /**
      * Authentication type (User, Credential, Identity).
+     *
+     * @var \idOS\Auth\AuthInterface
      */
     protected $authentication;
     /**
-     * GuzzeHTTP\Client;.
+     * GuzzeHTTP\Client.
+     *
+     * @var \GuzzleHttp\Client
      */
     protected $client;
     /**
      * Boolean option to throw exception or not.
      *
-     * @var [type]
+     * @var bool
      */
     protected $throwsExceptions;
     /**
      * idOS API base URL.
+     *
+     * @var string
      */
     protected $baseUrl;
 
