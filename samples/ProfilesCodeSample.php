@@ -25,13 +25,8 @@ $sdk = \idOS\SDK::create($auth);
  */
 $response = $sdk
     ->Profiles
-    ->listAll();
+    ->getOne('usr001');
 
-/**
- * Prints all usernames provided by the api call response to Profiles endpoint.
- */
-echo 'Usernames:', PHP_EOL;
-foreach ($response['data'] as $profiles) {
-    printf($profiles['username']);
-    echo PHP_EOL;
-}
+printf($response['data']);
+echo PHP_EOL;
+
