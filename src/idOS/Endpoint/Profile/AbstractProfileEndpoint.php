@@ -19,18 +19,22 @@ abstract class AbstractProfileEndpoint extends AbstractEndpoint {
     /**
      * Constructor Class.
      *
-     * @param string        $userName         The user username
-     * @param AuthInterface $authentication   The type of the authentication: UserToken, HandlerToken and IdentityToken
-     * @param Client        $client
-     * @param bool|bool     $throwsExceptions
+     * @param string                   $userName         The user username
+     * @param \idOS\Auth\AuthInterface $authentication   The type of the authentication: UserToken, HandlerToken and IdentityToken
+     * @param \GuzzleHttp\Client       $client
+     * @param bool                     $throwsExceptions
+     * @param string                   $baseUrl
+     *
+     * @return void
      */
     public function __construct(
         string $userName,
         AuthInterface $authentication,
         Client $client,
-        bool $throwsExceptions = false
+        bool $throwsExceptions = false,
+        string $baseUrl = 'https://api.idos.io/1.0/'
     ) {
         $this->userName = $userName;
-        parent::__construct($authentication, $client, $throwsExceptions);
+        parent::__construct($authentication, $client, $throwsExceptions, $baseUrl);
     }
 }

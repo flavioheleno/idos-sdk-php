@@ -17,52 +17,46 @@ class Company extends AbstractSection {
     /**
      * Constructor Class.
      *
-     * @param string        $companySlug
-     * @param AuthInterface $authentication
-     * @param Client        $client
-     * @param bool|bool     $throwsExceptions
+     * @param string                   $companySlug
+     * @param \idOS\Auth\AuthInterface $authentication
+     * @param \GuzzleHttp\Client       $client
+     * @param bool                     $throwsExceptions
+     * @param string                   $baseUrl
+     *
+     * @return void
      */
     public function __construct(
         string $companySlug,
         AuthInterface $authentication,
         Client $client,
-        bool $throwsExceptions = false
+        bool $throwsExceptions = false,
+        string $baseUrl = 'https://api.idos.io/1.0/'
     ) {
         $this->companySlug = $companySlug;
-        parent::__construct($authentication, $client, $throwsExceptions);
+        parent::__construct($authentication, $client, $throwsExceptions, $baseUrl);
     }
 
     /**
-     * returns the endpoint called passing the process id inside constructor.
+     * Return an endpoint instance properly initialized.
      *
      * @param string $name
      *
-     * @return endpoint instance
+     * @return \idOS\Endpoint\EndpointInterface
      */
     public function __get(string $name) : EndpointInterface {
-        $className = $this->getEndpointClassName($name);
-
-        return new $className(
-            $this->companySlug,
-            $this->authentication,
-            $this->client
-        );
+        return $this->createEndpoint($name, [$this->companySlug]);
     }
 
     /**
-     * returns the endpoint called.
+     * Return a section instance properly initialized.
      *
      * @param string $name
      * @param array  $args
      *
-     * @return endpoint instance
+     * @return \idOS\Section\SectionInterface
      */
     public function __call(string $name, array $args) : SectionInterface {
-        $className = $this->getSectionClassName($name);
-        $args[]    = $this->companySlug;
-        $args[]    = $this->authentication;
-        $args[]    = $this->client;
-
-        return new $className(...$args);
+        $args[] = $this->companySlug;
+        return $this->createSection($name, $args);
     }
 }

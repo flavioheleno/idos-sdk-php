@@ -10,7 +10,7 @@ use Test\Unit\AbstractUnit;
  */
 class GatesTest extends AbstractUnit {
     /**
-     * $gates object instantiates the Gates Class.
+     * Profile gates endpoint instance.
      */
     protected $gates;
 

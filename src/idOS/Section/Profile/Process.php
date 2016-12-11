@@ -18,22 +18,24 @@ class Process extends AbstractSection {
     /**
      * Constructor Class.
      *
-     * @param int           $processId
-     * @param string        $userName
-     * @param AuthInterface $authentication
-     * @param Client        $client
-     * @param bool|bool     $throwsExceptions
+     * @param int                      $processId
+     * @param string                   $userName
+     * @param \idOS\Auth\AuthInterface $authentication
+     * @param \GuzzleHttp\Client       $client
+     * @param bool                     $throwsExceptions
+     * @param string                   $baseUrl
      */
     public function __construct(
         int $processId,
         string $userName,
         AuthInterface $authentication,
         Client $client,
-        bool $throwsExceptions = false
+        bool $throwsExceptions = false,
+        string $baseUrl = 'https://api.idos.io/1.0/'
     ) {
         $this->processId = $processId;
         $this->userName  = $userName;
-        parent::__construct($authentication, $client, $throwsExceptions);
+        parent::__construct($authentication, $client, $throwsExceptions, $baseUrl);
     }
 
     /**
@@ -44,13 +46,12 @@ class Process extends AbstractSection {
      * @return endpoint instance
      */
     public function __get(string $name) : EndpointInterface {
-        $className = $this->getEndpointClassName($name);
-
-        return new $className(
-            $this->processId,
-            $this->userName,
-            $this->authentication,
-            $this->client
+        return $this->createEndpoint(
+            $name,
+            [
+                $this->processId,
+                $this->userName
+            ]
         );
     }
 }

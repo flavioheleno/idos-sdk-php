@@ -79,7 +79,6 @@ if ($response['status'] === true) {
      */
     printf('Status: %s', $response['status']);
     echo PHP_EOL;
-
 }
 
 /**
