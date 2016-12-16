@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Functional\Endpoint\Profile;
 
 use Test\Functional\AbstractFunctional;
+
 class ProcessesTest extends AbstractFunctional
 {
     protected function setUp()
@@ -27,7 +29,7 @@ class ProcessesTest extends AbstractFunctional
     public function testGetOne()
     {
         $processes = $this->sdk->Profile($this->credentials['username'])->Processes->listAll();
-        $response = $this->sdk->Profile($this->credentials['username'])->Processes->getOne($processes['data'][0]['id']);
+        $response  = $this->sdk->Profile($this->credentials['username'])->Processes->getOne($processes['data'][0]['id']);
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertSame($processes['data'][0]['id'], $response['data']['id']);

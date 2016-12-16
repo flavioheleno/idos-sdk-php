@@ -3,16 +3,18 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Functional\Endpoint\Profile\Process;
 
 use Test\Functional\AbstractFunctional;
+
 class TasksTest extends AbstractFunctional
 {
     private $processId;
     protected function setUp()
     {
         parent::setUp();
-        $processes = $this->sdk->Profile($this->credentials['username'])->Processes->listAll();
+        $processes       = $this->sdk->Profile($this->credentials['username'])->Processes->listAll();
         $this->processId = $processes['data'][0]['id'];
     }
     public function testListAll()
@@ -50,7 +52,7 @@ class TasksTest extends AbstractFunctional
     }
     public function testGetOne()
     {
-        $task = $this->sdk->Profile($this->credentials['username'])->Process($this->processId)->Tasks->createNew('name-test', 'event-test', true, false, 'message-test');
+        $task     = $this->sdk->Profile($this->credentials['username'])->Process($this->processId)->Tasks->createNew('name-test', 'event-test', true, false, 'message-test');
         $response = $response = $this->sdk->Profile($this->credentials['username'])->Process($this->processId)->Tasks->getOne($task['data']['id']);
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -60,7 +62,7 @@ class TasksTest extends AbstractFunctional
     }
     public function testUpdateOne()
     {
-        $task = $this->sdk->Profile($this->credentials['username'])->Process($this->processId)->Tasks->createNew('name-test', 'event-test', true, false, 'message-test');
+        $task     = $this->sdk->Profile($this->credentials['username'])->Process($this->processId)->Tasks->createNew('name-test', 'event-test', true, false, 'message-test');
         $response = $response = $this->sdk->Profile($this->credentials['username'])->Process($this->processId)->Tasks->updateOne($task['data']['id'], 'name-test-changed', 'event-test-changed', false, true, 'message-test-changed');
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);

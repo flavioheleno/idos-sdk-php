@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\References;
 use Test\Unit\AbstractUnit;
+
 /**
  * ReferencesTest Class tests all methods from the References Class.
  */
@@ -26,7 +28,7 @@ class ReferencesTest extends AbstractUnit
         /**
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
+        $this->auth       = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
         $this->references = new References('dummyUserName', $this->auth, $this->httpClient, false);
     }
     public function testListAll()

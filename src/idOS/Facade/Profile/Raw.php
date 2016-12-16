@@ -3,11 +3,13 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace idOS\Facade\Profile;
 
 use GuzzleHttp\Client;
 use idOS\Auth;
 use idOS\Endpoint\Raw as RawEndpoint;
+
 class Raw
 {
     /**
@@ -20,13 +22,14 @@ class Raw
      */
     private static function getInstance($userName, Auth $auth)
     {
-        if (!is_string($userName)) {
-            throw new \InvalidArgumentException("Argument \$userName passed to getInstance() must be of the type string, " . (gettype($userName) == "object" ? get_class($userName) : gettype($userName)) . " given");
+        if (! is_string($userName)) {
+            throw new \InvalidArgumentException('Argument $userName passed to getInstance() must be of the type string, ' . (gettype($userName) == 'object' ? get_class($userName) : gettype($userName)) . ' given');
         }
         $ret158541893a3b36 = new RawEndpoint($userName, $auth, new Client());
-        if (!$ret158541893a3b36 instanceof RawEndpoint) {
-            throw new \InvalidArgumentException("Argument returned must be of the type RawEndpoint, " . (gettype($ret158541893a3b36) == "object" ? get_class($ret158541893a3b36) : gettype($ret158541893a3b36)) . " given");
+        if (! $ret158541893a3b36 instanceof RawEndpoint) {
+            throw new \InvalidArgumentException('Argument returned must be of the type RawEndpoint, ' . (gettype($ret158541893a3b36) == 'object' ? get_class($ret158541893a3b36) : gettype($ret158541893a3b36)) . ' given');
         }
+
         return $ret158541893a3b36;
     }
     /**
@@ -42,15 +45,16 @@ class Raw
      */
     public static function createNew($userName, $sourceId, $collectionName, array $data, Auth $auth)
     {
-        if (!is_string($userName)) {
-            throw new \InvalidArgumentException("Argument \$userName passed to createNew() must be of the type string, " . (gettype($userName) == "object" ? get_class($userName) : gettype($userName)) . " given");
+        if (! is_string($userName)) {
+            throw new \InvalidArgumentException('Argument $userName passed to createNew() must be of the type string, ' . (gettype($userName) == 'object' ? get_class($userName) : gettype($userName)) . ' given');
         }
-        if (!is_int($sourceId)) {
-            throw new \InvalidArgumentException("Argument \$sourceId passed to createNew() must be of the type int, " . (gettype($sourceId) == "object" ? get_class($sourceId) : gettype($sourceId)) . " given");
+        if (! is_int($sourceId)) {
+            throw new \InvalidArgumentException('Argument $sourceId passed to createNew() must be of the type int, ' . (gettype($sourceId) == 'object' ? get_class($sourceId) : gettype($sourceId)) . ' given');
         }
-        if (!is_string($collectionName)) {
-            throw new \InvalidArgumentException("Argument \$collectionName passed to createNew() must be of the type string, " . (gettype($collectionName) == "object" ? get_class($collectionName) : gettype($collectionName)) . " given");
+        if (! is_string($collectionName)) {
+            throw new \InvalidArgumentException('Argument $collectionName passed to createNew() must be of the type string, ' . (gettype($collectionName) == 'object' ? get_class($collectionName) : gettype($collectionName)) . ' given');
         }
+
         return static::getInstance()->createNew($sourceId, $collectionName, $data);
     }
     /**
@@ -64,9 +68,10 @@ class Raw
      */
     public static function listAll($userName, Auth $auth, array $filters = [])
     {
-        if (!is_string($userName)) {
-            throw new \InvalidArgumentException("Argument \$userName passed to listAll() must be of the type string, " . (gettype($userName) == "object" ? get_class($userName) : gettype($userName)) . " given");
+        if (! is_string($userName)) {
+            throw new \InvalidArgumentException('Argument $userName passed to listAll() must be of the type string, ' . (gettype($userName) == 'object' ? get_class($userName) : gettype($userName)) . ' given');
         }
+
         return static::getInstance()->listAll($filters);
     }
 }

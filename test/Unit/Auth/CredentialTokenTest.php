@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace idOS\Auth;
 
 use Test\Unit\AbstractUnit;
+
 class CredentialTokenTest extends AbstractUnit
 {
     /**

@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace idOS\Auth;
 
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
+
 class UserToken extends AbstractAuth
 {
     /**
@@ -34,17 +36,17 @@ class UserToken extends AbstractAuth
      */
     public function __construct($userName, $credentialPublicKey, $credentialPrivateKey)
     {
-        if (!is_string($userName)) {
-            throw new \InvalidArgumentException("Argument \$userName passed to __construct() must be of the type string, " . (gettype($userName) == "object" ? get_class($userName) : gettype($userName)) . " given");
+        if (! is_string($userName)) {
+            throw new \InvalidArgumentException('Argument $userName passed to __construct() must be of the type string, ' . (gettype($userName) == 'object' ? get_class($userName) : gettype($userName)) . ' given');
         }
-        if (!is_string($credentialPublicKey)) {
-            throw new \InvalidArgumentException("Argument \$credentialPublicKey passed to __construct() must be of the type string, " . (gettype($credentialPublicKey) == "object" ? get_class($credentialPublicKey) : gettype($credentialPublicKey)) . " given");
+        if (! is_string($credentialPublicKey)) {
+            throw new \InvalidArgumentException('Argument $credentialPublicKey passed to __construct() must be of the type string, ' . (gettype($credentialPublicKey) == 'object' ? get_class($credentialPublicKey) : gettype($credentialPublicKey)) . ' given');
         }
-        if (!is_string($credentialPrivateKey)) {
-            throw new \InvalidArgumentException("Argument \$credentialPrivateKey passed to __construct() must be of the type string, " . (gettype($credentialPrivateKey) == "object" ? get_class($credentialPrivateKey) : gettype($credentialPrivateKey)) . " given");
+        if (! is_string($credentialPrivateKey)) {
+            throw new \InvalidArgumentException('Argument $credentialPrivateKey passed to __construct() must be of the type string, ' . (gettype($credentialPrivateKey) == 'object' ? get_class($credentialPrivateKey) : gettype($credentialPrivateKey)) . ' given');
         }
-        $this->userName = $userName;
-        $this->credentialPublicKey = $credentialPublicKey;
+        $this->userName             = $userName;
+        $this->credentialPublicKey  = $credentialPublicKey;
         $this->credentialPrivateKey = $credentialPrivateKey;
     }
     /**
@@ -61,9 +63,10 @@ class UserToken extends AbstractAuth
             $this->token = $jwtBuilder->sign(new Sha256(), $this->credentialPrivateKey)->getToken();
         }
         $ret1585418939707e = (string) $this->token;
-        if (!is_string($ret1585418939707e)) {
-            throw new \InvalidArgumentException("Argument returned must be of the type string, " . gettype($ret1585418939707e) . " given");
+        if (! is_string($ret1585418939707e)) {
+            throw new \InvalidArgumentException('Argument returned must be of the type string, ' . gettype($ret1585418939707e) . ' given');
         }
+
         return $ret1585418939707e;
     }
 }

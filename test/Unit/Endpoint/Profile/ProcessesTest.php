@@ -3,11 +3,13 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\Processes;
 use idOS\Section\Profile;
 use Test\Unit\AbstractUnit;
+
 /**
  * ProcessesTest Class tests all methods from the Processes Class.
  */
@@ -27,7 +29,7 @@ class ProcessesTest extends AbstractUnit
         /**
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
+        $this->auth      = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
         $this->processes = new Processes('dummyUserName', $this->auth, $this->httpClient, false);
     }
     public function testListAll()

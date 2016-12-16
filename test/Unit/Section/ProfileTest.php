@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Section;
 
 use Test\Unit\AbstractUnit;
+
 class ProfileTest extends AbstractUnit
 {
     /**
@@ -16,7 +18,7 @@ class ProfileTest extends AbstractUnit
     protected function setUp()
     {
         parent::setUp();
-        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
+        $this->auth           = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
         $this->profileSection = new \idOS\Section\Profile('userName', $this->auth, new \GuzzleHttp\Client(), false);
     }
     public function testGetMethod()

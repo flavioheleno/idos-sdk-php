@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\Sources;
 use Test\Unit\AbstractUnit;
+
 /**
  * SourcesTest Class tests all methods from the Sources Class.
  */
@@ -26,7 +28,7 @@ class SourcesTest extends AbstractUnit
         /**
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
+        $this->auth    = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
         $this->sources = new Sources('dummyUserName', $this->auth, $this->httpClient, false);
     }
     public function testListAll()

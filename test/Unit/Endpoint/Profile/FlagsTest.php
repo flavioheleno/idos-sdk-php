@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\Flags;
 use Test\Unit\AbstractUnit;
+
 class FlagsTest extends AbstractUnit
 {
     /**
@@ -23,7 +25,7 @@ class FlagsTest extends AbstractUnit
         /**
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
+        $this->auth  = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
         $this->flags = new Flags('dummyUserName', $this->auth, $this->httpClient, false);
     }
     public function testListAll()

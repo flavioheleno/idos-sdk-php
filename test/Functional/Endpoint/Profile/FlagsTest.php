@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Functional\Endpoint\Profile;
 
 use Test\Functional\AbstractFunctional;
+
 class FlagsTest extends AbstractFunctional
 {
     protected function setUp()
@@ -55,7 +57,7 @@ class FlagsTest extends AbstractFunctional
     public function testDeleteOne()
     {
         $this->sdk->Profile($this->credentials['username'])->Flags->deleteAll();
-        $feature = $this->sdk->Profile($this->credentials['username'])->Flags->createNew('flag-test', 'attribute-test');
+        $feature  = $this->sdk->Profile($this->credentials['username'])->Flags->createNew('flag-test', 'attribute-test');
         $response = $this->sdk->Profile($this->credentials['username'])->Flags->deleteOne('flag-test');
         $this->assertTrue($response['status']);
     }

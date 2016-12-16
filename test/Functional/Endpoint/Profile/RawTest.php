@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Functional\Endpoint\Profile;
 
 use Test\Functional\AbstractFunctional;
+
 class RawTest extends AbstractFunctional
 {
     private $sourceId;
@@ -13,7 +15,7 @@ class RawTest extends AbstractFunctional
     {
         parent::setUp();
         $this->sdk->Profile($this->credentials['username'])->Sources->deleteAll();
-        $source = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
+        $source         = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
         $this->sourceId = $source['data']['id'];
     }
     public function testListAll()

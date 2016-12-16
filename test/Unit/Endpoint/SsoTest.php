@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint;
 
 use idOS\Endpoint\Sso;
 use Test\Unit\AbstractUnit;
+
 /**
  * SsoTest Class tests all methods from the Sso Class.
  */
@@ -27,7 +29,7 @@ class SsoTest extends AbstractUnit
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
         $this->auth = new \idOS\Auth\None();
-        $this->sso = new Sso($this->auth, $this->httpClient, false);
+        $this->sso  = new Sso($this->auth, $this->httpClient, false);
     }
     public function testListAll()
     {

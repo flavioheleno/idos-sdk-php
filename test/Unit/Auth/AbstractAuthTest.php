@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Auth;
 
 use idOS\Auth\CredentialToken;
 use Test\Unit\AbstractUnit;
+
 class AbstractAuthTest extends AbstractUnit
 {
     protected $abstractAuth;
@@ -18,7 +20,7 @@ class AbstractAuthTest extends AbstractUnit
     public function testToString()
     {
         $this->abstractAuth->getToken();
-        $toString = $this->invokeMethod($this->abstractAuth, '__toString');
+        $toString   = $this->invokeMethod($this->abstractAuth, '__toString');
         $authHeader = explode(' ', $toString);
         $this->assertSame('CredentialToken', $authHeader[0]);
         $this->assertInternalType('string', $authHeader[1]);

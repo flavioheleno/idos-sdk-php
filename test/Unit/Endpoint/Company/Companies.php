@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint\Company;
 
 use idOS\Endpoint\Company\Companies;
 use Test\Unit\AbstractUnit;
+
 class CompaniesTest extends AbstractUnit
 {
     /**
@@ -23,7 +25,7 @@ class CompaniesTest extends AbstractUnit
         /**
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\IdentityToken($this->credentials['identityToken']);
+        $this->auth      = new \idOS\Auth\IdentityToken($this->credentials['identityToken']);
         $this->companies = new Companies('dummy-company', $this->auth, $this->httpClient, false);
     }
     public function testCreateNew()

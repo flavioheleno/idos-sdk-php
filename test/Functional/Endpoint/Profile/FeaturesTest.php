@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Functional\Endpoint\Profile;
 
 use Test\Functional\AbstractFunctional;
+
 class FeaturesTest extends AbstractFunctional
 {
     private $sourceId;
@@ -13,7 +15,7 @@ class FeaturesTest extends AbstractFunctional
     {
         parent::setUp();
         $this->sdk->Profile($this->credentials['username'])->Sources->deleteAll();
-        $source = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
+        $source         = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
         $this->sourceId = $source['data']['id'];
     }
     public function testListAll()
@@ -54,7 +56,7 @@ class FeaturesTest extends AbstractFunctional
     public function testGetOne()
     {
         $this->sdk->Profile($this->credentials['username'])->Features->deleteAll();
-        $feature = $this->sdk->Profile($this->credentials['username'])->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
+        $feature  = $this->sdk->Profile($this->credentials['username'])->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
         $response = $this->sdk->Profile($this->credentials['username'])->Features->getOne($feature['data']['id']);
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -67,7 +69,7 @@ class FeaturesTest extends AbstractFunctional
     public function testUpdateOne()
     {
         $this->sdk->Profile($this->credentials['username'])->Features->deleteAll();
-        $feature = $this->sdk->Profile($this->credentials['username'])->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
+        $feature  = $this->sdk->Profile($this->credentials['username'])->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
         $response = $this->sdk->Profile($this->credentials['username'])->Features->updateOne($feature['data']['id'], 2, 'integer');
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -122,7 +124,7 @@ class FeaturesTest extends AbstractFunctional
     public function testDeleteOne()
     {
         $this->sdk->Profile($this->credentials['username'])->Features->deleteAll();
-        $feature = $this->sdk->Profile($this->credentials['username'])->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
+        $feature  = $this->sdk->Profile($this->credentials['username'])->Features->createNew($this->sourceId, 'name-test', 'value-test', 'string');
         $response = $this->sdk->Profile($this->credentials['username'])->Features->deleteOne($feature['data']['id']);
         $this->assertTrue($response['status']);
     }

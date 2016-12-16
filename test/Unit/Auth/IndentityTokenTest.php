@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace idOS\Auth;
 
 use Test\Unit\AbstractUnit;
+
 class IdentityTokenTest extends AbstractUnit
 {
     /**
@@ -17,7 +19,7 @@ class IdentityTokenTest extends AbstractUnit
     {
         parent::setUp();
         $this->token = 'apiResponseIdentityToken';
-        $this->auth = new \idOS\Auth\IdentityToken($this->token);
+        $this->auth  = new \idOS\Auth\IdentityToken($this->token);
     }
     public function testGetToken()
     {

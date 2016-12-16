@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Functional\Endpoint\Profile;
 
 use Test\Functional\AbstractFunctional;
+
 class SourcesTest extends AbstractFunctional
 {
     protected function setUp()
@@ -45,7 +47,7 @@ class SourcesTest extends AbstractFunctional
     public function testGetOne()
     {
         $this->sdk->Profile($this->credentials['username'])->Sources->deleteAll();
-        $source = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
+        $source   = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
         $response = $this->sdk->Profile($this->credentials['username'])->Sources->getOne($source['data']['id']);
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -55,7 +57,7 @@ class SourcesTest extends AbstractFunctional
     public function testUpdateOne()
     {
         $this->sdk->Profile($this->credentials['username'])->Sources->deleteAll();
-        $source = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
+        $source   = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
         $response = $this->sdk->Profile($this->credentials['username'])->Sources->updateOne($source['data']['id'], ['tag-1' => 'value-1', 'tag-2' => 'value-2', 'tag-3' => 'value-3']);
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
@@ -65,7 +67,7 @@ class SourcesTest extends AbstractFunctional
     public function testDeleteOne()
     {
         $this->sdk->Profile($this->credentials['username'])->Sources->deleteAll();
-        $source = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
+        $source   = $this->sdk->Profile($this->credentials['username'])->Sources->createNew('name-test', ['tag-1' => 'value-1', 'tag-2' => 'value-2']);
         $response = $this->sdk->Profile($this->credentials['username'])->Sources->deleteOne($source['data']['id']);
         $this->assertTrue($response['status']);
     }

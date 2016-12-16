@@ -3,6 +3,7 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace idOS\Endpoint;
 
 /**
@@ -20,9 +21,10 @@ class Companies extends AbstractEndpoint
     public function listAll(array $filters = [])
     {
         $ret15854189371789 = $this->sendGet('/companies', $filters);
-        if (!is_array($ret15854189371789)) {
-            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret15854189371789) . " given");
+        if (! is_array($ret15854189371789)) {
+            throw new \InvalidArgumentException('Argument returned must be of the type array, ' . gettype($ret15854189371789) . ' given');
         }
+
         return $ret15854189371789;
     }
 }

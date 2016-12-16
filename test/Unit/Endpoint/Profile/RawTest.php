@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\Raw;
 use Test\Unit\AbstractUnit;
+
 /**
  * RawTest Class tests all methods from the Raw Class.
  */
@@ -27,7 +29,7 @@ class RawTest extends AbstractUnit
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
         $this->auth = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
-        $this->raw = new Raw('dummyUserName', $this->auth, $this->httpClient, false);
+        $this->raw  = new Raw('dummyUserName', $this->auth, $this->httpClient, false);
     }
     public function testListAll()
     {

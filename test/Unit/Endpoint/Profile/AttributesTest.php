@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\Attributes;
 use Test\Unit\AbstractUnit;
+
 /**
  * AttributesTest Class tests all methods from the Attributes Class.
  */
@@ -26,7 +28,7 @@ class AttributesTest extends AbstractUnit
         /**
          * UserToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\UserToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
+        $this->auth       = new \idOS\Auth\UserToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
         $this->attributes = new Attributes('dummyUserName', $this->auth, $this->httpClient, false);
     }
     public function testListAll()

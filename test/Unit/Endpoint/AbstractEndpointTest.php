@@ -3,12 +3,14 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use idOS\Endpoint\AbstractEndpoint;
 use Test\Unit\AbstractUnit;
+
 /**
  * AbstractEndpointTest Class tests the AbstractEndpoint Class.
  */
@@ -20,8 +22,8 @@ class AbstractEndpointTest extends AbstractUnit
     protected function setUp()
     {
         parent::setUp();
-        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
-        $this->httpClient = $this->getMockBuilder(Client::class)->getMock();
+        $this->auth         = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
+        $this->httpClient   = $this->getMockBuilder(Client::class)->getMock();
         $this->abstractMock = $this->getMockBuilder(AbstractEndpoint::class)->setConstructorArgs([$this->auth, $this->httpClient, false])->getMockForAbstractClass();
     }
     public function testSendRequestBasicFlow()
@@ -66,7 +68,7 @@ class AbstractEndpointTest extends AbstractUnit
     public function testSendRequestWithErrorButThrowsExceptionFalse()
     {
         $this->abstractMock = $this->getMockBuilder(AbstractEndpoint::class)->setConstructorArgs([$this->auth, $this->httpClient, false])->getMockForAbstractClass();
-        $array = ['status' => false, 'error' => ['message' => 'Invalid Credentials', 'type' => 'Error', 'link' => 'link']];
+        $array              = ['status' => false, 'error' => ['message' => 'Invalid Credentials', 'type' => 'Error', 'link' => 'link']];
         /**
          * Mocks the HTTP Response.
          */
@@ -95,7 +97,7 @@ class AbstractEndpointTest extends AbstractUnit
     public function testSendRequestThrowsSDKException()
     {
         $this->abstractMock = $this->getMockBuilder(AbstractEndpoint::class)->setConstructorArgs([$this->auth, $this->httpClient, true])->getMockForAbstractClass();
-        $array = ['status' => false, 'error' => ['message' => 'Invalid Credentials', 'type' => 'Error', 'link' => 'link']];
+        $array              = ['status' => false, 'error' => ['message' => 'Invalid Credentials', 'type' => 'Error', 'link' => 'link']];
         /**
          * Mocks the HTTP Response.
          */

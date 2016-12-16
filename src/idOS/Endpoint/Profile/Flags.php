@@ -3,6 +3,7 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace idOS\Endpoint\Profile;
 
 /**
@@ -20,16 +21,17 @@ class Flags extends AbstractProfileEndpoint
      */
     public function createNew($slug, $attribute)
     {
-        if (!is_string($slug)) {
-            throw new \InvalidArgumentException("Argument \$slug passed to createNew() must be of the type string, " . (gettype($slug) == "object" ? get_class($slug) : gettype($slug)) . " given");
+        if (! is_string($slug)) {
+            throw new \InvalidArgumentException('Argument $slug passed to createNew() must be of the type string, ' . (gettype($slug) == 'object' ? get_class($slug) : gettype($slug)) . ' given');
         }
-        if (!is_string($attribute)) {
-            throw new \InvalidArgumentException("Argument \$attribute passed to createNew() must be of the type string, " . (gettype($attribute) == "object" ? get_class($attribute) : gettype($attribute)) . " given");
+        if (! is_string($attribute)) {
+            throw new \InvalidArgumentException('Argument $attribute passed to createNew() must be of the type string, ' . (gettype($attribute) == 'object' ? get_class($attribute) : gettype($attribute)) . ' given');
         }
         $ret1585418937645e = $this->sendPost(sprintf('/profiles/%s/flags', $this->userName), [], ['slug' => $slug, 'attribute' => $attribute]);
-        if (!is_array($ret1585418937645e)) {
-            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret1585418937645e) . " given");
+        if (! is_array($ret1585418937645e)) {
+            throw new \InvalidArgumentException('Argument returned must be of the type array, ' . gettype($ret1585418937645e) . ' given');
         }
+
         return $ret1585418937645e;
     }
     /**
@@ -42,9 +44,10 @@ class Flags extends AbstractProfileEndpoint
     public function listAll(array $filters = [])
     {
         $ret158541893769a1 = $this->sendGet(sprintf('/profiles/%s/flags', $this->userName), $filters);
-        if (!is_array($ret158541893769a1)) {
-            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret158541893769a1) . " given");
+        if (! is_array($ret158541893769a1)) {
+            throw new \InvalidArgumentException('Argument returned must be of the type array, ' . gettype($ret158541893769a1) . ' given');
         }
+
         return $ret158541893769a1;
     }
     /**
@@ -56,13 +59,14 @@ class Flags extends AbstractProfileEndpoint
      */
     public function getOne($slug)
     {
-        if (!is_string($slug)) {
-            throw new \InvalidArgumentException("Argument \$slug passed to getOne() must be of the type string, " . (gettype($slug) == "object" ? get_class($slug) : gettype($slug)) . " given");
+        if (! is_string($slug)) {
+            throw new \InvalidArgumentException('Argument $slug passed to getOne() must be of the type string, ' . (gettype($slug) == 'object' ? get_class($slug) : gettype($slug)) . ' given');
         }
         $ret15854189376b79 = $this->sendGet(sprintf('/profiles/%s/flags/%s', $this->userName, $slug));
-        if (!is_array($ret15854189376b79)) {
-            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret15854189376b79) . " given");
+        if (! is_array($ret15854189376b79)) {
+            throw new \InvalidArgumentException('Argument returned must be of the type array, ' . gettype($ret15854189376b79) . ' given');
         }
+
         return $ret15854189376b79;
     }
     /**
@@ -74,13 +78,14 @@ class Flags extends AbstractProfileEndpoint
      */
     public function deleteOne($slug)
     {
-        if (!is_string($slug)) {
-            throw new \InvalidArgumentException("Argument \$slug passed to deleteOne() must be of the type string, " . (gettype($slug) == "object" ? get_class($slug) : gettype($slug)) . " given");
+        if (! is_string($slug)) {
+            throw new \InvalidArgumentException('Argument $slug passed to deleteOne() must be of the type string, ' . (gettype($slug) == 'object' ? get_class($slug) : gettype($slug)) . ' given');
         }
         $ret15854189376ed9 = $this->sendDelete(sprintf('/profiles/%s/flags/%s', $this->userName, $slug));
-        if (!is_array($ret15854189376ed9)) {
-            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret15854189376ed9) . " given");
+        if (! is_array($ret15854189376ed9)) {
+            throw new \InvalidArgumentException('Argument returned must be of the type array, ' . gettype($ret15854189376ed9) . ' given');
         }
+
         return $ret15854189376ed9;
     }
     /**
@@ -93,9 +98,10 @@ class Flags extends AbstractProfileEndpoint
     public function deleteAll(array $filters = [])
     {
         $ret15854189377235 = $this->sendDelete(sprintf('/profiles/%s/flags', $this->userName), $filters);
-        if (!is_array($ret15854189377235)) {
-            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret15854189377235) . " given");
+        if (! is_array($ret15854189377235)) {
+            throw new \InvalidArgumentException('Argument returned must be of the type array, ' . gettype($ret15854189377235) . ' given');
         }
+
         return $ret15854189377235;
     }
 }

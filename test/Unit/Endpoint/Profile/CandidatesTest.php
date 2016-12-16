@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\Candidates;
 use Test\Unit\AbstractUnit;
+
 /**
  * CandidatesTest Class tests all methods from the Candidates Class.
  */
@@ -26,7 +28,7 @@ class CandidatesTest extends AbstractUnit
         /**
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
+        $this->auth       = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
         $this->candidates = new Candidates('dummyUserName', $this->auth, $this->httpClient, false);
     }
     public function testListAll()

@@ -3,10 +3,12 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace Test\Unit\Section;
 
 use idOS\Section\Profile;
 use Test\Unit\AbstractUnit;
+
 class AbstractSectionTest extends AbstractUnit
 {
     /**
@@ -17,7 +19,7 @@ class AbstractSectionTest extends AbstractUnit
     protected function setUp()
     {
         parent::setUp();
-        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
+        $this->auth    = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
         $this->section = new Profile('userName', $this->auth, new \GuzzleHttp\Client(), false);
     }
     public function testGetEndpointClassNameExpectedFlow()

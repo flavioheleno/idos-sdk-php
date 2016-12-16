@@ -3,9 +3,11 @@
 /*
  * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
  */
+
 namespace idOS;
 
 use Test\Unit\AbstractUnit;
+
 class SDKTest extends AbstractUnit
 {
     /**
@@ -17,7 +19,7 @@ class SDKTest extends AbstractUnit
     {
         parent::setUp();
         $this->auth = new \idOS\Auth\CredentialToken($this->credentials['credentialPublicKey'], $this->credentials['handlerPublicKey'], $this->credentials['handlerPrivKey']);
-        $this->sdk = SDK::create($this->auth, false);
+        $this->sdk  = SDK::create($this->auth, false);
     }
     public function testSetAndGetAuth()
     {
