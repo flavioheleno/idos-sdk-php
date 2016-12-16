@@ -1,88 +1,51 @@
 <?php
 
+/*
+ * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
+ */
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\Processes;
 use idOS\Section\Profile;
 use Test\Unit\AbstractUnit;
-
 /**
  * ProcessesTest Class tests all methods from the Processes Class.
  */
-class ProcessesTest extends AbstractUnit {
+class ProcessesTest extends AbstractUnit
+{
     /**
-     * $processes object instantiates the Processes Class.
+     * Profile processes endpoint instance.
      */
     protected $processes;
-
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
-
         /**
          * GuzzleHttp\Client mock.
          */
-        $this->httpClient = $this
-            ->getMockBuilder('GuzzleHttp\Client')
-            ->getMock();
-
+        $this->httpClient = $this->getMockBuilder('GuzzleHttp\\Client')->getMock();
         /**
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\CredentialToken(
-            $this->credentials['userName'],
-            $this->credentials['credentialPublicKey'],
-            $this->credentials['credentialPrivKey']
-        );
-
+        $this->auth = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
         $this->processes = new Processes('dummyUserName', $this->auth, $this->httpClient, false);
     }
-
-    public function testListAll() {
+    public function testListAll()
+    {
         /**
          * Array response from the fake api call to Processes endpoint.
          */
-        $array = [
-            'status' => true,
-            'data'   => [
-                0 => [
-                    'id'    => 7854963,
-                    'name'  => 'process1',
-                    'event' => [
-                        'idos:source.sms.verified'
-                    ],
-                    'created_at' => time(),
-                    'updated_at' => time()
-                ],
-                1 => [
-                    'id'    => 4347294,
-                    'name'  => 'process2',
-                    'event' => [
-                        'idos:feature.profile.created'
-                    ],
-                    'created_at' => time(),
-                    'updated_at' => time()
-                ]
-            ]
-        ];
-
+        $array = ['status' => true, 'data' => [0 => ['id' => 7854963, 'name' => 'process1', 'event' => ['idos:source.sms.verified'], 'created_at' => time(), 'updated_at' => time()], 1 => ['id' => 4347294, 'name' => 'process2', 'event' => ['idos:feature.profile.created'], 'created_at' => time(), 'updated_at' => time()]]];
         /**
          * Mocks the HTTP Response.
          */
-        $this->httpResponse = $this
-            ->getMockBuilder('GuzzleHttp\Psr7\Response')
-            ->getMock();
-        $this->httpResponse
-            ->method('getBody')
-            ->will($this->returnValue(json_encode($array)));
-        $this->httpClient
-            ->method('request')
-            ->will($this->returnValue($this->httpResponse));
-
+        $this->httpResponse = $this->getMockBuilder('GuzzleHttp\\Psr7\\Response')->getMock();
+        $this->httpResponse->method('getBody')->will($this->returnValue(json_encode($array)));
+        $this->httpClient->method('request')->will($this->returnValue($this->httpResponse));
         /**
          * Calls the listAll() method.
          */
         $response = $this->processes->listAll();
-
         /**
          * Assertions.
          */
@@ -110,42 +73,22 @@ class ProcessesTest extends AbstractUnit {
         $this->assertInternalType('int', $response['data'][1]['created_at']);
         $this->assertInternalType('int', $response['data'][1]['updated_at']);
     }
-
-    public function testGetOne() {
+    public function testGetOne()
+    {
         /**
          * Array response from the fake api call to Processes endpoint.
          */
-        $array = [
-            'status' => true,
-            'data'   => [
-                'id'    => 7854963,
-                'name'  => 'process1',
-                'event' => [
-                    'idos:source.sms.verified'
-                ],
-                'created_at' => time(),
-                'updated_at' => time()
-            ]
-        ];
-
+        $array = ['status' => true, 'data' => ['id' => 7854963, 'name' => 'process1', 'event' => ['idos:source.sms.verified'], 'created_at' => time(), 'updated_at' => time()]];
         /**
          * Mocks the HTTP Response.
          */
-        $this->httpResponse = $this
-            ->getMockBuilder('GuzzleHttp\Psr7\Response')
-            ->getMock();
-        $this->httpResponse
-            ->method('getBody')
-            ->will($this->returnValue(json_encode($array)));
-        $this->httpClient
-            ->method('request')
-            ->will($this->returnValue($this->httpResponse));
-
+        $this->httpResponse = $this->getMockBuilder('GuzzleHttp\\Psr7\\Response')->getMock();
+        $this->httpResponse->method('getBody')->will($this->returnValue(json_encode($array)));
+        $this->httpClient->method('request')->will($this->returnValue($this->httpResponse));
         /**
          * Calls the getOne() method.
          */
         $response = $this->processes->getOne(7854963);
-
         /**
          * Assertions.
          */

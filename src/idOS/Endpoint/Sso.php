@@ -1,10 +1,15 @@
 <?php
 
+/*
+ * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
+ */
 namespace idOS\Endpoint;
+
 /**
  * Single Sign-On Class Endpoint.
  */
-class Sso extends AbstractEndpoint {
+class Sso extends AbstractEndpoint
+{
     /**
      * Creates a new SSO.
      *
@@ -12,56 +17,38 @@ class Sso extends AbstractEndpoint {
      * @param string $credentialPubKey
      * @param string $accessToken
      * @param string $tokenSecret
+     * @param string $signupHash
      */
-    public function createNew(
-        $providerName,
-        $credentialPubKey,
-        $accessToken,
-        $tokenSecret = '',
-        $signupHash = ''
-    ) {
-        assert(
-            is_string($providerName),
-            sprintf('Parameter "$providerName" should be a string. (%s)', $providerName)
-        );
-        assert(
-            is_string($credentialPubKey),
-            sprintf('Parameter "$credentialPubKey" should be a string. (%s)', $credentialPubKey)
-        );
-        assert(
-            is_string($accessToken),
-            sprintf('Parameter "$accessToken" should be a string. (%s)', $accessToken)
-        );
-
-        $array = [
-            'provider'     => $providerName,
-            'access_token' => $accessToken,
-            'credential'   => $credentialPubKey
-        ];
-
-        if (! empty($tokenSecret)) {
-            assert(
-                is_string($tokenSecret),
-                sprintf('Parameter "$tokenSecret" should be a string. (%s)', $tokenSecret)
-            );
+    public function createNew($providerName, $credentialPubKey, $accessToken, $tokenSecret = '', $signupHash = '')
+    {
+        if (!is_string($providerName)) {
+            throw new \InvalidArgumentException("Argument \$providerName passed to createNew() must be of the type string, " . (gettype($providerName) == "object" ? get_class($providerName) : gettype($providerName)) . " given");
+        }
+        if (!is_string($credentialPubKey)) {
+            throw new \InvalidArgumentException("Argument \$credentialPubKey passed to createNew() must be of the type string, " . (gettype($credentialPubKey) == "object" ? get_class($credentialPubKey) : gettype($credentialPubKey)) . " given");
+        }
+        if (!is_string($accessToken)) {
+            throw new \InvalidArgumentException("Argument \$accessToken passed to createNew() must be of the type string, " . (gettype($accessToken) == "object" ? get_class($accessToken) : gettype($accessToken)) . " given");
+        }
+        if (!is_string($tokenSecret)) {
+            throw new \InvalidArgumentException("Argument \$tokenSecret passed to createNew() must be of the type string, " . (gettype($tokenSecret) == "object" ? get_class($tokenSecret) : gettype($tokenSecret)) . " given");
+        }
+        if (!is_string($signupHash)) {
+            throw new \InvalidArgumentException("Argument \$signupHash passed to createNew() must be of the type string, " . (gettype($signupHash) == "object" ? get_class($signupHash) : gettype($signupHash)) . " given");
+        }
+        $array = ['provider' => $providerName, 'access_token' => $accessToken, 'credential' => $credentialPubKey];
+        if (!empty($tokenSecret)) {
             $array['token_secret'] = $tokenSecret;
         }
-
-        if (! empty($signupHash)) {
-            assert(
-                is_string($signupHash),
-                sprintf('Parameter "$signupHash" should be a string. (%s)', $signupHash)
-            );
+        if (!empty($signupHash)) {
             $array['signup_hash'] = $signupHash;
         }
-
-        return $this->sendPost(
-            '/sso',
-            [],
-            $array
-        );
+        $ret158541893912ed = $this->sendPost('/sso', [], $array);
+        if (!is_array($ret158541893912ed)) {
+            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret158541893912ed) . " given");
+        }
+        return $ret158541893912ed;
     }
-
     /**
      * Lists all SSO.
      *
@@ -69,13 +56,14 @@ class Sso extends AbstractEndpoint {
      *
      * @return array Response
      */
-    public function listAll(array $filters = []) {
-        return $this->sendGet(
-            '/sso',
-            $filters
-        );
+    public function listAll(array $filters = [])
+    {
+        $ret15854189391d5a = $this->sendGet('/sso', $filters);
+        if (!is_array($ret15854189391d5a)) {
+            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret15854189391d5a) . " given");
+        }
+        return $ret15854189391d5a;
     }
-
     /**
      * Retrieves a providerName SSO availability status.
      *
@@ -83,14 +71,15 @@ class Sso extends AbstractEndpoint {
      *
      * @return array Response
      */
-    public function getOne($providerName) {
-        assert(
-            is_string($providerName),
-            sprintf('Parameter "$providerName" should be a string. (%s)', $providerName)
-        );
-
-        return $this->sendGet(
-            sprintf('/sso/%s', $providerName)
-        );
+    public function getOne($providerName)
+    {
+        if (!is_string($providerName)) {
+            throw new \InvalidArgumentException("Argument \$providerName passed to getOne() must be of the type string, " . (gettype($providerName) == "object" ? get_class($providerName) : gettype($providerName)) . " given");
+        }
+        $ret15854189391f6e = $this->sendGet(sprintf('/sso/%s', $providerName));
+        if (!is_array($ret15854189391f6e)) {
+            throw new \InvalidArgumentException("Argument returned must be of the type array, " . gettype($ret15854189391f6e) . " given");
+        }
+        return $ret15854189391f6e;
     }
 }
