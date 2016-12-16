@@ -1,74 +1,49 @@
 <?php
 
+/*
+ * This code has been transpiled via TransPHPile. For more information, visit https://github.com/jaytaph/transphpile
+ */
+
 namespace Test\Unit\Endpoint\Profile;
 
 use idOS\Endpoint\Profile\Features;
 use Test\Unit\AbstractUnit;
 
-class FeaturesTest extends AbstractUnit {
+class FeaturesTest extends AbstractUnit
+{
+    /**
+     * Profile features endpoint instance.
+     */
     private $features;
-
-    protected function setUp() {
+    protected function setUp()
+    {
         parent::setUp();
-
         /**
          * GuzzleHttp\Client mock.
          */
-        $this->httpClient = $this
-            ->getMockBuilder('GuzzleHttp\Client')
-            ->getMock();
-
+        $this->httpClient = $this->getMockBuilder('GuzzleHttp\\Client')->getMock();
         /**
          * CredentialToken instance to instantiate the idOS\SDK Class.
          */
-        $this->auth = new \idOS\Auth\CredentialToken(
-            $this->credentials['userName'],
-            $this->credentials['credentialPublicKey'],
-            $this->credentials['credentialPrivKey']
-        );
-
+        $this->auth     = new \idOS\Auth\CredentialToken($this->credentials['userName'], $this->credentials['credentialPublicKey'], $this->credentials['credentialPrivKey']);
         $this->features = new Features('dummyUserName', $this->auth, $this->httpClient, false);
     }
-
-    public function testListAll() {
+    public function testListAll()
+    {
         /**
          * Array response from the fake api call to Features endpoint.
          */
-        $array = [
-            'status' => true,
-            'data'   => [
-                0 => [
-                    'name'    => 'test1',
-                    'creator' => [
-                        'creator.test'
-                    ],
-                    'type'       => 'type',
-                    'value'      => 'value',
-                    'source'     => 'test',
-                    'created_at' => time(),
-                    'updated_at' => time()
-                ]
-            ]
-        ];
-
+        $array = ['status' => true, 'data' => [0 => ['name' => 'test1', 'creator' => ['creator.test'], 'type' => 'type', 'value' => 'value', 'source' => 'test', 'created_at' => time(), 'updated_at' => time()]]];
         /**
          * Mocks the HTTP Response.
          */
-        $this->httpResponse = $this
-            ->getMockBuilder('GuzzleHttp\Psr7\Response')
-            ->getMock();
-        $this->httpResponse
-            ->method('getBody')
-            ->will($this->returnValue(json_encode($array)));
-        $this->httpClient
-            ->method('request')
-            ->will($this->returnValue($this->httpResponse));
-
+        $this->httpResponse = $this->getMockBuilder('GuzzleHttp\\Psr7\\Response')->getMock();
+        $this->httpResponse->method('getBody')->will($this->returnValue(json_encode($array)));
+        $this->httpClient->method('request')->will($this->returnValue($this->httpResponse));
         /**
          * Calls the listAll() method.
          */
         $response = $this->features->listAll();
-
         /**
          * Assertions.
          */
