@@ -4,56 +4,85 @@ namespace idOS;
 
 use GuzzleHttp\Client;
 use idOS\Auth\AuthInterface;
-use idOS\Section\Profile;
-use idOS\Section\Profile\Process;
-use idOS\Section\Company;
+use idOS\Endpoint\EndpointInterface;
+use idOS\Section\SectionInterface;
 
 class SDK {
     /**
      * Authentication instance.
+     *
+     * @var \idOS\Auth\AuthInterface
      */
     private $authentication;
     /**
-     * GuzzleHttp\Client.
+     * Guzzle Client instance.
+     *
+     * @var \GuzzleHttp\Client.
      */
     private $client;
     /**
-     * boolean option to throw exception.
+     * Flag to convert errors to exceptions.
+     *
+     * @var bool
      */
     private $throwsExceptions;
+    /**
+     * idOS API base URL.
+     *
+     * @var string
+     */
+    private $baseUrl;
 
     /**
      * Creates the SDK instance.
      *
-     * @param AuthInterface $authentication
+     * @param \idOS\Auth\AuthInterface $authentication
+     * @param bool                     $throwsExceptions
+     * @param string                   $baseUrl
      *
-     * @return SDK instance
+     * @return self instance
      */
-    public static function create(AuthInterface $authentication, $throwsExceptions = false) {
+    public static function create(
+        AuthInterface $authentication,
+        $throwsExceptions = false,
+        $baseUrl = 'https://api.idos.io/1.0/'
+    ) {
         return new static(
             $authentication,
             new Client(),
-            $throwsExceptions
+            $throwsExceptions,
+            $baseUrl
         );
     }
 
-    /**
+     /**
      * Constructor Class.
      *
-     * @param AuthInterface $authentication
-     * @param Client        $client
-     * @param bool|bool     $throwsExceptions
+     * @param \idOS\Auth\AuthInterface $authentication
+     * @param \GuzzleHttp\Client       $client
+     * @param bool                     $throwsExceptions
+     * @param string                   $baseUrl
+     *
+     * @return void
      */
-    public function __construct(AuthInterface $authentication, Client $client, $throwsExceptions = false) {
+    public function __construct(
+        AuthInterface $authentication,
+        Client $client,
+        $throwsExceptions = false,
+        $baseUrl = 'https://api.idos.io/1.0/'
+    ) {
         $this->authentication   = $authentication;
         $this->client           = $client;
         $this->throwsExceptions = $throwsExceptions;
+        $this->setBaseUrl($baseUrl);
     }
 
     /**
-     * setter Stores auth object.
+     * Stores auth object.
      *
-     * @param AuthInterface $authentication
+     * @param \idOS\Auth\AuthInterface $authentication
+     *
+     * @return self
      */
     public function setAuth(AuthInterface $authentication) {
         $this->authentication = $authentication;
@@ -94,6 +123,8 @@ class SDK {
      * Sets the throws exception option.
      *
      * @param bool $throws
+	 *
+	 * @return self
      */
     public function setThrowsExceptions($throws) {
         $this->throwsExceptions = $throws;
@@ -110,36 +141,26 @@ class SDK {
         return $this->throwsExceptions;
     }
 
-    /**
-     * Return new instance of Section\Profile.
+	/**
+     * Sets idOS API base URL.
      *
-     * @param string $userName
+     * @param string $baseUrl
      *
-     * @return Section\Profile instance
+     * @return self
      */
-    public function profile($userName) {
-        return new Profile(
-            $userName,
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions
-        );
+    public function setBaseUrl($baseUrl) {
+        $this->baseUrl = rtrim($baseUrl, '/') . '/';
+
+        return $this;
     }
 
     /**
-     * Return new instance of Company Endpoint.
+     * Returns idOS API base URL.
      *
-     * @param string $companySlug
-     *
-     * @return Endpoint\Company instance
+     * @return string $baseUrl
      */
-    public function company($companySlug) {
-        return new Company(
-            $companySlug,
-            $this->authentication,
-            $this->client,
-            $this->throwsExceptions
-        );
+    public function getBaseUrl() {
+        return $this->baseUrl;
     }
 
     /**
@@ -147,14 +168,16 @@ class SDK {
      *
      * @param string $name
      *
-     * @return new instance of the given class
+     * @return \idOS\Endpoint\EndpointInterface
      */
     public function __get($name) {
         $className = $this->getEndpointClassName($name);
 
         return new $className(
             $this->authentication,
-            $this->client
+            $this->client, 
+			$this->throwsExceptions,
+			$this->baseUrl
         );
     }
 
@@ -164,12 +187,14 @@ class SDK {
      * @param string $name
      * @param array  $args
      *
-     * @return new instance of the given class
+     * @return \idOS\Section\SectionInterface
      */
     public function __call($name, array $args) {
         $className = $this->getSectionClassName($name);
         $args[]    = $this->authentication;
         $args[]    = $this->client;
+        $args[]    = $this->throwsExceptions;
+        $args[]    = $this->baseUrl;
 
         return new $className(...$args);
     }
@@ -193,6 +218,34 @@ class SDK {
             throw new \RuntimeException(
                 sprintf(
                     'Invalid endpoint name "%s" (%s)',
+                    $name,
+                    $className
+                )
+            );
+        }
+
+        return $className;
+    }
+
+    /**
+     * Returns the name of the section class.
+     *
+     * @param string $name
+     *
+     * @return string className
+     */
+    protected function getSectionClassName($name) {
+        $className = sprintf(
+            '%s\\%s\\%s',
+            'idOS',
+            'Section',
+            ucfirst($name)
+        );
+
+        if (! class_exists($className)) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Invalid section name "%s" (%s)',
                     $name,
                     $className
                 )

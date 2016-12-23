@@ -27,7 +27,7 @@ $sdk = \idOS\SDK::create($auth);
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Gates->upsertOne('18+', true);
+    ->Gates->upsertOne('18+', 'high');
 
 /**
  * Stores the gate slug of the slug created.
@@ -83,7 +83,7 @@ if ($response['status'] === true) {
  */
 $response = $sdk
     ->Profile($credentials['username'])
-    ->Gates->upsertOne('18+', true);
+    ->Gates->upsertOne('18+', 'medium');
 
 /**
  * Checks if the gate was created before calling other methods related to the gates endpoint (requires an existing gate).

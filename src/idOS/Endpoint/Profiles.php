@@ -7,16 +7,15 @@ namespace idOS\Endpoint;
  */
 class Profiles extends AbstractEndpoint {
     /**
-     * Lists all Profiles.
+     * Retrieves information about one user.
      *
-     * @param array $filters
-     *
+     * @param string $userName the user userName
+     * 
      * @return array Response
      */
-    public function listAll(array $filters = []) {
+    public function getOne($userName)  {
         return $this->sendGet(
-            '/profiles',
-            $filters
+            sprintf('/profiles/%s', $userName)
         );
     }
 }

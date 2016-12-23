@@ -11,7 +11,7 @@ class AbstractAuthTest extends AbstractUnit {
     protected function setUp() {
         parent::setUp();
 
-        $this->abstractAuth =  new \idOS\Auth\CredentialToken(
+        $this->abstractAuth = new \idOS\Auth\CredentialToken(
             $this->credentials['credentialPublicKey'],
             $this->credentials['handlerPublicKey'],
             $this->credentials['handlerPrivKey']

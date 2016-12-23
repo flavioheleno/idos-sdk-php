@@ -6,6 +6,9 @@ use idOS\Endpoint\Profile\Features;
 use Test\Unit\AbstractUnit;
 
 class FeaturesTest extends AbstractUnit {
+    /**
+     * Profile features endpoint instance.
+     */
     private $features;
 
     protected function setUp() {

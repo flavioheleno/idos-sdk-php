@@ -63,12 +63,12 @@ class ReferencesTest extends AbstractFunctional {
     public function testCreateNewValueUtf8() {
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->References->createNew('name-test', 'válué-test');
+            ->References->createNew('test', 'vélue-test');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
-        $this->assertSame('name-test', $response['data']['name']);
-        $this->assertSame('válué-test', $response['data']['value']);
+        $this->assertSame('test', $response['data']['name']);
+        $this->assertSame('vélue-test', $response['data']['value']);
     }
 
     public function testGetOne() {

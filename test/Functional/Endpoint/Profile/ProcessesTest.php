@@ -29,7 +29,7 @@ class ProcessesTest extends AbstractFunctional {
         $processes = $this->sdk
             ->Profile($this->credentials['username'])
             ->Processes->listAll();
-
+            
         $response = $this->sdk
             ->Profile($this->credentials['username'])
             ->Processes->getOne($processes['data'][0]['id']);
@@ -37,8 +37,8 @@ class ProcessesTest extends AbstractFunctional {
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertSame($processes['data'][0]['id'], $response['data']['id']);
-        $this->assertSame('idos:verification', $response['data']['name']);
-        $this->assertSame('idos:feature.profile.created', $response['data']['event']);
+        $this->assertSame('Some random process for the user', $response['data']['name']);
+        $this->assertSame('idos:source.sms.verified', $response['data']['event']);
         $this->assertInternalType('integer', $response['data']['created_at']);
     }
 }

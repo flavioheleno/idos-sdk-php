@@ -10,40 +10,62 @@ class Gates extends AbstractProfileEndpoint {
      * Creates a new gate for the given user.
      *
      * @param string $name
-     * @param bool   $pass
      * @param string $confidenceLevel
      *
      * @return array Response
      */
     public function createNew(
         $name,
-        $pass,
-        $confidenceLevel = ''
+        $confidenceLevel
     ) {
         assert(
             is_string($name),
             sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
-            is_bool($pass),
-            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
+            is_string($confidenceLevel),
+            sprintf('Parameter "$confidenceLevel" should be a string. (%s)', $confidenceLevel)
         );
 
         $array = [
-            'name'      => $name,
-            'pass'      => $pass
+            'name'             => $name,
+            'confidence_level' => $confidenceLevel
         ];
-
-        if (! empty($confidenceLevel)) {
-            assert(
-                is_string($confidenceLevel),
-                sprintf('Parameter "$confidenceLevel" should be a string. (%s)', $confidenceLevel)
-            );
-            $array['confidence_level'] = $confidenceLevel;
-        }
-
+            
         return $this->sendPost(
             sprintf('/profiles/%s/gates', $this->userName),
+            [],
+            $array
+        );
+    }
+
+    /**
+     * Updates a gate.
+     *
+     * @param string $gateSlug
+     * @param string $confidenceLevel
+     *
+     * @return array Response
+     */
+    public function updateOne(
+        $gateSlug,
+        $confidenceLevel
+    ) {
+        assert(
+            is_string($gateSlug),
+            sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
+        );
+        assert(
+            is_string($confidenceLevel),
+            sprintf('Parameter "$confidenceLevel" should be a string. (%s)', $confidenceLevel)
+        );
+
+        $array = [
+            'confidence_level' => $confidenceLevel
+        ];
+        
+        return $this->sendPatch(
+            sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug),
             [],
             $array
         );
@@ -53,38 +75,28 @@ class Gates extends AbstractProfileEndpoint {
      * Tries to update a gate and if it doesnt exists, creates a new gate.
      *
      * @param string $name
-     * @param bool   $pass
      * @param string $confidenceLevel
      *
      * @return array Response
      */
     public function upsertOne(
         $name,
-        $pass,
-        $confidenceLevel = ''
+        $confidenceLevel
     ) {
         assert(
             is_string($name),
             sprintf('Parameter "$name" should be a string. (%s)', $name)
         );
         assert(
-            is_bool($pass),
-            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
+            is_string($confidenceLevel),
+            sprintf('Parameter "$confidenceLevel" should be a string. (%s)', $confidenceLevel)
         );
-
+        
         $array = [
-            'name'      => $name,
-            'pass'      => $pass
+            'name'             => $name,
+            'confidence_level' => $confidenceLevel
         ];
-
-        if (! empty($confidenceLevel)) {
-            assert(
-                is_string($confidenceLevel),
-                sprintf('Parameter "$confidenceLevel" should be a string. (%s)', $confidenceLevel)
-            );
-            $array['confidence_level'] = $confidenceLevel;
-        }
-
+        
         return $this->sendPut(
             sprintf('/profiles/%s/gates', $this->userName),
             [],
@@ -121,33 +133,6 @@ class Gates extends AbstractProfileEndpoint {
 
         return $this->sendGet(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug)
-        );
-    }
-
-    /**
-     * Updates a gate given its slug.
-     *
-     * @param string $gateSlug
-     * @param bool $pass
-     *
-     * @return array Response
-     */
-    public function updateOne($gateSlug, $pass) {
-        assert(
-            is_string($gateSlug),
-            sprintf('Parameter "$gateSlug" should be a string. (%s)', $gateSlug)
-        );
-        assert(
-            is_bool($pass),
-            sprintf('Parameter "$pass" should be a boolean. (%s)', $pass)
-        );
-
-        return $this->sendPatch(
-            sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug),
-            [],
-            [
-                'pass'     => $pass
-            ]
         );
     }
 
