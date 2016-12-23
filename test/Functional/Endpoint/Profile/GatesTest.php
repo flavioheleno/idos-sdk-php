@@ -16,10 +16,10 @@ class GatesTest extends AbstractFunctional {
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test 1', true);
+            ->Gates->createNew('Name Test 1', 'low');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test 2', false);
+            ->Gates->createNew('Name Test 2', 'medium');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
@@ -28,12 +28,12 @@ class GatesTest extends AbstractFunctional {
         foreach ($response['data'] as $gate) {
             if ($gate['name'] === 'Name Test 1') {
                 $this->assertSame('name-test-1', $gate['slug']);
-                $this->assertTrue($gate['pass']);
+                $this->assertSame('low', $gate['confidence_level']);
             }
 
             if ($gate['name'] === 'Name Test 2') {
                 $this->assertSame('name-test-2', $gate['slug']);
-                $this->assertFalse($gate['pass']);
+                $this->assertSame('medium', $gate['confidence_level']);
             }
         }
     }
@@ -45,14 +45,14 @@ class GatesTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test', true, 'confidence-level');
+            ->Gates->createNew('Name Test', 'high');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test', $response['data']['name']);
-        $this->assertSame('name-test-confidence-level', $response['data']['slug']);
-        $this->assertTrue($response['data']['pass']);
+        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertSame('high', $response['data']['confidence_level']);
     }
 
     public function testCreateNewUtf8() {
@@ -71,7 +71,7 @@ class GatesTest extends AbstractFunctional {
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test', true);
+            ->Gates->createNew('Name Test', 'high');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
@@ -82,28 +82,26 @@ class GatesTest extends AbstractFunctional {
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test', $response['data']['name']);
         $this->assertSame('name-test', $response['data']['slug']);
-        $this->assertTrue($response['data']['pass']);
+        $this->assertSame('high', $response['data']['confidence_level']);
     }
 
     public function testUpdateOne() {
         $this->sdk
             ->Profile($this->credentials['username'])
             ->Gates->deleteAll();
-
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test', true, 'confidence-level');
-
+            ->Gates->createNew('Name Test', 'high');
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->updateOne('name-test-confidence-level', false);
-
+            ->Gates->updateOne('name-test', 'medium');
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test', $response['data']['name']);
-        $this->assertSame('name-test-confidence-level', $response['data']['slug']);
-        $this->assertFalse($response['data']['pass']);
+        $this->assertSame('name-test', $response['data']['slug']);
+        $this->assertNotEmpty($response['data']['creator']);
+        $this->assertSame('medium', $response['data']['confidence_level']);
     }
 
     public function testUpsertOne() {
@@ -113,25 +111,25 @@ class GatesTest extends AbstractFunctional {
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->upsertOne('Name Test', true);
+            ->Gates->upsertOne('Name Test', 'high');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test', $response['data']['name']);
         $this->assertSame('name-test', $response['data']['slug']);
-        $this->assertTrue($response['data']['pass']);
+        $this->assertSame('high', $response['data']['confidence_level']);
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->upsertOne('Name Test1', true);
+            ->Gates->upsertOne('Name Test1', 'low');
 
         $this->assertTrue($response['status']);
         $this->assertNotEmpty($response['data']);
         $this->assertNotEmpty($response['data']['creator']);
         $this->assertSame('Name Test1', $response['data']['name']);
         $this->assertSame('name-test1', $response['data']['slug']);
-        $this->assertTrue($response['data']['pass']);
+        $this->assertSame('low', $response['data']['confidence_level']);
     }
 
     public function testDeleteOne() {
@@ -141,7 +139,7 @@ class GatesTest extends AbstractFunctional {
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test', true);
+            ->Gates->createNew('Name Test', 'low');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])
@@ -157,13 +155,13 @@ class GatesTest extends AbstractFunctional {
 
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test 1', true);
+            ->Gates->createNew('Name Test 1', 'low');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test 2', false);
+            ->Gates->createNew('Name Test 2', 'medium');
         $this->sdk
             ->Profile($this->credentials['username'])
-            ->Gates->createNew('Name Test 3', true);
+            ->Gates->createNew('Name Test 3', 'high');
 
         $response = $this->sdk
             ->Profile($this->credentials['username'])

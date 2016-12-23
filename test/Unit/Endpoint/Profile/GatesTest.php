@@ -44,18 +44,18 @@ class GatesTest extends AbstractUnit {
             'status' => true,
             'data'   => [
                 0 => [
-                    'name'       => '18+',
-                    'slug'       => '18',
-                    'pass'       => true,
-                    'created_at' => time(),
-                    'updated_at' => time()
+                    'name'             => '18+',
+                    'slug'             => '18',
+                    'confidence_level' => 'low',
+                    'created_at'       => time(),
+                    'updated_at'       => time()
                 ],
                 1 => [
-                    'name'       => 'gate slug',
-                    'slug'       => 'gate-slug',
-                    'pass'       => false,
-                    'created_at' => time(),
-                    'updated_at' => time()
+                    'name'             => 'gate slug',
+                    'slug'             => 'gate-slug',
+                    'confidence_level' => 'medium',
+                    'created_at'       => time(),
+                    'updated_at'       => time()
                 ]
             ]
         ];
@@ -90,14 +90,14 @@ class GatesTest extends AbstractUnit {
         $this->assertSame('18', $response['data'][0]['slug']);
         $this->assertArrayHasKey('name', $response['data'][0]);
         $this->assertSame('18+', $response['data'][0]['name']);
-        $this->assertArrayHasKey('pass', $response['data'][0]);
-        $this->assertTrue($response['data'][0]['pass']);
+        $this->assertArrayHasKey('confidence_level', $response['data'][0]);
+        $this->assertSame('low', $response['data'][0]['confidence_level']);
         $this->assertArrayHasKey('slug', $response['data'][1]);
         $this->assertSame('gate-slug', $response['data'][1]['slug']);
         $this->assertArrayHasKey('name', $response['data'][1]);
         $this->assertSame('gate slug', $response['data'][1]['name']);
-        $this->assertArrayHasKey('pass', $response['data'][1]);
-        $this->assertFalse($response['data'][1]['pass']);
+        $this->assertArrayHasKey('confidence_level', $response['data'][1]);
+        $this->assertSame('medium', $response['data'][1]['confidence_level']);
         $this->assertInternalType('int', $response['data'][0]['created_at']);
         $this->assertInternalType('int', $response['data'][0]['updated_at']);
         $this->assertInternalType('int', $response['data'][1]['created_at']);
@@ -111,11 +111,11 @@ class GatesTest extends AbstractUnit {
         $array = [
             'status' => true,
             'data'   => [
-                'name'       => '18+',
-                'slug'       => '18',
-                'pass'       => true,
-                'created_at' => time(),
-                'updated_at' => time()
+                'name'             => '18+',
+                'slug'             => '18',
+                'confidence_level' => 'low',
+                'created_at'       => time(),
+                'updated_at'       => time()
             ]
         ];
 
@@ -150,8 +150,8 @@ class GatesTest extends AbstractUnit {
         $this->assertSame('18', $response['data']['slug']);
         $this->assertArrayHasKey('name', $response['data']);
         $this->assertSame('18+', $response['data']['name']);
-        $this->assertArrayHasKey('pass', $response['data']);
-        $this->assertTrue($response['data']['pass']);
+        $this->assertArrayHasKey('confidence_level', $response['data']);
+        $this->assertSame('low', $response['data']['confidence_level']);
         $this->assertInternalType('int', $response['data']['created_at']);
         $this->assertInternalType('int', $response['data']['updated_at']);
     }
@@ -163,11 +163,11 @@ class GatesTest extends AbstractUnit {
         $array = [
             'status' => true,
             'data'   => [
-                'name'       => '18+',
-                'slug'       => '18',
-                'pass'       => true,
-                'created_at' => time(),
-                'updated_at' => time()
+                'name'             => '18+',
+                'slug'             => '18',
+                'confidence_level' => 'low',
+                'created_at'       => time(),
+                'updated_at'       => time()
             ]
         ];
 
@@ -202,8 +202,8 @@ class GatesTest extends AbstractUnit {
         $this->assertSame('18', $response['data']['slug']);
         $this->assertArrayHasKey('name', $response['data']);
         $this->assertSame('18+', $response['data']['name']);
-        $this->assertArrayHasKey('pass', $response['data']);
-        $this->assertTrue($response['data']['pass']);
+        $this->assertArrayHasKey('confidence_level', $response['data']);
+        $this->assertSame('low', $response['data']['confidence_level']);
         $this->assertInternalType('int', $response['data']['created_at']);
         $this->assertInternalType('int', $response['data']['updated_at']);
     }
@@ -215,14 +215,13 @@ class GatesTest extends AbstractUnit {
         $array = [
             'status' => true,
             'data'   => [
-                'name'       => '18+',
-                'slug'       => '18',
-                'pass'       => false,
-                'created_at' => time(),
-                'updated_at' => time()
+                'name'             => '18+',
+                'slug'             => '18',
+                'confidence_level' => 'high',
+                'created_at'       => time(),
+                'updated_at'       => time()
             ]
         ];
-
         /**
          * Mocks the HTTP Response.
          */
@@ -235,12 +234,10 @@ class GatesTest extends AbstractUnit {
         $this->httpClient
             ->method('request')
             ->will($this->returnValue($this->httpResponse));
-
         /**
          * Calls the updateOne() method.
          */
         $response = $this->gates->updateOne('18', false);
-
         /**
          * Assertions.
          */
@@ -253,8 +250,8 @@ class GatesTest extends AbstractUnit {
         $this->assertSame('18', $response['data']['slug']);
         $this->assertArrayHasKey('name', $response['data']);
         $this->assertSame('18+', $response['data']['name']);
-        $this->assertArrayHasKey('pass', $response['data']);
-        $this->assertFalse($response['data']['pass']);
+        $this->assertArrayHasKey('confidence_level', $response['data']);
+        $this->assertSame('high', $response['data']['confidence_level']);
         $this->assertInternalType('int', $response['data']['created_at']);
         $this->assertInternalType('int', $response['data']['updated_at']);
     }
@@ -266,11 +263,11 @@ class GatesTest extends AbstractUnit {
         $array = [
             'status' => true,
             'data'   => [
-                'name'       => '18+',
-                'slug'       => '18',
-                'pass'       => false,
-                'created_at' => time(),
-                'updated_at' => time()
+                'name'             => '18+',
+                'slug'             => '18',
+                'confidence_level' => 'low',
+                'created_at'       => time(),
+                'updated_at'       => time()
             ]
         ];
 
@@ -304,8 +301,8 @@ class GatesTest extends AbstractUnit {
         $this->assertSame('18', $response['data']['slug']);
         $this->assertArrayHasKey('name', $response['data']);
         $this->assertSame('18+', $response['data']['name']);
-        $this->assertArrayHasKey('pass', $response['data']);
-        $this->assertFalse($response['data']['pass']);
+        $this->assertArrayHasKey('confidence_level', $response['data']);
+        $this->assertSame('low', $response['data']['confidence_level']);
         $this->assertInternalType('int', $response['data']['created_at']);
         $this->assertInternalType('int', $response['data']['updated_at']);
     }

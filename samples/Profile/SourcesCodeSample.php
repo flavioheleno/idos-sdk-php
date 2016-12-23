@@ -29,7 +29,8 @@ $response = $sdk
     ->Sources->createNew(
         'email',
         [
-            'otp_check' => 'email'
+            'otp_check' => true, 
+            'email' => 'test@test.com'
         ]
     );
 

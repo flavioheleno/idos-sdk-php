@@ -11,13 +11,13 @@ class Profiles extends AbstractEndpoint {
     /**
      * Retrieves information about one user.
      *
-     * @param $userName the user userName
+     * @param string $userName the user userName
      * 
      * @return array Response
      */
     public function getOne(string $userName) : array {
         return $this->sendGet(
-            print_r('/profiles/%s', $userName);
+            sprintf('/profiles/%s', $userName)
         );
     }
 }
