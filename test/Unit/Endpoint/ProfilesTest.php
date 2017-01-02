@@ -36,14 +36,21 @@ class ProfilesTest extends AbstractUnit {
         $this->profiles = new Profiles($this->auth, $this->httpClient, false);
     }
 
-    public function testListAll() {
+    public function testGetOne() {
         /**
          * Array response from the fake api call to Profile endpoint.
          */
         $array = [
             'status' => true,
             'data'   => [
-                'userName'   => 'user',
+                'username'   => 'user',
+                'attributes' => [],
+                'candidates' => [],
+                'scores' => [],
+                'gates' => [],
+                'flags' => [],
+                'sources' => [],
+                'recommendation' => null,
                 'created_at' => time(),
                 'updated_at' => time()
             ]
@@ -63,16 +70,30 @@ class ProfilesTest extends AbstractUnit {
             ->will($this->returnValue($httpResponse));
 
         /**
-         * Calls the listAll() method.
+         * Calls the getOne() method.
          */
-        $response = $this->profiles->listAll();
+        $response = $this->profiles->getOne('user');
 
         /**
          * Assertions.
          */
         $this->assertNotEmpty($response['data']);
-        $this->assertArrayHasKey('userName', $response['data']);
-        $this->assertSame($response['data']['userName'], 'user');
+        $this->assertArrayHasKey('username', $response['data']);
+        $this->assertSame($response['data']['username'], 'user');
+        $this->assertArrayHasKey('attributes', $response['data']);
+        $this->assertSame($response['data']['attributes'], []);
+        $this->assertArrayHasKey('flags', $response['data']);
+        $this->assertSame($response['data']['flags'], []);
+        $this->assertArrayHasKey('candidates', $response['data']);
+        $this->assertSame($response['data']['candidates'], []);
+        $this->assertArrayHasKey('scores', $response['data']);
+        $this->assertSame($response['data']['scores'], []);
+        $this->assertArrayHasKey('gates', $response['data']);
+        $this->assertSame($response['data']['gates'], []);
+        $this->assertArrayHasKey('scores', $response['data']);
+        $this->assertSame($response['data']['scores'], []);
+        $this->assertArrayHasKey('recommendation', $response['data']);
+        $this->assertNull($response['data']['recommendation']);
         $this->assertInternalType('int', $response['data']['created_at']);
         $this->assertInternalType('int', $response['data']['updated_at']);
     }

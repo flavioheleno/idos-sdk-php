@@ -54,7 +54,7 @@ if ($response['status'] === true) {
     }
 
     /**
-     * Deletes the flag retrieved passing the stored $flagSlug as a parameter.
+     * Retrieves information about the flag created passing the stored $flagSlug as  aparameter.
      */
     $response = $sdk
         ->Profile($credentials['username'])
@@ -68,7 +68,7 @@ if ($response['status'] === true) {
     echo PHP_EOL;
 
     /**
-     * Retrieves information about the flag created passing the stored $flagSlug as  aparameter.
+     * Deletes the flag retrieved passing the stored $flagSlug as a parameter.
      */
     $response = $sdk
         ->Profile($credentials['username'])

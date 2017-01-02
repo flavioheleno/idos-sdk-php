@@ -6,12 +6,12 @@ require_once __DIR__ . '/settings.php';
 /**
  * To instantiate the $sdk object, which is responsible for calling the endpoints, it is necessary to create the $auth object.
  * The $auth object can instantiate the CredentialToken class, IdentityToken class, UserToken class or None class. They relate to the type of authorization required by the endpoint.
- * Passing through the CredentialToken constructor: the credential public key, handler public key and handler private key, so the auth token can be generated.
+ * Passing through the UserToken constructor: the username, credential public key and credencial private key, so the auth token can be generated.
  */
-$auth = new \idOS\Auth\CredentialToken(
+$auth = new \idOS\Auth\UserToken(
+    $credentials['username'],
     $credentials['credentialPublicKey'],
-    $credentials['handlerPublicKey'],
-    $credentials['handlerPrivKey']
+    $credentials['credentialPrivKey']
 );
 
 /**
@@ -21,17 +21,12 @@ $auth = new \idOS\Auth\CredentialToken(
 $sdk = \idOS\SDK::create($auth);
 
 /**
- * Lists all profiles related to the credentials provided.
+ * Retrieves all information related to the user provided.
  */
 $response = $sdk
     ->Profiles
-    ->listAll();
+    ->getOne($credentials['username']);
 
-/**
- * Prints all usernames provided by the api call response to Profiles endpoint.
- */
-echo 'Usernames:', PHP_EOL;
-foreach ($response['data'] as $profiles) {
-    printf($profiles['username']);
-    echo PHP_EOL;
-}
+print_r($response['data']);
+echo PHP_EOL;
+

@@ -12,25 +12,19 @@ class Gates extends AbstractProfileEndpoint {
      * Creates a new gate for the given user.
      *
      * @param string $name
-     * @param bool   $pass
      * @param string $confidenceLevel
      *
      * @return array Response
      */
     public function createNew(
         string $name,
-        bool $pass,
-        string $confidenceLevel = ''
+        string $confidenceLevel
     ) : array {
 
         $array = [
-            'name'      => $name,
-            'pass'      => $pass
+            'name'             => $name,
+            'confidence_level' => $confidenceLevel
         ];
-
-        if (! empty($confidenceLevel)) {
-            $array['confidence_level'] = $confidenceLevel;
-        }
 
         return $this->sendPost(
             sprintf('/profiles/%s/gates', $this->userName),
@@ -43,26 +37,46 @@ class Gates extends AbstractProfileEndpoint {
      * Tries to update a gate and if it doesnt exists, creates a new gate.
      *
      * @param string $name
-     * @param bool   $pass
+     * @param string $confidenceLevel
      *
      * @return array Response
      */
     public function upsertOne(
         string $name,
-        bool $pass
+        string $confidenceLevel
     ) : array {
 
         $array = [
-            'name'      => $name,
-            'pass'      => $pass
+            'name'             => $name,
+            'confidence_level' => $confidenceLevel
         ];
-
-        if (! empty($confidenceLevel)) {
-            $array['confidence_level'] = $confidenceLevel;
-        }
-
+        
         return $this->sendPut(
             sprintf('/profiles/%s/gates', $this->userName),
+            [],
+            $array
+        );
+    }
+
+    /**
+     * Updates a gate.
+     *
+     * @param string $gateSlug
+     * @param string $confidenceLevel
+     *
+     * @return array Response
+     */
+    public function updateOne(
+        string $gateSlug,
+        string $confidenceLevel
+    ) : array {
+
+        $array = [
+            'confidence_level' => $confidenceLevel
+        ];
+        
+        return $this->sendPatch(
+            sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug),
             [],
             $array
         );
@@ -92,23 +106,6 @@ class Gates extends AbstractProfileEndpoint {
     public function getOne(string $gateSlug) : array {
         return $this->sendGet(
             sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug)
-        );
-    }
-
-    /**
-     * Updates a gate given its slug.
-     *
-     * @param bool $pass
-     *
-     * @return array Response
-     */
-    public function updateOne(string $gateSlug, bool $pass) : array {
-        return $this->sendPatch(
-            sprintf('/profiles/%s/gates/%s', $this->userName, $gateSlug),
-            [],
-            [
-                'pass'     => $pass
-            ]
         );
     }
 
